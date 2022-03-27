@@ -5,7 +5,7 @@ export default function Header(props) {
     return (
         <div>
             <style dangerouslySetInnerHTML={{ __html: "\n.dropdown:hover > .dropdown-content {\n\tdisplay: block;\n}\n" }} />
-            <header className="p-4 bg-coolGray-800 text-coolGray-100 bg-black text-white bg-opacity-40 fixed w-full z-10">
+            <header className="p-4 text-coolGray-100 bg-gray-900 text-white fixed bg-opacity-70 w-full z-10">
                 <div className="container flex justify-between h-16 mx-auto">
                     <NavLink to="/" aria-label="Back to homepage" className="flex items-center p-2">
                         <img src="https://lh3.googleusercontent.com/fife/AAWUweWv9SZbR3u9RncNlYTE-yjWI6grXgMkZo-nnIeJXlzaSqe5mAXfpp9owPQSFHpbtavjLbIVSZk0B7Hj_HFSqc7OfByMvZDXH6j5LyampXOgvL0BVsjN3WEZhJ0tOtXQiOA4mUIo3SOxIYFSh46zq5mAfpNGSfxHV_MJHakECrRbiA5TXyVmH46gUUOHB_LrMg0qA58lfqWA4ZEl23n-oh3bEodr5PwIzYTJ48eTK9dVtisUYMljNEcHFSVw_auu5cVuszOYi7ltK0Fn_9yTydxFd-bwXTuSDoKEjDsDCdV0OQqE2p_oZQfy-BePCRoa4cLIPpkOf2xc5HdfEkUq5a1AloSjughvlw-zRMFLrcOKOssx9Hgf4OnhF0VA7_3pYlGr9T_rx46ejX3QdjLNuapbPGCx_fp8ku7-DI-VbYz2d_dT2s0pO3I5BQcJmD0cJdtpeY-WlMh5C9xeYQ8TDT8hxscuIGaFn77Xj1P8bpcf70uBtKjxgpPaKIgM9QizECpJH3sdyqlpi_DDiVffC3B838RvNuK7qThkiJBewwPp6kt1MAzr4LDsuNBgM5LRgj_JIBB6jOJOCOHI98z6IUP8zWbA4kXE6iY2qn-Vn3w_ibB5OxwVYarDbtvMMH5qBasQnOhbWoUgtXJpD9PTjEdMU5t3f739vshqKlzvfUloBOft8aaEfDu2mdNqoJrXmUdAef1nilNSjQglD6WuGnN7Vvs3XBiEOKKGSge4LO0PUOcxNfoACEK_QE4XulbVnvJqhFRFxLOx0WzYD8UfBnA3cRiMSGAhEu1AE4SYt81o6SRw-zYhvO__uNSx3cLVpdVIDs-1WCfLoTjHaoKXVHd_ZScWmw=w1919-h819" className="w-12 h-12" alt="" />
@@ -64,21 +64,20 @@ export default function Header(props) {
                                             </li>
                                         </ul>
                                     </li>
-                                    {/* <li><a className="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-black hover:text-red-600" href="#">Option 4</a></li> */}
                                 </ul>
                             </div>
                         </li>
                         <li className="flex">
-                            <NavLink to="/contact" className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-white hover:text-red-600 hover:border-red-600 duration-500 text-lg" activeClassName="border-red-600 text-red-600">Contact</NavLink>
+                            <NavLink to="/contact" className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-white hover:text-red-500 hover:border-red-500 duration-500 text-lg" activeClassName="border-red-500 text-red-500">Contact</NavLink>
                         </li>
-                        {/* <li className="flex">
-                            <NavLink to="" className="flex items-center px-4 -mb-1 border-b-2 border-transparent hover:text-red-600" activeClassName="border-b-2 border-red-600 text-red-600">Link</NavLink>
-                        </li> */}
+                        <li className="flex">
+                            <NavLink to="/cart" className="flex items-center px-4 -mb-1 border-b-2 border-transparent text-white hover:text-red-500 hover:border-red-500 duration-500 text-lg" activeClassName="border-red-500 text-red-500">Cart</NavLink>
+                        </li>
                     </ul>
 
                     <div className="items-center flex-shrink-0 hidden lg:flex">
-                        <button className="self-center px-8 py-3 rounded border-2 border-transparent hover:border-red-600 hover:text-red-600 duration-500 text-lg">Sign in</button>
-                        <button className="self-center px-8 py-3 rounded border-2 border-transparent hover:border-red-600 hover:text-red-600 duration-500 text-lg">Sign up</button>
+                        <button className="self-center px-8 py-3 rounded border-2 border-transparent hover:border-red-500 hover:text-red-500 duration-500 text-lg">Sign in</button>
+                        <button className="self-center px-8 py-3 rounded border-2 border-transparent hover:border-red-500 hover:text-red-500 duration-500 text-lg">Sign up</button>
                     </div>
                     <button title="Open menu" type="button" className="p-4 lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-6 h-6 dark:text-coolGray-100">
