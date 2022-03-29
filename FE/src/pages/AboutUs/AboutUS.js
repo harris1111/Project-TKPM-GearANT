@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function AboutUS() {
     return (
-        <section className="py-6 dark:bg-coolGray-800 dark:text-coolGray-100">
+        <section className="pt-40 py-6 dark:bg-coolGray-800 dark:text-coolGray-100">
             <div className="container flex flex-col items-center justify-center p-4 mx-auto sm:p-10">
                 <p className="p-2 text-2xl font-medium tracking-wider text-center uppercase">Development team</p>
                 <h1 className="text-4xl font-bold leading-none text-center sm:text-5xl">The talended people behind the scenes</h1>

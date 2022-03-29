@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-
+import { history } from '../../../../App';
 export default function Header(props) {
     return (
         <div>
@@ -32,7 +32,7 @@ export default function Header(props) {
                                 </button>
                                 <ul className="dropdown-content absolute hidden pt-1">
                                     <li className="dropdown">
-                                        <a className="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-black hover:text-red-600" href="#">Option 2</a>
+                                        <NavLink className="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-black hover:text-red-600" to="./category">Option 2</NavLink>
                                         <ul className="dropdown-content absolute hidden text-gray-700 pl-2 ml-20 -mt-10">
                                             <li>
                                                 <a className="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap text-black hover:text-red-600" href="#">Option 1-1</a>
@@ -76,7 +76,9 @@ export default function Header(props) {
                     </ul>
 
                     <div className="items-center flex-shrink-0 hidden lg:flex">
-                        <button className="self-center px-8 py-3 rounded border-2 border-transparent hover:border-red-500 hover:text-red-500 duration-500 text-lg">Sign in</button>
+                        <button onClick={() => {
+                            history.push('/login')
+                        }} className="self-center px-8 py-3 rounded border-2 border-transparent hover:border-red-500 hover:text-red-500 duration-500 text-lg">Sign in</button>
                         <button className="self-center px-8 py-3 rounded border-2 border-transparent hover:border-red-500 hover:text-red-500 duration-500 text-lg">Sign up</button>
                     </div>
                     <button title="Open menu" type="button" className="p-4 lg:hidden">
@@ -86,7 +88,6 @@ export default function Header(props) {
                     </button>
                 </div>
             </header>
-
         </div>
     )
 }

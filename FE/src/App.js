@@ -8,6 +8,9 @@ import Register from './pages/Register/Register';
 import Contact from './pages/Contact/Contact';
 import Cart from './pages/Cart/Cart';
 import AboutUS from './pages/AboutUs/AboutUS';
+import Category from './pages/Category/Category';
+import Detail from './pages/Detail/Detail';
+import { UserTemplate } from './templates/UserTemplate/UserTemplate';
 
 export const history = createBrowserHistory();
 
@@ -19,8 +22,11 @@ function App() {
         <HomeTemplate path="/contact" exact Component={Contact} />
         <HomeTemplate path="/cart" exact Component={Cart} />
         <HomeTemplate path="/about" exact Component={AboutUS}/>
-        <Route path="/login" exact Component={Login} />
+        <HomeTemplate path="/category" exact Component={Category}/>
+        <HomeTemplate path="/detail/:id" exact Component={Detail}/>
+
         <Route path="/register" exact Component={Register}/>
+        <UserTemplate path="/login" exact Component={Login} />
       </Switch>
     </Router>
   );
