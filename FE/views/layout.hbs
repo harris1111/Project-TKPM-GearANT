@@ -52,13 +52,42 @@
                     <div class="col align-self-center d-none d-lg-block">
                         <div class="main-menu">
                             <ul>
-                                <li><a href="/">Home </a>
+                                <li><a href="/" class="main-menu-link">Home </a>
                                 </li>
-                                <li><a href="/product">Shop</a>
+                                {{!-- <li><a href="/product" class="main-menu-link">Shop</a>
+                                </li> --}}
+                                <li class="dropdown">
+                                    <a class="main-menu-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Category
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="/product" class="dropdown-item" href="#">Shop</a></li>
+                                        <li><a class="dropdown-item" href="#">Dropdown item 2 &raquo; </a>
+                                            <ul class="submenu dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Submenu item 1</a></li>
+                                                <li><a class="dropdown-item" href="#">Submenu item 2</a></li>
+                                                <li><a class="dropdown-item" href="#">Submenu item 3</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a class="dropdown-item" href="#">Dropdown item 3 &raquo; </a>
+                                            <ul class="submenu dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Another submenu 1</a></li>
+                                                <li><a class="dropdown-item" href="#">Another submenu 2</a></li>
+                                                <li><a class="dropdown-item" href="#">Another submenu 3</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a class="dropdown-item" href="#">Dropdown item 4 &raquo;</a>
+                                            <ul class="submenu dropdown-menu">
+                                                <li><a class="dropdown-item" href="#">Another submenu 1</a></li>
+                                                <li><a class="dropdown-item" href="#">Another submenu 2</a></li>
+                                                <li><a class="dropdown-item" href="#">Another submenu 3</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li><a href="/account">Account</a>
+                                <li><a href="/account" class="main-menu-link">Account</a>
                                 </li>
-                                <li><a href="/about">About us</a></li>
+                                <li><a href="/about" class="main-menu-link">About us</a></li>
+                                
                             </ul>
                         </div>
                     </div>
@@ -66,7 +95,7 @@
                     <div class="col col-lg-auto align-self-center pl-0">
                         <div class="header-actions">
                             {{#if user}}
-                            <span>Hello, {{user.username}} </span>
+                            <span class="text-light">Hello, {{user.username}} </span>
                             {{/if}}
                             {{#if user}}
 
@@ -76,7 +105,8 @@
                             {{/if}}
 
                             <!-- Single Wedge Start -->
-                            <a href="#" class="header-action-btn text-light" data-bs-toggle="modal" data-bs-target="#searchActive">
+                            <a href="#" class="header-action-btn text-light" data-bs-toggle="modal"
+                                data-bs-target="#searchActive">
                                 <i class="pe-7s-search"></i>
                             </a>
 
@@ -130,7 +160,7 @@
     <!-- OffCanvas Cart End -->
     {{{body}}}
     <!-- OffCanvas Menu Start -->
-    <div id="offcanvas-mobile-menu" class="offcanvas offcanvas-mobile-menu">
+    {{!-- <div id="offcanvas-mobile-menu" class="offcanvas offcanvas-mobile-menu">
         <button class="offcanvas-close"></button>
 
         <div class="inner customScroll">
@@ -167,7 +197,7 @@
                 </ul>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- OffCanvas Menu End -->
     <!-- Footer Area Start -->
     <div class="footer-area">
@@ -254,7 +284,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-12 text-center">
-                            <p class="copy-text"> © 2021 <strong>Jesco</strong> Made With <i class="fa fa-heart"
+                            <p class="copy-text"> © 2022 <strong>GearANT</strong> Made With <i class="fa fa-heart"
                                     aria-hidden="true"></i> By <a class="company-name" href="https://hasthemes.com/">
                                     <strong> HasThemes</strong></a>.</p>
                         </div>

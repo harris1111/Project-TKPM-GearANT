@@ -36,12 +36,15 @@
             <div class="shop-select">
               <select class="shop-sort" onchange="if (this.value) window.location.href=this.value">
                 <option data-display="Relevance">Relevance</option>
-                <option value="/product/?sort=name{{categoryString}}{{genString}}{{keywordString}}"> Name, A to Z</option>
-                <option value="/product/?sort=-name{{categoryString}}{{genString}}{{keywordString}}"> Name, Z to A</option>
-                <option value="/product/?sort=price{{categoryString}}{{genString}}{{keywordString}}"> Price, low to high</option>
-                <option value="/product/?sort=-price{{categoryString}}{{genString}}{{keywordString}}"> Price, high to low</option>
+                <option value="/product/?sort=name{{categoryString}}{{genString}}{{keywordString}}"> Name, A to Z
+                </option>
+                <option value="/product/?sort=-name{{categoryString}}{{genString}}{{keywordString}}"> Name, Z to A
+                </option>
+                <option value="/product/?sort=price{{categoryString}}{{genString}}{{keywordString}}"> Price, low to high
+                </option>
+                <option value="/product/?sort=-price{{categoryString}}{{genString}}{{keywordString}}"> Price, high to
+                  low</option>
               </select>
-
             </div>
           </div>
           <!-- Right Side End -->
@@ -57,89 +60,98 @@
               <div class="tab-content">
                 <div class="tab-pane fade show active" id="shop-list">
                   {{#each products}}
-                    <div class="shop-list-wrapper">
-                      <div class="row">
-                        <div class="col-md-5 col-lg-5 col-xl-4">
-                          <div class="product">
-                            <div class="thumb">
-                              <a href="/product/{{id}}" class="image">
+                  <div class="shop-list-wrapper">
+                    <div class="row">
+                      <div class="col-md-5 col-lg-5 col-xl-4">
+                        <div class="product">
+                          <div class="thumb">
+                            <a href="/product/{{id}}" class="image">
 
-                                {{#with image}}
-                                  <img src={{0}} alt="Product" />
-                                {{/with}}
+                              {{#with image}}
+                              <img src={{0}} alt="Product" />
+                              {{/with}}
 
-                                {{#with image}}
-                                  <img
-                                    class="hover-image"
-                                    src={{1}}
-                                    alt="Product"
-                                  />
-                                {{/with}}
+                              {{#with image}}
+                              <img class="hover-image" src={{1}} alt="Product" />
+                              {{/with}}
 
-                              </a>
-                              <span class="badges">
-                                 {{#if this.sale}}
-                                <span class="sale">-{{this.sale}}%</span>
-                                
-                                {{/if}}
-                                <span class="new">{{this.gen}}</span>
-                              </span>
-                            </div>
+                            </a>
+                            <span class="badges">
+                              {{#if this.sale}}
+                              <span class="sale">-{{this.sale}}%</span>
+
+                              {{/if}}
+                              <span class="new">{{this.gen}}</span>
+                            </span>
                           </div>
                         </div>
-                        <div class="col-md-7 col-lg-7 col-xl-8">
-                          <div class="content-desc-wrap">
-                            <div class="content">
-                              <span class="ratings">
-                                
-                                <span class="rating-num">(
-                                  {{this.review}}
-                                  Review )</span>
-                              </span>
-                              <h5 class="title"><a
-                                  href="/product/{{id}}"
-                                >{{this.name}}</a></h5>
-                              <p>{{this.description}}</p>
-                            </div>
-                            <div class="box-inner">
-                              <span class="price">
-                                <span class="new">{{this.price}} $</span>
-                              </span>
+                      </div>
+                      <div class="col-md-7 col-lg-7 col-xl-8">
+                        <div class="content-desc-wrap">
+                          <div class="content">
+                            {{!-- <span class="ratings">
+                              <span class="rating-num">(
+                                {{this.review}}
+                                Review )</span>
+                            </span> --}}
+                            {{!-- <h5 class="title"><a href="/product/{{id}}">{{this.name}}</a></h5> --}}
+                            {{!-- <p>{{this.description}}</p> --}}
+                            <table class="table">
+                              <tbody>
+                                <tr>
+                                  <td class="table-active">Price</td>
+                                  <td class="text-center">
+                                    {{this.price}}
+                                  </td>
+                                  <td class="table-active text-center">Sold</td>
+                                  <td class="text-center">
+                                    {{this.review}}
+                                  </td>
+                                  <td class="table-active text-center">
+                                    View
+                                  </td>
+                                  <td class="text-center">0</td>
+                                </tr>
+                                <tr>
+                                  <td class="table-active">Description</td>
+                                  <td colspan="5">
+                                    {{this.description}}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
 
-                             
-<form action="{{id}}/order" method="POST">
-                                <input type="hidden" name="userid" value="{{user._id}}" />
-                                <input type="hidden" name="username" value="{{user.username}}" />
-                               <input type="hidden" name="address" value="{{user.address}}" />
-                               <input type="hidden" name="email_address" value="{{user.email_address}}" />
-                               <input type="hidden" name="phone" value="{{user.phone}}" />
-                               <input type="hidden" name="quantity" value=1 />
+                          <div class="box-inner">
+                            <form action="{{id}}/order" method="POST">
+                              <input type="hidden" name="userid" value="{{user._id}}" />
+                              <input type="hidden" name="username" value="{{user.username}}" />
+                              <input type="hidden" name="address" value="{{user.address}}" />
+                              <input type="hidden" name="email_address" value="{{user.email_address}}" />
+                              <input type="hidden" name="phone" value="{{user.phone}}" />
+                              <input type="hidden" name="quantity" value=1 />
 
 
-                              
-                                <input type="hidden" name="productid" value="{{id}}" />
-                                <input type="hidden" name="productName" value="{{name}}" />
-                                 {{#with image}}
-                                <input type="hidden" name="image" value="{{0}}" />
-                                {{/with}}
-                                <input type="hidden" name="price" value="{{price}}" />
 
-                                
-                                <input type="hidden" name="note" value="" />
-                                <input type="hidden" name="status" value="" />
-                                <input type="hidden" name="shippingFee" value=0 />
-                              <button
-                                title="Add To Cart"
-                                class="add-to-cart"
-                                type="submit" 
-                                value="Submit"
-                              >Add To Cart</button>
-                              </form>
-                            </div>
+                              <input type="hidden" name="productid" value="{{id}}" />
+                              <input type="hidden" name="productName" value="{{name}}" />
+                              {{#with image}}
+                              <input type="hidden" name="image" value="{{0}}" />
+                              {{/with}}
+                              <input type="hidden" name="price" value="{{price}}" />
+
+
+                              <input type="hidden" name="note" value="" />
+                              <input type="hidden" name="status" value="" />
+                              <input type="hidden" name="shippingFee" value=0 />
+                              <button title="Add To Cart" class="add-to-cart" type="submit" value="Submit">Add To
+                                Cart</button>
+                            </form>
                           </div>
                         </div>
                       </div>
                     </div>
+                  </div>
                   {{/each}}
                 </div>
               </div>
@@ -148,12 +160,11 @@
           <!-- Tab Content Area End -->
 
           <!--  Pagination Area Start -->
-          <div
-            class="load-more-items text-center mb-md-60px mb-lm-60px mt-30px0px"
-            data-aos="fade-up"
-          >
+          <div class="load-more-items text-center mb-md-60px mb-lm-60px mt-30px0px" data-aos="fade-up">
             <div class="pagination">
-              <ul> <!--pages or li are comes from javascript --> </ul>
+              <ul>
+                <!--pages or li are comes from javascript -->
+              </ul>
             </div>
           </div>
           <!--  Pagination Area End -->
@@ -161,9 +172,7 @@
         <!-- Shop Bottom Area End -->
       </div>
       <!-- Sidebar Area Start -->
-      <div
-        class="col-lg-3 order-lg-first col-md-12 order-md-last mb-md-60px mb-lm-60px"
-      >
+      <div class="col-lg-3 order-lg-first col-md-12 order-md-last mb-md-60px mb-lm-60px">
         <div class="shop-sidebar-wrap">
           <!-- Sidebar single item -->
           <div class="sidebar-widget-search">
@@ -175,54 +184,67 @@
             </form>
           </div>
           <!-- Sidebar single item -->
-          
+
           <!-- Sidebar single item -->
           <div class="sidebar-widget">
             <h4 class="sidebar-title">Category</h4>
             <div class="sidebar-widget-category">
               <ul>
-                  {{#if activeShirt}}
-                        <li><a href="/product/?{{genString}}{{keywordString}}{{sortString}}" style="color: #fb5d5d;" class="" >T-Shirt </a></li>
-                  {{else}}
-                        <li><a href="/product/?category=T-shirt{{genString}}{{keywordString}}{{sortString}}"  class="" >T-Shirt </a></li>
-                  {{/if}}
-                  
+                {{#if activeShirt}}
+                <li><a href="/product/?{{genString}}{{keywordString}}{{sortString}}" style="color: #fb5d5d;"
+                    class="">T-Shirt </a></li>
+                {{else}}
+                <li><a href="/product/?category=T-shirt{{genString}}{{keywordString}}{{sortString}}" class="">T-Shirt
+                  </a></li>
+                {{/if}}
+
                 {{#if activeJacket}}
-                <li><a href="/product/?{{genString}}{{keywordString}}{{sortString}}" style="color: #fb5d5d;" class="">Jacket </a></li>
+                <li><a href="/product/?{{genString}}{{keywordString}}{{sortString}}" style="color: #fb5d5d;"
+                    class="">Jacket </a></li>
                 {{else}}
-                 <li><a href="/product/?category=Jacket{{genString}}{{keywordString}}{{sortString}}" class="">Jacket </a></li>
+                <li><a href="/product/?category=Jacket{{genString}}{{keywordString}}{{sortString}}" class="">Jacket </a>
+                </li>
                 {{/if}}
 
-                 {{#if activeBack}}
-                <li><a href="/product/?{{genString}}{{keywordString}}{{sortString}}"  style="color: #fb5d5d;" class="">Backpack</a></li>
-                
+                {{#if activeBack}}
+                <li><a href="/product/?{{genString}}{{keywordString}}{{sortString}}" style="color: #fb5d5d;"
+                    class="">Backpack</a></li>
+
                 {{else}}
-                    <li><a href="/product/?category=Backpack{{genString}}{{keywordString}}{{sortString}}"  class="">Backpack</a></li>
+                <li><a href="/product/?category=Backpack{{genString}}{{keywordString}}{{sortString}}"
+                    class="">Backpack</a></li>
 
                 {{/if}}
 
-                 {{#if activeJeans}}
-                <li><a href="/product/?{{genString}}{{keywordString}}{{sortString}}"  style="color: #fb5d5d;" class="">Jeans</a></li>
+                {{#if activeJeans}}
+                <li><a href="/product/?{{genString}}{{keywordString}}{{sortString}}" style="color: #fb5d5d;"
+                    class="">Jeans</a></li>
                 {{else}}
-                  <li><a href="/product/?category=Jeans{{genString}}{{keywordString}}{{sortString}}"  class="">Jeans</a></li>
+                <li><a href="/product/?category=Jeans{{genString}}{{keywordString}}{{sortString}}" class="">Jeans</a>
+                </li>
                 {{/if}}
 
-                 {{#if activeShoe}}
-                <li><a href="/product/?{{genString}}{{keywordString}}{{sortString}}" style="color: #fb5d5d;" class="">Shoe </a></li>
+                {{#if activeShoe}}
+                <li><a href="/product/?{{genString}}{{keywordString}}{{sortString}}" style="color: #fb5d5d;"
+                    class="">Shoe </a></li>
                 {{else}}
-                <li><a href="/product/?category=Shoe{{genString}}{{keywordString}}{{sortString}}"  class="">Shoe </a></li>
+                <li><a href="/product/?category=Shoe{{genString}}{{keywordString}}{{sortString}}" class="">Shoe </a>
+                </li>
                 {{/if}}
 
                 {{#if activeHoodie}}
-                <li><a href="/product/?{{genString}}{{keywordString}}{{sortString}}"  style="color: #fb5d5d;" class="">Hoodie</a></li>
+                <li><a href="/product/?{{genString}}{{keywordString}}{{sortString}}" style="color: #fb5d5d;"
+                    class="">Hoodie</a></li>
                 {{else}}
-                 <li><a href="/product/?category=Hoodie{{genString}}{{keywordString}}{{sortString}}" class="">Hoodie</a></li>
+                <li><a href="/product/?category=Hoodie{{genString}}{{keywordString}}{{sortString}}" class="">Hoodie</a>
+                </li>
                 {{/if}}
 
                 {{#if activePant}}
-                  <li><a href="/product/?{{genString}}{{keywordString}}{{sortString}}"  style="color: #fb5d5d;" class="">Pant</a></li>
-                  {{else}}
-                  <li><a href="/product/?category=Pant{{genString}}{{keywordString}}{{sortString}}"   class="">Pant</a></li>
+                <li><a href="/product/?{{genString}}{{keywordString}}{{sortString}}" style="color: #fb5d5d;"
+                    class="">Pant</a></li>
+                {{else}}
+                <li><a href="/product/?category=Pant{{genString}}{{keywordString}}{{sortString}}" class="">Pant</a></li>
                 {{/if}}
 
               </ul>
@@ -234,37 +256,37 @@
             <h4 class="sidebar-title">Tags</h4>
             <div class="sidebar-widget-tag">
               <ul>
-                 {{#if activePopular}}
+                {{#if activePopular}}
                 <li><a href="/product/?{{categoryString}}{{keywordString}}{{sortString}}" style="background-color: #fb5d5d;
   border-color: #fb5d5d;
   color: #fff;">Popular</a></li>
-                 {{else}}
+                {{else}}
                 <li><a href="/product/?gen=Popular{{categoryString}}{{keywordString}}{{sortString}}">Popular</a></li>
-                  {{/if}}
+                {{/if}}
 
-                 {{#if activeNew}}
+                {{#if activeNew}}
                 <li><a href="/product/?{{categoryString}}{{keywordString}}{{sortString}}" style="background-color: #fb5d5d;
   border-color: #fb5d5d;
   color: #fff;">New</a></li>
-                 {{else}}
+                {{else}}
                 <li><a href="/product/?gen=New{{categoryString}}{{keywordString}}{{sortString}}">New</a></li>
-                 {{/if}}
+                {{/if}}
 
-                 {{#if activeHot}}
+                {{#if activeHot}}
                 <li><a href="/product/?{{categoryString}}{{keywordString}}{{sortString}}" style="background-color: #fb5d5d;
   border-color: #fb5d5d;
   color: #fff;">Hot</a></li>
-                  {{else}}
-                <li><a href="/product/?gen=Hot{{categoryString}}{{keywordString}}{{sortString}}" >Hot</a></li>
-                 {{/if}}
+                {{else}}
+                <li><a href="/product/?gen=Hot{{categoryString}}{{keywordString}}{{sortString}}">Hot</a></li>
+                {{/if}}
 
-                 {{#if activeLimited}}
+                {{#if activeLimited}}
                 <li><a href="/product/?{{categoryString}}{{keywordString}}{{sortString}}" style="background-color: #fb5d5d;
   border-color: #fb5d5d;
   color: #fff;">Limited</a></li>
-                  {{else}}
+                {{else}}
                 <li><a href="/product/?gen=Limited{{categoryString}}{{keywordString}}{{sortString}}">Limited</a></li>
-                  {{/if}}
+                {{/if}}
 
               </ul>
             </div>
@@ -289,60 +311,60 @@
 <script type="text/javascript">
 
   const element = document.querySelector(".pagination ul");
-let totalPages = {{ totalPage }};
-let page = {{ page }};
-let keyword = "{{keyword}}" != 0 ? "&keyword=" + "{{keyword}}" : " ";
-let category = "{{category}}" != 0 ? "&category=" + "{{category}}" : "";
-let gen = "{{gen}}" != 0 ? "&gen=" + "{{gen}}" : "";
-let sort = "{{sort}}" != 0 ? "&sort=" + "{{sort}}" : "";
+  let totalPages = {{ totalPage }};
+  let page = {{ page }};
+  let keyword = "{{keyword}}" != 0 ? "&keyword=" + "{{keyword}}" : " ";
+  let category = "{{category}}" != 0 ? "&category=" + "{{category}}" : "";
+  let gen = "{{gen}}" != 0 ? "&gen=" + "{{gen}}" : "";
+  let sort = "{{sort}}" != 0 ? "&sort=" + "{{sort}}" : "";
 
-element.innerHTML = createPagination(totalPages, page); function createPagination(totalPages, page) {
+  element.innerHTML = createPagination(totalPages, page); function createPagination(totalPages, page) {
     let liTag = '';
     let active;
     let beforePage = page - 1;
     let afterPage = page + 1;
     if (page > 1) {
-        liTag += `<li class="btn prev" onclick="location.href='/product?page=${page - 1}${keyword}${category}${gen}${sort}'"><span>Prev</span></li>`;
+      liTag += `<li class="btn prev" onclick="location.href='/product?page=${page - 1}${keyword}${category}${gen}${sort}'"><span>Prev</span></li>`;
     }
     if (page > 2) {
-        liTag += `<li class="first numb" onclick="location.href='/product?page=1${keyword}${category}${gen}${sort}'"><span>1</span></li>`;
-        if (page > 3) {
-            liTag += `<li class="dots"><span>...</span></li>`;
-        }
+      liTag += `<li class="first numb" onclick="location.href='/product?page=1${keyword}${category}${gen}${sort}'"><span>1</span></li>`;
+      if (page > 3) {
+        liTag += `<li class="dots"><span>...</span></li>`;
+      }
     }
     if (page == totalPages) { beforePage = beforePage - 2; } else if (page == totalPages - 1) {
-        beforePage
-            = beforePage - 1;
+      beforePage
+        = beforePage - 1;
     } if (page == 1) { afterPage = afterPage + 2; } else if
-        (page == 2) { afterPage = afterPage + 1; } for (var plength = beforePage;
-        plength <= afterPage; plength++) {
-        if (plength > totalPages) { continue; } if
-            (plength == 0) { plength = plength + 1; } if (page == plength) {
-                active =
-                    "active";
-            } else { active = ""; }
-        liTag += `<li class="numb ${active}" onclick="location.href='/product?page=${plength}${keyword}${category}${gen}${sort}'"><span>${plength}</span></li>`;
+      (page == 2) { afterPage = afterPage + 1; } for (var plength = beforePage;
+      plength <= afterPage; plength++) {
+      if (plength > totalPages) { continue; } if
+        (plength == 0) { plength = plength + 1; } if (page == plength) {
+          active =
+            "active";
+        } else { active = ""; }
+      liTag += `<li class="numb ${active}" onclick="location.href='/product?page=${plength}${keyword}${category}${gen}${sort}'"><span>${plength}</span></li>`;
     } if (page < totalPages - 1) {
-        if (page < totalPages - 2) {
-            liTag += `<li
+      if (page < totalPages - 2) {
+        liTag += `<li
   class="dots"><span>...</span></li>`;
-        }
-        liTag += `<li class="last numb" onclick="location.href='/product?page=${totalPages}${keyword}${category}${gen}${sort}'"><span>${totalPages}</span></li>`;
+      }
+      liTag += `<li class="last numb" onclick="location.href='/product?page=${totalPages}${keyword}${category}${gen}${sort}'"><span>${totalPages}</span></li>`;
     } if (page < totalPages) {
-        liTag += `<li class="btn next" onclick="location.href='/product?page=${page + 1}${keyword}${category}${gen}${sort}'"><span>Next <i class="fas fa-angle-right"></i></span></li>`;
+      liTag += `<li class="btn next" onclick="location.href='/product?page=${page + 1}${keyword}${category}${gen}${sort}'"><span>Next <i class="fas fa-angle-right"></i></span></li>`;
     } element.innerHTML = liTag; return liTag;
-}
+  }
 </script>
 
 <script type="text/javascript">
-    $(function(){
-      // bind change event to select
-      $('#dynamic_select').on('change', function () {
-          var url = $(this).val(); // get selected value
-          if (url) { // require a URL
-              window.location = url; // redirect
-          }
-          return false;
-      });
+  $(function () {
+    // bind change event to select
+    $('#dynamic_select').on('change', function () {
+      var url = $(this).val(); // get selected value
+      if (url) { // require a URL
+        window.location = url; // redirect
+      }
+      return false;
     });
+  });
 </script>
