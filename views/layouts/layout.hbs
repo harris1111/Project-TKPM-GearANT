@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="robots" content="index, follow" />
+    <title>GearANT</title>
+    <meta name="description" content="GearANT" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Add site Favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon/favicon.ico" type="image/png">
+
+
+    <!-- vendor css (Icon Font) -->
+    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/vendor/pe-icon-7-stroke.css" />
+    <link rel="stylesheet" href="assets/css/vendor/font.awesome.css" />
+
+    <!-- plugins css (All Plugins Files) -->
+    <link rel="stylesheet" href="assets/css/plugins/animate.css" />
+    <link rel="stylesheet" href="assets/css/plugins/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="assets/css/plugins/jquery-ui.min.css" />
+    <link rel="stylesheet" href="assets/css/plugins/nice-select.css" />
+    <link rel="stylesheet" href="assets/css/plugins/venobox.css" />
+
+
+    <link rel="stylesheet" href="assets/css/plugins/owl.carousel.css">
+    <link rel="stylesheet" href="assets/css/plugins/owl.theme.default.css">
+
+    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
+    <!-- <link rel="stylesheet" href="assets/css/vendor/vendor.min.css" />
+    <link rel="stylesheet" href="assets/css/plugins/plugins.min.css" />
+    <link rel="stylesheet" href="assets/css/style.min.css"> -->
+
+    <!-- Main Style -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+
+</head>
+
+<body>
+
+<!-- Header Area Start -->
+<header>
+    <div class="header-main sticky-nav ">
+        <div class="container position-relative">
+            <div class="row">
+                <div class="col-auto align-self-center">
+                    <p class="fw-bold fs-2 text-light">GEAR <span class="text-danger fs-2">ANT</span></p>
+                </div>
+                <div class="col align-self-center d-none d-lg-block">
+                    <div class="main-menu">
+                        <ul>
+                            <li><a href="/" class="main-menu-link">Home </a>
+                            </li>
+                            {{!-- <li><a href="/product" class="main-menu-link">Shop</a>
+                            </li> --}}
+                            <li class="dropdown">
+                                <a class="main-menu-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Category
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/product" class="dropdown-item" href="#">Shop</a></li>
+                                    <li><a class="dropdown-item" href="#">Dropdown item 2 &raquo; </a>
+                                        <ul class="submenu dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Submenu item 1</a></li>
+                                            <li><a class="dropdown-item" href="#">Submenu item 2</a></li>
+                                            <li><a class="dropdown-item" href="#">Submenu item 3</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Dropdown item 3 &raquo; </a>
+                                        <ul class="submenu dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Another submenu 1</a></li>
+                                            <li><a class="dropdown-item" href="#">Another submenu 2</a></li>
+                                            <li><a class="dropdown-item" href="#">Another submenu 3</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#">Dropdown item 4 &raquo;</a>
+                                        <ul class="submenu dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Another submenu 1</a></li>
+                                            <li><a class="dropdown-item" href="#">Another submenu 2</a></li>
+                                            <li><a class="dropdown-item" href="#">Another submenu 3</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><a href="/account" class="main-menu-link">Account</a>
+                            </li>
+                            <li><a href="/about" class="main-menu-link">About us</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+                <!-- Header Action Start -->
+                <div class="col col-lg-auto align-self-center pl-0">
+                    <div class="header-actions">
+                        {{#if user}}
+                            <span class="text-light">Hello, {{user.username}} </span>
+                        {{/if}}
+                        {{#if user}}
+
+                            <a href="/logout">Sign Out</a>
+                        {{else}}
+                            <a href="/login">Sign In</a>
+                        {{/if}}
+
+                        <!-- Single Wedge Start -->
+                        <a href="#" class="header-action-btn text-light" data-bs-toggle="modal"
+                           data-bs-target="#searchActive">
+                            <i class="pe-7s-search"></i>
+                        </a>
+
+                        <!-- Single Wedge End -->
+                        <a href="/cart" class="header-action-btn header-action-btn-cart pr-0 text-light">
+                            <i class="pe-7s-shopbag"></i>
+
+                            <!-- <span class="cart-amount">€30.00</span> -->
+                        </a>
+
+                    </div>
+                    <!-- Header Action End -->
+                </div>
+            </div>
+        </div>
+</header>
+<!-- OffCanvas Cart Start -->
+{{!-- <div id="offcanvas-cart" class="offcanvas offcanvas-cart">
+    <div class="inner">
+        <div class="head">
+            <span class="title">Cart</span>
+            <button class="offcanvas-close">×</button>
+        </div>
+        {{#if user}}
+
+        <div class="body customScroll">
+            <ul class="minicart-product-list">
+                <li>
+                    <a href="/product_detail" class="image"><img src="assets/images/product-image/1.jpg"
+                            alt="Cart product Image"></a>
+                    <div class="content">
+                        <a href="/product_detail" class="title">Women's Elizabeth Coat</a>
+                        <span class="quantity-price">1 x <span class="amount">$18.86</span></span>
+                        <a href="#" class="remove">×</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        {{else}}
+        <div> <a href="/login">Login</a> to add product to cart!</div>
+        {{/if}}
+        <div class="foot">
+            <div class="buttons mt-30px">
+                <a href="/cart" class="btn btn-dark btn-hover-primary mb-30px">view cart</a>
+                <a href="/checkout" class="btn btn-outline-dark current-btn">checkout</a>
+            </div>
+        </div>
+    </div>
+</div> --}}
+<!-- OffCanvas Cart End -->
+{{{body}}}
+<!-- OffCanvas Menu Start -->
+{{!-- <div id="offcanvas-mobile-menu" class="offcanvas offcanvas-mobile-menu">
+    <button class="offcanvas-close"></button>
+
+    <div class="inner customScroll">
+
+        <div class="offcanvas-menu mb-4">
+            <ul>
+                <li><a href="/""><span class=" menu-text">Home</span></a>
+                </li>
+                <li><a href="/product"><span class="menu-text">Shop</span></a>
+                </li>
+                <li><a href="/account"><span class="menu-text">Account</span></a>
+                </li>
+                <li><a href="/about">About Us</a></li>
+            </ul>
+        </div>
+        <!-- OffCanvas Menu End -->
+        <div class="offcanvas-social mt-auto">
+            <ul>
+                <li>
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-twitter"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-google"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-youtube"></i></a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-instagram"></i></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div> --}}
+<!-- OffCanvas Menu End -->
+<!-- Footer Area Start -->
+<div class="footer-area">
+    <div class="footer-container">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <!-- Start single blog -->
+                    <div class="col-12 col-sm-6 col-lg-3 mb-md-30px mb-lm-30px">
+                        <div class="single-wedge">
+                            <div class="footer-logo">
+                                <p class="fw-bold fs-2">GEAR <span class="text-danger fs-2">ANT</span></p>
+                            </div>
+                            <ul class="link-follow">
+                                <li>
+                                    <a class="m-0" title="Twitter" href="#"><i class="fa fa-twitter"
+                                                                               aria-hidden="true"></i></a>
+                                </li>
+                                <li>
+                                    <a title="Facebook" href="https://www.facebook.com/thanhhoang4869"><i
+                                            class="fa fa-facebook" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a title="Instagram" href="#"><i class="fa fa-instagram" aria-hidden="true"></i>
+                                        </i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- End single blog -->
+                    <!-- Start single blog -->
+                    <div class="col-12 col-md-3 col-sm-6 col-lg-3 mb-md-30px mb-lm-30px pl-lg-50px">
+                        <div class="single-wedge">
+                            <h4 class="footer-herading">Quick Links</h4>
+                            <div class="footer-links">
+                                <div class="footer-row">
+                                    <ul class="align-items-center">
+                                        <li class="li"><a class="single-link" href="/about">About</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End single blog -->
+                    <!-- Start single blog -->
+                    <div class="col-12 col-sm-6 col-md-3 col-lg-3 mb-lm-30px pl-lg-50px">
+                        <div class="single-wedge">
+                            <h4 class="footer-herading">Company</h4>
+                            <div class="footer-links">
+                                <div class="footer-row">
+                                    <ul class="align-items-center">
+                                        <li class="li"><a class="single-link" href="/">GearANT</a>
+                                        </li>
+                                        <li class="li"><a class="single-link" href="/product">Shop</a></li>
+                                        <li class="li"><a class="single-link" href="/login">Log in</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End single blog -->
+                    <!-- Start single blog -->
+                    <div class="col-6 col-md-4 col-lg-3 ">
+                        <div class="single-wedge">
+                            <h4 class="footer-herading">Store Information.</h4>
+                            <div class="footer-links">
+                                <!-- News letter area -->
+                                <p class="address">227 Nguyen Van Cu, Ward 4, District 5, Ho Chi Minh city</p>
+                                <p class="phone">Phone/Fax:<a href="tel:0933442607">0933442607</a></p>
+                                <p class="mail">Email:<a
+                                        href="mailto:19127067@student.hcmus.edu.vn">19127067@student.hcmus.edu.vn</a>
+                                </p>
+                                <!-- News letter area  End -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End single blog -->
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <p class="copy-text"> © 2022 <strong>GearANT</strong> Made With <i class="fa fa-heart"
+                                                                                           aria-hidden="true"></i> By <a class="company-name" href="https://hasthemes.com/">
+                            <strong> HasThemes</strong></a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer Area End -->
+
+<!-- Search Modal Start -->
+<div class="modal popup-search-style" id="searchActive">
+    <button type="button" class="close-btn" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
+    <div class="modal-overlay">
+        <div class="modal-dialog p-0" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <h2>Search Your Product</h2>
+                    <form class="navbar-form position-relative" role="search" action="/product">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="keyword" placeholder="Search here...">
+                        </div>
+                        <button type="submit" class="submit-btn"><i class="pe-7s-search"></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Search Modal End -->
+
+<!-- Global Vendor, plugins JS -->
+
+<!-- Vendor JS -->
+<script src="assets/js/vendor/jquery-3.5.1.min.js"></script>
+
+<script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+<script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+<script src="assets/js/vendor/modernizr-3.11.2.min.js"></script>
+
+<!--Plugins JS-->
+<script src="assets/js/plugins/swiper-bundle.min.js"></script>
+<script src="assets/js/plugins/jquery-ui.min.js"></script>
+<script src="assets/js/plugins/jquery.nice-select.min.js"></script>
+<script src="assets/js/plugins/countdown.js"></script>
+<script src="assets/js/plugins/scrollup.js"></script>
+<script src="assets/js/plugins/jquery.zoom.min.js"></script>
+<script src="assets/js/plugins/venobox.min.js"></script>
+<script src="assets/js/plugins/ajax-mail.js"></script>
+
+<!-- Use the minified version files listed below for better performance and remove the files listed above -->
+<!-- <script src="assets/js/vendor/vendor.min.js"></script>
+<script src="assets/js/plugins/plugins.min.js"></script> -->
+<!-- OWL Js -->
+<script src="assets/js/plugins/owl.carousel.js"></script>
+<script>
+    $('.owl-carousel').owlCarousel({
+        loop: true,
+        margin: 10,
+        nav: false,
+        smartSpeed: 500,
+        responsive: {
+            0: {
+                items: 1
+            },
+            600: {
+                items: 3
+            },
+            1000: {
+                items: 4
+            }
+        }
+    })
+</script>
+<!-- Main Js -->
+<script src="assets/js/main.js"></script>
+</body>
