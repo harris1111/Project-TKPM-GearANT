@@ -10,7 +10,6 @@ import accountRoute from '../routes/account.route.js'
 
 export default function (app) {
     app.use('/', indexRoute);
-    app.use('/home', indexRoute);
     app.use('/about', aboutRoute);
     // app.use('/admin', auth, adminRoute);
     app.use('/account', accountRoute);

@@ -1,311 +1,90 @@
 {{!-- Slide product --}}
 
 <div class="container py-5">
-    <div class="section-title text-center mb-3">
-        <h2 class="title line-height-1">Ram</h2>
+    <div class="section-title text-left mb-3">
+        <h2 class="title line-height-1">Ram - 5 best sellers</h2>
     </div>
     <div class="owl-carousel owl-theme">
-        <div class="item card-item">
-            <div class="card">
-                <img src="https://picsum.photos/200" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">Tên nè</h5>
-                    <div class="card-price">
-                        <p class="card-price-num">123456</p><span> VND</span>
+        {{#each best_ram}}
+            <div class="item card-item">
+                <div class="card">
+                    <img src="{{this.LinkURL}}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.ProName}}</h5>
+                        <div class="card-price">
+                            <p class="card-price-num">{{format_number this.Price}}</p><span>VND</span>
+                        </div>
+                    </div>
+                    <div class="card__overlay">
+                        <a href="/product/{{this._id}}" class="card__overlay-detail">
+                            <i class="fa fa-arrow-circle-right"></i>Xem chi tiết
+                        </a>
+                        <button class="card__overlay-cart">
+                            <i class="fa fa-shopping-cart"></i>Cho vào giỏ
+                        </button>
                     </div>
                 </div>
-                <div class="card__overlay">
-                    <a href="/product/{{this._id}}" class="card__overlay-detail">
-                        <i class="fa fa-arrow-circle-right"></i>Xem chi tiết
-                    </a>
-                    <button class="card__overlay-cart">
-                        <i class="fa fa-shopping-cart"></i>Cho vào giỏ
-                    </button>
-                </div>
             </div>
-        </div>
-        <div class="item card-item">
-            <div class="card">
-                <img src="https://picsum.photos/200" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">Tên nè</h5>
-                    <div class="card-price">
-                        <p class="card-price-num">123456</p><span> VND</span>
-                    </div>
-                </div>
-                <div class="card__overlay">
-                    <a href="/product/{{this._id}}" class="card__overlay-detail">
-                        <i class="fa fa-arrow-circle-right"></i>Xem chi tiết
-                    </a>
-                    <button class="card__overlay-cart">
-                        <i class="fa fa-shopping-cart"></i>Cho vào giỏ
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="item card-item">
-            <div class="card">
-                <img src="https://picsum.photos/200" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">Tên nè</h5>
-                    <div class="card-price">
-                        <p class="card-price-num">123456</p><span> VND</span>
-                    </div>
-                </div>
-                <div class="card__overlay">
-                    <a href="/product/{{this._id}}" class="card__overlay-detail">
-                        <i class="fa fa-arrow-circle-right"></i>Xem chi tiết
-                    </a>
-                    <button class="card__overlay-cart">
-                        <i class="fa fa-shopping-cart"></i>Cho vào giỏ
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="item card-item">
-            <div class="card">
-                <img src="https://picsum.photos/200" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">Tên nè</h5>
-                    <div class="card-price">
-                        <p class="card-price-num">123456</p><span> VND</span>
-                    </div>
-                </div>
-                <div class="card__overlay">
-                    <a href="/product/{{this._id}}" class="card__overlay-detail">
-                        <i class="fa fa-arrow-circle-right"></i>Xem chi tiết
-                    </a>
-                    <button class="card__overlay-cart">
-                        <i class="fa fa-shopping-cart"></i>Cho vào giỏ
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="item card-item">
-            <div class="card">
-                <img src="https://picsum.photos/200" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">Tên nè</h5>
-                    <div class="card-price">
-                        <p class="card-price-num">123456</p><span> VND</span>
-                    </div>
-                </div>
-                <div class="card__overlay">
-                    <a href="/product/{{this._id}}" class="card__overlay-detail">
-                        <i class="fa fa-arrow-circle-right"></i>Xem chi tiết
-                    </a>
-                    <button class="card__overlay-cart">
-                        <i class="fa fa-shopping-cart"></i>Cho vào giỏ
-                    </button>
-                </div>
-            </div>
-        </div>
+        {{/each}}
     </div>
 </div>
 
 <div class="container py-5">
-    <div class="section-title text-center mb-3">
-        <h2 class="title line-height-1">CPU</h2>
+    <div class="section-title text-left mb-3">
+        <h2 class="title line-height-1">SSD - 5 best sellers</h2>
     </div>
     <div class="owl-carousel owl-theme">
-        <div class="item card-item">
-            <div class="card">
-                <img src="https://picsum.photos/200" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">Tên nè</h5>
-                    <div class="card-price">
-                        <p class="card-price-num">123456</p><span> VND</span>
+        {{#each best_ssd}}
+            <div class="item card-item">
+                <div class="card">
+                    <img src="{{this.LinkURL}}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.ProName}}</h5>
+                        <div class="card-price">
+                            <p class="card-price-num">{{format_number this.Price}}</p><span>VND</span>
+                        </div>
+                    </div>
+                    <div class="card__overlay">
+                        <a href="/product/{{this._id}}" class="card__overlay-detail">
+                            <i class="fa fa-arrow-circle-right"></i>Xem chi tiết
+                        </a>
+                        <button class="card__overlay-cart">
+                            <i class="fa fa-shopping-cart"></i>Cho vào giỏ
+                        </button>
                     </div>
                 </div>
-                <div class="card__overlay">
-                    <a href="/product/{{this._id}}" class="card__overlay-detail">
-                        <i class="fa fa-arrow-circle-right"></i>Xem chi tiết
-                    </a>
-                    <button class="card__overlay-cart">
-                        <i class="fa fa-shopping-cart"></i>Cho vào giỏ
-                    </button>
-                </div>
             </div>
-        </div>
-        <div class="item card-item">
-            <div class="card">
-                <img src="https://picsum.photos/200" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">Tên nè</h5>
-                    <div class="card-price">
-                        <p class="card-price-num">123456</p><span> VND</span>
-                    </div>
-                </div>
-                <div class="card__overlay">
-                    <a href="/product/{{this._id}}" class="card__overlay-detail">
-                        <i class="fa fa-arrow-circle-right"></i>Xem chi tiết
-                    </a>
-                    <button class="card__overlay-cart">
-                        <i class="fa fa-shopping-cart"></i>Cho vào giỏ
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="item card-item">
-            <div class="card">
-                <img src="https://picsum.photos/200" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">Tên nè</h5>
-                    <div class="card-price">
-                        <p class="card-price-num">123456</p><span> VND</span>
-                    </div>
-                </div>
-                <div class="card__overlay">
-                    <a href="/product/{{this._id}}" class="card__overlay-detail">
-                        <i class="fa fa-arrow-circle-right"></i>Xem chi tiết
-                    </a>
-                    <button class="card__overlay-cart">
-                        <i class="fa fa-shopping-cart"></i>Cho vào giỏ
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="item card-item">
-            <div class="card">
-                <img src="https://picsum.photos/200" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">Tên nè</h5>
-                    <div class="card-price">
-                        <p class="card-price-num">123456</p><span> VND</span>
-                    </div>
-                </div>
-                <div class="card__overlay">
-                    <a href="/product/{{this._id}}" class="card__overlay-detail">
-                        <i class="fa fa-arrow-circle-right"></i>Xem chi tiết
-                    </a>
-                    <button class="card__overlay-cart">
-                        <i class="fa fa-shopping-cart"></i>Cho vào giỏ
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="item card-item">
-            <div class="card">
-                <img src="https://picsum.photos/200" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">Tên nè</h5>
-                    <div class="card-price">
-                        <p class="card-price-num">123456</p><span> VND</span>
-                    </div>
-                </div>
-                <div class="card__overlay">
-                    <a href="/product/{{this._id}}" class="card__overlay-detail">
-                        <i class="fa fa-arrow-circle-right"></i>Xem chi tiết
-                    </a>
-                    <button class="card__overlay-cart">
-                        <i class="fa fa-shopping-cart"></i>Cho vào giỏ
-                    </button>
-                </div>
-            </div>
-        </div>
+        {{/each}}
     </div>
 </div>
 
 <div class="container py-5">
-    <div class="section-title text-center mb-3">
-        <h2 class="title line-height-1">SSD</h2>
+    <div class="section-title text-left mb-3">
+        <h2 class="title line-height-1">CPU - 5 best sellers</h2>
     </div>
+
     <div class="owl-carousel owl-theme">
-        <div class="item card-item">
-            <div class="card">
-                <img src="https://picsum.photos/200" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">Tên nè</h5>
-                    <div class="card-price">
-                        <p class="card-price-num">123456</p><span> VND</span>
+        {{#each best_cpu}}
+            <div class="item card-item">
+                <div class="card">
+                    <img src="{{this.LinkURL}}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.ProName}}</h5>
+                        <div class="card-price">
+                            <p class="card-price-num">{{format_number this.Price}}</p><span>VND</span>
+                        </div>
+                    </div>
+                    <div class="card__overlay">
+                        <a href="/product/{{this._id}}" class="card__overlay-detail">
+                            <i class="fa fa-arrow-circle-right"></i>Xem chi tiết
+                        </a>
+                        <button class="card__overlay-cart">
+                            <i class="fa fa-shopping-cart"></i>Cho vào giỏ
+                        </button>
                     </div>
                 </div>
-                <div class="card__overlay">
-                    <a href="/product/{{this._id}}" class="card__overlay-detail">
-                        <i class="fa fa-arrow-circle-right"></i>Xem chi tiết
-                    </a>
-                    <button class="card__overlay-cart">
-                        <i class="fa fa-shopping-cart"></i>Cho vào giỏ
-                    </button>
-                </div>
             </div>
-        </div>
-        <div class="item card-item">
-            <div class="card">
-                <img src="https://picsum.photos/200" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">Tên nè</h5>
-                    <div class="card-price">
-                        <p class="card-price-num">123456</p><span> VND</span>
-                    </div>
-                </div>
-                <div class="card__overlay">
-                    <a href="/product/{{this._id}}" class="card__overlay-detail">
-                        <i class="fa fa-arrow-circle-right"></i>Xem chi tiết
-                    </a>
-                    <button class="card__overlay-cart">
-                        <i class="fa fa-shopping-cart"></i>Cho vào giỏ
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="item card-item">
-            <div class="card">
-                <img src="https://picsum.photos/200" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">Tên nè</h5>
-                    <div class="card-price">
-                        <p class="card-price-num">123456</p><span> VND</span>
-                    </div>
-                </div>
-                <div class="card__overlay">
-                    <a href="/product/{{this._id}}" class="card__overlay-detail">
-                        <i class="fa fa-arrow-circle-right"></i>Xem chi tiết
-                    </a>
-                    <button class="card__overlay-cart">
-                        <i class="fa fa-shopping-cart"></i>Cho vào giỏ
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="item card-item">
-            <div class="card">
-                <img src="https://picsum.photos/200" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">Tên nè</h5>
-                    <div class="card-price">
-                        <p class="card-price-num">123456</p><span> VND</span>
-                    </div>
-                </div>
-                <div class="card__overlay">
-                    <a href="/product/{{this._id}}" class="card__overlay-detail">
-                        <i class="fa fa-arrow-circle-right"></i>Xem chi tiết
-                    </a>
-                    <button class="card__overlay-cart">
-                        <i class="fa fa-shopping-cart"></i>Cho vào giỏ
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="item card-item">
-            <div class="card">
-                <img src="https://picsum.photos/200" class="card-img-top" alt="">
-                <div class="card-body">
-                    <h5 class="card-title">Tên nè</h5>
-                    <div class="card-price">
-                        <p class="card-price-num">123456</p><span> VND</span>
-                    </div>
-                </div>
-                <div class="card__overlay">
-                    <a href="/product/{{this._id}}" class="card__overlay-detail">
-                        <i class="fa fa-arrow-circle-right"></i>Xem chi tiết
-                    </a>
-                    <button class="card__overlay-cart">
-                        <i class="fa fa-shopping-cart"></i>Cho vào giỏ
-                    </button>
-                </div>
-            </div>
-        </div>
+        {{/each}}
     </div>
 </div>
 <!-- Feature Area Srart -->

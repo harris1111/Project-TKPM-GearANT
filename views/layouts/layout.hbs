@@ -14,20 +14,20 @@
 
 
     <!-- vendor css (Icon Font) -->
-    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css" />
-    <link rel="stylesheet" href="assets/css/vendor/pe-icon-7-stroke.css" />
-    <link rel="stylesheet" href="assets/css/vendor/font.awesome.css" />
+    <link rel="stylesheet" href="/assets/css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/vendor/pe-icon-7-stroke.css" />
+    <link rel="stylesheet" href="/assets/css/vendor/font.awesome.css" />
 
     <!-- plugins css (All Plugins Files) -->
-    <link rel="stylesheet" href="assets/css/plugins/animate.css" />
-    <link rel="stylesheet" href="assets/css/plugins/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="assets/css/plugins/jquery-ui.min.css" />
-    <link rel="stylesheet" href="assets/css/plugins/nice-select.css" />
-    <link rel="stylesheet" href="assets/css/plugins/venobox.css" />
+    <link rel="stylesheet" href="/assets/css/plugins/animate.css" />
+    <link rel="stylesheet" href="/assets/css/plugins/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/assets/css/plugins/jquery-ui.min.css" />
+    <link rel="stylesheet" href="/assets/css/plugins/nice-select.css" />
+    <link rel="stylesheet" href="/assets/css/plugins/venobox.css" />
 
 
-    <link rel="stylesheet" href="assets/css/plugins/owl.carousel.css">
-    <link rel="stylesheet" href="assets/css/plugins/owl.theme.default.css">
+    <link rel="stylesheet" href="/assets/css/plugins/owl.carousel.css">
+    <link rel="stylesheet" href="/assets/css/plugins/owl.theme.default.css">
 
     <!-- Use the minified version files listed below for better performance and remove the files listed above -->
     <!-- <link rel="stylesheet" href="assets/css/vendor/vendor.min.css" />
@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="assets/css/style.min.css"> -->
 
     <!-- Main Style -->
-    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="/assets/css/style.css" />
 
 </head>
 
@@ -61,32 +61,20 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/product" class="dropdown-item" href="#">Shop</a></li>
-                                    <li><a class="dropdown-item" href="#">Dropdown item 2 &raquo; </a>
-                                        <ul class="submenu dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Submenu item 1</a></li>
-                                            <li><a class="dropdown-item" href="#">Submenu item 2</a></li>
-                                            <li><a class="dropdown-item" href="#">Submenu item 3</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Dropdown item 3 &raquo; </a>
-                                        <ul class="submenu dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Another submenu 1</a></li>
-                                            <li><a class="dropdown-item" href="#">Another submenu 2</a></li>
-                                            <li><a class="dropdown-item" href="#">Another submenu 3</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a class="dropdown-item" href="#">Dropdown item 4 &raquo;</a>
-                                        <ul class="submenu dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Another submenu 1</a></li>
-                                            <li><a class="dropdown-item" href="#">Another submenu 2</a></li>
-                                            <li><a class="dropdown-item" href="#">Another submenu 3</a></li>
-                                        </ul>
-                                    </li>
+                                    {{#each lcCategories}}
+                                        <li><a class="dropdown-item" href="#">{{BigCatName}}</a>
+                                            <ul class="submenu dropdown-menu">
+                                                {{#each childCat}}
+                                                    <li><a class="dropdown-item" href="#">{{CatName}}</a></li>
+                                                {{/each}}
+                                            </ul>
+                                        </li>
+                                    {{/each}}
                                 </ul>
                             </li>
                             <li><a href="/account" class="main-menu-link">Account</a>
                             </li>
-                            <li><a href="/home/about" class="main-menu-link">About us</a></li>
+                            <li><a href="/gearANT/about" class="main-menu-link">About us</a></li>
 
                         </ul>
                     </div>
