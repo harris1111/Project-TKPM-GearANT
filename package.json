@@ -3,6 +3,7 @@
   "name": "gearANT",
   "version": "1.0.0",
   "dependencies": {
+    "body-parser": "^1.20.0",
     "express": "^4.17.3",
     "moment": "^2.29.2"
   },
