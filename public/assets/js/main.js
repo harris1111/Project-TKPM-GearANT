@@ -510,3 +510,25 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     // end if innerWidth
 }); 
+
+
+window.addEventListener("load", function(){
+    truncateCardText();
+});
+
+function truncateCardText(){
+    var cardList = document.getElementsByClassName("card-title");
+    for(var i = 0; i < cardList.length; i++){
+        var text = cardList[i].innerHTML;
+        var newText = truncateString(text, 34);
+        cardList[i].innerHTML = newText;
+    }
+}
+
+function truncateString(str, num){
+    if (str.length > num){
+        return str.slice(0, num) + "...";
+    } else {
+        return str;
+    }
+}

@@ -8428,10 +8428,14 @@ only screen and (max-width: 479px) {
 .card-item {
   position: relative;
   width: 100%;
+  box-shadow: 0px 0px 16px -4px rgba(0,0,0,0.06);
 }
 
 .card-item .card {
   margin: 0 auto;
+}
+.card-item .card .card-img-top{
+  box-shadow: 0px 0px 16px -4px rgba(0,0,0,0.06);
 }
 
 .card-item .card .card-body {
@@ -8439,7 +8443,7 @@ only screen and (max-width: 479px) {
 }
 
 .card-item .card .card-body .card-title {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   color: black;
   margin-bottom: 8px;
@@ -8458,10 +8462,6 @@ only screen and (max-width: 479px) {
   color: #fb5332;
   margin: 0;
   display: inline-block;
-}
-
-.card-item .card .card-body .card-price span {
-  float: right;
 }
 
 .card-item .card .card__overlay {
@@ -8573,5 +8573,17 @@ header {
     margin-right: 0.7rem;
     margin-bottom: .5rem;
   }
-
+}
+@media screen and (max-width: 576px){
+  .card-item .card .card__overlay .card__overlay-cart,
+  .card-item .card .card__overlay .card__overlay-detail {
+    width: 80%;
+  }
+  .card-item .card:hover .card__overlay .card__overlay-detail {
+    top: 33%;
+  }
+  
+  .card-item .card:hover .card__overlay .card__overlay-cart {
+    bottom: 33%;
+  }
 }
