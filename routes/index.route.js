@@ -22,8 +22,4 @@ router.get("/", async function (req, res, next) {
     });
 });
 
-router.get("/about", function(req, res, next) {
-    res.render('about');
-});
-
 export default router;
