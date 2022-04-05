@@ -8431,6 +8431,7 @@ only screen and (max-width: 479px) {
   position: relative;
   width: 100%;
   box-shadow: 0px 0px 16px -4px rgba(0,0,0,0.06);
+  padding: 10px 0;
 }
 
 .card-item .card {
@@ -8590,4 +8591,19 @@ header {
   .card-item .card:hover .card__overlay .card__overlay-cart {
     bottom: 33%;
   }
+}
+
+
+.product-infor ul{
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 40px;
+  padding-left: 20px;
+}
+.product-infor ul li{
+  list-style: circle;
+}
+
+.product-infor ul li p{
+  display: inline;
 }
