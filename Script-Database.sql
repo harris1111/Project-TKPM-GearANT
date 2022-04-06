@@ -70,12 +70,14 @@ CREATE TABLE `cart` (
 
 -- ----------------------------
 -- Don dat hang
+--1 pending, 2 approved, 3  shipping, 4 success, 5 canceled
 -- ----------------------------
 DROP TABLE IF EXISTS `order_list`;
 CREATE TABLE `order_list` (
   `OrderID` int unsigned NOT NULL AUTO_INCREMENT,
   `User` char(50) COLLATE utf8_general_ci NOT NULL,
   `Date` datetime NOT NULL,
+  `State` int unsigned NOT NULL, 
   PRIMARY KEY (`OrderID`),
   FOREIGN KEY (`User`) REFERENCES user(`Username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -178,21 +180,21 @@ INSERT INTO `cart` VALUES ('ngan',16,4);
 COMMIT;
 
 BEGIN;
-INSERT INTO `order_list` VALUES (1,'thanh','2021-11-11 11:12:01');
-INSERT INTO `order_list` VALUES (2,'thanh','2021-12-11 11:12:01');
-INSERT INTO `order_list` VALUES (3,'thanh','2022-01-11 11:12:01');
-INSERT INTO `order_list` VALUES (4,'thanh','2021-12-11 11:12:01');
-INSERT INTO `order_list` VALUES (5,'an','2021-11-11 11:12:01');
-INSERT INTO `order_list` VALUES (6,'an','2021-12-11 11:12:01');
-INSERT INTO `order_list` VALUES (7,'an','2022-01-11 11:12:01');
-INSERT INTO `order_list` VALUES (8,'an','2021-02-11 11:12:01');
-INSERT INTO `order_list` VALUES (9,'an','2021-03-11 11:12:01');
-INSERT INTO `order_list` VALUES (10,'an','2020-12-11 11:12:01');
-INSERT INTO `order_list` VALUES (11,'an','2021-11-11 11:12:01');
-INSERT INTO `order_list` VALUES (12,'an','2021-12-11 11:12:01');
-INSERT INTO `order_list` VALUES (13,'an','2021-01-11 11:12:01');
-INSERT INTO `order_list` VALUES (14,'ngan','2022-02-11 11:12:01');
-INSERT INTO `order_list` VALUES (15,'ngan','2022-03-11 11:12:01');
+INSERT INTO `order_list` VALUES (1,'thanh','2021-11-11 11:12:01',1);
+INSERT INTO `order_list` VALUES (2,'thanh','2021-12-11 11:12:01',2);
+INSERT INTO `order_list` VALUES (3,'thanh','2022-01-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (4,'thanh','2021-12-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (5,'an','2021-11-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (6,'an','2021-12-11 11:12:01',3);
+INSERT INTO `order_list` VALUES (7,'an','2022-01-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (8,'an','2021-02-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (9,'an','2021-03-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (10,'an','2020-12-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (11,'an','2021-11-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (12,'an','2021-12-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (13,'an','2021-01-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (14,'ngan','2022-02-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (15,'ngan','2022-03-11 11:12:01',4);
 COMMIT;
 
 BEGIN;
