@@ -6,7 +6,8 @@ import activate_view from './middlewares/view.mdw.js';
 import activate_route from './middlewares/route.mdw.js';
 import activate_locals from './middlewares/local.mdw.js';
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
+const __dirname = dirname(fileURLToPath(
+    import.meta.url));
 
 const app = express();
 
@@ -19,6 +20,5 @@ activate_view(app);
 activate_route(app);
 
 const port = process.env.PORT || 8080;
-app.listen(port, function () {});
-console.log(`Listening on port`,port)
-
+app.listen(port, function() {});
+console.log(`Listening on port`, port)
