@@ -20,55 +20,31 @@
       <div class="shop-bottom-area">
         <!-- Tab Content Area Start -->
         <div class="tab-pane fade show active row" id="shop-list">
-
-          <div class="col-12 col-md-4 col-lg-3 card-content">
-            <div class="item card-item">
-              <div class="card">
-                <img src="https://picsum.photos/200" class="card-img-top" alt="">
-                <div class="card-body">
-                  <h5 class="card-title">Tên nè</h5>
-                  <div class="card-price">
-                    <p class="card-price-num">123456</p><span> VND</span>
-                  </div>
-                  <hr>
-                  <p class="card-sold">Sold: 9k</p>
+            {{#each this.products}}
+                <div class="col-12 col-md-4 col-lg-3 card-content">
+                    <div class="item card-item">
+                        <div class="card">
+                            <img src="{{LinkURL}}" class="card-img-top" alt="">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ProName}}</h5>
+                                <div class="card-price">
+                                    <p class="card-price-num">{{format_number Price}} VND</p>
+                                </div>
+                                <hr>
+                                <p class="card-sold">Sold: 9k</p>
+                            </div>
+                            <div class="card__overlay">
+                                <a href="/product/detail/{{ProID}}" class="card__overlay-detail">
+                                    <i class="fa fa-arrow-circle-right"></i>Details
+                                </a>
+                                <button class="card__overlay-cart">
+                                    <i class="fa fa-shopping-cart"></i>Add to cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="card__overlay">
-                  <a href="/product/{{this._id}}" class="card__overlay-detail">
-                    <i class="fa fa-arrow-circle-right"></i>Xem chi tiết
-                  </a>
-                  <button class="card__overlay-cart">
-                    <i class="fa fa-shopping-cart"></i>Cho vào giỏ
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-12 col-md-4 col-lg-3 card-content">
-            <div class="item card-item">
-              <div class="card">
-                <img src="https://picsum.photos/200" class="card-img-top" alt="">
-                <div class="card-body">
-                  <h5 class="card-title">Tên nè</h5>
-                  <div class="card-price">
-                    <p class="card-price-num">123456</p><span> VND</span>
-                  </div>
-                  <hr>
-                  <p class="card-sold">Sold: 9k</p>
-                </div>
-                <div class="card__overlay">
-                  <a href="/product/{{this._id}}" class="card__overlay-detail">
-                    <i class="fa fa-arrow-circle-right"></i>Xem chi tiết
-                  </a>
-                  <button class="card__overlay-cart">
-                    <i class="fa fa-shopping-cart"></i>Cho vào giỏ
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
+            {{/each}}
                 <!-- Tab Content Area End -->
 
                 <!--  Pagination Area Start -->

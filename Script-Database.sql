@@ -49,7 +49,7 @@ CREATE TABLE `product` (
   `LinkURL` char(200) NOT NULL,
   `Stock` int unsigned NOT NULL,
   `ProState` bit NOT NULL, 
-  `Discription` text COLLATE utf8_general_ci NOT NULL,
+  `Description` text COLLATE utf8_general_ci NOT NULL,
   
   PRIMARY KEY (`ProID`),
   FOREIGN KEY (`CatID`) REFERENCES category(`CatID`)

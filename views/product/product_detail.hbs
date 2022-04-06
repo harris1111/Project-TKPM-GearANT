@@ -4,8 +4,8 @@
         <div class="d-flex align-items-center">
             <ul class="breadcrumb-list">
                 <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i></a></li>
-                <li class="breadcrumb-item"><a href="/">Ram</a></li>
-                <li class="breadcrumb-item">Samsung</li>
+                <li class="breadcrumb-item"><a href="/">{{product.BigCatName}}</a></li>
+                <li class="breadcrumb-item">{{product.CatName}}</li>
             </ul>
         </div>
     </div>
@@ -22,7 +22,7 @@
                 <div class="swiper-container zoom-top">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide zoom-image-hover">
-                            <img class="img-responsive m-auto" src="https://picsum.photos/200" alt="">
+                            <img class="img-responsive m-auto" src="{{product.LinkURL}}" alt="">
                         </div>
                     </div>
                 </div>
@@ -30,25 +30,25 @@
             <div class="col-lg-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="200">
                 <div class="product-details-content quickview-content p-3">
 
-                    <h2>Ram PC DDR5 Samsung</h2>
+                    <h2>{{product.ProName}}</h2>
 
                     <div class="product-infor">
                         <ul>
                             <li>
-                                Thương hiệu: <p>SAMSUNG</p>
+                                Thương hiệu: <p>{{product.CatName}}</p>
                             </li>
                             <li>
-                                Sold: <p>123</p>
+                                Sold: <p>123 sản phẩm</p>
                             </li>
                             <li>
-                                Số lượng tồn kho: <p>123</p>
+                                Còn lại: <p>{{product.Stock}} sản phẩm</p>
                             </li>
                         </ul>
                     </div>
 
                     <div class="pricing-meta mt-30px">
                         <ul>
-                            <li class="old-price not-cut">123435<span> VND</span></li>
+                            <li class="old-price not-cut">{{format_number product.Price}} VND</li>
                         </ul>
                     </div>
                     <div class="pro-details-quality">
@@ -82,20 +82,18 @@
             </div>
         </div>
     </div>
-</div>
 
-
-<!-- product details description area start -->
-<div class="container pb-100px">
-    <div class="product-description">
-        <div class="product-description-title">
-            <p>Description</p>
+    <div class="container pt-50px">
+        <div class="product-description">
+            <div class="product-description-title">
+                <p>Description</p>
+            </div>
         </div>
-    </div>
-    <div class="product-description-text">
-        <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Animi, ex.
-        </p>
+        <div class="product-description-text">
+            <p>
+                {{product.Description}}
+            </p>
+        </div>
     </div>
 </div>
 <!-- product details description area end -->
