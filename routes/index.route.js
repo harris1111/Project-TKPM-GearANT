@@ -22,4 +22,8 @@ router.get("/", async function (req, res, next) {
     });
 });
 
+
+router.get("/login", async function (req, res, next) {
+    res.render('login');
+});
 export default router;
