@@ -13,7 +13,7 @@ router.get("/", async function (req, res, next) {
     const best_ssd = await productHome.findBestSeller(constant.bigCatID.SSD);
     const best_cpu = await productHome.findBestSeller(constant.bigCatID.CPU);
 
-    console.log(best_ram)
+    // console.log(best_ram)
 
     res.render('index', {
         best_ram,
