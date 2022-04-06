@@ -2,11 +2,11 @@
 <div class="breadcrumb-area">
   <div class="container">
     <div class="d-flex align-items-center">
-       <ul class="breadcrumb-list">
-          <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i></a></li>
-          <li class="breadcrumb-item"><a href="/">Ram</a></li>
-          <li class="breadcrumb-item">Samsung</li>
-        </ul>
+      <ul class="breadcrumb-list">
+        <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i></a></li>
+        <li class="breadcrumb-item"><a href="/">Ram</a></li>
+        <li class="breadcrumb-item">Samsung</li>
+      </ul>
     </div>
   </div>
 </div>
@@ -14,13 +14,14 @@
 <!-- breadcrumb-area end -->
 <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 <!-- Shop Page Start  -->
-<div class="shop-category-area pt-100px pb-100px">
+<div class="shop-category-area py-5">
   <div class="container">
     <div class="row">
       <!-- Shop Bottom Area Start -->
       <div class="shop-bottom-area">
         <!-- Tab Content Area Start -->
         <div class="tab-pane fade show active row" id="shop-list">
+
           <div class="col-12 col-md-4 col-lg-3 card-content">
             <div class="item card-item">
               <div class="card">
@@ -45,6 +46,29 @@
             </div>
           </div>
 
+          <div class="col-12 col-md-4 col-lg-3 card-content">
+            <div class="item card-item">
+              <div class="card">
+                <img src="https://picsum.photos/200" class="card-img-top" alt="">
+                <div class="card-body">
+                  <h5 class="card-title">Tên nè</h5>
+                  <div class="card-price">
+                    <p class="card-price-num">123456</p><span> VND</span>
+                  </div>
+                  <hr>
+                  <p class="card-sold">Sold: 9k</p>
+                </div>
+                <div class="card__overlay">
+                  <a href="/product/{{this._id}}" class="card__overlay-detail">
+                    <i class="fa fa-arrow-circle-right"></i>Xem chi tiết
+                  </a>
+                  <button class="card__overlay-cart">
+                    <i class="fa fa-shopping-cart"></i>Cho vào giỏ
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div class="col-12 col-md-4 col-lg-3 card-content">
             <div class="item card-item">
@@ -122,12 +146,24 @@
         <!-- Tab Content Area End -->
 
         <!--  Pagination Area Start -->
-        <div class="load-more-items text-center mb-md-60px mb-lm-60px mt-30px0px" data-aos="fade-up">
-          <div class="pagination">
-            <ul>
-              <!--pages or li are comes from javascript -->
+        <div class="mt-5">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
             </ul>
-          </div>
+          </nav>
         </div>
         <!--  Pagination Area End -->
       </div>
