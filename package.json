@@ -12,6 +12,7 @@
   "devDependencies": {
     "express-handlebars": "^6.0.3",
     "express-handlebars-sections": "^1.0.1",
+    "node-cron": "^3.0.0",
     "numeral": "^2.0.6"
   }
 }
