@@ -1,7 +1,6 @@
-import db from '../../utils/db.js';
+import db from '../utils/db.js';
 
 export default {
-
     async findById(id) {
         const list = await db('user').where('id', id);
         if (list.length === 0)

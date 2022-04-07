@@ -2,7 +2,7 @@ import express from "express";
 import bodyParser from "body-parser";
 import productHome from "../models/product.model.js";
 import constant from "../utils/config.js";
-import userModel from "../components/auth/userModel.js";
+import userModel from "../models/user.model.js";
 import bcrypt from "bcrypt";
 const router = express.Router();
 
@@ -25,7 +25,10 @@ router.get("/", async function(req, res, next) {
 
 // login started
 router.get("/login", async function(req, res, next) {
-    res.render("login");
+    if (req.session.auth === true) {
+        return res.redirect("/");
+    } else
+        return res.render('login');
 });
 
 router.post("/login", async function(req, res) {
@@ -39,6 +42,7 @@ router.post("/login", async function(req, res) {
     }
 
     const ret = bcrypt.compareSync(req.body.password, user.Password);
+
     if (ret === false) {
         return res.render("login", {
             error: "Invalid username or password!",
@@ -50,13 +54,6 @@ router.post("/login", async function(req, res) {
     req.session.auth = true;
     req.session.authUser = user;
 
-    if (user.Type === "1") {
-        req.session.isAdmin = false;
-        req.session.isUser = true;
-    } else if (user.Type === "2") {
-        req.session.isAdmin = true;
-        req.session.isUser = true;
-    }
     const url = req.session.retUrl || "/";
     res.redirect(url);
 });

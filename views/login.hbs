@@ -37,7 +37,7 @@
                 <div class="login-register-form">
                   <form action="/login" method="post">
                     {{#if wrongPassword}}
-                    Username or Password is incorrect/ Or User is banned
+                      Username or Password is incorrect!
                       {{/if}}
                      {{#if wrongConfirm}}
                       Confirm password is not correct !
@@ -57,7 +57,6 @@
                       placeholder="Password"
                     />
                     <div class="button-box">
-
                       <button type="submit"><span>Login</span></button>
                     </div>
                   </form>

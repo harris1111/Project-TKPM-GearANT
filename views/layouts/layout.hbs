@@ -82,10 +82,10 @@
                 <!-- Header Action Start -->
                 <div class="col col-lg-auto align-self-center pl-0">
                     <div class="header-actions">
-                        {{#if user}}
-                            <span class="text-light">Hello, {{user.username}} </span>
+                        {{#if auth}}
+                            <span class="text-light">Hello, {{authUser.Username}} </span>
                         {{/if}}
-                        {{#if user}}
+                        {{#if auth}}
                             <a href="/logout">Sign Out</a>
                         {{else}}
                             <a href="/login">Sign In</a>
