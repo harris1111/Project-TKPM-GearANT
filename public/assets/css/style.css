@@ -430,6 +430,9 @@ only screen and (max-width: 767px) {
   color: #000000;
   font-weight: 600;
 }
+.header-actions .header-action-btn span{
+  color: #fb5d5d;
+}
 
 .header-actions .header-action-btn.login-btn {
   color: #fb5d5d;
