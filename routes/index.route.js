@@ -53,7 +53,7 @@ router.post("/login", async function(req, res) {
     if (user.Type === "1") {
         req.session.isAdmin = false;
         req.session.isUser = true;
-    } else if (user.Type === "1") {
+    } else if (user.Type === "2") {
         req.session.isAdmin = true;
         req.session.isUser = true;
     }
