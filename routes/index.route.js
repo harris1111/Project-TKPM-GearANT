@@ -2,7 +2,8 @@ import express from "express";
 import bodyParser from "body-parser";
 import productHome from "../models/product.model.js";
 import constant from "../utils/config.js";
-
+import userModel from "../components/auth/userModel.js";
+import bcrypt from "bcrypt";
 const router = express.Router();
 
 router.use(bodyParser.urlencoded({ extended: false }));

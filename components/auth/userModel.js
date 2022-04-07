@@ -1,9 +1,9 @@
-import db from '../utils/db.js';
+import db from '../../utils/db.js';
 
 export default {
 
     async findById(id) {
-        const list = await db('users').where('id', id);
+        const list = await db('user').where('id', id);
         if (list.length === 0)
             return null;
 
@@ -11,7 +11,7 @@ export default {
     },
 
     async findByUsername(username) {
-        const list = await db('users').where('username', username);
+        const list = await db('user').where('username', username);
         if (list.length === 0)
             return null;
 
@@ -19,11 +19,11 @@ export default {
     },
 
     add(entity) {
-        return db('users').insert(entity);
+        return db('user').insert(entity);
     },
 
     del(id) {
-        return db('users')
+        return db('user')
             .where('id', id)
             .del();
     },
@@ -32,7 +32,7 @@ export default {
         const id = entity.id;
         delete entity.id;
 
-        return db('users')
+        return db('user')
             .where('id', id)
             .update(entity);
     },
