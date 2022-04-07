@@ -98,28 +98,32 @@
                                 <!-- <span class="cart-amount">€30.00</span> -->
                             </a>
 
-                </div>
-                <!-- Header Action Start -->
-                <div class="col col-lg-auto align-self-center pl-0">
-                    <div class="header-actions">
-                        {{#if auth}}
-                            <span class="text-light">Hello, {{authUser.Username}} </span>
-                        {{/if}}
-                        {{#if auth}}
-                            <a href="/logout">Sign Out</a>
-                            {{else}}
-                            <a href="/login">Sign In</a>
-                            {{/if}}
-
-
-
-
                         </div>
-                        <!-- Header Action End -->
+                        <!-- Header Action Start -->
+                        <div class="col col-lg-auto align-self-center pl-0">
+                            <div class="header-actions">
+                                {{#if auth}}
+                                <span class="text-light">Hello, {{authUser.Username}} </span>
+                                {{/if}}
+                                {{#if auth}}
+                                <form id="formLogout" action="/logout" method="post"></form>
+                                <a class="py-2 hover:bg-cyan-900 w-full text-left pl-3"
+                                    href="javascript: $('#formLogout').submit();">
+                                    Log out
+                                </a>
+                                {{else}}
+                                <a href="/login">Sign In</a>
+                                {{/if}}
+
+
+
+
+                            </div>
+                            <!-- Header Action End -->
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
     </header>
 
     {{{body}}}
@@ -212,7 +216,8 @@
                     <div class="row">
                         <div class="col-12 text-center">
                             <p class="copy-text"> © 2022 <strong>GearANT</strong> Made With <i class="fa fa-heart"
-                                    aria-hidden="true"></i> By <a class="company-name" href="https://www.facebook.com/thanhhoang4869">
+                                    aria-hidden="true"></i> By <a class="company-name"
+                                    href="https://www.facebook.com/thanhhoang4869">
                                     <strong> GearANT</strong></a>.</p>
                         </div>
                     </div>
