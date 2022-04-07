@@ -1,0 +1,121 @@
+<!-- breadcrumb-area start -->
+<div class="breadcrumb-area">
+  <div class="container">
+    <div class="d-flex align-items-center">
+      <ul class="breadcrumb-list">
+        <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i></a></li>
+        <li class="breadcrumb-item">Account</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- breadcrumb-area end -->
+<!-- account area start -->
+<div class="account-dashboard pt-100px pb-100px height-full ">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-3 col-lg-3">
+        <!-- Nav tabs -->
+        <div class="dashboard_tab_button" data-aos="fade-up" data-aos-delay="0">
+          <ul role="tablist" class="nav flex-column dashboard-list">
+            <li>
+              <a href="#orders" data-bs-toggle="tab" class="nav-link">Orders</a>
+            </li>
+            <li>
+              <a href="#address" data-bs-toggle="tab" class="nav-link">Addresses</a>
+            </li>
+            <li>
+              <a href="#account-details" data-bs-toggle="tab" class="nav-link">Account details</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-9 col-lg-9">
+        <!-- Tab panes -->
+        <div class="tab-content dashboard_content" data-aos="fade-up" data-aos-delay="200">
+          <div class="tab-pane fade show active" id="dashboard">
+            <h4>Account Infomation </h4>
+            <p>From Account Infomation. You can check and modify your personal
+              details.</p>
+
+            {{#if duplicateEmail}}
+            <p style="color: red;">Email has been already registered. </p>
+            {{/if}}
+            {{#if wrongPassword}}
+            <p style="color: red;">Confirm password unsuccessfully. </p>
+            {{/if}}
+          </div>
+          <div class="tab-pane fade" id="orders">
+            {{!-- <h4>Orders</h4> --}}
+            <div class="table_page table-responsive">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Order</th>
+                    <th>Date</th>
+                    <th>Product</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td>07/04/2022</td>
+                    <td class="text-start">
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, maiores. </p>
+                      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, maiores. </p>
+                    </td>
+                    <td>123123 VND</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="address">
+            <p>The following addresses will be used on the checkout page by
+              default.</p>
+            <span class="mb-1 d-inline-block"><strong>Address: </strong>
+              227 NguyenVanCu
+            </span>
+          </div>
+          <div class="tab-pane fade" id="account-details">
+            <div class="login">
+              <div class="login_form_container">
+                <div class="account_login_form">
+                  <form action="#" method="POST">
+                    <input type="hidden" name="_id" value="{{user._id}}" />
+
+                    <div class="default-form-box mb-20">
+                      <label>Email</label>
+                      <input type="text" name="email_address" value="abc@gmail.com" />
+                    </div>
+                    <div class="default-form-box mb-20">
+                      <label>Old Password</label>
+                      <input type="password" name="old-password" />
+                    </div>
+                    <div class="default-form-box mb-20">
+                      <label>New Password</label>
+                      <input type="password" name="new-password" />
+                    </div>
+                    <div class="default-form-box mb-20">
+                      <label>Address</label>
+                      <input type="text" name="address" value="227 NguyenVanCu" />
+                    </div>
+                    <div class="default-form-box mb-20">
+                      <label>Phone Number</label>
+                      <input type="text" name="phone" value="0987654321" />
+                    </div>
+                    <div class="save_button mt-3">
+                      <button class="btn" type="submit">Save</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- account area start -->
