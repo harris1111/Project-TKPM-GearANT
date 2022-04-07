@@ -67,14 +67,15 @@ router.post("/register", async function(req, res) {
     const hash = bcrypt.hashSync(rawPassword, salt);
 
     const user = {
-        username: req.body.username,
+        Username: req.body.username,
         Password: hash,
-        Name: req.body.fullName,
-        Address: req.body.Address,
+        Address: "test adress",
+        Number: req.body.Number,
         Type: 1,
     };
 
     await userModel.add(user);
+    res.redirect('/');
 });
 //register ended
 
@@ -91,8 +92,7 @@ router.post('/logout', async function(req, res) {
     //res.locals.isSeller = req.session.isSeller;
     //res.locals.isAdmin = req.session.isAdmin;
 
-    const url = req.headers.referer || '/';
-    res.redirect(url);
+    res.redirect('/');
 });
 //log out
 export default router;
