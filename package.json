@@ -13,6 +13,7 @@
     "bcrypt": "^5.0.1",
     "express-handlebars": "^6.0.3",
     "express-handlebars-sections": "^1.0.1",
+    "nodemon": "^2.0.15",
     "numeral": "^2.0.6"
   }
 }
