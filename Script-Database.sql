@@ -70,7 +70,6 @@ CREATE TABLE `cart` (
 
 -- ----------------------------
 -- Don dat hang
---1 pending, 2 approved, 3  shipping, 4 success, 5 canceled
 -- ----------------------------
 DROP TABLE IF EXISTS `order_list`;
 CREATE TABLE `order_list` (

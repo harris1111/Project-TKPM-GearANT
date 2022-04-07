@@ -3036,13 +3036,14 @@ only screen and (max-width: 767px) {
 
 .cart-main-area .cart-page-title {
   color: #000000;
-  text-align: left;
-  font-size: 24px;
-  line-height: 16px;
+  text-align: center;
   font-style: normal;
   text-transform: none;
-  margin: 0 0 30px;
-  font-weight: 600;
+  margin: 0 0 20px;
+  font-weight: bold;
+  background: linear-gradient(-96deg, #fd3d6b 0%, #fd7863 98%, #f3dfe0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .cart-main-area .table-content table {
@@ -3060,7 +3061,7 @@ only screen and (max-width: 767px) {
   color: #000000;
   font-size: 16px;
   font-weight: 700;
-  padding: 21px 45px 22px;
+  padding: 20px 30px;
   text-align: center;
   text-transform: uppercase;
   vertical-align: middle;
@@ -3083,7 +3084,9 @@ only screen and (max-width: 767px) {
 }
 
 .cart-main-area .table-content table tbody>tr td.product-name {
-  width: 350px;
+  width: 400px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .cart-main-area .table-content table tbody>tr td.product-name a {
@@ -3092,12 +3095,13 @@ only screen and (max-width: 767px) {
   font-weight: 600;
 }
 
-.cart-main-area .table-content table tbody>tr td.product-price-cart {
-  width: 435px;
+.cart-main-area .table-content table tbody>tr td.product-price-cart,
+.cart-main-area .table-content table tbody>tr td.product-subtotal {
+  width: 250px;
 }
 
 .cart-main-area .table-content table tbody>tr td.product-quantity {
-  width: 435px;
+  width: 90px;
 }
 
 .cart-main-area .table-content table tbody>tr td.product-quantity .cart-plus-minus {
@@ -3247,46 +3251,19 @@ only screen and (max-width: 767px) {
   color: #fff;
 }
 
-.cart-tax,
-.discount-code-wrapper,
 .grand-totall {
   background-color: #ebebeb;
   border: 1px solid #ebebeb;
   border-radius: 0px;
-  padding: 45px 30px 50px;
+  padding: 20px 30px;
 }
 
-.cart-tax .title-wrap,
-.discount-code-wrapper .title-wrap,
-.grand-totall .title-wrap {
-  position: relative;
-}
-
-.cart-tax .title-wrap::before,
-.discount-code-wrapper .title-wrap::before,
-.grand-totall .title-wrap::before {
-  background-color: #e3e1e1;
-  content: "";
-  height: 1px;
-  left: 0;
-  position: absolute;
-  top: 13px;
-  transition: all 0.4s ease 0s;
-  width: 100%;
-  z-index: 1;
-}
-
-.cart-tax .title-wrap h4.cart-bottom-title,
-.discount-code-wrapper .title-wrap h4.cart-bottom-title,
-.grand-totall .title-wrap h4.cart-bottom-title {
+.grand-totall .title-wrap .cart-bottom-title {
   display: inline-block;
   font-size: 18px;
   font-weight: 700;
   margin: 0;
-  padding-right: 18px;
   background-color: #ebebeb;
-  position: relative;
-  z-index: 1;
   color: #000000;
 }
 
@@ -5023,6 +5000,7 @@ only screen and (max-width: 767px) {
   max-width: 100%;
   transition: all 0.3s ease 0s;
   width: 100%;
+  padding: 20px;
 }
 
 .team-wrapper .team-content {
@@ -8347,6 +8325,6 @@ header {
   font-size: 18px;
 }
 
-.pagination .page-item .page-link{
+.pagination .page-item .page-link {
   color: #fd3d6b;
 }
