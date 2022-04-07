@@ -14,7 +14,7 @@ router.get("/", async function(req, res, next) {
     const best_ssd = await productHome.findBestSeller(constant.bigCatID.SSD);
     const best_cpu = await productHome.findBestSeller(constant.bigCatID.CPU);
 
-    console.log(best_ram);
+    //console.log(best_ram);
 
     res.render("index", {
         best_ram,
@@ -60,11 +60,8 @@ router.post("/login", async function(req, res) {
 //login ended
 
 //register started
-router.get("/register", async function(req, res) {
-    res.render("register");
-});
-
 router.post("/register", async function(req, res) {
+    console.log("POST register")
     const rawPassword = req.body.password;
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(rawPassword, salt);
@@ -77,21 +74,22 @@ router.post("/register", async function(req, res) {
         Type: 1,
     };
 
-    await userModel.addUser(user);
+    await userModel.add(user);
 });
 //register ended
 
 //log out
 router.post('/logout', async function(req, res) {
+    console.log("LOGOUT post");
     req.session.auth = false;
     req.session.authUser = null;
-    req.session.isSeller = null;
-    req.session.isAdmin = null;
+    //req.session.isSeller = null;
+    //req.session.isAdmin = null;
 
     res.locals.auth = req.session.auth;
     res.locals.authUser = req.session.authUser;
-    res.locals.isSeller = req.session.isSeller;
-    res.locals.isAdmin = req.session.isAdmin;
+    //res.locals.isSeller = req.session.isSeller;
+    //res.locals.isAdmin = req.session.isAdmin;
 
     const url = req.headers.referer || '/';
     res.redirect(url);

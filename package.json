@@ -9,7 +9,8 @@
         "express-session": "^1.17.2",
         "knex": "^1.0.4",
         "moment": "^2.29.2",
-        "mysql2": "^2.3.3"
+        "mysql2": "^2.3.3",
+        "sweetalert": "^2.1.2"
     },
     "scripts": {
         "watch": "nodemon app.js"
