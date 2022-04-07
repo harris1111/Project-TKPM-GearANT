@@ -15,5 +15,26 @@ export default {
                          limit 5`;
         const raw = await db.raw(sql);
         return raw[0];
+    },
+
+    async  findByID(id){
+        const sql = `select * from product p
+                        join category c
+                        on c.CatID = p.CatID
+                        join big_category b
+                        on c.BigCat = b.BigCatID
+                        where ProID = ${id}`
+
+        const raw = await db.raw(sql);
+        return raw[0][0];
+    },
+
+    async  findByCatID(catid, proid){
+        const sql = `select * from product
+                     where CatID = ${catid} and ProID!=${proid}
+                    limit 4 offset 0`
+
+        const raw = await db.raw(sql);
+        return raw[0];
     }
 }
