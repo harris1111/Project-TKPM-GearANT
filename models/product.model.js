@@ -11,8 +11,8 @@ export default {
                               join big_category b
                                    on c.BigCat = b.BigCatID
                               join order_list ol on od.OrderID = ol.OrderID
-                     where b.BigCatID = ${bigid}
-                       and ol.State = 4
+                     where b.BigCatID = ${bigid} 
+                     and ol.State = 4
                      group by p.ProID
                      order by StockSum DESC limit 5`;
         const raw = await db.raw(sql);
