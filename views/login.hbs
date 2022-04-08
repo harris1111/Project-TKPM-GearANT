@@ -32,13 +32,13 @@
                 <div class="login-register-form">
                   <form action="/login" method="post">
                     {{#if wrongPassword}}
-                    Username or Password is incorrect/ Or User is banned
+                    swal("Invalid password");
                     {{/if}}
                     {{#if wrongConfirm}}
                     Confirm password is not correct !
                     {{/if}}
                     {{#if duplicate}}
-                    Username or Email has been register !
+                    Username or Email has been registered !
                     {{/if}}
 
                     <input type="text" name="username" placeholder="Username" />
