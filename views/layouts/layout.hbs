@@ -37,19 +37,26 @@
 
     <!-- Header Area Start -->
     <header>
-        <div class="header-main sticky-nav ">
-            <div class="container-fluid position-relative">
-                <div class="row">
-                    <a href="/" class="col-auto d-flex align-self-center header-logo align-items-center">
+        <div class="header-main sticky-nav">
+            <nav class="navbar navbar-light navbar-expand-lg position-relative">
+                <div class="container-fluid">
+                    <a class="navbar-brand d-flex align-self-center header-logo align-items-center col-3 col-lg-3 m-0"
+                        href="#">
                         <img src="https://i.imgur.com/5g0Inms_d.webp?maxwidth=760&fidelity=grand" alt="logo">
-                        <p class="fw-bold fs-2 text-light">GEAR<span class="fs-2">ANT</span></p>
+                        <p class="fw-bold text-light">GEAR<span>ANT</span></p>
                     </a>
-                    <div class="col align-self-center d-none d-lg-block">
-                        <div class="main-menu">
-                            <ul>
-                                <li><a href="/" class="main-menu-link">Home </a>
+                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+                        aria-labelledby="offcanvasNavbarLabel">
+                        <div class="offcanvas-header d-block text-end">
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body main-menu navbar-collapse">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="main-menu-link" href="/">Home</a>
                                 </li>
-                                <li class="dropdown">
+                                <li class="nav-item dropdown">
                                     <a class="main-menu-link dropdown-toggle" href="#"
                                         data-bs-toggle="dropdown">Category
                                     </a>
@@ -60,54 +67,57 @@
                                             <ul class="submenu dropdown-menu">
                                                 {{#each childCat}}
                                                 <li><a class="dropdown-item"
-                                                        href="/product/byCat/{{CatID}}">{{CatName}}</a></li>
+                                                        href="/product/byCat/{{CatID}}">{{CatName}}</a>
+                                                </li>
                                                 {{/each}}
                                             </ul>
                                         </li>
                                         {{/each}}
                                     </ul>
                                 </li>
-                                <li><a href="/about" class="main-menu-link">About us</a></li>
-                                <li><a href="/account" class="main-menu-link">Account</a></li>
+                                <li class="nav-item">
+                                    <a href="/about" class="main-menu-link">About us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/account" class="main-menu-link">Account</a>
+                                </li>
                             </ul>
+                            <form id="widgets-searchbox" action="/product">
+                                <input class="input-field" type="text" name="keyword" placeholder="Search" />
+                                <button class="widgets-searchbox-btn" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </form>
                         </div>
                     </div>
-                    <!-- Header Action Start -->
-                    <div class="col-2 sidebar-widget-search align-self-center">
-                        <form id="widgets-searchbox" action="/product">
-                            <input class="input-field" type="text" name="keyword" placeholder="Search" />
-                            <button class="widgets-searchbox-btn" type="submit">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </form>
-                    </div>
-                    <div class="col-2 align-self-center d-flex justify-content-center ">
-                        <div class="header-actions">
-                            <a href="/account/cart" class="header-action-btn header-action-btn-cart pr-0 text-light">
-                                <i class="pe-7s-shopbag"></i>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light">
-                                    3
-                                </span>
-                            </a>
-
-
-                            {{#if user}}
-                            <span class="text-light">Hello, {{user.username}} </span>
-                            {{/if}}
-                            {{#if user}}
-                            <a href="/logout">SIGN OUT</a>
-                            {{else}}
-                            <a href="/login">SIGN IN</a>
-                            {{/if}}
-
-
-
-
+                    <div class="d-flex">
+                        <div class="align-self-center d-flex justify-content-center ">
+                            <div class="header-actions">
+                                <a href="/account/cart"
+                                    class="header-action-btn header-action-btn-cart pr-0 text-light">
+                                    <i class="pe-7s-shopbag"></i>
+                                    <span
+                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light">
+                                        3
+                                    </span>
+                                </a>
+                                {{#if user}}
+                                <span class="text-light">Hello, {{user.username}} </span>
+                                {{/if}}
+                                {{#if user}}
+                                <a href="/logout">SIGN OUT</a>
+                                {{else}}
+                                <a href="/login">SIGN IN</a>
+                                {{/if}}
+                            </div>
                         </div>
-                        <!-- Header Action End -->
+                        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                            <span class="navbar-toggler-icon"><i class="fa fa-bars"></i></span>
+                        </button>
                     </div>
                 </div>
-            </div>
+            </nav>
         </div>
     </header>
 
