@@ -105,9 +105,13 @@
                                 <span class="text-light">Hello, {{authUser.Username}} </span>
                                 {{/if}}
                                 {{#if auth}}
-                                <a href="/logout">SIGN OUT</a>
+                                <form id="formLogout" action="/logout" method="post"></form>
+                                <a class="py-2 hover:bg-cyan-900 w-full text-left pl-3"
+                                    href="javascript: $('#formLogout').submit();">
+                                    Log out
+                                </a>
                                 {{else}}
-                                <a href="/login">SIGN IN</a>
+                                <a href="/login">Sign In</a>
                                 {{/if}}
                             </div>
                         </div>
@@ -264,4 +268,5 @@
     </script>
     <!-- Main Js -->
     <script src="/assets/js/main.js"></script>
+    {{{_sections.js}}}
 </body>
