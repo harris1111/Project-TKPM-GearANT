@@ -1458,7 +1458,7 @@ only screen and (max-width: 767px) {
   border: 1px solid #cfcfcf;
   background-color: #f9f9f9;
   border-radius: 10px;
-  width: 100%;
+  width: 200px;
   height: 40px;
   padding-left: 15px;
   padding-right: 75px;
@@ -1511,7 +1511,7 @@ only screen and (max-width: 767px) {
   margin: 0 0 40px;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (max-width: 1199px) {
   .shop-sidebar-wrap .sidebar-widget {
     padding: 30px 20px 30px 20px;
   }
