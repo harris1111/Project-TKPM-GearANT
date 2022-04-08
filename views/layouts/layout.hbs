@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="">
 
 <head>
     <meta charset="UTF-8">
@@ -28,10 +28,6 @@
     <link rel="stylesheet" href="/assets/css/plugins/owl.theme.default.css">
 
     <!-- Use the minified version files listed below for better performance and remove the files listed above -->
-    <!-- <link rel="stylesheet" href="assets/css/vendor/vendor.min.css" />
-    <link rel="stylesheet" href="assets/css/plugins/plugins.min.css" />
-    <link rel="stylesheet" href="assets/css/style.min.css"> -->
-
     <!-- Main Style -->
     <link rel="stylesheet" href="/assets/css/style.css" />
 
@@ -41,89 +37,88 @@
 
     <!-- Header Area Start -->
     <header>
-        <div class="header-main sticky-nav ">
-            <div class="container-fluid position-relative">
-                <div class="row">
-                    <a href="/" class="col-auto d-flex align-self-center header-logo align-items-center">
+        <div class="header-main sticky-nav">
+            <nav class="navbar navbar-light navbar-expand-lg position-relative">
+                <div class="container-fluid">
+                    <a class="navbar-brand d-flex align-self-center header-logo align-items-center col-3 col-lg-3 m-0"
+                        href="#">
                         <img src="https://i.imgur.com/5g0Inms_d.webp?maxwidth=760&fidelity=grand" alt="logo">
-                        <p class="fw-bold fs-2 text-light">GEAR<span class="fs-2">ANT</span></p>
+                        <p class="fw-bold text-light">GEAR<span>ANT</span></p>
                     </a>
-                    <div class="col align-self-center d-none d-lg-block">
-                        <div class="main-menu">
-                            <ul>
-                                <li><a href="/" class="main-menu-link">Home </a>
+                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+                        aria-labelledby="offcanvasNavbarLabel">
+                        <div class="offcanvas-header text-end">
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body main-menu navbar-collapse">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="main-menu-link" href="/">Home</a>
                                 </li>
-                                <li class="dropdown">
+                                <li class="nav-item dropdown">
                                     <a class="main-menu-link dropdown-toggle" href="#"
                                         data-bs-toggle="dropdown">Category
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="/product" class="dropdown-item" href="#">Shop</a></li>
                                         {{#each lcCategories}}
-                                        <li><a class="dropdown-item" href="#">{{BigCatName}}</a>
+                                        <li><a class="dropdown-item"
+                                                href="/product/byBigCat/{{BigCatID}}">{{BigCatName}}</a>
                                             <ul class="submenu dropdown-menu">
                                                 {{#each childCat}}
-                                                <li><a class="dropdown-item" href="#">{{CatName}}</a></li>
+                                                <li><a class="dropdown-item"
+                                                        href="/product/byCat/{{CatID}}">{{CatName}}</a>
+                                                </li>
                                                 {{/each}}
                                             </ul>
                                         </li>
                                         {{/each}}
                                     </ul>
                                 </li>
-                                <li><a href="/about" class="main-menu-link">About us</a></li>
-                                <li><a href="/account" class="main-menu-link">Account</a></li>
+                                <li class="nav-item">
+                                    <a href="/about" class="main-menu-link">About us</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/account" class="main-menu-link">Account</a>
+                                </li>
                             </ul>
+                            <form id="widgets-searchbox" action="/product">
+                                <input class="input-field" type="text" name="keyword" placeholder="Search" />
+                                <button class="widgets-searchbox-btn" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </form>
                         </div>
                     </div>
-                    <!-- Header Action Start -->
-                    <div class="col-2 sidebar-widget-search align-self-center">
-                        <form id="widgets-searchbox" action="/product">
-                            <input class="input-field" type="text" name="keyword" placeholder="Search" />
-                            <button class="widgets-searchbox-btn" type="submit">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </form>
-                    </div>
-                    <div class="col-2 align-self-center d-flex justify-content-center ">
-                        <div class="header-actions">
-                            <!-- Single Wedge Start -->
-                            {{!-- <a href="#" class="header-action-btn text-light" data-bs-toggle="modal"
-                                data-bs-target="#searchActive">
-                                <i class="pe-7s-search"></i>
-                            </a> --}}
-                            <!-- Single Wedge End -->
-                            <a href="/cart" class="header-action-btn header-action-btn-cart pr-0 text-light">
-                                <i class="pe-7s-shopbag"></i>
-
-                                <!-- <span class="cart-amount">€30.00</span> -->
-                            </a>
-
-                        </div>
-                        <!-- Header Action Start -->
-                        <div class="col col-lg-auto align-self-center pl-0">
+                    <div class="d-flex">
+                        <div class="align-self-center d-flex justify-content-center ">
                             <div class="header-actions">
-                                {{#if auth}}
-                                <span class="text-light">Hello, {{authUser.Username}} </span>
-                                {{/if}}
-                                {{#if auth}}
-                                <form id="formLogout" action="/logout" method="post"></form>
-                                <a class="py-2 hover:bg-cyan-900 w-full text-left pl-3"
-                                    href="javascript: $('#formLogout').submit();">
-                                    Log out
+                                <a href="/account/cart"
+                                    class="header-action-btn header-action-btn-cart pr-0 text-light">
+                                    <i class="pe-7s-shopbag"></i>
+                                    <span
+                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light">
+                                        3
+                                    </span>
                                 </a>
-                                {{else}}
-                                <a href="/login">Sign In</a>
+                                {{#if auth}}
+                                <span class="text-light">Hello, {{authUser.username}} </span>
                                 {{/if}}
-
-
-
-
+                                {{#if auth}}
+                                <a href="/logout">SIGN OUT</a>
+                                {{else}}
+                                <a href="/login">SIGN IN</a>
+                                {{/if}}
                             </div>
-                            <!-- Header Action End -->
                         </div>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                            <span class="navbar-toggler-icon"><i class="fa fa-bars"></i></span>
+                        </button>
                     </div>
                 </div>
-            </div>
+            </nav>
+        </div>
     </header>
 
     {{{body}}}
@@ -227,51 +222,27 @@
     </div>
     <!-- Footer Area End -->
 
-    <!-- Search Modal Start -->
-    {{!-- <div class="modal popup-search-style" id="searchActive">
-        <button type="button" class="close-btn" data-bs-dismiss="modal"><span aria-hidden="true">&times;</span></button>
-        <div class="modal-overlay">
-            <div class="modal-dialog p-0" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <h2>Search Your Product</h2>
-                        <form class="navbar-form position-relative" role="search" action="/product">
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="keyword" placeholder="Search here...">
-                            </div>
-                            <button type="submit" class="submit-btn"><i class="pe-7s-search"></i></button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    <!-- Search Modal End -->
-
     <!-- Global Vendor, plugins JS -->
 
     <!-- Vendor JS -->
-    <script src="assets/js/vendor/jquery-3.5.1.min.js"></script>
+    <script src="/assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <script src="/assets/js/vendor/jquery-3.5.1.min.js"></script>
+    <!--Plugins J/S-->
+    <script src="/assets/js/plugins/jquery-ui.min.js"></script>
+    <script src="/assets/js/plugins/jquery.nice-select.min.js"></script>
+    <script src="/assets/js/plugins/swiper-bundle.min.js"></script>
+    <script src="/assets/js/plugins/countdown.js"></script>
+    <script src="/assets/js/plugins/scrollup.js"></script>
+    <script src="/assets/js/plugins/jquery.zoom.min.js"></script>
+    <script src="/assets/js/plugins/venobox.min.js"></script>
+    <script src="/assets/js/plugins/ajax-mail.js"></script>
 
-    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
-    <script src="assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
-    <script src="assets/js/vendor/modernizr-3.11.2.min.js"></script>
-
-    <!--Plugins JS-->
-    <script src="assets/js/plugins/swiper-bundle.min.js"></script>
-    <script src="assets/js/plugins/jquery-ui.min.js"></script>
-    <script src="assets/js/plugins/jquery.nice-select.min.js"></script>
-    <script src="assets/js/plugins/countdown.js"></script>
-    <script src="assets/js/plugins/scrollup.js"></script>
-    <script src="assets/js/plugins/jquery.zoom.min.js"></script>
-    <script src="assets/js/plugins/venobox.min.js"></script>
-    <script src="assets/js/plugins/ajax-mail.js"></script>
+    <script src="/assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/vendor/modernizr-3.11.2.min.js"></script>
 
     <!-- Use the minified version files listed below for better performance and remove the files listed above -->
-    <!-- <script src="assets/js/vendor/vendor.min.js"></script>
-<script src="assets/js/plugins/plugins.min.js"></script> -->
     <!-- OWL Js -->
-    <script src="assets/js/plugins/owl.carousel.js"></script>
+    <script src="/assets/js/plugins/owl.carousel.js"></script>
     <script>
         $('.owl-carousel').owlCarousel({
             loop: true,
@@ -292,5 +263,5 @@
         })
     </script>
     <!-- Main Js -->
-    <script src="assets/js/main.js"></script>
+    <script src="/assets/js/main.js"></script>
 </body>

@@ -520,7 +520,7 @@ function truncateCardText(){
     var cardList = document.getElementsByClassName("card-title");
     for(var i = 0; i < cardList.length; i++){
         var text = cardList[i].innerHTML;
-        var newText = truncateString(text, 34);
+        var newText = truncateString(text, 20);
         cardList[i].innerHTML = newText;
     }
 }

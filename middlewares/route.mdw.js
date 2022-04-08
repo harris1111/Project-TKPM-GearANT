@@ -2,7 +2,6 @@ import indexRoute from '../routes/index.route.js'
 import aboutRoute from '../routes/about.route.js'
 import accountRoute from '../routes/account.route.js'
 import productRoute from '../routes/product.route.js'
-
 // import sellerRoute from '../routes/seller.route.js'
 // import auth from '../middlewares/auth.mdw.js';
 
