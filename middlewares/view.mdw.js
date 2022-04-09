@@ -3,7 +3,7 @@ import numeral from 'numeral';
 import moment from 'moment';
 import handlebars_sections from "express-handlebars-sections";
 
-export default function (app) {
+export default function(app) {
     app.engine('hbs', engine({
         defaultLayout: 'layout.hbs',
         helpers: {

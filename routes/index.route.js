@@ -27,8 +27,7 @@ router.get("/", async function(req, res, next) {
 router.get("/login", async function(req, res, next) {
     if (req.session.auth === true) {
         return res.redirect("/");
-    } else
-        return res.render('login');
+    } else return res.render("login");
 });
 
 router.post("/login", async function(req, res) {
@@ -37,7 +36,7 @@ router.post("/login", async function(req, res) {
 
     if (user === null) {
         return res.render("login", {
-            error: "Invalid username or password !",
+            error: "Invalid username or password!",
         });
     }
 
@@ -61,7 +60,7 @@ router.post("/login", async function(req, res) {
 
 //register started
 router.post("/register", async function(req, res) {
-    console.log("POST register")
+    console.log("POST register");
     const rawPassword = req.body.password;
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(rawPassword, salt);
@@ -75,12 +74,12 @@ router.post("/register", async function(req, res) {
     };
 
     await userModel.add(user);
-    res.redirect('/');
+    res.redirect("/login");
 });
 //register ended
 
 //log out
-router.post('/logout', async function(req, res) {
+router.post("/logout", async function(req, res) {
     console.log("LOGOUT post");
     req.session.auth = false;
     req.session.authUser = null;
@@ -92,7 +91,7 @@ router.post('/logout', async function(req, res) {
     //res.locals.isSeller = req.session.isSeller;
     //res.locals.isAdmin = req.session.isAdmin;
 
-    res.redirect('/');
+    res.redirect("/");
 });
 //log out
 export default router;
