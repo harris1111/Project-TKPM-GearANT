@@ -7,6 +7,7 @@
         "express": "^4.17.3",
         "express-mysql-session": "^2.1.7",
         "express-session": "^1.17.2",
+        "jquery": "^3.6.0",
         "knex": "^1.0.4",
         "moment": "^2.29.2",
         "mysql2": "^2.3.3",

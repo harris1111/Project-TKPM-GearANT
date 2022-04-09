@@ -76,6 +76,15 @@ router.post("/register", async function(req, res) {
     await userModel.add(user);
     res.redirect("/login");
 });
+router.get('/username-available', async function(req, res) {
+    const username = req.query.username;
+    const user = await userModel.findByUsername(username);
+    if (user === null) {
+        return res.json(true);
+    } else {
+        return res.json(false);
+    }
+});
 //register ended
 
 //log out
