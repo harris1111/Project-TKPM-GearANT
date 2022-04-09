@@ -64,7 +64,11 @@
                                 <tr>
                                     <td>{{@key}}</td>
                                     <td>{{format_no_h this.Date}}</td>
-                                    <td>{{this.State}}</td>
+                                    <td
+                                            {{#if this.success}}
+                                                class="text-success"
+                                            {{/if}}
+                                    >{{this.State}}</td>
                                     <td class="text-start">
                                         {{#each this.Orders}}
                                             <p>{{this.ProName}}</p>

@@ -36,6 +36,7 @@ router.get('/', async function (req, res, next) {
                 ordList[i]['State']='Arriving'
                 break;
             case config.ordState.SUCCESS:
+                ret[orderID].success=true
                 ordList[i]['State']='Success'
                 break;
         }
@@ -61,6 +62,7 @@ router.get('/cart', async function (req, res, next) {
             //if product stock > 0
             if(cart[i]['Stock']>=cart[i]['StockCart']){
                 cart[i]['Stock']='Available'
+                cart[i].outstock = true
                 cart[i].subtotal = parseInt(cart[i]['StockCart'])*parseInt(cart[i]['Price'])
                 total+=cart[i].subtotal
             } else{

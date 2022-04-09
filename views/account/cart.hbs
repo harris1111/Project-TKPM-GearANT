@@ -3,7 +3,7 @@
     <div class="container-fluid">
         {{#if isEmpty}}
             <h2 class="text-gray-700 h-10 ml-5">Your cart is empty!</h2>
-            <a href="/" >
+            <a href="/">
                 <h4>
                     <i class="fa fa-arrow-right text-danger"></i>
                     <span class="text-danger ml-2">Go shopping</span>
@@ -22,6 +22,7 @@
                                     <th>Price</th>
                                     <th>Qty</th>
                                     <th>Subtotal</th>
+                                    <th>Status</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -29,19 +30,30 @@
                                 {{#each cart}}
                                     <tr>
                                         <td class="product-thumbnail">
-                                            <a href="/product/detail/{{ProID}}"><img class="img-responsive" src="{{LinkURL}}"
+                                            <a href="/product/detail/{{ProID}}"><img class="img-responsive"
+                                                                                     src="{{LinkURL}}"
                                                                                      alt="{{ProName}}"/></a>
                                         </td>
-                                        <td class="product-name"><a href="/product/detail/{{ProID}}"></a>{{ProName}}</td>
-                                        <td class="product-price-cart"><span class="amount">{{format_number Price}} VND</span></td>
+                                        <td class="product-name"><a href="/product/detail/{{ProID}}"><b>{{ProName}}</b></a>
+                                        </td>
+                                        <td class="product-price-cart"><span class="amount">{{format_number Price}}
+                                            VND</span></td>
                                         <td class="product-quantity">
                                             {{StockCart}}
                                         </td>
                                         <td class="product-subtotal">{{format_number subtotal}} VND</td>
+                                        <td
+                                            {{#if outstock}}
+                                            class="text-danger"
+                                            {{else}}
+                                            class="text-primary"
+                                            {{/if}}
+                                        >{{Stock}}</td>
                                         <td class="product-remove">
                                             <button
                                                     type="submit"
                                                     name="ProID"
+                                                    class="text-danger"
                                                     value={{ProID}}
                                                     formmethod="post"
                                                     formaction="/account/cart-del">
