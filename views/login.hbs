@@ -3,8 +3,6 @@
       document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';
       $('#formLogin').on('submit', function (event) {
         event.preventDefault();
-        swal('test');
-
         const pass = document.getElementById('pass_login').value;
         const username = document.getElementById('username_login').value;
         if (username.length < 1) {

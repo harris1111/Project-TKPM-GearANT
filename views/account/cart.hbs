@@ -1,60 +1,73 @@
 <!-- Cart Area Start -->
 <div class="cart-main-area pt-100px pb-100px height-full">
     <div class="container-fluid">
-        <h2 class="cart-page-title">Your cart items</h2>
-        {{!-- {{#if outofstock}} <h3 id="outofstock">OUT OF STOCK</h3>
-        {{/if}} --}}
-        <div class="row">
-            <div class="col-12 col-lg-9">
-                <form action="#">
-                    <div class="table-content table-responsive cart-table-content">
-                        <table>
-                            <thead>
+        {{#if isEmpty}}
+            <h2 class="text-gray-700 h-10 ml-5">Your cart is empty!</h2>
+            <a href="/" >
+                <h4>
+                    <i class="fa fa-arrow-right text-danger"></i>
+                    <span class="text-danger ml-2">Go shopping</span>
+                </h4>
+            </a>
+        {{else}}
+            <div class="row">
+                <div class="col-12 col-lg-9">
+                    <form action="#">
+                        <div class="table-content table-responsive cart-table-content">
+                            <table>
+                                <thead>
                                 <tr>
-                                    <th>Image</th>
+                                    <th></th>
                                     <th>Product Name</th>
-                                    <th>Until Price</th>
+                                    <th>Price</th>
                                     <th>Qty</th>
                                     <th>Subtotal</th>
-                                    <th>Action</th>
+                                    <th></th>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="product-thumbnail">
-                                        <a href="#"><img class="img-responsive" src="https://picsum.photos/200"
-                                                alt="" /></a>
-                                    </td>
-                                    <td class="product-name"><a href="#">Lorem ipsum dolor sit amet consectetur
-                                            adipisicing elit. Quae, ipsum.</a></td>
-                                    <td class="product-price-cart"><span class="amount">123123 VND</span></td>
-                                    <td class="product-quantity">
-                                        1
-                                    </td>
-                                    <td class="product-subtotal">123123 VND</td>
-                                    <td class="product-remove">
-
-                                        <a href="/cart/{{this.productid}}/delete"><i class="fa fa-times"></i></a>
-
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                {{#each cart}}
+                                    <tr>
+                                        <td class="product-thumbnail">
+                                            <a href="/product/detail/{{ProID}}"><img class="img-responsive" src="{{LinkURL}}"
+                                                                                     alt="{{ProName}}"/></a>
+                                        </td>
+                                        <td class="product-name"><a href="/product/detail/{{ProID}}"></a>{{ProName}}</td>
+                                        <td class="product-price-cart"><span class="amount">{{format_number Price}} VND</span></td>
+                                        <td class="product-quantity">
+                                            {{StockCart}}
+                                        </td>
+                                        <td class="product-subtotal">{{format_number subtotal}} VND</td>
+                                        <td class="product-remove">
+                                            <button
+                                                    type="submit"
+                                                    name="ProID"
+                                                    value={{ProID}}
+                                                    formmethod="post"
+                                                    formaction="/account/cart-del">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3 mt-md-30px">
+                    <div class="grand-totall">
+                        <div class="title-wrap text-center">
+                            <h4 class="cart-bottom-title section-bg-gary-cart">CART TOTAL</h4>
+                        </div>
+                        <h5>Total products <span>{{format_number total}} VND</span></h5>
+                        <h5>Shipping Fee <span>0 VND</span></h5>
+                        <h4 class="grand-totall-title">Total <span>123123 VND</span></h4>
+                        <a href="/account/checkout">Proceed to Checkout</a>
                     </div>
-                </form>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3 mt-md-30px">
-                <div class="grand-totall">
-                    <div class="title-wrap text-center">
-                        <h4 class="cart-bottom-title section-bg-gary-cart">CART TOTAL</h4>
-                    </div>
-                    <h5>Total products <span>123123 VND</span></h5>
-                    <h5>Shipping Fee <span>0 VND</span></h5>
-                    <h4 class="grand-totall-title">Total <span>123123 VND</span></h4>
-                    <a href="/account/checkout">Proceed to Checkout</a>
                 </div>
             </div>
-        </div>
+        {{/if}}
     </div>
 </div>
 <!-- Cart Area End -->
