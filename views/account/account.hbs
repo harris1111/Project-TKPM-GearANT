@@ -22,10 +22,13 @@
                             <a href="#orders" data-bs-toggle="tab" class="nav-link active">Orders</a>
                         </li>
                         <li>
+                            <a href="#information" data-bs-toggle="tab" class="nav-link">Information</a>
+                        </li>
+                        <li>
                             <a href="#address" data-bs-toggle="tab" class="nav-link">Addresses</a>
                         </li>
                         <li>
-                            <a href="#account-details" data-bs-toggle="tab" class="nav-link">Account details</a>
+                            <a href="#account-details" data-bs-toggle="tab" class="nav-link">Change Password</a>
                         </li>
                     </ul>
                 </div>
@@ -33,7 +36,7 @@
             <div class="col-sm-12 col-md-9 col-lg-9">
                 <!-- Tab panes -->
                 <div class="tab-content dashboard_content" data-aos="fade-up" data-aos-delay="200">
-                    <div class="tab-pane fade" id="dashboard">
+                    {{!-- <div class="tab-pane fade" id="dashboard">
                         <h4>Account Infomation </h4>
                         <p>From Account Infomation. You can check and modify your personal
                             details.</p>
@@ -44,7 +47,7 @@
                         {{#if wrongPassword}}
                         <p style="color: red;">Confirm password unsuccessfully. </p>
                         {{/if}}
-                    </div>
+                    </div> --}}
                     <div class="tab-pane fade active" id="orders">
                         {{!-- <h4>Orders</h4> --}}
                         <div class="table_page table-responsive">
@@ -54,7 +57,6 @@
                                         <th>Order</th>
                                         <th>Date</th>
                                         <th>Status</th>
-                                        <th>Stock</th>
                                         <th>Product</th>
                                         <th>Total</th>
                                     </tr>
@@ -66,11 +68,15 @@
                                         <td>{{@key}}</td>
                                         <td>{{format_no_h this.Date}}</td>
                                         <td {{#if this.success}} class="text-success" {{/if}}>{{this.State}}</td>
-                                        <td>1</td>
-                                        <td class="text-start">
-                                            {{#each this.Orders}}
-                                            <p>{{this.ProName}}</p>
-                                            {{/each}}
+                                        <td>
+                                            <table>
+                                                {{#each this.Orders}}
+                                                <tr>
+                                                    <td style="border: none; padding:0; float:left">{{this.ProName}}</td>
+                                                    <td style="border: none; padding:0; min-width: 50px; color:#24262b">{{this.Stock}}</td>
+                                                </tr>
+                                                {{/each}}
+                                            </table>
                                         </td>
                                         <td>{{format_number this.Total}} VND</td>
                                     </tr>
@@ -79,24 +85,46 @@
                             </table>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="address">
-                        <p>The following addresses will be used on the checkout page by
-                            default.</p>
+                    <div class="tab-pane fade" id="information">
                         <div class="login">
                             <div class="login_form_container">
                                 <div class="account_login_form">
                                     <form action="#" method="POST">
-                                        <div class="default-form-box mb-20" >
-                                            <label>Old Address</label>
-                                            <input type="text" name="address" value="227 NguyenVanCu" readonly/>
-                                        </div>
                                         <div class="default-form-box mb-20">
-                                            <label>Old Phone Number</label>
-                                            <input type="text" name="phone" value="0987654321" readonly/>
+                                            <label>Address</label>
+                                            <input type="text" name="address" value="227 NguyenVanCu" readonly />
+                                        </div>
+                                        <div class="default-form-box mb-20 mt-3">
+                                            <label>Phone Number</label>
+                                            <input type="text" name="phone" value="0987654321" readonly />
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="address">
+                        {{!-- <p>The following addresses will be used on the checkout page by
+                            default.</p> --}}
+                        <div class="login">
+                            <div class="login_form_container">
+                                <div class="account_login_form">
+                                    <form action="#" method="POST">
+                                        <div class="default-form-box mb-20">
+                                            <label>Old Address</label>
+                                            <input type="text" name="address" value="227 NguyenVanCu" readonly />
                                         </div>
                                         <div class="default-form-box mb-20">
                                             <label>New Address</label>
                                             <input type="text" name="address" placeholder="New address" />
+                                        </div>
+
+                                        <div class="save_button mt-3">
+                                            <button class="btn" type="submit">Save</button>
+                                        </div>
+                                        <div class="default-form-box mb-20 mt-3">
+                                            <label>Old Phone Number</label>
+                                            <input type="text" name="phone" value="0987654321" readonly />
                                         </div>
                                         <div class="default-form-box mb-20">
                                             <label>New Phone Number</label>
@@ -117,10 +145,10 @@
                                     <form action="#" method="POST">
                                         <input type="hidden" name="_id" value="{{user._id}}" />
 
-                                        <div class="default-form-box mb-20">
+                                        {{!-- <div class="default-form-box mb-20">
                                             <label>Email</label>
                                             <input type="text" name="email_address" value="abc@gmail.com" />
-                                        </div>
+                                        </div> --}}
                                         <div class="default-form-box mb-20">
                                             <label>Old Password</label>
                                             <input type="password" name="old-password" />

@@ -2329,8 +2329,32 @@ only screen and (max-width: 767px) {
   align-items: center;
   letter-spacing: 2px;
 }
+.product-details-content .pro-details-quality .pro-details-cart .buy-cart{
+  position: relative;
+  padding: 0 35px;
+  height: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  box-shadow: none;
+  text-transform: uppercase;
+  display: inline-block;
+  background: rgb(103, 187, 215);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 2px;
+  margin-left: 20px;
+}
 
 .product-details-content .pro-details-quality .pro-details-cart .add-cart:hover {
+  background-color: #000000;
+}
+
+.product-details-content .pro-details-quality .pro-details-cart .buy-cart:hover{
   background-color: #000000;
 }
 
@@ -3605,6 +3629,7 @@ Pages - My Account
 .table_page table tbody tr td.text-start p{
   margin-bottom: 6px;
 }
+
 .table_page table tbody tr td.text-start p:last-child{
   margin-bottom: 0;
 }
