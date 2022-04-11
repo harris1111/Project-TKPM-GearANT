@@ -72,8 +72,10 @@
                                             <table>
                                                 {{#each this.Orders}}
                                                 <tr>
-                                                    <td style="border: none; padding:0; float:left">{{this.ProName}}</td>
-                                                    <td style="border: none; padding:0; min-width: 50px; color:#24262b">{{this.Stock}}</td>
+                                                    <td style="border: none; padding:0; float:left">{{this.ProName}}
+                                                    </td>
+                                                    <td style="border: none; padding:0; min-width: 50px; color:#24262b">
+                                                        {{this.Stock}}</td>
                                                 </tr>
                                                 {{/each}}
                                             </table>
@@ -104,8 +106,6 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="address">
-                        {{!-- <p>The following addresses will be used on the checkout page by
-                            default.</p> --}}
                         <div class="login">
                             <div class="login_form_container">
                                 <div class="account_login_form">
@@ -145,16 +145,16 @@
                                     <form action="#" method="POST">
                                         <input type="hidden" name="_id" value="{{user._id}}" />
 
-                                        {{!-- <div class="default-form-box mb-20">
-                                            <label>Email</label>
-                                            <input type="text" name="email_address" value="abc@gmail.com" />
-                                        </div> --}}
                                         <div class="default-form-box mb-20">
                                             <label>Old Password</label>
                                             <input type="password" name="old-password" />
                                         </div>
                                         <div class="default-form-box mb-20">
                                             <label>New Password</label>
+                                            <input type="password" name="new-password" />
+                                        </div>
+                                        <div class="default-form-box mb-20">
+                                            <label>Confirm Password</label>
                                             <input type="password" name="new-password" />
                                         </div>
                                         <div class="save_button mt-3">
