@@ -2793,13 +2793,29 @@ only screen and (max-width: 767px) {
   border-radius: 0px;
   padding: 20px 30px;
 }
+.grand-totall:first-child {
+  background-color: transparent;
+  border: 1px solid #ebebeb;
+  border-radius: 0px;
+  /* padding: 20px 30px; */
+  padding: 0;
+}
+.grand-totall:first-child .title-wrap{
+  background-color: #ebebeb;
+  border: 1px solid #ebebeb;
+  border-radius: 0px;
+  padding: 20px 30px;
+}
+.grand-totall:first-child .delivery-infor{
+  padding: 10px 30px;
+}
 
 .grand-totall .title-wrap .cart-bottom-title {
   display: inline-block;
   font-size: 18px;
   font-weight: 700;
   margin: 0;
-  background-color: #ebebeb;
+
   color: #000000;
 }
 
