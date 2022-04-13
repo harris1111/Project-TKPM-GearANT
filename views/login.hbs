@@ -1,50 +1,55 @@
 {{#section 'js'}}
-    <script>
-      document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';
-      $('#formLogin').on('submit', function (event) {
-        event.preventDefault();
-        const pass = document.getElementById('pass_login').value;
-        const username = document.getElementById('username_login').value;
-        if (username.length < 1) {
-          swal("Please enter your username!");
-          return;
-        }
-        if (pass.length < 1) {
-          swal("Please enter your password!");
-          return;
-        }
-        // Ajax
-        $('#formLogin').off('submit').submit();
-      });
+<script>
+  document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';
+  $('#formLogin').on('submit', function (event) {
+    event.preventDefault();
+    const pass = document.getElementById('pass_login').value;
+    const username = document.getElementById('username_login').value;
+    if (username.length < 1) {
+      swal("Please enter your username!");
+      return;
+    }
+    if (pass.length < 1) {
+      swal("Please enter your password!");
+      return;
+    }
+    // Ajax
+    $('#formLogin').off('submit').submit();
+  });
+  $('#formRegister').on('submit', function (event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const confirm_password = document.getElementById('confirm_Password').value;
+    // Validate username
+    if (username.length < 1) {
+      swal('Username must be filled in!');
+      return;
+    }
+    // Validate password
+    if (!password) {
+      swal('Password must be filled in!');
+      return;
+    }
+    if (!confirm_password) {
+      swal('Confirm password must be filled in!');
+      return;
+    }
+    if (password !== confirm_password) {
+      swal("Passwords doesn't match!");
+      return;
+    }
 
-      $('#formRegister').on('submit', function (event) {
-        event.preventDefault();
-
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        const confirm_password = document.getElementById('confirm_Password').value;
-
-        // Validate username
-        if (username.length < 1) {
-          swal('Username must be filled in!');
-          return;
-        }
-        // Validate password
-        if (!password) {
-          swal('Password must be filled in!');
-          return;
-        }
-        if (!confirm_password) {
-          swal('Confirm password must be filled in!');
-          return;
-        }
-        if (password !== confirm_password) {
-          swal("Passwords doesn't match!");
-          return;
-        }
-        $('#formRegister').off('submit').submit();
-      });
-    </script>
+    $.getJSON(`/username-available?username=${username}`, function (data) {
+      if (data === false) {
+        swal('Username is already in use. Please choose another one!');
+        return;
+      }
+      $('#formRegister').off('submit').submit();
+    }
+    );
+  });
+</script>
 {{/section}}
 
 
@@ -81,11 +86,12 @@
               <div class="login-form-container">
                 <div class="login-register-form">
                   <form id="formLogin" action="/login" method="post">
-
+                    {{#if error}}
+                    <p class="text-danger text-center"><strong>{{error}}</strong></p>
+                    {{/if}}
                     <input type="text" name="username" id="username_login" placeholder="Username" />
                     <input type="password" name="password" id="pass_login" placeholder="Password" />
-                    <div class="button-box">
-
+                    <div class="button-box center">
                       <button type="submit"><span>Login</span></button>
                     </div>
                   </form>
@@ -96,11 +102,15 @@
               <div class="login-form-container">
                 <div class="login-register-form">
                   <form id="formRegister" action="/register" method="post">
-                    <input type="text" name="username" placeholder="Username" />
-                    <input type="password" name="password" placeholder="Password" />
-                    <input type="password" name="confirm_password" placeholder="Confirm Password" />
-                    <input type="text" name="phone" placeholder="Phone number" />
-                    <input type="text" name="address" placeholder="Address" />
+                    {{#if error}}
+                    <p class="text-danger text-center"><strong>{{error}}</strong></p>
+                    {{/if}}
+                    <input type="text" name="username" id="username" placeholder="Username" />
+                    <input type="password" name="password" id="password" placeholder="Password" />
+                    <input type="password" name="confirm_password" id="confirm_Password"
+                      placeholder="Confirm Password" />
+                    <input type="text" name="phone" id="phone_num" placeholder="Phone number" />
+                    <input type="text" name="address" id="address" placeholder="Address" />
                     <div class="button-box">
                       <button type="submit"><span>Register</span></button>
                     </div>
