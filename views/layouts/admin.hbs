@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="robots" content="index, follow" />
+    <title>GearANT</title>
+    <meta name="description" content="GearANT" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Add site Favicon -->
+    <link rel="icon" href="https://i.imgur.com/5g0Inms.png" type="image/x-icon">
+    <!-- vendor css (Icon Font) -->
+    <link rel="stylesheet" href="/assets/css/vendor/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/vendor/pe-icon-7-stroke.css" />
+    <link rel="stylesheet" href="/assets/css/vendor/font.awesome.css" />
+
+    <!-- plugins css (All Plugins Files) -->
+    <link rel="stylesheet" href="/assets/css/plugins/animate.css" />
+    <link rel="stylesheet" href="/assets/css/plugins/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="/assets/css/plugins/jquery-ui.min.css" />
+    <link rel="stylesheet" href="/assets/css/plugins/nice-select.css" />
+    <link rel="stylesheet" href="/assets/css/plugins/venobox.css" />
+
+
+    <link rel="stylesheet" href="/assets/css/plugins/owl.carousel.css">
+    <link rel="stylesheet" href="/assets/css/plugins/owl.theme.default.css">
+
+    <!-- Use the minified version files listed below for better performance and remove the files listed above -->
+    <!-- Main Style -->
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+</head>
+
+<body>
+    <header>
+        <div class="header-main sticky-nav">
+            <nav class="navbar navbar-light navbar-expand-xl position-relative">
+                <div class="container-fluid">
+                    <a class="navbar-brand d-flex align-self-center header-logo align-items-center" href="/">
+                        <img src="https://i.imgur.com/5g0Inms_d.webp?maxwidth=760&fidelity=grand" alt="logo">
+                        <p class="fw-bold text-light">GEAR<span>ANT</span></p>
+                    </a>
+                    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar"
+                        aria-labelledby="offcanvasNavbarLabel">
+                        <div class="offcanvas-header text-end">
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="offcanvas-body main-menu navbar-collapse px-3">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="main-menu-link" href="/">Home</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="main-menu-link dropdown-toggle" href="#"
+                                        data-bs-toggle="dropdown">Category
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        {{#each lcCategories}}
+                                        <li><a class="dropdown-item"
+                                                href="/product/byBigCat/{{BigCatID}}">{{BigCatName}}</a>
+                                            <ul class="submenu dropdown-menu">
+                                                {{#each childCat}}
+                                                <li><a class="dropdown-item"
+                                                        href="/product/byCat/{{CatID}}">{{CatName}}</a>
+                                                </li>
+                                                {{/each}}
+                                            </ul>
+                                        </li>
+                                        {{/each}}
+                                    </ul>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="/about" class="main-menu-link">About us</a>
+                                </li>
+                                {{#if auth}}
+                                <li class="nav-item">
+                                    <a href="/account" class="main-menu-link">Account</a>
+                                </li>
+                                {{/if}}
+                            </ul>
+                            <form id="widgets-searchbox" action="/product">
+                                <input class="input-field" type="text" name="keyword" placeholder="Search" />
+                                <button class="widgets-searchbox-btn" type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="d-flex">
+                        <div class="align-self-center d-flex justify-content-center">
+                            <div class="header-actions">
+                                {{#if auth}}
+                                <a href="/account/cart"
+                                    class="header-action-btn header-action-btn-cart pr-0 text-light">
+                                    <i class="pe-7s-shopbag"></i>
+                                    {{#if cartSum}}
+                                    <span
+                                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-light">
+                                        {{cartSum}}
+                                    </span>
+                                    {{/if}}
+                                </a>
+                                <span class="text-light">Hello, {{authUser.Username}} </span>
+                                {{/if}}
+                                {{#if auth}}
+                                <form id="formLogout" action="/logout" method="post"></form>
+                                <a class="py-2 hover:bg-cyan-900 w-full text-left pl-3"
+                                    href="javascript: $('#formLogout').submit();">
+                                    Log out
+                                </a>
+                                {{else}}
+                                <a href="/login">Sign In</a>
+                                {{/if}}
+                            </div>
+                        </div>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas"
+                            data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                            <span class="navbar-toggler-icon"><i class="fa fa-bars"></i></span>
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="admin">
+        <div class="container pt-5 height-full admin__content">
+            <div x-data="{ sidebarOpen: false }" class="row">
+                <div class="col-2 ">
+                    <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false"
+                        class="fixed z-20 inset-0 opacity-50 transition-opacity lg:hidden"></div>
+
+                    <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
+                        class="fixed z-30 inset-y-0 left-0 w-64 transition duration-300 transform lg:translate-x-0 lg:static lg:inset-0">
+                        <nav class="text-black">
+                            {{!-- <div x-data="{ open: false }" class="admin__item">
+                                <div x-data="{ open: false }" class="">
+                                    <button @click=" open = !open "
+                                        class="admin__item-cat
+                                        {{#if cActive}}
+                                            .admin__item-active
+                                        {{/if}}">
+                                        <div>
+                                            <i class="fa fa-list-alt admin__item-icon" aria-hidden="true"></i>
+                                            <span class="mx-3">Category</span>
+                                        </div>
+                                    </button>
+
+                                    <div x-show="open" class="flex-col divide-y bg-white text-cyan-700"
+                                        @click.away="open = false" x-transition:enter="transition duration-1000"
+                                        x-transition:enter-start="opacity-0 transform -translate-y-12"
+                                        x-transition:enter-end="opacity-100 transform translate-y-0"
+                                        x-transition:leave="transition duration-1000"
+                                        x-transition:leave-start="opacity-100 transform translate-y-0"
+                                        x-transition:leave-end="opacity-0 transform -translate-y-12">
+                                        <a href="/admin/category-parent">
+                                            <div class="admin__item-drop">Big Category
+                                            </div>
+                                        </a>
+
+                                        <a href="/admin/category-child">
+                                            <div class="admin__item-drop">Category</div>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div> --}}
+                            <div class="admin__item ">
+                                <a class="admin__item-cat
+                {{#if pActive}}
+                       admin__item-active
+                {{/if}}" href="/admin/order">
+                                    <i class="fa fa-cart-arrow-down"></i>
+                                    <span>Order</span>
+                                </a>
+                            </div>
+                            
+                            <div class="admin__item ">
+                                <a class="admin__item-cat
+                {{#if pActive}}
+                       admin__item-active
+                {{/if}}" href="/admin/category-parent">
+                                   <i class="fa fa-list-alt admin__item-icon" aria-hidden="true"></i>
+                                    <span>Big Category</span>
+                                </a>
+                            </div>
+
+                            <div class="admin__item ">
+                                <a class="admin__item-cat
+                {{#if pActive}}
+                       admin__item-active
+                {{/if}}" href="/admin/category-child">
+                                    <i class="fa fa-list-alt admin__item-icon" aria-hidden="true"></i>
+                                    <span>Category</span>
+                                </a>
+                            </div>
+        
+                            <div class="admin__item ">
+                                <a class="admin__item-cat
+                {{#if pActive}}
+                       admin__item-active
+                {{/if}}" href="/admin/product">
+                                    <i class="fa fa-archive fa-lg admin__item-icon" aria-hidden="true"></i>
+                                    <span>Product</span>
+                                </a>
+                            </div>
+
+
+                            {{!-- <div x-data="{ open: false }" class="w-full">
+                                <div x-data="{ open: false }" class="admin__item">
+                                    <button @click=" open = !open "
+                                        class="w-full flex items-center justify-between admin__item-cat{{#if aActive}}bg-gray-300 bg-opacity-25 text-cyan-700 {{/if}}">
+                                        <div>
+                                            <i class="fa fa-user fa-lg admin__item-icon" aria-hidden="true"></i>
+                                            <span class="mx-3">Account</span>
+                                        </div>
+                                    </button>
+
+                                    <div x-show="open" class="flex-col divide-y bg-white text-cyan-700"
+                                        @click.away="open = false" x-transition:enter="transition duration-1000"
+                                        x-transition:enter-start="opacity-0 transform -translate-y-12"
+                                        x-transition:enter-end="opacity-100 transform translate-y-0"
+                                        x-transition:leave="transition duration-1000"
+                                        x-transition:leave-start="opacity-100 transform translate-y-0"
+                                        x-transition:leave-end="opacity-0 transform -translate-y-12">
+                                        <a href="/admin/account-request">
+                                            <div class="admin__item-drop">View Request
+                                            </div>
+                                        </a>
+                                        <a href="/admin/account">
+                                            <div class="admin__item-drop">View User
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div> --}}
+                        </nav>
+                    </div>
+                </div>
+                {{!-- flex-1 flex flex-col overflow-scroll --}}
+                <div class="col-10">
+                    {{{body}}}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="footer-area">
+        <div class="footer-container">
+            <div class="footer-top">
+                <div class="container">
+                    <div class="row">
+                        <!-- Start single blog -->
+                        <div class="col-12 col-sm-6 col-lg-3 mb-md-30px mb-lm-30px">
+                            <div class="single-wedge">
+                                <div class="footer-logo d-flex align-items-center">
+                                    <img src="https://i.imgur.com/5g0Inms_d.webp?maxwidth=760&fidelity=grand"
+                                        alt="logo">
+                                    <p class="fw-bold fs-2">GEAR<span class="fs-2">ANT</span></p>
+                                </div>
+                                <ul class="link-follow">
+                                    <li>
+                                        <a class="m-0" title="Twitter" href="#"><i class="fa fa-twitter"
+                                                aria-hidden="true"></i></a>
+                                    </li>
+                                    <li>
+                                        <a title="Facebook" href="https://www.facebook.com/thanhhoang4869"><i
+                                                class="fa fa-facebook" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a title="Instagram" href="#"><i class="fa fa-instagram" aria-hidden="true"></i>
+                                            </i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- End single blog -->
+                        <!-- Start single blog -->
+                        <div class="col-12 col-md-3 col-sm-6 col-lg-3 mb-md-30px mb-lm-30px pl-lg-50px">
+                            <div class="single-wedge">
+                                <h4 class="footer-herading">Quick Links</h4>
+                                <div class="footer-links">
+                                    <div class="footer-row">
+                                        <ul class="align-items-center">
+                                            <li class="li"><a class="single-link" href="/about">About</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End single blog -->
+                        <!-- Start single blog -->
+                        <div class="col-12 col-sm-6 col-md-3 col-lg-3 mb-lm-30px pl-lg-50px">
+                            <div class="single-wedge">
+                                <h4 class="footer-herading">Company</h4>
+                                <div class="footer-links">
+                                    <div class="footer-row">
+                                        <ul class="align-items-center">
+                                            <li class="li"><a class="single-link" href="/">GearANT</a>
+                                            </li>
+                                            {{!-- <li class="li"><a class="single-link" href="/product">Shop</a>
+                                            </li>
+                                            --}}
+                                            <li class="li"><a class="single-link" href="/login">Log in</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End single blog -->
+                        <!-- Start single blog -->
+                        <div class="col-6 col-md-4 col-lg-3 ">
+                            <div class="single-wedge">
+                                <h4 class="footer-herading">Store Information.</h4>
+                                <div class="footer-links">
+                                    <!-- News letter area -->
+                                    <p class="address">227 Nguyen Van Cu, Ward 4, District 5, Ho Chi Minh city</p>
+                                    <p class="phone">Phone/Fax:<a href="tel:0933442607">0933442607</a></p>
+                                    <p class="mail">Email:<a
+                                            href="mailto:19127067@student.hcmus.edu.vn">19127067@student.hcmus.edu.vn</a>
+                                    </p>
+                                    <!-- News letter area  End -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End single blog -->
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <p class="copy-text"> © 2022 <strong>GearANT</strong> Made With <i class="fa fa-heart"
+                                    aria-hidden="true"></i> By <a class="company-name"
+                                    href="https://www.facebook.com/thanhhoang4869">
+                                    <strong> GearANT</strong></a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Vendor JS -->
+    <script src="/assets/js/vendor/jquery-migrate-3.3.0.min.js"></script>
+    <script src="/assets/js/vendor/jquery-3.5.1.min.js"></script>
+    <!--Plugins J/S-->
+    <script src="/assets/js/plugins/jquery-ui.min.js"></script>
+    <script src="/assets/js/plugins/jquery.nice-select.min.js"></script>
+    <script src="/assets/js/plugins/swiper-bundle.min.js"></script>
+    <script src="/assets/js/plugins/countdown.js"></script>
+    <script src="/assets/js/plugins/scrollup.js"></script>
+    <script src="/assets/js/plugins/jquery.zoom.min.js"></script>
+    <script src="/assets/js/plugins/venobox.min.js"></script>
+    <script src="/assets/js/plugins/ajax-mail.js"></script>
+
+    <script src="/assets/js/vendor/bootstrap.bundle.min.js"></script>
+
+
+
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+</body>
+
+</html>
