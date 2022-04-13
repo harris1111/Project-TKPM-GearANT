@@ -2329,8 +2329,32 @@ only screen and (max-width: 767px) {
   align-items: center;
   letter-spacing: 2px;
 }
+.product-details-content .pro-details-quality .pro-details-cart .buy-cart{
+  position: relative;
+  padding: 0 35px;
+  height: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 5px;
+  box-shadow: none;
+  text-transform: uppercase;
+  display: inline-block;
+  background: rgb(103, 187, 215);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 2px;
+  margin-left: 20px;
+}
 
 .product-details-content .pro-details-quality .pro-details-cart .add-cart:hover {
+  background-color: #000000;
+}
+
+.product-details-content .pro-details-quality .pro-details-cart .buy-cart:hover{
   background-color: #000000;
 }
 
@@ -2769,13 +2793,29 @@ only screen and (max-width: 767px) {
   border-radius: 0px;
   padding: 20px 30px;
 }
+.grand-totall:first-child {
+  background-color: transparent;
+  border: 1px solid #ebebeb;
+  border-radius: 0px;
+  /* padding: 20px 30px; */
+  padding: 0;
+}
+.grand-totall:first-child .title-wrap{
+  background-color: #ebebeb;
+  border: 1px solid #ebebeb;
+  border-radius: 0px;
+  padding: 20px 30px;
+}
+.grand-totall:first-child .delivery-infor{
+  padding: 10px 30px;
+}
 
 .grand-totall .title-wrap .cart-bottom-title {
   display: inline-block;
   font-size: 18px;
   font-weight: 700;
   margin: 0;
-  background-color: #ebebeb;
+
   color: #000000;
 }
 
@@ -3605,6 +3645,7 @@ Pages - My Account
 .table_page table tbody tr td.text-start p{
   margin-bottom: 6px;
 }
+
 .table_page table tbody tr td.text-start p:last-child{
   margin-bottom: 0;
 }
