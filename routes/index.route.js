@@ -36,7 +36,7 @@ router.post("/login", async function(req, res) {
 
     if (user === null) {
         return res.render("login", {
-            error: "Invalid username or password!",
+            error_login: "Invalid username or password!",
         });
     }
 
@@ -44,7 +44,7 @@ router.post("/login", async function(req, res) {
 
     if (ret === false) {
         return res.render("login", {
-            error: "Invalid username or password!",
+            error_login: "Invalid username or password!",
         });
     }
 
@@ -68,7 +68,7 @@ router.post("/register", async function(req, res) {
     const user = {
         Username: req.body.username,
         Password: hash,
-        Address: "test adress",
+        Address: req.body.Address,
         Number: req.body.Number,
         Type: 1,
     };
@@ -89,7 +89,6 @@ router.get('/username-available', async function(req, res) {
 
 //log out
 router.post("/logout", async function(req, res) {
-    console.log("LOGOUT post");
     req.session.auth = false;
     req.session.authUser = null;
     //req.session.isSeller = null;

@@ -21,6 +21,8 @@
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     const confirm_password = document.getElementById('confirm_Password').value;
+    const address = document.getElementById('address').value;
+    const phone_num = document.getElementById('phone_num').value;
     // Validate username
     if (username.length < 1) {
       swal('Username must be filled in!');
@@ -33,6 +35,18 @@
     }
     if (!confirm_password) {
       swal('Confirm password must be filled in!');
+      return;
+    }
+    if (!address) {
+      swal('Address must be filled in!');
+      return;
+    }
+    if (!address) {
+      swal('Address must be filled in!');
+      return;
+    }
+    if (!phone_num) {
+      swal('Phone number must be filled in!');
       return;
     }
     if (password !== confirm_password) {
@@ -86,8 +100,8 @@
               <div class="login-form-container">
                 <div class="login-register-form">
                   <form id="formLogin" action="/login" method="post">
-                    {{#if error}}
-                    <p class="text-red-600 text-center mb-4 "><strong>{{error}}</strong></p>
+                    {{#if error_login}}
+                    <p class="text-danger text-center mb-4 "><strong>{{error_login}}</strong></p>
                     {{/if}}
                     <input type="text" name="username" id="username_login" placeholder="Username" />
                     <input type="password" name="password" id="pass_login" placeholder="Password" />
@@ -103,8 +117,8 @@
               <div class="login-form-container">
                 <div class="login-register-form">
                   <form id="formRegister" action="/register" method="post">
-                    {{#if error}}
-                    <p class="text-red-600 text-center mb-4 "><strong>{{error}}</strong></p>
+                    {{#if error_register}}
+                    <p class="text-danger text-center mb-4 "><strong>{{error_register}}</strong></p>
                     {{/if}}
                     <input type="text" name="username" id="username" placeholder="Username" />
                     <input type="password" name="password" id="password" placeholder="Password" />
