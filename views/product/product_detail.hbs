@@ -53,25 +53,25 @@
                     </div>
                     <div class="pro-details-quality">
                         <form action="{{product._id}}/order" method="POST">
-                            <input type="hidden" name="userid" value="{{user._id}}" />
-                            <input type="hidden" name="username" value="{{user.username}}" />
-                            <input type="hidden" name="address" value="{{user.address}}" />
-                            <input type="hidden" name="email_address" value="{{user.email_address}}" />
-                            <input type="hidden" name="phone" value="{{user.phone}}" />
+                            <input type="hidden" name="userid" value="{{user._id}}"/>
+                            <input type="hidden" name="username" value="{{user.username}}"/>
+                            <input type="hidden" name="address" value="{{user.address}}"/>
+                            <input type="hidden" name="email_address" value="{{user.email_address}}"/>
+                            <input type="hidden" name="phone" value="{{user.phone}}"/>
 
-                            <input type="hidden" name="productid" value="{{product._id}}" />
-                            <input type="hidden" name="productName" value="{{product.name}}" />
-                            <input type="hidden" name="image" value="{{product.image.[0]}}" />
-                            <input type="hidden" name="price" value="{{product.price}}" />
+                            <input type="hidden" name="productid" value="{{product._id}}"/>
+                            <input type="hidden" name="productName" value="{{product.name}}"/>
+                            <input type="hidden" name="image" value="{{product.image.[0]}}"/>
+                            <input type="hidden" name="price" value="{{product.price}}"/>
 
-                            <input type="hidden" name="note" value="" />
-                            <input type="hidden" name="status" value="" />
-                            <input type="hidden" name="shippingFee" value=0 />
+                            <input type="hidden" name="note" value=""/>
+                            <input type="hidden" name="status" value=""/>
+                            <input type="hidden" name="shippingFee" value=0/>
                             {{#if outOfStock}}
-                            <div>OUT OF STOCK ! </div>
+                                <div>OUT OF STOCK !</div>
                             {{/if}}
                             <div class="cart-plus-minus">
-                                <input class="cart-plus-minus-box" type="number" name="quantity" value="1" />
+                                <input class="cart-plus-minus-box" type="number" name="quantity" value="1"/>
                             </div>
                             <span class="pro-details-cart">
                                 <button class="add-cart" type="submit" value="Submit"> Add To Cart</button>
@@ -90,9 +90,14 @@
             </div>
         </div>
         <div class="product-description-text">
-            <p>
-                {{product.Description}}
-            </p>
+            Test description
+            <div>
+                <p>Nếu như bạn vừa mới mua cho mình một thiết bị máy tính xách tay thế hệ mới, nhưng cảm thấy dung lượng ram hiện tại sẵn có trên máy tính quá thấp, không thể đáp ứng được nhu cầu học tập, làm việc của bạn? Thì bạn cần phải nâng cấp sản phẩm RAM Laptop Samsung 8GB DDR4 3200 cho máy tính của mình để máy có thể hoạt động mượt mà hơn.</p>
+                <p>Một số ưu điểm nổi bât của RAM Laptop DDR4 Samsung 8GB Bus 3200 M471A1K43DB1-CWE</p>
+                <p><em><strong>Tốc độ cực cao:</strong></em> Sản phẩm này<strong> </strong>được thiết kế với xung bus cực lớn lên đến 3200MHz, nhờ đó các tác vụ xử lý dữ liệu diễn ra trên máy tính của bạn đều được xử lý vô cùng nhanh chóng.</p>
+                <p><em><strong>Dung lượng lớn:</strong></em> Hỗ trợ bộ nhớ tối đa lên tới 8GB, tuy không quá nhiều nhưng đối với người dùng bình thường thì mình tin rằng đây là một mức dung lượng vô cùng lý tưởng.</p>
+                <p><em><strong>Điện năng tiêu thụ cực thấp: </strong></em>Với mức điện áp yêu cầu chỉ 1.2V, điều này giúp giảm thiểu lượng điện năng tiêu thụ của máy tính và cho phép máy tính của bạn có thể sử dụng được trong thời gian dài hơn.</p>
+                </div>
         </div>
     </div>
 </div>
