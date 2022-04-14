@@ -63,6 +63,8 @@ CREATE TABLE `cart` (
   `User` char(50) COLLATE utf8_general_ci NOT NULL,
   `ProID` int unsigned NOT NULL,
   `Stock` int NOT NULL,
+  `Date` datetime NOT NULL,
+
   PRIMARY KEY (`ProID`,`User`),
   FOREIGN KEY (`ProID`) REFERENCES product(`ProID`),
   FOREIGN KEY (`User`) REFERENCES user(`Username`)
@@ -173,10 +175,10 @@ INSERT INTO `product` VALUES (21,6,'CPU AMD Ryzen 5 5600X (3.7 GHz Upto 4.6GHz /
 COMMIT;
 
 BEGIN;
-INSERT INTO `cart` VALUES ('thanh',1,2);
-INSERT INTO `cart` VALUES ('thanh',16,1);
-INSERT INTO `cart` VALUES ('an',15,3);
-INSERT INTO `cart` VALUES ('ngan',16,4);
+INSERT INTO `cart` VALUES ('thanh',1,2,'2021-11-11 11:12:01');
+INSERT INTO `cart` VALUES ('thanh',16,2,'2021-12-11 11:12:01');
+INSERT INTO `cart` VALUES ('an',15,3,'2022-02-11 11:12:01');
+INSERT INTO `cart` VALUES ('ngan',16,4,'2022-03-11 11:12:01');
 COMMIT;
 
 BEGIN;

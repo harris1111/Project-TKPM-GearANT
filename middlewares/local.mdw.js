@@ -1,4 +1,6 @@
 import categoryModel from '../models/cat.model.js';
+import userModel from '../models/user.model.js';
+
 
 export default function(app) {
     app.use(async function(req, res, next) {
@@ -8,8 +10,6 @@ export default function(app) {
         res.locals.auth = req.session.auth;
         res.locals.authUser = req.session.authUser;
 
-        console.log(req.session.authUser)
-        console.log(res.locals.authUser)
         next();
     });
 
@@ -21,7 +21,11 @@ export default function(app) {
         }
         res.locals.lcCategories = lcCategories;
 
-        //console.log(res.locals.lcCategories)
+        if(req.session.auth){
+            let cartSum = await userModel.findCartSum(req.session.authUser.Username)
+            res.locals.cartSum = cartSum['SumStock']
+        }
+
         next();
     });
 }

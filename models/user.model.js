@@ -9,6 +9,47 @@ export default {
         return list[0];
     },
 
+    async findOrderList(username) {
+        const sql = `select ol.OrderID, User, Date, State, od.ProID, p.ProName, Price, od.Stock
+                     from order_list ol
+                         join order_detail od
+                     on ol.OrderID = od.OrderID
+                         join product p on od.ProID = p.ProID
+                     where User = '${username}'
+                     order by State`;
+        const raw = await db.raw(sql);
+        return raw[0] || null
+    },
+
+    async findCart(username) {
+        const sql = `select c.User, c.Stock as StockCart, Date, d.*
+                     from cart c
+                         join user u
+                     on c.User = u.Username
+                         join product d on c.ProID = d.ProID
+                     where User = '${username}'
+                     order by Date desc`;
+        const raw = await db.raw(sql);
+        return raw[0] || null
+    },
+
+    async delCart(proid){
+        return db('cart').where('ProID',proid).del();
+    },
+
+    async findCartSum(username) {
+        const sql = `select sum(StockCart) as SumStock
+                     from (
+                              select c.User, c.Stock as StockCart, d.*
+                              from cart c
+                                       join user u on c.User = u.Username
+                                       join product d on c.ProID = d.ProID
+                          ) as detail
+                     where User = '${username}'`;
+        const raw = await db.raw(sql);
+        return raw[0][0] || null
+    },
+
     async findByUsername(username) {
         const list = await db('user').where('username', username);
         if (list.length === 0)
@@ -35,4 +76,6 @@ export default {
             .where('id', id)
             .update(entity);
     },
+
+
 }
