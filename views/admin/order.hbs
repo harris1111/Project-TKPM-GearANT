@@ -30,18 +30,19 @@
 <div class="bigCate">
     <div class="bigCate-title d-flex">
         <h3>Order</h3>
-        <button type="submit" class="text-md px-6 py-2  border border-cyan-700" data-bs-toggle="modal"
+        {{!-- <button type="submit" class="text-md px-6 py-2  border border-cyan-700" data-bs-toggle="modal"
             data-bs-target="#exampleModalAdd">
             <i class="fa fa-plus" aria-hidden="true"></i> ADD
-        </button>
+        </button> --}}
     </div>
     <div class="mt-5 table-responsive">
         <table class="table">
             <thead>
                 <tr class="table-active">
                     <th scope="col">ID</th>
-                    <th scope="col">Product Name</th>
-
+                    <th scope="col">User Name</th>
+                    <th scope="col" style="text-align: center;">Status</th>
+                    <th scope="col" style="text-align: center;">Date</th>
                     <th scope="col" class="text-center">Edit</th>
                 </tr>
             </thead>
@@ -49,12 +50,26 @@
                 <tr>
                     <th scope="row">1</th>
                     <td>
-                        <table>
+                        <table style="width: 100%">
                             <tr>
                                 <td style="border: none; padding:0; float:left">Ram abcxyz</td>
-                                <td style="border: none; padding:0; min-width: 50px; color:#24262b; float:right;">1</td>
+                                <td
+                                    style="border: none; padding:0; min-width: 30px; color:#24262b; text-align: center;">
+                                    1</td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; padding:0; float:left">Ram abcxyz</td>
+                                <td
+                                    style="border: none; padding:0; min-width: 30px; color:#24262b; text-align: center;">
+                                    1</td>
                             </tr>
                         </table>
+                    </td>
+                    <td style="text-align: center;">
+                        success
+                    </td>
+                    <td style="text-align: center;">
+                        10/04/2022
                     </td>
                     <td>
                         <form class="editForm">
@@ -69,29 +84,18 @@
         </table>
     </div>
 
-    <!-- Modal add-->
-    <div class="modal" id="exampleModalAdd" tabindex="-1" aria-labelledby="exampleModalAddLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <label>Name</label>
-                    <input id="txtAddBigCatName" type="text" name="BigCatName" class="border border-cyan-700">
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn-save">Save</button>
-                    <button type="submit" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Modal edit-->
     <div class="modal" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalEditLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
-                    <label>Name</label>
-                    <input id="txtAddBigCatName" type="text" name="BigCatName" class="border border-cyan-700">
+                    <label>Status</label>
+                    <select class="form-select" aria-label="Default select example">
+                        <option value="1">pending</option>
+                        <option value="2">preparing</option>
+                        <option value="3">shipping</option>
+                        <option value="3">success</option>
+                    </select>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn-save">Save</button>
