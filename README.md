@@ -74,16 +74,13 @@ node app.js
 
 **4. Test login/register**
 
-**Please note: Logout is not implemented yet!**
-
 - Test login by using the account below
 ```sh
   username: thanh
   password: 123
 ```
 
-- Test signup by using the account below, and please dont leave any field blank!
-We will handle empty input and duplicate username later.
+- Test signup by using the account below
 ```sh
   username: thanh123,
   password: //anything
