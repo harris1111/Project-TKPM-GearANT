@@ -16,6 +16,30 @@
             return;
         }
         $('#editAddPhoenForm').off('submit').submit();
+    $('$changePassForm').on('submit', function (event) { 
+        event.preventDefault();
+        alert('change pass form');
+        const oldPass = document.getElementById('oldPass').value;
+        const newPass = document.getElementById('newPass').value;
+        const newPassConfirm = document.getElementById('newPassConfirm').value;
+        if (oldPass.length < 1) { 
+            swal('Please enter old password!');
+            return;
+        }
+        if (newPass.length < 1) { 
+            swal('Please enter new password!');
+            return;
+        }
+        if (newPassConfirm.length < 1) { 
+            swal('Please enter confirm password!');
+            return;
+        }
+        if (newPassConfirm != newPass) { 
+            swal('Password not match');
+            return;
+        }
+        $('$changePassForm').off('submit').submit();
+    })
     });
 </script>
 {{/section}}
@@ -166,20 +190,20 @@
                         <div class="login">
                             <div class="login_form_container">
                                 <div class="account_login_form">
-                                    <form action="#" method="POST">
+                                    <form id="changePassForm" action="/account/change-password" method="POST">
                                         <input type="hidden" name="_id" value="{{user._id}}" />
 
                                         <div class="default-form-box mb-20">
                                             <label>Old Password</label>
-                                            <input type="password" name="old-password" />
+                                            <input id="oldPass" type="password" name="old-password" />
                                         </div>
                                         <div class="default-form-box mb-20">
                                             <label>New Password</label>
-                                            <input type="password" name="new-password" />
+                                            <input id="newPass" type="password" name="new-password" />
                                         </div>
                                         <div class="default-form-box mb-20">
                                             <label>Confirm Password</label>
-                                            <input type="password" name="new-password" />
+                                            <input id="newPassConfirm" type="password" name="new-password" />
                                         </div>
                                         <div class="save_button mt-3">
                                             <button class="btn" type="submit">Save</button>
