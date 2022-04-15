@@ -9,7 +9,7 @@ export default function(app) {
         }
         res.locals.auth = req.session.auth;
         res.locals.authUser = req.session.authUser;
-
+        res.locals.
         next();
     });
 
@@ -21,7 +21,7 @@ export default function(app) {
         }
         res.locals.lcCategories = lcCategories;
 
-        if(req.session.auth){
+        if (req.session.auth) {
             let cartSum = await userModel.findCartSum(req.session.authUser.Username)
             res.locals.cartSum = cartSum['SumStock']
         }

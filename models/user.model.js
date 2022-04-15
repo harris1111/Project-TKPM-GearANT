@@ -33,8 +33,8 @@ export default {
         return raw[0] || null
     },
 
-    async delCart(proid){
-        return db('cart').where('ProID',proid).del();
+    async delCart(proid) {
+        return db('cart').where('ProID', proid).del();
     },
 
     async findCartSum(username) {
@@ -69,11 +69,11 @@ export default {
     },
 
     patch(entity) {
-        const id = entity.id;
-        delete entity.id;
+        const user = entity.username;
+        delete entity.username;
 
         return db('user')
-            .where('id', id)
+            .where('Username', username)
             .update(entity);
     },
 
