@@ -1,3 +1,25 @@
+{{#section 'js'}}
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<script>
+    document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';
+    $('#editAddPhoneForm').on('submit', function (event) {
+        event.preventDefault();
+        const new_address = document.getElementById('new_address').value;
+        const new_phone = document.getElementById('new_phone').value;
+        if (new_address.length < 1) {
+            swal('Address must be filled to be updated');
+            return;
+        }
+        if (new_phone.length < 10) {
+            swal('Phone must be 10 digits!');
+            return;
+        }
+        $('#editAddPhoenForm').off('submit').submit();
+    });
+</script>
+{{/section}}
+
 <!-- breadcrumb-area start -->
 <div class="breadcrumb-area">
     <div class="container">
@@ -109,14 +131,15 @@
                         <div class="login">
                             <div class="login_form_container">
                                 <div class="account_login_form">
-                                    <form action="#" method="POST">
+                                    <form id="editAddPhoneForm" action="/account/change-address" method="POST">
                                         <div class="default-form-box mb-20">
                                             <label>Old Address</label>
                                             <input type="text" name="address" value="227 NguyenVanCu" readonly />
                                         </div>
                                         <div class="default-form-box mb-20">
                                             <label>New Address</label>
-                                            <input type="text" name="address" placeholder="New address" />
+                                            <input id="new_address" type="text" name="address"
+                                                placeholder="New address" />
                                         </div>
 
                                         <div class="save_button mt-3">
@@ -128,7 +151,8 @@
                                         </div>
                                         <div class="default-form-box mb-20">
                                             <label>New Phone Number</label>
-                                            <input type="text" name="phone" placeholder="New phone number" />
+                                            <input id="new_phone" type="text" name="phone"
+                                                placeholder="New phone number" />
                                         </div>
                                         <div class="save_button mt-3">
                                             <button class="btn" type="submit">Save</button>
