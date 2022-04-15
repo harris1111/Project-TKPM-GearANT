@@ -136,38 +136,6 @@
                     <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
                         class="fixed z-30 inset-y-0 left-0 w-64 transition duration-300 transform lg:translate-x-0 lg:static lg:inset-0">
                         <nav class="text-black">
-                            {{!-- <div x-data="{ open: false }" class="admin__item">
-                                <div x-data="{ open: false }" class="">
-                                    <button @click=" open = !open "
-                                        class="admin__item-cat
-                                        {{#if cActive}}
-                                            .admin__item-active
-                                        {{/if}}">
-                                        <div>
-                                            <i class="fa fa-list-alt admin__item-icon" aria-hidden="true"></i>
-                                            <span class="mx-3">Category</span>
-                                        </div>
-                                    </button>
-
-                                    <div x-show="open" class="flex-col divide-y bg-white text-cyan-700"
-                                        @click.away="open = false" x-transition:enter="transition duration-1000"
-                                        x-transition:enter-start="opacity-0 transform -translate-y-12"
-                                        x-transition:enter-end="opacity-100 transform translate-y-0"
-                                        x-transition:leave="transition duration-1000"
-                                        x-transition:leave-start="opacity-100 transform translate-y-0"
-                                        x-transition:leave-end="opacity-0 transform -translate-y-12">
-                                        <a href="/admin/category-parent">
-                                            <div class="admin__item-drop">Big Category
-                                            </div>
-                                        </a>
-
-                                        <a href="/admin/category-child">
-                                            <div class="admin__item-drop">Category</div>
-                                        </a>
-
-                                    </div>
-                                </div>
-                            </div> --}}
                             <div class="admin__item ">
                                 <a class="admin__item-cat
                 {{#if pActive}}
@@ -177,18 +145,18 @@
                                     <span>Order</span>
                                 </a>
                             </div>
-                            
-                            <div class="admin__item ">
+
+                            {{!-- <div class="admin__item ">
                                 <a class="admin__item-cat
                 {{#if pActive}}
                        admin__item-active
                 {{/if}}" href="/admin/category-parent">
-                                   <i class="fa fa-list-alt admin__item-icon" aria-hidden="true"></i>
+                                    <i class="fa fa-list-alt admin__item-icon" aria-hidden="true"></i>
                                     <span>Big Category</span>
                                 </a>
-                            </div>
+                            </div> --}}
 
-                            <div class="admin__item ">
+                            {{!-- <div class="admin__item ">
                                 <a class="admin__item-cat
                 {{#if pActive}}
                        admin__item-active
@@ -196,8 +164,8 @@
                                     <i class="fa fa-list-alt admin__item-icon" aria-hidden="true"></i>
                                     <span>Category</span>
                                 </a>
-                            </div>
-        
+                            </div> --}}
+
                             <div class="admin__item ">
                                 <a class="admin__item-cat
                 {{#if pActive}}
@@ -207,40 +175,9 @@
                                     <span>Product</span>
                                 </a>
                             </div>
-
-
-                            {{!-- <div x-data="{ open: false }" class="w-full">
-                                <div x-data="{ open: false }" class="admin__item">
-                                    <button @click=" open = !open "
-                                        class="w-full flex items-center justify-between admin__item-cat{{#if aActive}}bg-gray-300 bg-opacity-25 text-cyan-700 {{/if}}">
-                                        <div>
-                                            <i class="fa fa-user fa-lg admin__item-icon" aria-hidden="true"></i>
-                                            <span class="mx-3">Account</span>
-                                        </div>
-                                    </button>
-
-                                    <div x-show="open" class="flex-col divide-y bg-white text-cyan-700"
-                                        @click.away="open = false" x-transition:enter="transition duration-1000"
-                                        x-transition:enter-start="opacity-0 transform -translate-y-12"
-                                        x-transition:enter-end="opacity-100 transform translate-y-0"
-                                        x-transition:leave="transition duration-1000"
-                                        x-transition:leave-start="opacity-100 transform translate-y-0"
-                                        x-transition:leave-end="opacity-0 transform -translate-y-12">
-                                        <a href="/admin/account-request">
-                                            <div class="admin__item-drop">View Request
-                                            </div>
-                                        </a>
-                                        <a href="/admin/account">
-                                            <div class="admin__item-drop">View User
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div> --}}
                         </nav>
                     </div>
                 </div>
-                {{!-- flex-1 flex flex-col overflow-scroll --}}
                 <div class="col-10">
                     {{{body}}}
                 </div>
@@ -305,9 +242,6 @@
                                         <ul class="align-items-center">
                                             <li class="li"><a class="single-link" href="/">GearANT</a>
                                             </li>
-                                            {{!-- <li class="li"><a class="single-link" href="/product">Shop</a>
-                                            </li>
-                                            --}}
                                             <li class="li"><a class="single-link" href="/login">Log in</a></li>
                                         </ul>
                                     </div>
