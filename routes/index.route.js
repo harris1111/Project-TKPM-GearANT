@@ -14,6 +14,22 @@ router.get("/", async function(req, res, next) {
     const best_ssd = await productHome.findBestSeller(constant.bigCatID.SSD);
     const best_cpu = await productHome.findBestSeller(constant.bigCatID.CPU);
 
+    for(let i in best_ram){
+        const sold = await productHome.findSold(best_ram[i].ProID)
+        best_ram[i].sold = sold.Sold || 0
+    }
+
+    console.log(best_ram)
+
+    for(let i in best_ssd){
+        const sold = await productHome.findSold(best_ssd[i].ProID)
+        best_ssd[i].sold = sold.Sold || 0
+    }
+
+    for(let i in best_cpu){
+        const sold = await productHome.findSold(best_cpu[i].ProID)
+        best_cpu[i].sold = sold.Sold || 0
+    }
     // console.log(best_ram)
 
     res.render("index", {

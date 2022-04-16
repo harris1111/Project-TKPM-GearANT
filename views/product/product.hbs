@@ -27,10 +27,10 @@
                             <div class="card-body">
                                 <h5 class="card-title">{{ProName}}</h5>
                                 <div class="card-price">
-                                    <p class="card-price-num">{{format_number Price}} VND</p>
+                                    <p class="card-price-num">{{format_number Price}} </p>
                                 </div>
                                 <hr>
-                                <p class="card-sold">Sold: 9k</p>
+                                <p class="card-sold">Sold: {{sold}}</p>
                             </div>
                             <div class="card__overlay">
                                 <a href="/product/detail/{{ProID}}" class="card__overlay-detail">
@@ -54,19 +54,33 @@
         <div class="mt-5">
           <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-center">
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
+                {{#if isFirst}}
+                {{else}}
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                {{/if}}
+                {{#each this.page_numbers}}
+                    {{#if isCurrent}}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{value}}">
+                                <strong>{{value}}</strong>
+                            </a>
+                        </li>
+                    {{else}}
+                        <li class="page-item"><a class="page-link" href="?page={{value}}">{{value}}</a></li>
+                    {{/if}}
+                {{/each}}
+                {{#if isLast}}
+                {{else}}
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                {{/if}}
             </ul>
           </nav>
         </div>
