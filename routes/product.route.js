@@ -12,9 +12,11 @@ router.get('/detail/:id', async function (req, res) {
     const pro_id = req.params.id || 0;
     const product = await productModel.findByID(pro_id);
 
-    if (product.ProState.readInt8() === 1) {
-        product.Onair = true;
-    }
+    const sold = await productModel.findSold(pro_id)
+
+    product.sold=sold.Sold
+
+    product.outstock = product.Stock === 0
 
     const related_products = await productModel.findByCatID(product.CatID, product.ProID);
 
@@ -28,7 +30,7 @@ router.get('/byBigCat/:id', async function (req, res) {
     const bigCatId = req.params.id || 0;
     const page = req.query.page || 1;
 
-    const limit = 4;
+    const limit = 8;
     const raw = await productModel.countBigCatId(bigCatId);
     const total = raw[0][0].amount;
 
@@ -48,8 +50,18 @@ router.get('/byBigCat/:id', async function (req, res) {
     const offset = (page - 1) * limit;
     const list = await productModel.findPageByBigCatId(bigCatId, limit, offset);
 
+    for(let i in list){
+        const sold = await productModel.findSold(list[i].ProID)
+        list[i].sold = sold.Sold || 0
+    }
+
     let isFirst = 1;
     let isLast = 1;
+
+    if (list.length !== 0) {
+        isFirst = page_numbers[0].isCurrent;
+        isLast = page_numbers[nPage - 1].isCurrent;
+    }
 
     res.render('product/product', {
         products: list,
@@ -66,7 +78,7 @@ router.get('/byCat/:id', async function (req, res) {
     const catId = req.params.id || 0;
     const page = req.query.page || 1;
 
-    const limit = 4;
+    const limit = 8;
     const raw = await productModel.countCatId(catId);
     const total = raw[0][0].amount;
 
@@ -88,6 +100,11 @@ router.get('/byCat/:id', async function (req, res) {
 
     let isFirst = 1;
     let isLast = 1;
+
+    if (list.length !== 0) {
+        isFirst = page_numbers[0].isCurrent;
+        isLast = page_numbers[nPage - 1].isCurrent;
+    }
 
     res.render('product/product', {
         products: list,

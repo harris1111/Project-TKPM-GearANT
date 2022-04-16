@@ -42,7 +42,7 @@
                                         {{StockCart}}
                                     </td>
                                     <td class="product-subtotal">{{format_number subtotal}} VND</td>
-                                    <td {{#if outstock}} class="text-danger" {{else}} class="text-primary" {{/if}}>
+                                    <td {{#if outstock}} class="text-success" {{else}} class="text-primary" {{/if}}>
                                         {{Stock}}</td>
                                     <td class="product-remove">
                                         <button type="submit" name="ProID" class="text-danger" value={{ProID}}
@@ -63,7 +63,7 @@
                         <h4 class="cart-bottom-title section-bg-gary-cart">DELIVERY INFORMATION</h4>
                     </div>
                     <div class="delivery-infor">
-                        <p><strong>Username: </strong>DoanHuongNgan</p>
+                        <p><strong>Receiver: </strong>Hoang Nhu Thanh</p>
                         <p><strong>Address: </strong>227 NguyenVanCu</p>
                         <p><strong>Phone: </strong>0987654321</p>
                     </div>
@@ -73,7 +73,7 @@
                         <h4 class="cart-bottom-title section-bg-gary-cart">CART TOTAL</h4>
                     </div>
                     <h4 class="grand-totall-title">Total <span>{{format_number total}} VND</span></h4>
-                    <a href="#">Proceed to Checkout</a>
+                    <a href="#">Check out</a>
                 </div>
             </div>
         </div>
