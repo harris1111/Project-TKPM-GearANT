@@ -16,30 +16,62 @@
             return;
         }
         $('#editAddPhoenForm').off('submit').submit();
-    $('$changePassForm').on('submit', function (event) { 
-        event.preventDefault();
-        alert('change pass form');
-        const oldPass = document.getElementById('oldPass').value;
-        const newPass = document.getElementById('newPass').value;
-        const newPassConfirm = document.getElementById('newPassConfirm').value;
-        if (oldPass.length < 1) { 
-            swal('Please enter old password!');
-            return;
-        }
-        if (newPass.length < 1) { 
-            swal('Please enter new password!');
-            return;
-        }
-        if (newPassConfirm.length < 1) { 
-            swal('Please enter confirm password!');
-            return;
-        }
-        if (newPassConfirm != newPass) { 
-            swal('Password not match');
-            return;
-        }
-        $('$changePassForm').off('submit').submit();
-    })
+        $('$changePassForm').on('submit', function (event) {
+            event.preventDefault();
+            alert('change pass form');
+            const oldPass = document.getElementById('oldPass').value;
+            const newPass = document.getElementById('newPass').value;
+            const newPassConfirm = document.getElementById('newPassConfirm').value;
+            if (oldPass.length < 1) {
+                swal('Please enter old password!');
+                return;
+            }
+            if (newPass.length < 1) {
+                swal('Please enter new password!');
+                return;
+            }
+            if (newPassConfirm.length < 1) {
+                swal('Please enter confirm password!');
+                return;
+            }
+            if (newPassConfirm != newPass) {
+                swal('Password not match');
+                return;
+            }
+            $('$changePassForm').off('submit').submit();
+        });
+        $('#newPass, #newPassConfirm, #oldPass').on('keyup', function () {
+            if ($('#oldPass').val().length < 1 ||
+                $('#newPass').val().length < 1 ||
+                $('#newPassConfirm').val().length < 1) {
+                $('#saveBtn').prop("disabled", true);
+                $('#saveBtn').addClass("disable");
+            } else {
+                $('#saveBtn').prop("disabled", false);
+                $('#saveBtn').removeClass("disable");
+            }
+        });
+
+        $('#newPass').on('keyup', function () {
+            if ($('#newPass').val().length < 6) {
+                $('#saveBtn').addClass("disable");
+                $('#message_t').html('Password must be more than 6 characters.').css('color', 'red');
+            } else
+                $('#saveBtn').removeClass("disable");
+            $('#message_t').html('OK').css('color', 'green');
+        });
+
+        $('#newPass, #newPassConfirm').on('keyup', function () {
+            if ($('#newPass').val().length > 0) {
+                if ($('#newPass').val() == $('#newPassConfirm').val()) {
+                    $('#message').html('OK').css('color', 'green');
+                    $('#saveBtn').removeClass("disable");
+                } else {
+                    $('#saveBtn').addClass("disable");
+                    $('#message').html('Not Matching').css('color', 'red');
+                }
+            }
+        });
     });
 </script>
 {{/section}}
