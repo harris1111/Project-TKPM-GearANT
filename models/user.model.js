@@ -37,6 +37,10 @@ export default {
         return db('cart').where('ProID',proid).del();
     },
 
+    async addCart(entity){
+        return db('cart').insert(entity);
+    },
+
     async findCartSum(username) {
         const sql = `select sum(StockCart) as SumStock
                      from (

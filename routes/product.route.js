@@ -7,7 +7,7 @@ const router = express.Router();
 router.use(bodyParser.urlencoded({extended: false}))
 
 router.get('/detail/:id', async function (req, res) {
-    // req.session.retUrl = req.originalUrl;
+    req.session.retUrl = req.originalUrl;
 
     const pro_id = req.params.id || 0;
     const product = await productModel.findByID(pro_id);
