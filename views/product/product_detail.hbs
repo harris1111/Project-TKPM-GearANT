@@ -41,13 +41,13 @@
                                 Sold: <p>{{product.sold}}</p>
                             </li>
                             {{#if product.outstock}}
-                                <li>
-                                    <p class="text-danger"><strong>Out of stock</strong></p>
-                                </li>
+                            <li>
+                                <p class="text-danger"><strong>Out of stock</strong></p>
+                            </li>
                             {{else}}
-                                <li>
-                                    Remaining: <p>{{product.Stock}}</p>
-                                </li>
+                            <li>
+                                Remaining: <p>{{product.Stock}}</p>
+                            </li>
                             {{/if}}
                         </ul>
                     </div>
@@ -58,38 +58,38 @@
                         </ul>
                     </div>
                     <div class="pro-details-quality">
-                            {{#if product.outstock}}
+                        {{#if product.outstock}}
 
-                            {{else}}
+                        {{else}}
 
-                            {{/if}}
-                            <div class="cart-plus-minus">
-                                <input class="cart-plus-minus-box" type="number" name="quantity" value="1"/>
-                            </div>
-                            <div class="d-flex">
-                                <span class="pro-details-cart">
-                                    <form method="post" action="/product/buynow">
-                                        <input type="hidden" name="username" value="{{authUser.Username}}"/>
-                                        <input type="hidden" name="ProID" value="{{product.ProID}}"/>
-                                        <button class="add-cart" type="submit" value="Submit"> Add To Cart</button>
-                                    </form>
-                                </span>
+                        {{/if}}
+                        <div class="cart-plus-minus">
+                            <input class="cart-plus-minus-box" type="number" name="quantity" value="1" />
+                        </div>
+                        <div class="d-flex">
+                            <span class="pro-details-cart">
+                                <form method="post" action="/product/buynow">
+                                    <input type="hidden" name="username" value="{{authUser.Username}}" />
+                                    <input type="hidden" name="ProID" value="{{product.ProID}}" />
+                                    <button class="add-cart" type="submit" value="Submit"> Add To Cart</button>
+                                </form>
+                            </span>
 
-                                <span class="pro-details-cart">
-                                    <form method="post" action="/product/buynow">
-                                        <input type="hidden" name="username" value="{{authUser.Username}}"/>
-                                        <input type="hidden" name="ProID" value="{{product.ProID}}"/>
-                                        <button class="add-cart" type="submit" value="Submit">Buy now</button>
-                                    </form>
-                                </span>
-                            </div>
+                            <span class="pro-details-cart">
+                                <form method="post" action="/product/buynow">
+                                    <input type="hidden" name="username" value="{{authUser.Username}}" />
+                                    <input type="hidden" name="ProID" value="{{product.ProID}}" />
+                                    <button class="buy-cart" type="submit" value="Submit">Buy now</button>
+                                </form>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container pt-50px pb-50px">
+    <div class="container pb-50px">
         <div class="product-description">
             <div class="product-description-title">
                 <p>Description</p>
@@ -100,5 +100,172 @@
                 {{{product.Description}}}
             </div>
         </div>
+    </div>
+
+    {{!-- Related Product --}}
+    <div class="container">
+        <div class="product-description">
+            <div class="product-description-title">
+                <p>Related Product</p>
+            </div>
+        </div>
+
+        <div class="owl-carousel owl-theme pt-3">
+
+            <div class="item card-item">
+                <div class="card">
+                    <img src="https://picsum.photos/200" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">Tên đây nha</h5>
+                        <div class="card-price">
+                            <p class="card-price-num">1000000 </p>
+                        </div>
+                        <hr>
+                        <p class="card-sold">Sold: 9k</p>
+                    </div>
+                    <div class="card__overlay">
+                        <a href="/product/detail/{{this.ProID}}" class="card__overlay-detail">
+                            <i class="fa fa-arrow-circle-right"></i>Detail
+                        </a>
+                        <button class="card__overlay-cart">
+                            <i class="fa fa-shopping-cart"></i>Add to cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item card-item">
+                <div class="card">
+                    <img src="https://picsum.photos/200" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">Tên đây nha</h5>
+                        <div class="card-price">
+                            <p class="card-price-num">1000000 </p>
+                        </div>
+                        <hr>
+                        <p class="card-sold">Sold: 9k</p>
+                    </div>
+                    <div class="card__overlay">
+                        <a href="/product/detail/{{this.ProID}}" class="card__overlay-detail">
+                            <i class="fa fa-arrow-circle-right"></i>Detail
+                        </a>
+                        <button class="card__overlay-cart">
+                            <i class="fa fa-shopping-cart"></i>Add to cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item card-item">
+                <div class="card">
+                    <img src="https://picsum.photos/200" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">Tên đây nha</h5>
+                        <div class="card-price">
+                            <p class="card-price-num">1000000 </p>
+                        </div>
+                        <hr>
+                        <p class="card-sold">Sold: 9k</p>
+                    </div>
+                    <div class="card__overlay">
+                        <a href="/product/detail/{{this.ProID}}" class="card__overlay-detail">
+                            <i class="fa fa-arrow-circle-right"></i>Detail
+                        </a>
+                        <button class="card__overlay-cart">
+                            <i class="fa fa-shopping-cart"></i>Add to cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item card-item">
+                <div class="card">
+                    <img src="https://picsum.photos/200" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">Tên đây nha</h5>
+                        <div class="card-price">
+                            <p class="card-price-num">1000000 </p>
+                        </div>
+                        <hr>
+                        <p class="card-sold">Sold: 9k</p>
+                    </div>
+                    <div class="card__overlay">
+                        <a href="/product/detail/{{this.ProID}}" class="card__overlay-detail">
+                            <i class="fa fa-arrow-circle-right"></i>Detail
+                        </a>
+                        <button class="card__overlay-cart">
+                            <i class="fa fa-shopping-cart"></i>Add to cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item card-item">
+                <div class="card">
+                    <img src="https://picsum.photos/200" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">Tên đây nha</h5>
+                        <div class="card-price">
+                            <p class="card-price-num">1000000 </p>
+                        </div>
+                        <hr>
+                        <p class="card-sold">Sold: 9k</p>
+                    </div>
+                    <div class="card__overlay">
+                        <a href="/product/detail/{{this.ProID}}" class="card__overlay-detail">
+                            <i class="fa fa-arrow-circle-right"></i>Detail
+                        </a>
+                        <button class="card__overlay-cart">
+                            <i class="fa fa-shopping-cart"></i>Add to cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item card-item">
+                <div class="card">
+                    <img src="https://picsum.photos/200" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">Tên đây nha</h5>
+                        <div class="card-price">
+                            <p class="card-price-num">1000000 </p>
+                        </div>
+                        <hr>
+                        <p class="card-sold">Sold: 9k</p>
+                    </div>
+                    <div class="card__overlay">
+                        <a href="/product/detail/{{this.ProID}}" class="card__overlay-detail">
+                            <i class="fa fa-arrow-circle-right"></i>Detail
+                        </a>
+                        <button class="card__overlay-cart">
+                            <i class="fa fa-shopping-cart"></i>Add to cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item card-item">
+                <div class="card">
+                    <img src="https://picsum.photos/200" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">Tên đây nha</h5>
+                        <div class="card-price">
+                            <p class="card-price-num">1000000 </p>
+                        </div>
+                        <hr>
+                        <p class="card-sold">Sold: 9k</p>
+                    </div>
+                    <div class="card__overlay">
+                        <a href="/product/detail/{{this.ProID}}" class="card__overlay-detail">
+                            <i class="fa fa-arrow-circle-right"></i>Detail
+                        </a>
+                        <button class="card__overlay-cart">
+                            <i class="fa fa-shopping-cart"></i>Add to cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>

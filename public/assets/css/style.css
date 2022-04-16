@@ -158,6 +158,14 @@ input {
 .height-full{
   height: 100vh;
 }
+.pt-50px {
+  padding-top: 50px;
+}
+
+.pb-50px{
+  padding-bottom: 50px;
+}
+
 .pt-100px {
   padding-top: 100px;
 }
@@ -2252,7 +2260,7 @@ only screen and (max-width: 767px) {
 }
 
 .product-details-content .pro-details-quality {
-  display: inline-flex;
+  /* display: inline-flex; */
   margin: 30px 0;
   width: 100%;
 }
@@ -7835,6 +7843,7 @@ header {
 
 .product-description-text p {
   font-size: 18px;
+  margin-bottom: 8px;
 }
 
 .pagination .page-item .page-link {
