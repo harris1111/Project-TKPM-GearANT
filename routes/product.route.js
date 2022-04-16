@@ -12,9 +12,11 @@ router.get('/detail/:id', async function (req, res) {
     const pro_id = req.params.id || 0;
     const product = await productModel.findByID(pro_id);
 
-    if (product.ProState.readInt8() === 1) {
-        product.Onair = true;
-    }
+    const sold = await productModel.findSold(pro_id)
+
+    product.sold=sold.Sold
+
+    product.outstock = product.Stock === 0
 
     const related_products = await productModel.findByCatID(product.CatID, product.ProID);
 

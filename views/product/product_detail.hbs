@@ -35,20 +35,26 @@
                     <div class="product-infor">
                         <ul>
                             <li>
-                                Thương hiệu: <p>{{product.CatName}}</p>
+                                Brand: <p>{{product.CatName}}</p>
                             </li>
                             <li>
-                                Sold: <p>123 sản phẩm</p>
+                                Sold: <p>{{product.sold}}</p>
                             </li>
-                            <li>
-                                Còn lại: <p>{{product.Stock}} sản phẩm</p>
-                            </li>
+                            {{#if product.outstock}}
+                                <li>
+                                    <p class="text-danger"><strong>Out of stock</strong></p>
+                                </li>
+                            {{else}}
+                                <li>
+                                    Remaining: <p>{{product.Stock}}</p>
+                                </li>
+                            {{/if}}
                         </ul>
                     </div>
 
                     <div class="pricing-meta mt-30px">
                         <ul>
-                            <li class="old-price not-cut">{{format_number product.Price}} VND</li>
+                            <li class="old-price not-cut"><strong>{{format_number product.Price}}</strong></li>
                         </ul>
                     </div>
                     <div class="pro-details-quality">
