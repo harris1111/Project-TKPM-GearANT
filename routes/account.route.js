@@ -80,8 +80,22 @@ router.get('/cart', async function(req, res, next) {
 
 router.post('/cart-del', async(req, res) => {
     const ret = await userModel.delCart(req.body.ProID);
-    console.log(ret);
+    // console.log(ret);
     const url = req.headers.referer || '/account/cart';
+    return res.redirect(url);
+});
+
+router.post('/cart-add', async(req, res) => {
+    const item = {
+        User: req.body.Username,
+        ProID: req.body.ProID,
+        Stock: req.body.Stock,
+        Date: moment().format()
+    }
+
+    const ret = await userModel.addCart(item);
+    console.log(ret);
+    const url = req.headers.referer || '/';
     return res.redirect(url);
 });
 

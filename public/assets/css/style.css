@@ -2271,6 +2271,7 @@ only screen and (max-width: 767px) {
   height: 50px;
   overflow: hidden;
   padding: 0;
+  clear: right;
   position: relative;
   width: 80px;
   background: #505050;

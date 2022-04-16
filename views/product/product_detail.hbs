@@ -1,4 +1,62 @@
-<!-- breadcrumb-area start -->
+{{#section 'js'}}
+    <script>
+        document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';
+        $('#formAddCart').on('submit', function (event) {
+            event.preventDefault();
+            const quantity = document.getElementById('quantity').value;
+
+            if (+quantity < 1) {
+                swal('Minimum quantity is 1!');
+                return;
+            }
+
+            const stock = +{{product.Stock}}
+            if (+quantity > stock){
+                const str= `Sorry, we have only ${stock} products left!`
+                swal(str);
+                return;
+            }
+
+            $('.stock').val(+quantity)
+            swal("Success!", "This product has been added to cart!", "success").then(() => {
+                $('#formAddCart').off('submit').submit();
+                return;
+            });
+        });
+
+        $('#formBuyNow').on('submit', function (event) {
+            event.preventDefault();
+            const quantity = document.getElementById('quantity').value;
+
+            if (+quantity < 1) {
+                swal('Minimum quantity is 1!');
+                return;
+            }
+
+            const stock = +{{product.Stock}}
+            if (+quantity > stock){
+                const str= `Sorry, we have only ${stock} products left!`
+                swal(str);
+                return;
+            }
+
+            $('.stock').val(+quantity)
+        });
+    </script>
+
+    <script>
+        $('.isLogin').click(function (e) {
+            if(!{{this.auth}}) {
+                swal("Please log in to continue!")
+                        .then((value) => {
+                            if(value)
+                                window.location.href = "/login";
+                        });
+            }
+        })
+    </script>
+{{/section}}
+
 <div class="breadcrumb-area">
     <div class="container">
         <div class="d-flex align-items-center">
@@ -59,30 +117,48 @@
                     </div>
                     <div class="pro-details-quality">
                         {{#if product.outstock}}
-
+                            <p class="text-danger"><strong>Out of stock</strong></p>
                         {{else}}
+                            <div class="cart-plus-minus">
+                                <input id = "quantity"
+                                       class="cart-plus-minus-box" min="1" value="1"
+                                       type="number" name="quantity"/>
+                            </div>
+                            <div class="d-flex">
+                                <span class="pro-details-cart">
+                                    <form id="formAddCart"
+                                            method="post" action="/account/cart-add">
+                                        <input type="hidden" name="Username" value="{{authUser.Username}}"/>
+                                        <input type="hidden" name="ProID" value="{{product.ProID}}"/>
+                                        <input type="hidden" class="stock" name="Stock"/>
 
+                                        {{#if auth}}
+                                            <button class="add-cart"
+                                                    type="submit"> Add To Cart</button>
+                                        {{else}}
+                                            <button class="add-cart isLogin"> Add To Cart</button>
+                                        {{/if}}
+
+                                    </form>
+                                </span>
+
+                                <span class="pro-details-cart">
+                                    <form method="post" id="formBuyNow"
+                                          action="/product/buynow">
+                                        <input type="hidden" name="Username" value="{{authUser.Username}}"/>
+                                        <input type="hidden" name="ProID" value="{{product.ProID}}"/>
+                                        <input type="hidden" class="stock" name="Stock"/>
+
+                                        {{#if auth}}
+                                            <button class="buy-cart" type="submit">Buy now</button>
+                                        {{else}}
+                                            <button class="buy-cart isLogin">Buy now</button>
+                                        {{/if}}
+                                    </form>
+                                </span>
+                            </div>
                         {{/if}}
-                        <div class="cart-plus-minus">
-                            <input class="cart-plus-minus-box" type="number" name="quantity" value="1" />
-                        </div>
-                        <div class="d-flex">
-                            <span class="pro-details-cart">
-                                <form method="post" action="/product/buynow">
-                                    <input type="hidden" name="username" value="{{authUser.Username}}" />
-                                    <input type="hidden" name="ProID" value="{{product.ProID}}" />
-                                    <button class="add-cart" type="submit" value="Submit"> Add To Cart</button>
-                                </form>
-                            </span>
 
-                            <span class="pro-details-cart">
-                                <form method="post" action="/product/buynow">
-                                    <input type="hidden" name="username" value="{{authUser.Username}}" />
-                                    <input type="hidden" name="ProID" value="{{product.ProID}}" />
-                                    <button class="buy-cart" type="submit" value="Submit">Buy now</button>
-                                </form>
-                            </span>
-                        </div>
                     </div>
                 </div>
             </div>

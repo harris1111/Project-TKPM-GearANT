@@ -69,7 +69,7 @@ router.post("/login", async function(req, res) {
     req.session.auth = true;
     req.session.authUser = user;
 
-    const url = req.session.retUrl || "/";
+    const url = req.session.retUrl || '/';
     res.redirect(url);
 });
 //login ended
