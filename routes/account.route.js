@@ -93,12 +93,21 @@ router.post('/change-address', async(req, res, next) => {
     console.log('change address post');
     const user = {
         Username: req.body.username,
-        Address: req.body.Address
+        Address: req.body.new_address
 
     }
     const ret = await userModel.patch(user)
     return res.redirect('/account');
 });
+router.post('/change-phone', async(req, res, next) => {
+    console.log('change phone post');
+    const user = {
+        Username: req.session.authUser.username,
+        Phonge: req.body.new_phone
+    }
+    const ret = await userModel.patch(user);
+    return res.redirect('/account');
+})
 router.post('/change-password', async(req, res, next) => {
     const isEqual = bcrypt.compareSync(req.body.OldPassword, res.locals.authUser.Password);
     if (isEqual === false) {
