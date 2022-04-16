@@ -89,7 +89,7 @@ router.get('/checkout', function(req, res, next) {
     res.render('account/checkout');
 });
 
-router.post('/account/change-address', async(req, res, next) => {
+router.post('/change-address', async(req, res, next) => {
     console.log('change address post');
     const user = {
         Username: req.body.username,
@@ -99,5 +99,34 @@ router.post('/account/change-address', async(req, res, next) => {
     const ret = await userModel.patch(user)
     return res.redirect('/account');
 });
+router.post('/change-password', async(req, res, next) => {
+    const isEqual = bcrypt.compareSync(req.body.OldPassword, res.locals.authUser.Password);
+    if (isEqual === false) {
+        console.log("Error");
+        return res.render('bidder/change-password', {
+            pActive: true,
+            error: 'Incorrect password!',
+            layout: 'account.handlebars'
+        });
+    }
 
+    const newPassword = req.body.Password;
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(newPassword, salt);
+
+    const user = {
+        Email: req.body.Email,
+        Password: hash
+    }
+
+    const ret = await userModel.updatePassword(user);
+    res.locals.authUser = ret[0];
+    req.session.authUser = ret[0];
+    // console.log(ret[0]);
+    return res.render('bidder/change-password', {
+        pActive: true,
+        success: 'Password changed!',
+        layout: 'account.handlebars'
+    });
+});
 export default router;
