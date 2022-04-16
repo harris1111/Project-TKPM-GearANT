@@ -4,17 +4,17 @@ import moment from "moment";
 import bodyParser from "body-parser";
 
 const router = express.Router();
-router.use(bodyParser.urlencoded({extended: false}))
+router.use(bodyParser.urlencoded({ extended: false }))
 
-router.get('/detail/:id', async function (req, res) {
-    req.session.retUrl = req.originalUrl;
+router.get('/detail/:id', async function(req, res) {
+    //req.session.retUrl = req.originalUrl;
 
     const pro_id = req.params.id || 0;
     const product = await productModel.findByID(pro_id);
 
     const sold = await productModel.findSold(pro_id)
 
-    product.sold=sold.Sold
+    product.sold = sold.Sold
 
     product.outstock = product.Stock === 0
 
@@ -26,7 +26,7 @@ router.get('/detail/:id', async function (req, res) {
     });
 });
 
-router.get('/byBigCat/:id', async function (req, res) {
+router.get('/byBigCat/:id', async function(req, res) {
     const bigCatId = req.params.id || 0;
     const page = req.query.page || 1;
 
@@ -50,7 +50,7 @@ router.get('/byBigCat/:id', async function (req, res) {
     const offset = (page - 1) * limit;
     const list = await productModel.findPageByBigCatId(bigCatId, limit, offset);
 
-    for(let i in list){
+    for (let i in list) {
         const sold = await productModel.findSold(list[i].ProID)
         list[i].sold = sold.Sold || 0
     }
@@ -74,7 +74,7 @@ router.get('/byBigCat/:id', async function (req, res) {
     });
 });
 
-router.get('/byCat/:id', async function (req, res) {
+router.get('/byCat/:id', async function(req, res) {
     const catId = req.params.id || 0;
     const page = req.query.page || 1;
 

@@ -2,7 +2,10 @@ import express from 'express';
 import userModel from '../models/user.model.js';
 import config from '../utils/config.js';
 import bcrypt from "bcrypt";
+import bodyParser from "body-parser";
+
 const router = express.Router();
+router.use(bodyParser.urlencoded({ extended: false }))
 
 /* GET home page. */
 router.get('/', async function(req, res, next) {
@@ -130,18 +133,22 @@ router.post('/change-phone', async(req, res, next) => {
     return res.redirect('/');
 })
 router.post('/change-password', async(req, res, next) => {
-    console.log(req.body.old_password);
-    console.log(req.authUser);
-    const isEqual = bcrypt.compareSync(req.body.old_password, res.locals.authUser.Password);
-    if (isEqual === false) {
-        console.log("Error");
-        return res.render('/account', {
-            error: 'Incorrect password!'
-        });
-    }
+    console.log('old pass' + req.body.old_password);
+    const user_model = await userModel.findByUsername(req.session.authUser.Username);
+    console.log(user_model.Password);
+    // const isEqual = bcrypt.compareSync(req.body.old_password, old_password_sv);
+    // if (isEqual === false) {
+    //     console.log("Error");
+    //     return res.render('/account', {
+    //         error: 'Incorrect password!'
+    //     });
+    // }
     const newPassword = req.body.new_password;
+    console.log('newPassword' + newPassword);
     const salt = bcrypt.genSaltSync(10);
+    console.log('salt' + salt);
     const hash = bcrypt.hashSync(newPassword, salt);
+    console.log('hash' + hash);
 
     const user = {
         Username: req.session.authUser.Username,
