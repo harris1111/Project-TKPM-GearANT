@@ -2,21 +2,21 @@
 <div class="cart-main-area pt-100px pb-100px height-full">
     <div class="container">
         {{#if isEmpty}}
-        <h2 class="text-gray-700 h-10 ml-5 text-start">Your cart is empty!</h2>
-        <a href="/">
-            <h4>
-                <i class="fa fa-arrow-right text-danger"></i>
-                <span class="text-danger ml-2">Go shopping</span>
-            </h4>
-        </a>
+            <h2 class="text-gray-700 h-10 ml-5 text-start">Your cart is empty!</h2>
+            <a href="/">
+                <h4>
+                    <i class="fa fa-arrow-right text-danger"></i>
+                    <span class="text-danger ml-2">Go shopping</span>
+                </h4>
+            </a>
         {{else}}
-        <div class="row">
-            {{!-- col-lg-9 --}}
-            <div class="col-12 col-lg-9">
-                <form action="#">
-                    <div class="table-content table-responsive cart-table-content" style="overflow-y: auto; height: 440px">
-                        <table>
-                            <thead>
+            <div class="row">
+                {{!-- col-lg-9 --}}
+                <div class="col-12 col-lg-9">
+                    <form action="#">
+                        <div class="table-content table-responsive cart-table-content">
+                            <table>
+                                <thead>
                                 <tr>
                                     <th></th>
                                     <th>Product Name</th>
@@ -26,57 +26,61 @@
                                     <th>Status</th>
                                     <th></th>
                                 </tr>
-                            </thead>
-                            <tbody>
+                                </thead>
+                                <tbody>
                                 {{#each cart}}
-                                <tr>
-                                    <td class="product-thumbnail">
-                                        <a href="/product/detail/{{ProID}}"><img class="img-responsive"
-                                                src="{{LinkURL}}" alt="{{ProName}}" /></a>
-                                    </td>
-                                    <td class="product-name"><a href="/product/detail/{{ProID}}"><b>{{ProName}}</b></a>
-                                    </td>
-                                    <td class="product-price-cart"><span class="amount">{{format_number Price}}
-                                            VND</span></td>
-                                    <td class="product-quantity">
-                                        {{StockCart}}
-                                    </td>
-                                    <td class="product-subtotal">{{format_number subtotal}} VND</td>
-                                    <td {{#if outstock}} class="text-success" {{else}} class="text-primary" {{/if}}>
-                                        {{Stock}}</td>
-                                    <td class="product-remove">
-                                        <button type="submit" name="ProID" class="text-danger" value={{ProID}}
-                                            formmethod="post" formaction="/account/cart-del">
-                                            <i class="fa fa-times"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                                    <tr>
+                                        <td class="product-thumbnail">
+                                            <a href="/product/detail/{{ProID}}"><img class="img-responsive"
+                                                                                     src="{{LinkURL}}"
+                                                                                     alt="{{ProName}}"/></a>
+                                        </td>
+                                        <td class="product-name"><a href="/product/detail/{{ProID}}"><b>{{ProName}}</b></a>
+                                        </td>
+                                        <td class="product-price-cart"><span class="amount">{{format_number
+                                                Price}}</span></td>
+                                        <td class="product-quantity">
+                                            {{StockCart}}
+                                        </td>
+                                        <td class="product-subtotal">{{format_number subtotal}} VND</td>
+                                        <td {{#if outstock}} class="text-danger" {{else}} class="text-primary" {{/if}}>
+                                            <strong>
+                                                {{Stock}}
+                                            </strong>
+                                        </td>
+                                        <td class="product-remove">
+                                            <button type="submit" name="ProID" class="text-danger" value={{ProID}}
+                                                    formmethod="post" formaction="/account/cart-del">
+                                                <i class="fa fa-times"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
                                 {{/each}}
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="grand-totall">
+                        <div class="title-wrap text-center">
+                            <h4 class="cart-bottom-title section-bg-gary-cart">DELIVERY INFORMATION</h4>
+                        </div>
+                        <div class="delivery-infor">
+                            <p><strong>Receiver: </strong>{{user.Username}}</p>
+                            <p><strong>Address: </strong>{{user.Address}}</p>
+                            <p><strong>Phone: </strong>{{user.Number}}</p>
+                        </div>
                     </div>
-                </form>
-            </div>
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="grand-totall">
-                    <div class="title-wrap text-center">
-                        <h4 class="cart-bottom-title section-bg-gary-cart">DELIVERY INFORMATION</h4>
-                    </div>
-                    <div class="delivery-infor">
-                        <p><strong>Receiver: </strong>Hoang Nhu Thanh</p>
-                        <p><strong>Address: </strong>227 NguyenVanCu</p>
-                        <p><strong>Phone: </strong>0987654321</p>
+                    <div class="grand-totall mt-5">
+                        <div class="title-wrap text-center">
+                            <h4 class="cart-bottom-title section-bg-gary-cart">CART TOTAL</h4>
+                        </div>
+                        <h4 class="grand-totall-title">Total <span>{{format_number total}} VND</span></h4>
+                        <a href="#">Check out</a>
                     </div>
                 </div>
-                <div class="grand-totall mt-5">
-                    <div class="title-wrap text-center">
-                        <h4 class="cart-bottom-title section-bg-gary-cart">CART TOTAL</h4>
-                    </div>
-                    <h4 class="grand-totall-title">Total <span>{{format_number total}} VND</span></h4>
-                    <a href="#">Check out</a>
-                </div>
             </div>
-        </div>
         {{/if}}
     </div>
 </div>
