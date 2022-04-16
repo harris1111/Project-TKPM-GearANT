@@ -11,8 +11,8 @@ export default {
                               join big_category b
                                    on c.BigCat = b.BigCatID
                               join order_list ol on od.OrderID = ol.OrderID
-                     where b.BigCatID = ${bigid} 
-                     and ol.State = 4
+                     where b.BigCatID = ${bigid}
+                       and ol.State = 4
                      group by p.ProID
                      order by StockSum DESC limit 5`;
         const raw = await db.raw(sql);
@@ -61,7 +61,7 @@ export default {
         const sql = `select count(p.ProID) as amount
                      from product p
                               join
-                          category c 
+                          category c
                           on p.CatID = c.CatID
                      where c.CatID = ${catId}
                        and p.ProState = true`;
@@ -74,8 +74,7 @@ export default {
                      from product p
                               join category c on p.CatID = c.CatID
                               join big_category b on c.BigCat = b.BigCatID
-                     where b.BigCatID = ${bigCatId}
-                         limit ${limit}
+                     where b.BigCatID = ${bigCatId} limit ${limit}
                      offset ${offset}`;
         const raw = await db.raw(sql);
         return raw[0];
@@ -85,10 +84,20 @@ export default {
         const sql = `select *
                      from product p
                               join category c on p.CatID = c.CatID
-                              where c.CatID = ${catId}
-                         limit ${limit}
+                     where c.CatID = ${catId} limit ${limit}
                      offset ${offset}`;
         const raw = await db.raw(sql);
         return raw[0];
+    },
+
+    async findSold(proid) {
+        const sql = `select sum(od.Stock) as Sold
+                     from order_list ol
+                              join order_detail od on ol.OrderID = od.OrderID
+                     where od.ProID = ${proid}
+                     group by od.ProID
+        `;
+        const raw = await db.raw(sql);
+        return raw[0][0] || 0;
     },
 }

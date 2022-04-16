@@ -128,7 +128,7 @@
                     </div> --}}
                     <div class="tab-pane fade active" id="orders">
                         {{!-- <h4>Orders</h4> --}}
-                        <div class="table_page table-responsive">
+                        <div class="table_page table-responsive" style="overflow-y: auto; height: 440px">
                             <table>
                                 <thead>
                                     <tr>
@@ -153,7 +153,7 @@
                                                     <td style="border: none; padding:0; float:left">{{this.ProName}}
                                                     </td>
                                                     <td style="border: none; padding:0; min-width: 50px; color:#24262b">
-                                                        {{this.Stock}}</td>
+                                                        {{this.Stock}}x</td>
                                                 </tr>
                                                 {{/each}}
                                             </table>
@@ -201,6 +201,9 @@
                                         <div class="save_button mt-3">
                                             <button class="btn" type="submit">Save</button>
                                         </div>
+                                    </form>
+                                    
+                                    <form action="#" method="POST">
                                         <div class="default-form-box mb-20 mt-3">
                                             <label>Old Phone Number</label>
                                             <input type="text" name="phone" value="0987654321" readonly />

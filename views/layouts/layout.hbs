@@ -53,9 +53,6 @@
                     </div>
                     <div class="offcanvas-body main-menu navbar-collapse px-3">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li class="nav-item">
-                                <a class="main-menu-link" href="/">Home</a>
-                            </li>
                             <li class="nav-item dropdown">
                                 <a class="main-menu-link dropdown-toggle" href="#"
                                    data-bs-toggle="dropdown">Category
@@ -83,6 +80,11 @@
                                     <a href="/account" class="main-menu-link">Account</a>
                                 </li>
                             {{/if}}
+
+                            <li class="nav-item">
+                                <a class="main-menu-link" href="/admin/order">Admin</a>
+                            </li>
+
                         </ul>
                         <form id="widgets-searchbox" action="/product">
                             <input class="input-field" type="text" name="keyword" placeholder="Search"/>
