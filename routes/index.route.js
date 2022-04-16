@@ -19,8 +19,6 @@ router.get("/", async function(req, res, next) {
         best_ram[i].sold = sold.Sold || 0
     }
 
-    console.log(best_ram)
-
     for(let i in best_ssd){
         const sold = await productHome.findSold(best_ssd[i].ProID)
         best_ssd[i].sold = sold.Sold || 0
@@ -30,7 +28,6 @@ router.get("/", async function(req, res, next) {
         const sold = await productHome.findSold(best_cpu[i].ProID)
         best_cpu[i].sold = sold.Sold || 0
     }
-    // console.log(best_ram)
 
     res.render("index", {
         best_ram,
@@ -76,7 +73,6 @@ router.post("/login", async function(req, res) {
 
 //register started
 router.post("/register", async function(req, res) {
-    console.log("POST register");
     const rawPassword = req.body.password;
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(rawPassword, salt);
@@ -105,7 +101,6 @@ router.get('/username-available', async function(req, res) {
 
 //log out
 router.post("/logout", async function(req, res) {
-    console.log("LOGOUT post");
     req.session.auth = false;
     req.session.authUser = null;
     req.session.retUrl = null;
