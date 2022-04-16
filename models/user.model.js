@@ -68,12 +68,12 @@ export default {
             .del();
     },
 
-    patch(entity) {
-        const user = entity.username;
-        delete entity.username;
+    update(entity) {
+        const user = entity.Username;
+        delete entity.Username;
 
         return db('user')
-            .where('Username', username)
+            .where('Username', user)
             .update(entity);
     },
 

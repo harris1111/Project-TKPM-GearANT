@@ -1,7 +1,7 @@
 import express from 'express';
-import userModel from '../models/user.model.js'
-import config from '../utils/config.js'
-
+import userModel from '../models/user.model.js';
+import config from '../utils/config.js';
+import bcrypt from "bcrypt";
 const router = express.Router();
 
 /* GET home page. */
@@ -92,50 +92,48 @@ router.get('/checkout', function(req, res, next) {
 router.post('/change-address', async(req, res, next) => {
     console.log('change address post');
     const user = {
-        Username: req.body.username,
+        Username: req.session.authUser.Username,
         Address: req.body.new_address
-
     }
-    const ret = await userModel.patch(user)
-    return res.redirect('/account');
+    console.log(user.Username);
+    console.log(user.Address);
+    const ret = await userModel.update(user)
+
+    const user_new = await userModel.findByUsername(req.session.authUser.Username)
+    console.log(user_new)
+    req.session.authUser = user_new
+    res.locals.authUser = req.session.authUser
+    return res.redirect('/');
 });
 router.post('/change-phone', async(req, res, next) => {
     console.log('change phone post');
     const user = {
-        Username: req.session.authUser.username,
-        Phonge: req.body.new_phone
+        Username: req.session.authUser.Username,
+        Number: req.body.new_phone
     }
-    const ret = await userModel.patch(user);
-    return res.redirect('/account');
+    console.log(user);
+    const ret = await userModel.update(user);
+    return res.redirect('/');
 })
 router.post('/change-password', async(req, res, next) => {
-    const isEqual = bcrypt.compareSync(req.body.OldPassword, res.locals.authUser.Password);
+    console.log(req.body.old_password);
+    console.log(req.authUser);
+    const isEqual = bcrypt.compareSync(req.body.old_password, res.locals.authUser.Password);
     if (isEqual === false) {
         console.log("Error");
-        return res.render('bidder/change-password', {
-            pActive: true,
-            error: 'Incorrect password!',
-            layout: 'account.handlebars'
+        return res.render('/account', {
+            error: 'Incorrect password!'
         });
     }
-
-    const newPassword = req.body.Password;
+    const newPassword = req.body.new_password;
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(newPassword, salt);
 
     const user = {
-        Email: req.body.Email,
+        Username: req.session.authUser.Username,
         Password: hash
     }
 
-    const ret = await userModel.updatePassword(user);
-    res.locals.authUser = ret[0];
-    req.session.authUser = ret[0];
-    // console.log(ret[0]);
-    return res.render('bidder/change-password', {
-        pActive: true,
-        success: 'Password changed!',
-        layout: 'account.handlebars'
-    });
+    const ret = await userModel.update(user);
 });
 export default router;
