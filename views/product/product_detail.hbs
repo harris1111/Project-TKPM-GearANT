@@ -41,6 +41,7 @@
             }
 
             $('.stock').val(+quantity)
+            $('#formBuyNow').off('submit').submit();
         });
     </script>
 
@@ -143,9 +144,8 @@
                                 </span>
 
                                 <span class="pro-details-cart">
-                                    <form method="post" id="formBuyNow"
-                                          action="/product/buynow">
-                                        <input type="hidden" name="Username" value="{{authUser.Username}}"/>
+                                    <form method="get" id="formBuyNow"
+                                          action="/product/buynow?ProID={{product.ProID}}&Stock=1">
                                         <input type="hidden" name="ProID" value="{{product.ProID}}"/>
                                         <input type="hidden" class="stock" name="Stock"/>
 
@@ -158,7 +158,6 @@
                                 </span>
                             </div>
                         {{/if}}
-
                     </div>
                 </div>
             </div>

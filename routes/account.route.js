@@ -2,8 +2,10 @@ import express from 'express';
 import userModel from '../models/user.model.js'
 import config from '../utils/config.js'
 import moment from "moment";
+import bodyParser from "body-parser";
 
 const router = express.Router();
+router.use(bodyParser.urlencoded({extended: false}))
 
 /* GET home page. */
 router.get('/', async function (req, res, next) {
@@ -56,6 +58,10 @@ router.get('/cart', async function (req, res, next) {
     let isEmpty = false
     let total = 0
 
+    const user = await userModel.findByUsername(username)
+    console.log(user)
+    delete user.Password
+
     if(cart.length<=0){
         isEmpty = true
     } else{
@@ -63,11 +69,12 @@ router.get('/cart', async function (req, res, next) {
             //if product stock > 0
             if(cart[i]['Stock']>=cart[i]['StockCart']){
                 cart[i]['Stock']='Available'
-                cart[i].outstock = true
+                cart[i].outstock = false
                 cart[i].subtotal = parseInt(cart[i]['StockCart'])*parseInt(cart[i]['Price'])
                 total+=cart[i].subtotal
             } else{
                 cart[i]['Stock']='Out of Stock'
+                cart[i].outstock = true
             }
         }
     }
@@ -75,7 +82,8 @@ router.get('/cart', async function (req, res, next) {
     res.render('account/cart',{
         cart,
         total,
-        isEmpty
+        isEmpty,
+        user
     });
 });
 

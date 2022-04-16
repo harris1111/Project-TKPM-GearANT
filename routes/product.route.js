@@ -2,6 +2,7 @@ import express from 'express';
 import productModel from '../models/product.model.js';
 import moment from "moment";
 import bodyParser from "body-parser";
+import userModel from "../models/user.model.js";
 
 const router = express.Router();
 router.use(bodyParser.urlencoded({extended: false}))
@@ -71,6 +72,31 @@ router.get('/byBigCat/:id', async function (req, res) {
         isLast,
         CatName: list[0].BigCatName,
         CatID: bigCatId,
+    });
+});
+
+router.get('/buynow', async function (req, res, next) {
+    const username = req.session.authUser.Username;
+    const pro_id = req.query.ProID;
+    const quantity = req.query.Stock;
+
+    const product = await productModel.findByID(pro_id)
+    const user = await userModel.findByUsername(username)
+    delete user.Password
+
+    const total = +product.Price*+quantity;
+
+    const cart = []
+    cart.push(product)
+    product.StockCart = quantity
+    product.Stock = 'Available'
+    product.subtotal=total
+
+    res.render('account/cart',{
+        cart,
+        total,
+        isEmpty: false,
+        user
     });
 });
 
