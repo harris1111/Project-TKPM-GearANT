@@ -84,6 +84,7 @@
                             <li class="nav-item">
                                 <a class="main-menu-link" href="/admin/order">Admin</a>
                             </li>
+
                         </ul>
                     </div>
                 </div>
@@ -269,5 +270,19 @@
 </script>
 <!-- Main Js -->
 <script src="/assets/js/main.js"></script>
+<script>
+    document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';
+    $('#widgets-searchbox').on('submit', function (event) {
+        event.preventDefault();
+        const kw = document.getElementById('keyword').value;
+
+        if (kw.length<1) {
+            swal('Please enter keyword!');
+            return;
+        }
+
+        $('#widgets-searchbox').off('submit').submit();
+    });
+</script>
 {{{_sections.js}}}
 </body>

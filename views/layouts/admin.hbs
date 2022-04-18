@@ -81,12 +81,6 @@
                                 </li>
                                 {{/if}}
                             </ul>
-                            <form id="widgets-searchbox" action="/product">
-                                <input class="input-field" type="text" name="keyword" placeholder="Search" />
-                                <button class="widgets-searchbox-btn" type="submit">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </form>
                         </div>
                     </div>
                     <div class="d-flex">
@@ -227,6 +221,11 @@
                                     <div class="footer-row">
                                         <ul class="align-items-center">
                                             <li class="li"><a class="single-link" href="/about">About</a></li>
+                                            {{#if auth}}
+                                                <li class="nav-item">
+                                                    <a href="/account" class="main-menu-link">Account</a>
+                                                </li>
+                                            {{/if}}
                                         </ul>
                                     </div>
                                 </div>

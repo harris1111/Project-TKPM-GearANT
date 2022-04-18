@@ -22,6 +22,7 @@ router.get('/detail/:id', async function(req, res) {
     const related_products = await productModel.findByCatID(product.CatID, product.ProID);
 
     res.render('product/product_detail', {
+        layout: 'homecat.hbs',
         product,
         related_products,
     });
@@ -65,6 +66,7 @@ router.get('/byBigCat/:id', async function(req, res) {
     }
 
     res.render('product/product', {
+        layout: 'homecat.hbs',
         products: list,
         empty: list.length === 0,
         page_numbers,
@@ -133,6 +135,7 @@ router.get('/byCat/:id', async function(req, res) {
     }
 
     res.render('product/product', {
+        layout: 'homecat.hbs',
         products: list,
         empty: list.length === 0,
         page_numbers,

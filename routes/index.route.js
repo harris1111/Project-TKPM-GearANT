@@ -30,6 +30,7 @@ router.get("/", async function(req, res, next) {
     }
 
     res.render("index", {
+        layout: 'homecat.hbs',
         best_ram,
         best_ssd,
         best_cpu,
