@@ -103,7 +103,6 @@ router.post('/cart-add', async(req, res) => {
     }
 
     const ret = await userModel.addCart(item);
-    console.log(ret);
     const url = req.headers.referer || '/';
     return res.redirect(url);
 });
@@ -113,35 +112,35 @@ router.get('/checkout', function(req, res, next) {
 });
 
 router.post('/change-address', async(req, res, next) => {
-    console.log('change address post');
+    // console.log('change address post');
     const user = {
         Username: req.session.authUser.Username,
         Address: req.body.new_address
     }
-    console.log(user.Username);
-    console.log(user.Address);
+    // console.log(user.Username);
+    // console.log(user.Address);
     const ret = await userModel.update(user)
 
     const user_new = await userModel.findByUsername(req.session.authUser.Username)
-    console.log(user_new)
+    // console.log(user_new)
     req.session.authUser = user_new
     res.locals.authUser = req.session.authUser
     return res.redirect('/');
 });
 router.post('/change-phone', async(req, res, next) => {
-    console.log('change phone post');
+    // console.log('change phone post');
     const user = {
         Username: req.session.authUser.Username,
         Number: req.body.new_phone
     }
-    console.log(user);
+    // console.log(user);
     const ret = await userModel.update(user);
     return res.redirect('/');
 })
 router.post('/change-password', async(req, res, next) => {
-    console.log('old pass' + req.body.old_password);
+    // console.log('old pass' + req.body.old_password);
     const user_model = await userModel.findByUsername(req.session.authUser.Username);
-    console.log(user_model.Password);
+    // console.log(user_model.Password);
     // const isEqual = bcrypt.compareSync(req.body.old_password, old_password_sv);
     // if (isEqual === false) {
     //     console.log("Error");
@@ -150,11 +149,11 @@ router.post('/change-password', async(req, res, next) => {
     //     });
     // }
     const newPassword = req.body.new_password;
-    console.log('newPassword' + newPassword);
+    // console.log('newPassword' + newPassword);
     const salt = bcrypt.genSaltSync(10);
-    console.log('salt' + salt);
+    // console.log('salt' + salt);
     const hash = bcrypt.hashSync(newPassword, salt);
-    console.log('hash' + hash);
+    // console.log('hash' + hash);
 
     const user = {
         Username: req.session.authUser.Username,

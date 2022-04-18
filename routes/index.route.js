@@ -67,6 +67,11 @@ router.post("/login", async function(req, res) {
     req.session.auth = true;
     req.session.authUser = user;
 
+    if(user.Type==='2'){
+        req.session.isAdmin = true;
+        res.locals.isAdmin=req.session.isAdmin;
+    }
+
     const url = req.session.retUrl || '/';
     res.redirect(url);
 });

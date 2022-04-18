@@ -1,6 +1,15 @@
 import db from '../utils/db.js';
 
 export default {
+    async countByKW(name) {
+        const sql = `SELECT count(*) as amount
+                     FROM product p
+                     WHERE MATCH(ProName)
+                         AGAINST('${name}')`;
+        const raw = await db.raw(sql);
+        return raw[0][0].amount;
+    },
+
     async findBestSeller(bigid) {
         const sql = `select SUM(od.Stock) as StockSum, p.*
                      from order_detail od
@@ -75,6 +84,17 @@ export default {
                               join category c on p.CatID = c.CatID
                               join big_category b on c.BigCat = b.BigCatID
                      where b.BigCatID = ${bigCatId} limit ${limit}
+                     offset ${offset}`;
+        const raw = await db.raw(sql);
+        return raw[0];
+    },
+
+    async findPageByKW(name, limit, offset) {
+        const sql = `select *
+                     from product p
+                     WHERE MATCH(ProName)
+                         AGAINST('${name}')
+                     limit ${limit}
                      offset ${offset}`;
         const raw = await db.raw(sql);
         return raw[0];

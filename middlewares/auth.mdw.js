@@ -5,7 +5,7 @@ export default async function auth(req, res, next) {
         req.session.retUrl = req.originalUrl;
         return res.redirect('/login');
     } else {
-        if(req.session.authUser.Type===2){
+        if(req.session.authUser.Type==='2'){
             req.session.isAdmin = true
         }
     }
