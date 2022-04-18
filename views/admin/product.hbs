@@ -7,26 +7,19 @@
 
 
 <div class="bigCate">
-    <div class="bigCate-title d-flex">
-        <h3>Product</h3>
-        <button type="submit" class="text-md px-6 py-2  border border-cyan-700" data-bs-toggle="modal"
-            data-bs-target="#exampleModalAdd">
-            <i class="fa fa-plus" aria-hidden="true"></i> ADD
-        </button>
-    </div>
-    
-    <div class="mt-5 table-responsive" style="overflow-y: auto; height: 500px">
+    <div class="table-responsive" style="overflow-y: auto; height: 500px">
         <table class="table">
             <thead>
                 <tr class="table-active">
                     <th scope="col">ID</th>
                     <th scope="col">Product Name</th>
                     <th scope="col">Price</th>
-                    <th scope="col">Product Count</th>
+                    <th scope="col">Stock</th>
                     {{!-- <th scope="col">Big Category</th>
                     <th scope="col">Category</th> --}}
-                    <th scope="col" class="text-center">Edit</th>
-                </tr>
+
+                    <th scope="col" class="text-center">&nbsp;</th>
+                    <th scope="col" class="text-center">&nbsp;</th>                </tr>
             </thead>
             <tbody>
                 <tr>
@@ -40,8 +33,12 @@
                         <form class="editForm">
                             <button type="button" data-bs-toggle="modal"
                                 data-bs-target="#exampleModalEdit">Edit</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form class="editForm">
                             <button type="button" data-bs-toggle="modal"
-                                data-bs-target="#exampleModalDel">Delete</button>
+                                    data-bs-target="#exampleModalDel">Delete</button>
                         </form>
                     </td>
                 </tr>
