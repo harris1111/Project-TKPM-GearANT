@@ -11,7 +11,7 @@ export default function (app) {
     app.use('/about', aboutRoute);
     app.use('/product', productRoute);
     app.use('/account', auth,accountRoute);
-    app.use('/admin', adminRoute);
+    app.use('/admin', auth, adminRoute);
 
 
     // app.use('/profile', auth, accountRoute);

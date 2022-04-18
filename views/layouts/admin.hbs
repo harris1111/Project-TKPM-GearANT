@@ -79,6 +79,11 @@
                                 <li class="nav-item">
                                     <a href="/account" class="main-menu-link">Account</a>
                                 </li>
+                                    {{#if isAdmin}}
+                                        <li class="nav-item">
+                                            <a class="main-menu-link" href="/admin/order">Admin</a>
+                                        </li>
+                                    {{/if}}
                                 {{/if}}
                             </ul>
                         </div>

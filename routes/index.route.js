@@ -30,7 +30,7 @@ router.get("/", async function(req, res, next) {
     }
 
     res.render("index", {
-        layout: 'homecat.hbs',
+        layout:'homecat.hbs',
         best_ram,
         best_ssd,
         best_cpu,
@@ -107,12 +107,12 @@ router.post("/logout", async function(req, res) {
     req.session.retUrl = null;
 
     //req.session.isSeller = null;
-    //req.session.isAdmin = null;
+    req.session.isAdmin = null;
 
     res.locals.auth = req.session.auth;
     res.locals.authUser = req.session.authUser;
     //res.locals.isSeller = req.session.isSeller;
-    //res.locals.isAdmin = req.session.isAdmin;
+    res.locals.isAdmin = req.session.isAdmin;
 
     res.redirect("/");
 });

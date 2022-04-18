@@ -17,8 +17,8 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/public', express.static('public'));
 
 activate_session(app);
-activate_locals(app);
 activate_view(app);
+activate_locals(app);
 activate_route(app);
 
 const port = process.env.PORT || 8080;
