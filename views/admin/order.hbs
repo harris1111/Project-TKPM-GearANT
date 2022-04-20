@@ -66,16 +66,16 @@
                     10/04/2022
                 </td>
                 <td>
-                    <form class="editForm">
+                    <div class="editForm">
                         <button type="button" data-bs-toggle="modal"
                                 data-bs-target="#exampleModalApprove">Approve</button>
-                    </form>
+                    </div>
                 </td>
                 <td>
-                    <form class="delForm">
+                    <div class="delForm">
                         <button type="button" data-bs-toggle="modal"
                                 data-bs-target="#exampleModalDel">Cancel</button>
-                    </form>
+                    </div>
                 </td>
             </tr>
             </tbody>
@@ -89,10 +89,10 @@
                 <div class="modal-body">
                     Approve this order?
                 </div>
-                <div class="modal-footer">
+                <form class="modal-footer">
                     <button type="button" class="btn-save">Approve</button>
                     <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -104,10 +104,10 @@
                 <div class="modal-body">
                     Cancel this order?
                 </div>
-                <div class="modal-footer">
+                <form class="modal-footer">
                     <button type="button" class="btn-save">Cancel</button>
                     <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>

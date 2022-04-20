@@ -7969,7 +7969,6 @@ header {
 }
 
 @media screen and (max-width: 576px){
-  
   .header-logo img,
   .footer-logo img{
     width: 40px;

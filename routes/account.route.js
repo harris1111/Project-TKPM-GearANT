@@ -138,9 +138,7 @@ router.post('/change-phone', async(req, res, next) => {
     return res.redirect('/');
 })
 router.post('/change-password', async(req, res, next) => {
-    // console.log('old pass' + req.body.old_password);
     const user_model = await userModel.findByUsername(req.session.authUser.Username);
-    // console.log(user_model.Password);
     // const isEqual = bcrypt.compareSync(req.body.old_password, old_password_sv);
     // if (isEqual === false) {
     //     console.log("Error");
@@ -149,11 +147,8 @@ router.post('/change-password', async(req, res, next) => {
     //     });
     // }
     const newPassword = req.body.new_password;
-    // console.log('newPassword' + newPassword);
     const salt = bcrypt.genSaltSync(10);
-    // console.log('salt' + salt);
     const hash = bcrypt.hashSync(newPassword, salt);
-    // console.log('hash' + hash);
 
     const user = {
         Username: req.session.authUser.Username,
