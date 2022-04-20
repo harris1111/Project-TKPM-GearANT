@@ -1,31 +1,3 @@
-{{!-- {{#section 'js'}}
-<script>
-    document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';
-    $(".editForm").on('submit', function (event) {
-        const big_cat_name = $(this).find("input").val();
-        if (big_cat_name.length < 1) {
-            swal('Name must be filled in!');
-            event.preventDefault();
-        }
-    });
-
-    $('#addForm').on('submit', function (event) {
-        event.preventDefault();
-        const big_cat_name = document.getElementById('txtAddBigCatName').value;
-
-        if (big_cat_name.length < 1) {
-            swal('Name must be filled in!');
-            return;
-        } else {
-            swal("Successful").then((value) => {
-                $('#addForm').off('submit').submit();
-            });
-        }
-    });
-
-    $('#txtAddBigCatName').select();
-</script>
-{{/section}} --}}
 
 <div class="bigCate">
     <div class="table-responsive" style="overflow-y: auto; height: 500px">
@@ -35,7 +7,6 @@
                 <th scope="col">ID</th>
                 <th scope="col">Detail</th>
                 <th scope="col" style="text-align: center;">Date</th>
-                <th scope="col" class="text-center">&nbsp;</th>
                 <th scope="col" class="text-center">&nbsp;</th>
 
             </tr>
@@ -69,14 +40,14 @@
                     <div class="editForm">
                         <button type="button" data-bs-toggle="modal"
                                 data-bs-target="#exampleModalApprove">Approve</button>
-                    </div>
-                </td>
-                <td>
-                    <div class="delForm">
                         <button type="button" data-bs-toggle="modal"
                                 data-bs-target="#exampleModalDel">Cancel</button>
                     </div>
                 </td>
+                {{!-- <td>
+                    <div class="editForm">
+                    </div>
+                </td> --}}
             </tr>
             </tbody>
         </table>

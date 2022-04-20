@@ -76,11 +76,11 @@
                                 <li class="nav-item">
                                     <a href="/account" class="main-menu-link">Account</a>
                                 </li>
-                                    {{#if isAdmin}}
-                                        <li class="nav-item">
-                                            <a class="main-menu-link" href="/admin/order">Admin</a>
-                                        </li>
-                                    {{/if}}
+                                {{#if isAdmin}}
+                                <li class="nav-item">
+                                    <a class="main-menu-link" href="/admin/order">Admin</a>
+                                </li>
+                                {{/if}}
                                 {{/if}}
                             </ul>
                         </div>
@@ -166,9 +166,19 @@
                                 <a class="admin__item-cat
                 {{#if pActive}}
                        admin__item-active
-                {{/if}}" href="/admin/product">
+                {{/if}}" href="/admin/product" target="_blank">
                                     <i class="fa fa-archive fa-lg admin__item-icon" aria-hidden="true"></i>
                                     <span>Product</span>
+                                </a>
+                            </div>
+
+                            <div class="admin__item ">
+                                <a class="admin__item-cat
+                {{#if pActive}}
+                       admin__item-active
+                {{/if}}" href="/admin/product" target="_blank">
+                                    <i class="fa fa-archive fa-lg admin__item-icon" aria-hidden="true"></i>
+                                    <span>User</span>
                                 </a>
                             </div>
                         </nav>
@@ -203,7 +213,7 @@
                                     </li>
                                     <li>
                                         <a title="Facebook" href="https://www.facebook.com/thanhhoang4869"><i
-                                                class="fa fa-facebook" aria-hidden="true"></i>
+                                                class="fa fa-facebook" aria-hidden="true" target="_blank"></i>
                                         </a>
                                     </li>
                                     <li>
@@ -222,11 +232,12 @@
                                 <div class="footer-links">
                                     <div class="footer-row">
                                         <ul class="align-items-center">
-                                            <li class="li"><a class="single-link" href="/about">About</a></li>
+                                            <li class="li"><a class="single-link" href="/about"
+                                                    target="_blank">About</a></li>
                                             {{#if auth}}
-                                                <li class="nav-item">
-                                                    <a href="/account" class="main-menu-link">Account</a>
-                                                </li>
+                                            <li class="nav-item">
+                                                <a href="/account" class="main-menu-link" target="_blank">Account</a>
+                                            </li>
                                             {{/if}}
                                         </ul>
                                     </div>
@@ -257,9 +268,10 @@
                                 <div class="footer-links">
                                     <!-- News letter area -->
                                     <p class="address">227 Nguyen Van Cu, Ward 4, District 5, Ho Chi Minh city</p>
-                                    <p class="phone">Phone/Fax:<a href="tel:0933442607">0933442607</a></p>
-                                    <p class="mail">Email:<a
-                                            href="mailto:19127067@student.hcmus.edu.vn">19127067@student.hcmus.edu.vn</a>
+                                    <p class="phone">Phone/Fax:<a href="tel:0933442607" target="_blank">0933442607</a>
+                                    </p>
+                                    <p class="mail">Email:<a href="mailto:19127067@student.hcmus.edu.vn"
+                                            target="_blank">19127067@student.hcmus.edu.vn</a>
                                     </p>
                                     <!-- News letter area  End -->
                                 </div>
@@ -275,7 +287,7 @@
                         <div class="col-12 text-center">
                             <p class="copy-text"> © 2022 <strong>GearANT</strong> Made With <i class="fa fa-heart"
                                     aria-hidden="true"></i> By <a class="company-name"
-                                    href="https://www.facebook.com/thanhhoang4869">
+                                    href="https://www.facebook.com/thanhhoang4869" target="_blank">
                                     <strong> GearANT</strong></a>.</p>
                         </div>
                     </div>

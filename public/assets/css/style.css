@@ -7888,23 +7888,28 @@ header {
   justify-content: center;
 }
 .editForm button{
-  border: 1px solid #3c3c3c;
+  border: 1px solid transparent;
   margin: 0 6px ;
   font-weight: bold;
+  transition: all .5s;
+}
+
+.editForm button:first-child{
+  background-color: #6699ff;
 }
 
 .editForm button:first-child:hover{
-  background-color: #cccccc;
+  background-color: blue;
+  color: white;
 }
 
 .editForm button:last-child{
-  color: white;
-  background-color: #9ca3af;
+  background-color: rgba(255,0,0,0.6);
 }
 
 .editForm button:last-child:hover{
   color: white;
-  background-color: black;
+  background-color: red;
 }
 
 /* modal */
