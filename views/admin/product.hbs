@@ -1,5 +1,4 @@
 {{#section 'js'}}
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script>
         function update() {
             const child_category = {
@@ -20,8 +19,33 @@
                 $('#child_category').append(selectOption);
             }
         }
-
         update();
+    </script>
+
+    <script>
+        document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';
+        $('#addForm').on('submit', function (event) {
+            event.preventDefault();
+            const proname = document.getElementById('txtAddProductName').value;
+            const price = document.getElementById('txtAddPrice').value;
+            const stock = document.getElementById('txtAddStock').value;
+            // const bigCat = document.getElementById('parent_category').value;
+            // const childCat = document.getElementById('child_category').value;
+            const file = document.getElementById('fileUpload');
+
+            // alert(file.files.length)
+            if(file.files.length === 0 ){
+                swal("Please upload product image!")
+                return;
+            }
+
+            if(proname.length<1||price.length<1||stock.length<1){
+                swal("Please fill all fields!")
+                return;
+            }
+            swal("Congrats!", "Product uploaded successfully!!", "success");
+            $('#addForm').off('submit').submit();
+        });
     </script>
 {{/section}}
 
@@ -73,14 +97,17 @@
     <div class="modal" id="exampleModalAdd" tabindex="-1" aria-labelledby="exampleModalAddLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
-                <form enctype="multipart/form-data" action="/admin/add-product" class="modal-footer" method="post">
+                <form enctype="multipart/form-data"
+                      action="/admin/add-product"
+                      id="addForm"
+                      class="modal-footer" method="post">
                     <div class="modal-body">
                         <label>Product Name</label>
-                        <input id="txtAddProductName" type="text" name="ProductName" class="border border-cyan-700">
+                        <input id="txtAddProductName" type="text" name="ProName" class="border border-cyan-700">
                         <label class="mt-3">Price</label>
                         <input id="txtAddPrice" type="text" name="Price" class="border border-cyan-700">
                         <label class="mt-3">Stock</label>
-                        <input id="txtAddProductCount" type="text" name="ProductCount" class="border border-cyan-700">
+                        <input id="txtAddStock" type="number" min="1" name="Stock" class="border border-cyan-700">
                         <label class="mt-3">Big Category</label>
                         <select class="form-select"
                                 name="parent_category" id="parent_category"
@@ -97,7 +124,6 @@
                         <input name="fileUpload" id="fileUpload" type="file" accept=".jpg, .png"
                                style="line-height: normal;">
                     </div>
-
                     <button type="submit" class="btn-save">Save</button>
                     <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
                 </form>
@@ -141,7 +167,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-body">
-                    Are you sure ?
+                    Are you sure to delete this product?
                 </div>
                 <form class="modal-footer" id="btnDelete" method="post">
                     <button type="submit" class="btn-save" value="1" formaction="/admin/product/delete-product"

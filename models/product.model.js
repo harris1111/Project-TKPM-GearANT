@@ -1,6 +1,10 @@
 import db from '../utils/db.js';
 
 export default {
+    async addProduct(entity) {
+        return db('product').insert(entity);
+    },
+
     async countByKW(name) {
         const sql = `SELECT count(*) as amount
                      FROM product p

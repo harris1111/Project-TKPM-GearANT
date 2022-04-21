@@ -1,5 +1,6 @@
 import express from "express";
 import adminModel from "../models/admin.model.js";
+import productModel from "../models/product.model.js";
 import multer from 'multer';
 import {v2 as cloudinary} from 'cloudinary';
 import { CloudinaryStorage } from "multer-storage-cloudinary";
@@ -48,7 +49,20 @@ router.get("/order", function (req, res, next) {
 });
 
 router.post("/add-product", upload.single('fileUpload'),async function(req,res) {
-  // console.log(req.file.path)
+  const product = {
+    ProName:req.body.ProName,
+    CatID:+req.body.child_category+1,
+    Price:req.body.Price,
+    LinkURL:req.file.path,
+    Stock:req.body.Stock,
+    ProState:true,
+    Description:"test"
+  }
+  const ret = await productModel.addProduct(product);
+  //console.log(ret);
+  const url = req.headers.referer || '/admin/product';
+  return res.redirect(url);
+
   res.redirect('/admin/product')
 });
 
