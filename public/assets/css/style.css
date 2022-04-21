@@ -7971,7 +7971,13 @@ header {
 }
 
 @media screen and (max-width: 576px){
-  .header-logo img,
+  .header-logo img{
+    width: 30px;
+    height: auto;
+  }
+  .header-logo p{
+    display: none;
+  }
   .footer-logo img{
     width: 40px;
     height: auto;
@@ -7979,5 +7985,6 @@ header {
   .header-logo p,
   .footer-logo p{
     font-size: 15px;
+
   }
 }
