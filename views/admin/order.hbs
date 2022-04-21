@@ -75,8 +75,8 @@
                 <div class="modal-body">
                     Cancel this order?
                 </div>
-                <form class="modal-footer">
-                    <button type="button" class="btn-save">Cancel</button>
+                <form class="modal-footer" method="post">
+                    <button type="submit" class="btn-save" value="2" formaction="/admin/order/cancel-order">Save</button>
                     <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
                 </form>
             </div>

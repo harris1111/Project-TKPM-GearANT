@@ -2,11 +2,6 @@ import db from '../utils/db.js';
 import productModel from '../models/product.model.js';
 
 export default {
-    async updateAdmin(entity) {
-        const username = res.Username;
-        delete entity.Username;
-        return db('order_list').where('username', username).update(entity);
-    },
     async delOrder(id) {
         await db('order_list').where('OrderID', id).del();
     },
@@ -15,5 +10,10 @@ export default {
     },
     async addProduct(entity) {
         return db('product').insert(entity);
+    },
+    async updateStateOrder(entity) { 
+        const username = entity.Username;
+        delete entity.Username;
+        return db('order_list').where('User', username).update(entity);
     }
 }
