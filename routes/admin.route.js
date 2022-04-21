@@ -26,16 +26,7 @@ router.get("/order", function(req, res, next) {
         layout: "admin.hbs",
     });
 });
-router.post("order/edit-order-list", async function(req, res) {
-    const state = req.body.new_state;
-    const user = {
-        Username: req.session.authUser.Username,
-        new_state: state,
-    };
-    await adminModel.updateAdmin(user);
-    return res.render("/");
-});
-router.post("order/edit-product", async function(req, res) {
+router.post("/product/edit-product", async function(req, res) {
     const name = res.body.newProductName;
     const price = res.body.newPrice;
     const count = res.body.newCount;
@@ -47,6 +38,14 @@ router.post("order/edit-product", async function(req, res) {
     if (count != "") user = user + { Stock: count };
     await adminModel.updateAdmin(user);
     return res.render('/');
-
+});
+router.post("/product/delete-product", async function(req,res) {
+    const id = req.body.delete;
+    await adminModel.delProduct(id);
+    return res.redirect("/admin/product");
+});
+router.post("/product/set-state-order", async function(req,res) { 
+     const state = req.body.state;
+     await adminModel.updateAdmin
 });
 export default router;
