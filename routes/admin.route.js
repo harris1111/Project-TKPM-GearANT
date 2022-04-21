@@ -1,7 +1,26 @@
 import express from "express";
 import adminModel from "../models/admin.model.js";
+import multer from 'multer';
+import {v2 as cloudinary} from 'cloudinary';
+import { CloudinaryStorage } from "multer-storage-cloudinary";
 
 const router = express.Router();
+
+cloudinary.config({
+  cloud_name: 'gearant',
+  api_key: '581671485695681',
+  api_secret: 'RvshNX0rSnZf-Ox4qIGnN0Lt49A'
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: `gearant`,
+    allowedFormats: ['jpg', 'png'],
+  },
+});
+
+const upload = multer({ storage: storage });
 
 router.get("/user", function (req, res, next) {
   let uActive = true;
@@ -15,6 +34,7 @@ router.get("/product", function (req, res, next) {
   let pActive = true;
   res.render("admin/product", {
     pActive,
+    lcCategories: res.locals.lcCategories,
     layout: "admin.hbs",
   });
 });
@@ -26,14 +46,17 @@ router.get("/order", function (req, res, next) {
     layout: "admin.hbs",
   });
 });
-router.post("/product/add-product", async function(req,res) { 
 
+router.post("/add-product", upload.single('fileUpload'),async function(req,res) {
+  // console.log(req.file.path)
+  res.redirect('/admin/product')
 });
+
 router.post("/product/edit-product", async function (req, res) {
   const name = res.body.newProductName;
   const price = res.body.newPrice;
   const count = res.body.newCount;
-  const user = {
+  let user = {
     Username: req.session.authUser.username,
   };
   if (name != "") user = user + { ProName: name };
