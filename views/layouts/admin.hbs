@@ -123,68 +123,38 @@
     </header>
 
     <div class="admin">
-        <div class="container pt-5 height-full admin__content">
+        <div class="container py-5 height-full admin__content">
             <div x-data="{ sidebarOpen: false }" class="row">
-                <div class="col-2 ">
-                    <div :class="sidebarOpen ? 'block' : 'hidden'" @click="sidebarOpen = false"
-                        class="fixed z-20 inset-0 opacity-50 transition-opacity lg:hidden"></div>
+                <div class="col-12 col-lg-2">
+                    <nav>
+                        <a class="admin__item 
+                            {{#if oActive}}
+                                admin__item-active
+                            {{/if}}" href="/admin/order">
+                            <i class="fa fa-cart-arrow-down"></i>
+                            Order
+                        </a>
 
-                    <div :class="sidebarOpen ? 'translate-x-0 ease-out' : '-translate-x-full ease-in'"
-                        class="fixed z-30 inset-y-0 left-0 w-64 transition duration-300 transform lg:translate-x-0 lg:static lg:inset-0">
-                        <nav class="text-black">
-                            <div class="admin__item ">
-                                <a class="admin__item-cat
-                {{#if pActive}}
-                       admin__item-active
-                {{/if}}" href="/admin/order">
-                                    <i class="fa fa-cart-arrow-down"></i>
-                                    <span>Order</span>
-                                </a>
-                            </div>
+                        <a class="admin__item 
+                            {{#if pActive}}
+                                admin__item-active
+                            {{/if}}" href="/admin/product">
+                            <i class="fa fa-archive"></i>
+                            Product
+                        </a>
 
-                            {{!-- <div class="admin__item ">
-                                <a class="admin__item-cat
-                {{#if pActive}}
-                       admin__item-active
-                {{/if}}" href="/admin/category-parent">
-                                    <i class="fa fa-list-alt admin__item-icon" aria-hidden="true"></i>
-                                    <span>Big Category</span>
-                                </a>
-                            </div> --}}
+                        <a class="admin__item
+                            {{#if uActive}}
+                                admin__item-active
+                            {{/if}}" href="/admin/user">
+                            <i class="fa fa-user"></i>
+                            User
+                        </a>
 
-                            {{!-- <div class="admin__item ">
-                                <a class="admin__item-cat
-                {{#if pActive}}
-                       admin__item-active
-                {{/if}}" href="/admin/category-child">
-                                    <i class="fa fa-list-alt admin__item-icon" aria-hidden="true"></i>
-                                    <span>Category</span>
-                                </a>
-                            </div> --}}
 
-                            <div class="admin__item ">
-                                <a class="admin__item-cat
-                {{#if pActive}}
-                       admin__item-active
-                {{/if}}" href="/admin/product" target="_blank">
-                                    <i class="fa fa-archive fa-lg admin__item-icon" aria-hidden="true"></i>
-                                    <span>Product</span>
-                                </a>
-                            </div>
-
-                            <div class="admin__item ">
-                                <a class="admin__item-cat
-                {{#if pActive}}
-                       admin__item-active
-                {{/if}}" href="/admin/product" target="_blank">
-                                    <i class="fa fa-archive fa-lg admin__item-icon" aria-hidden="true"></i>
-                                    <span>User</span>
-                                </a>
-                            </div>
-                        </nav>
-                    </div>
+                    </nav>
                 </div>
-                <div class="col-10">
+                <div class="col-12 col-lg-10 pt-5 pt-lg-0">
                     {{{body}}}
                 </div>
             </div>

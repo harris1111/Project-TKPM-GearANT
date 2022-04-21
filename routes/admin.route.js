@@ -3,26 +3,26 @@ import adminModel from "../models/admin.model.js";
 
 const router = express.Router();
 
-router.get("/category-parent", function(req, res, next) {
-    res.render("admin/category-parent", {
-        layout: "admin.hbs",
-    });
-});
-
-router.get("/category-child", function(req, res, next) {
-    res.render("admin/category-child", {
+router.get("/user", function(req, res, next) {
+    let uActive = true;
+    res.render("admin/user", {
+        uActive,
         layout: "admin.hbs",
     });
 });
 
 router.get("/product", function(req, res, next) {
+    let pActive = true;
     res.render("admin/product", {
+        pActive,
         layout: "admin.hbs",
     });
 });
 
 router.get("/order", function(req, res, next) {
+    let oActive = true;
     res.render("admin/order", {
+        oActive,
         layout: "admin.hbs",
     });
 });

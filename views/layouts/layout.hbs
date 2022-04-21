@@ -60,11 +60,11 @@
                                 <ul class="dropdown-menu">
                                     {{#each lcCategories}}
                                         <li><a class="dropdown-item"
-                                               href="/product/byBigCat/{{BigCatID}}">{{BigCatName}}</a>
+                                               href="/product/byBigCat/{{BigCatID}}" target="_blank">{{BigCatName}}</a>
                                             <ul class="submenu dropdown-menu">
                                                 {{#each childCat}}
                                                     <li><a class="dropdown-item"
-                                                           href="/product/byCat/{{CatID}}">{{CatName}}</a>
+                                                           href="/product/byCat/{{CatID}}" target="_blank">{{CatName}}</a>
                                                     </li>
                                                 {{/each}}
                                             </ul>
@@ -73,15 +73,15 @@
                                 </ul>
                             </li>
                             <li class="nav-item">
-                                <a href="/about" class="main-menu-link">About us</a>
+                                <a href="/about" class="main-menu-link" target="_blank">About us</a>
                             </li>
                             {{#if auth}}
                                 <li class="nav-item">
-                                    <a href="/account" class="main-menu-link">Account</a>
+                                    <a href="/account" class="main-menu-link" target="_blank">Account</a>
                                 </li>
                                 {{#if isAdmin}}
                                     <li class="nav-item">
-                                        <a class="main-menu-link" href="/admin/order">Admin</a>
+                                        <a class="main-menu-link" href="/admin/order" target="_blank">Admin</a>
                                     </li>
                                 {{/if}}
                             {{/if}}
@@ -93,7 +93,7 @@
                         <div class="header-actions">
                             {{#if auth}}
                                 <a href="/account/cart"
-                                   class="header-action-btn header-action-btn-cart pr-0 text-light">
+                                   class="header-action-btn header-action-btn-cart pr-0 text-light" target="_blank">
                                     <i class="pe-7s-shopbag"></i>
                                     {{#if cartSum}}
                                         <span
@@ -148,7 +148,7 @@
                                                                                aria-hidden="true"></i></a>
                                 </li>
                                 <li>
-                                    <a title="Facebook" href="https://www.facebook.com/thanhhoang4869"><i
+                                    <a title="Facebook" href="https://www.facebook.com/thanhhoang4869" target="_blank"><i
                                             class="fa fa-facebook" aria-hidden="true"></i>
                                     </a>
                                 </li>
@@ -168,7 +168,7 @@
                             <div class="footer-links">
                                 <div class="footer-row">
                                     <ul class="align-items-center">
-                                        <li class="li"><a class="single-link" href="/about">About</a></li>
+                                        <li class="li"><a class="single-link" href="/about" target="_blank">About</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -184,7 +184,6 @@
                                     <ul class="align-items-center">
                                         <li class="li"><a class="single-link" href="/">GearANT</a>
                                         </li>
-                                        {{!-- <li class="li"><a class="single-link" href="/product">Shop</a></li> --}}
                                         <li class="li"><a class="single-link" href="/login">Log in</a></li>
                                     </ul>
                                 </div>
@@ -199,9 +198,9 @@
                             <div class="footer-links">
                                 <!-- News letter area -->
                                 <p class="address">227 Nguyen Van Cu, Ward 4, District 5, Ho Chi Minh city</p>
-                                <p class="phone">Phone/Fax:<a href="tel:0933442607">0933442607</a></p>
+                                <p class="phone">Phone/Fax:<a href="tel:0933442607" target="_blank">0933442607</a></p>
                                 <p class="mail">Email:<a
-                                        href="mailto:19127067@student.hcmus.edu.vn">19127067@student.hcmus.edu.vn</a>
+                                        href="mailto:19127067@student.hcmus.edu.vn" target="_blank">19127067@student.hcmus.edu.vn</a>
                                 </p>
                                 <!-- News letter area  End -->
                             </div>
@@ -218,7 +217,7 @@
                         <p class="copy-text"> © 2022 <strong>GearANT</strong> Made With <i class="fa fa-heart"
                                                                                            aria-hidden="true"></i> By <a
                                 class="company-name"
-                                href="https://www.facebook.com/thanhhoang4869">
+                                href="https://www.facebook.com/thanhhoang4869" target="_blank">
                             <strong> GearANT</strong></a>.</p>
                     </div>
                 </div>

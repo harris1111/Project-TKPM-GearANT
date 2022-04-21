@@ -7838,33 +7838,27 @@ header {
 }
 
 .admin__item{
+  display: block;
   width: 100%;
-  text-align: left !important;
-  padding: 10px;
   margin-bottom: 6px;
   background-color: #333333;
-}
-
-.admin__item-cat{
+  cursor: pointer;
   font-size: 18px;
-  padding-left: 20px;
+  padding: 10px 10px 10px 30px;
   color: white;
-  width: 100%;
-}
-.admin__item-icon{
-  font-size: 20px;
-}
-.admin__item:hover .admin__item-cat{
-  color: #fb5d5d;
+  align-items: center;
+  transition: all .5s;
 }
 
-.admin__item-drop{
-  color: #000;
+.admin__item-active{
+  background: linear-gradient(-96deg, #fd3d6b 0%, #fd7863 98%, #f3dfe0 100%);
+}
+
+
+.admin__item:hover{
+  background: linear-gradient(-96deg, #fd3d6b 0%, #fd7863 98%, #f3dfe0 100%);
+  color: white;
   padding-left: 40px;
-}
-
-.admin__item-drop:hover{
-  color: #fb5d5d;
 }
 
 .bigCate{
@@ -7941,6 +7935,9 @@ header {
   }
   .height-full{
     height: auto;
+  }
+  .bigCate{
+    width: 90%;
   }
 }
 
