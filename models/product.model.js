@@ -1,6 +1,14 @@
 import db from '../utils/db.js';
 
 export default {
+    async findCatID(Cat) {
+        const sql = `select CatID
+                     from category c
+                     where c.CatName = '${Cat}'`;
+        const raw = await db.raw(sql);
+        return raw[0][0].CatID;
+    },
+
     async addProduct(entity) {
         return db('product').insert(entity);
     },

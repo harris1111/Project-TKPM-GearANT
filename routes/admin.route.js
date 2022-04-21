@@ -49,17 +49,19 @@ router.get("/order", function (req, res, next) {
 });
 
 router.post("/add-product", upload.single('fileUpload'),async function(req,res) {
+  const cat_id = await productModel.findCatID(req.body.child_category);
+
   const product = {
     ProName:req.body.ProName,
-    CatID:+req.body.child_category+1,
+    CatID:cat_id,
     Price:req.body.Price,
     LinkURL:req.file.path,
     Stock:req.body.Stock,
     ProState:true,
-    Description:"test"
+    Description:req.body.Description
   }
+
   const ret = await productModel.addProduct(product);
-  //console.log(ret);
   const url = req.headers.referer || '/admin/product';
   return res.redirect(url);
 

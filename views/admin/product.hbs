@@ -29,7 +29,7 @@
             const proname = document.getElementById('txtAddProductName').value;
             const price = document.getElementById('txtAddPrice').value;
             const stock = document.getElementById('txtAddStock').value;
-            // const bigCat = document.getElementById('parent_category').value;
+            const des = document.getElementById('txtAddProductDescription').value;
             // const childCat = document.getElementById('child_category').value;
             const file = document.getElementById('fileUpload');
 
@@ -39,7 +39,7 @@
                 return;
             }
 
-            if(proname.length<1||price.length<1||stock.length<1){
+            if(proname.length<1||price.length<1||stock.length<1||des.length<1){
                 swal("Please fill all fields!")
                 return;
             }
@@ -96,7 +96,7 @@
     <!-- Modal add-->
     <div class="modal" id="exampleModalAdd" tabindex="-1" aria-labelledby="exampleModalAddLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
+            <div class="modal-content" style="overflow-y: scroll; height:500px"> 
                 <form enctype="multipart/form-data"
                       action="/admin/add-product"
                       id="addForm"
@@ -120,6 +120,10 @@
                         <select class="form-select"
                                 name="child_category" id="child_category">
                         </select>
+                        
+                        <label class="mt-3">Description</label>
+                    <textarea id="txtAddProductDescription" type="text" name="Description" class="border border-cyan-700"></textarea>
+
                         <label class="mt-3">Image</label>
                         <input name="fileUpload" id="fileUpload" type="file" accept=".jpg, .png"
                                style="line-height: normal;">
@@ -179,3 +183,9 @@
         </div>
     </div>
 </div>
+
+<script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+
+<script>
+    CKEDITOR.replace('txtAddProductDescription');
+</script>
