@@ -46,6 +46,11 @@ router.post("/product/delete-product", async function(req,res) {
 });
 router.post("/product/set-state-order", async function(req,res) { 
      const state = req.body.state;
-     await adminModel.updateAdmin
+     const OrderID = req.body.orderid;
+     const user = {
+        orderID: OrderID,
+        State: state 
+     }
+     await adminModel.updateStateOrder(user);
 });
 export default router;
