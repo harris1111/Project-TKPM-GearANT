@@ -1,5 +1,3 @@
-{{!-- Slide product --}}
-
 <div class="container py-5">
     <div class="section-title text-left mb-3">
         <h2 class="title line-height-1">Ram - 5 best sellers</h2>
@@ -21,9 +19,14 @@
                         <a href="/product/detail/{{this.ProID}}" class="card__overlay-detail" target="_blank">
                             <i class="fa fa-arrow-circle-right"></i>Detail
                         </a>
-                        <button class="card__overlay-cart">
-                            <i class="fa fa-shopping-cart"></i>Add to cart
-                        </button>
+                        <form class = "addCartForm" method = "post" action="/account/cart-add">
+                            <input type="hidden" name="ProID" value="{{this.ProID}}"/>
+                            <input type="hidden" class="Stock" name="Stock" value="1"/>
+                            <button type="submit"
+                                    class="card__overlay-cart">
+                                <i class="fa fa-shopping-cart"></i>Add to cart
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -49,12 +52,17 @@
                         <p class="card-sold">Sold: {{sold}}</p>
                     </div>
                     <div class="card__overlay">
-                        <a href="/product/{{this._id}}" class="card__overlay-detail" target="_blank">
+                        <a href="/product/detail/{{ProID}}" class="card__overlay-detail" target="_blank">
                             <i class="fa fa-arrow-circle-right"></i>Detail
                         </a>
-                        <button class="card__overlay-cart">
-                            <i class="fa fa-shopping-cart"></i>Add to cart
-                        </button>
+                        <form class = "addCartForm" method = "post" action="/account/cart-add">
+                            <input type="hidden" name="ProID" value="{{this.ProID}}"/>
+                            <input type="hidden" class="Stock" name="Stock" value="1"/>
+                            <button type="submit"
+                                    class="card__overlay-cart">
+                                <i class="fa fa-shopping-cart"></i>Add to cart
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -81,12 +89,17 @@
                         <p class="card-sold">Sold: {{sold}}</p>
                     </div>
                     <div class="card__overlay">
-                        <a href="/product/{{this._id}}" class="card__overlay-detail" target="_blank">
+                        <a href="/product/detai/{{ProID}}" class="card__overlay-detail" target="_blank">
                             <i class="fa fa-arrow-circle-right"></i>Detail
                         </a>
-                        <button class="card__overlay-cart">
-                            <i class="fa fa-shopping-cart"></i>Add to cart
-                        </button>
+                        <form class = "addCartForm" method = "post" action="/account/cart-add">
+                            <input type="hidden" name="ProID" value="{{this.ProID}}"/>
+                            <input type="hidden" class="Stock" name="Stock" value="1"/>
+                            <button type="submit"
+                                    class="card__overlay-cart">
+                                <i class="fa fa-shopping-cart"></i>Add to cart
+                            </button>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -97,7 +97,7 @@ router.post('/cart-del', async (req, res) => {
 
 router.post('/cart-add', async (req, res) => {
     const item = {
-        User: req.body.Username,
+        User: req.body.Username||req.session.authUser.Username,
         ProID: req.body.ProID,
         Stock: req.body.Stock,
         Date: moment().format()

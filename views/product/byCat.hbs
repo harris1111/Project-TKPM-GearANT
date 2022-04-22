@@ -36,9 +36,14 @@
                                     <a href="/product/detail/{{ProID}}" class="card__overlay-detail" target="_blank">
                                         <i class="fa fa-arrow-circle-right"></i>Details
                                     </a>
-                                    <button class="card__overlay-cart">
-                                        <i class="fa fa-shopping-cart"></i>Add to cart
-                                    </button>
+                                    <form class = "addCartForm" method = "post" action="/account/cart-add">
+                                        <input type="hidden" name="ProID" value="{{this.ProID}}"/>
+                                        <input type="hidden" class="Stock" name="Stock" value="1"/>
+                                        <button type="submit"
+                                                class="card__overlay-cart">
+                                            <i class="fa fa-shopping-cart"></i>Add to cart
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                         </div>

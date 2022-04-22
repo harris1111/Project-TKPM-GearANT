@@ -185,28 +185,34 @@
         </div>
 
         <div class="owl-carousel owl-theme pt-3">
-
-            <div class="item card-item">
-                <div class="card">
-                    <img src="https://picsum.photos/200" class="card-img-top" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">Tên đây nha</h5>
-                        <div class="card-price">
-                            <p class="card-price-num">1000000 </p>
+            {{#each related_products}}
+                <div class="item card-item">
+                    <div class="card">
+                        <img src="{{LinkURL}}" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ProName}}</h5>
+                            <div class="card-price">
+                                <p class="card-price-num">{{format_number Price}}</p>
+                            </div>
+                            <hr>
+                            <p class="card-sold">Sold: {{Sold}}</p>
                         </div>
-                        <hr>
-                        <p class="card-sold">Sold: 9k</p>
-                    </div>
-                    <div class="card__overlay">
-                        <a href="/product/detail/{{this.ProID}}" class="card__overlay-detail">
-                            <i class="fa fa-arrow-circle-right"></i>Detail
-                        </a>
-                        <button class="card__overlay-cart">
-                            <i class="fa fa-shopping-cart"></i>Add to cart
-                        </button>
+                        <div class="card__overlay">
+                            <a href="/product/detail/{{this.ProID}}" class="card__overlay-detail">
+                                <i class="fa fa-arrow-circle-right"></i>Detail
+                            </a>
+                            <form class = "addCartForm" method = "post" action="/account/cart-add">
+                                <input type="hidden" name="ProID" value="{{this.ProID}}"/>
+                                <input type="hidden" class="Stock" name="Stock" value="1"/>
+                                <button type="submit"
+                                        class="card__overlay-cart">
+                                    <i class="fa fa-shopping-cart"></i>Add to cart
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {{/each}}
 
         </div>
     </div>
