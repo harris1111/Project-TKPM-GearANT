@@ -8,50 +8,50 @@ const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }))
 
 /* GET home page. */
-router.get('/', async function(req, res, next) {
-    const username = req.session.authUser.Username;
-    const ordList = await userModel.findOrderList(username)
+// router.get('/', async function (req, res, next) {
+//     const username = req.session.authUser.Username;
+//     const ordList = await userModel.findOrderList(username)
 
-    let ret = {}
+//     let ret = {}
 
-    for (let i in ordList) {
-        let orderID = ordList[i]['OrderID']
-        if (!(orderID in ret)) {
-            ret[orderID] = {
-                'Orders': [],
-                'Date': null,
-                'State': null,
-                'Total': 0
-            }
-        }
-        ret[orderID]['Orders'].push(ordList[i])
-        ret[orderID]['Date'] = ordList[i]['Date']
+//     for (let i in ordList) {
+//         let orderID = ordList[i]['OrderID']
+//         if (!(orderID in ret)) {
+//             ret[orderID] = {
+//                 'Orders': [],
+//                 'Date': null,
+//                 'State': null,
+//                 'Total': 0
+//             }
+//         }
+//         ret[orderID]['Orders'].push(ordList[i])
+//         ret[orderID]['Date'] = ordList[i]['Date']
 
-        switch (ordList[i]['State']) {
-            case config.ordState.PENDING:
-                ordList[i]['State'] = 'Pending'
-                break;
-            case config.ordState.PREPARING:
-                ordList[i]['State'] = 'Preparing'
-                break;
-            case config.ordState.ARRIVING:
-                ordList[i]['State'] = 'Arriving'
-                break;
-            case config.ordState.SUCCESS:
-                ret[orderID].success = true
-                ordList[i]['State'] = 'Success'
-                break;
-        }
+//         switch (ordList[i]['State']) {
+//             case config.ordState.PENDING:
+//                 ordList[i]['State'] = 'Pending'
+//                 break;
+//             case config.ordState.PREPARING:
+//                 ordList[i]['State'] = 'Preparing'
+//                 break;
+//             case config.ordState.ARRIVING:
+//                 ordList[i]['State'] = 'Arriving'
+//                 break;
+//             case config.ordState.SUCCESS:
+//                 ret[orderID].success = true
+//                 ordList[i]['State'] = 'Success'
+//                 break;
+//         }
 
-        ret[orderID]['State'] = ordList[i]['State']
-        ret[orderID]['Total'] += parseInt(ordList[i]['Price']) * parseInt(ordList[i]['Stock'])
-    }
-    res.render('account/account', {
-        ordList: ret
-    });
-});
+//         ret[orderID]['State'] = ordList[i]['State']
+//         ret[orderID]['Total'] += parseInt(ordList[i]['Price']) * parseInt(ordList[i]['Stock'])
+//     }
+//     res.render('layouts/account', {
+//         ordList: ret
+//     });
+// });
 
-router.get('/cart', async function(req, res, next) {
+router.get('/cart', async function (req, res, next) {
     const username = req.session.authUser.Username;
     const cart = await userModel.findCart(username)
     let isEmpty = false
@@ -85,14 +85,14 @@ router.get('/cart', async function(req, res, next) {
     });
 });
 
-router.post('/cart-del', async(req, res) => {
+router.post('/cart-del', async (req, res) => {
     const ret = await userModel.delCart(req.body.ProID);
     // console.log(ret);
     const url = req.headers.referer || '/account/cart';
     return res.redirect(url);
 });
 
-router.post('/cart-add', async(req, res) => {
+router.post('/cart-add', async (req, res) => {
     const item = {
         User: req.body.Username,
         ProID: req.body.ProID,
@@ -105,11 +105,11 @@ router.post('/cart-add', async(req, res) => {
     return res.redirect(url);
 });
 
-router.get('/checkout', function(req, res, next) {
+router.get('/checkout', function (req, res, next) {
     res.render('account/checkout');
 });
 
-router.post('/change-address', async(req, res, next) => {
+router.post('/change-address', async (req, res, next) => {
     // console.log('change address post');
     const user = {
         Username: req.session.authUser.Username,
@@ -125,7 +125,7 @@ router.post('/change-address', async(req, res, next) => {
     res.locals.authUser = req.session.authUser
     return res.redirect('/');
 });
-router.post('/change-phone', async(req, res, next) => {
+router.post('/change-phone', async (req, res, next) => {
     // console.log('change phone post');
     const user = {
         Username: req.session.authUser.Username,
@@ -135,7 +135,7 @@ router.post('/change-phone', async(req, res, next) => {
     const ret = await userModel.update(user);
     return res.redirect('/');
 })
-router.post('/change-password', async(req, res, next) => {
+router.post('/change-password', async (req, res, next) => {
     const user_model = await userModel.findByUsername(req.session.authUser.Username);
     // const isEqual = bcrypt.compareSync(req.body.old_password, old_password_sv);
     // if (isEqual === false) {
@@ -155,4 +155,37 @@ router.post('/change-password', async(req, res, next) => {
 
     const ret = await userModel.update(user);
 });
+
+router.get("/order", function (req, res, next) {
+    let oActive = true;
+    res.render("account/accountOrder", {
+        oActive,
+        layout: "account.hbs",
+    });
+});
+
+router.get("/information", function (req, res, next) {
+    let iActive = true;
+    res.render("account/information", {
+        iActive,
+        layout: "account.hbs",
+    });
+});
+
+router.get("/address", function (req, res, next) {
+    let aActive = true;
+    res.render("account/address", {
+        aActive,
+        layout: "account.hbs",
+    });
+});
+
+router.get("/changePass", function (req, res, next) {
+    let cActive = true;
+    res.render("account/changePass", {
+        cActive,
+        layout: "account.hbs",
+    });
+});
+
 export default router;
