@@ -19,6 +19,7 @@
                 $('#child_category').append(selectOption);
             }
         }
+
         update();
     </script>
 
@@ -29,22 +30,37 @@
             const proname = document.getElementById('txtAddProductName').value;
             const price = document.getElementById('txtAddPrice').value;
             const stock = document.getElementById('txtAddStock').value;
-            // const bigCat = document.getElementById('parent_category').value;
+            const des = document.getElementById('txtAddProductDescription').value;
             // const childCat = document.getElementById('child_category').value;
             const file = document.getElementById('fileUpload');
 
             // alert(file.files.length)
-            if(file.files.length === 0 ){
+            if (file.files.length === 0) {
                 swal("Please upload product image!")
                 return;
             }
 
-            if(proname.length<1||price.length<1||stock.length<1){
+            if (proname.length < 1 || price.length < 1 || stock.length < 1) {
                 swal("Please fill all fields!")
                 return;
             }
             swal("Congrats!", "Product uploaded successfully!!", "success");
             $('#addForm').off('submit').submit();
+        });
+
+        $('.formEdit').on('submit', function (event) {
+            event.preventDefault();
+            // const price = document.getElementById('editPrice').value;
+            const price = $(this).find("input").val();
+
+            if (price.length<1) {
+                swal("Price must be filled in!");
+                return;
+            }
+            // else {
+            //     swal("Successful").then((value) => {
+            //         $('#editForm').off('submit').submit();});
+            // }
         });
     </script>
 {{/section}}
@@ -62,64 +78,171 @@
             <thead>
             <tr class="table-active">
                 <th scope="col">ID</th>
-                <th scope="col">Product Name</th>
+                <th scope="col">Name</th>
                 <th scope="col">Price</th>
-                <th scope="col">Stock</th>
+                <th scope="col">Sold</th>
+                <th scope="col">Remaining</th>
 
                 <th scope="col" class="text-center">&nbsp;</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th scope="row">1</th>
-                <td>Ram abcxyz</td>
-                <td>10000000</td>
-                <td>10</td>
-                {{!-- <td>Ram</td>
-                <td>Samsung</td> --}}
-                <td>
-                    <div class="editForm">
-                        <button type="button" data-bs-toggle="modal"
-                                data-bs-target="#exampleModalEdit">Edit
-                        </button>
-                        <button type="button" data-bs-toggle="modal"
-                                data-bs-target="#exampleModalDel">Delete
-                        </button>
+            {{#each this.product}}
+                <tr>
+                    <th scope="row">{{ProID}}</th>
+                    <td>
+                        <a href="#" class="text-dark">
+                            <strong>{{ProName}}</strong>
+                        </a>
+                    </td>
+                    <td>{{format_number Price}}</td>
+                    <td>{{Sold}}</td>
+                    <td>{{Stock}}</td>
+                    <td>
+                        <div class="editForm">
+                            <button type="button" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModalEdit{{ProID}}">Edit
+                            </button>
+                            <button type="button" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModalDel{{ProID}}">Delete
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+
+                <div class="modal"
+                     id="exampleModalEdit{{ProID}}" tabindex="-1" aria-labelledby="exampleModalEditLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <form class="modal-footer formEdit" method="post"
+                                  id="formEdit"
+                                  action="/admin/update-pro">
+                                <div class="modal-body">
+                                    <label>Product Name</label>
+                                    <input id="editBigCatName" type="text" value="{{ProName}}" disabled
+                                           name="BigCatName" class="border border-cyan-700">
+                                    <label>Price</label>
+                                    <input id="editPrice" type="text" name="Price" value="{{Price}}"
+                                           class="border border-cyan-700 editPrice">
+                                    <label class="mt-3">Stock</label>
+                                    <input id="editStock" type="text" value="{{Stock}}"
+                                           name="Stock" class="border border-cyan-700">
+                                    <label class="mt-3">Big Category</label>
+                                    <select class="form-select" name="BigCat"
+                                            aria-label="Default select example">
+                                        <option value="" selected disabled hidden>{{BigCatName}}</option>
+                                        <option value="RAM">Ram</option>
+                                        <option value="CPU">CPU</option>
+                                        <option value="SSD">SSD</option>
+                                    </select>
+                                    <label class="mt-3">Category</label>
+                                    <select class="form-select" name="Cat" id="editCat"
+                                            aria-label="Default select example">
+                                        <option value="" selected disabled hidden>{{CatName}}</option>
+                                    </select>
+                                </div>
+
+                                <button type="submit" class="btn-save">Save</button>
+                                <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                            </form>
+                        </div>
                     </div>
-                </td>
-            </tr>
+                </div>
+
+                <div class="modal delForm" id="exampleModalDel{{ProID}}" tabindex="-1" aria-labelledby="exampleModalDelLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                                Are you sure to delete this product?
+                            </div>
+                            <form class="modal-footer" id="btnDelete" method="post">
+                                <button type="submit" class="btn-save" value="1"
+                                        formaction="/admin/product/delete-product"
+                                        name="delete">Delete
+                                </button>
+                                <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            {{/each}}
             </tbody>
         </table>
+    </div>
+
+    <div class="mt-5">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                {{#if isFirst}}
+                {{else}}
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                {{/if}}
+                {{#each this.page_numbers}}
+                    {{#if isCurrent}}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{value}}">
+                            <strong>{{value}}</strong>
+                            </a>
+                        </li>
+                    {{else}}
+                        <li class="page-item"><a class="page-link" href="?page={{value}}">{{value}}</a></li>
+                    {{/if}}
+                {{/each}}
+                {{#if isLast}}
+                {{else}}
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                {{/if}}
+            </ul>
+        </nav>
     </div>
 
     <!-- Modal add-->
     <div class="modal" id="exampleModalAdd" tabindex="-1" aria-labelledby="exampleModalAddLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content"style="overflow-y: scroll; height:500px">
-                <div class="modal-body" >
-                    <label>Product Name</label>
-                    <input id="txtAddProductName" type="text" name="ProductName" class="border border-cyan-700">
-                    <label class="mt-3">Price</label>
-                    <input id="txtAddPrice" type="text" name="Price" class="border border-cyan-700">
-                    <label class="mt-3">Product Count</label>
-                    <input id="txtAddProductCount" type="text" name="ProductCount" class="border border-cyan-700">
-                    <label class="mt-3">Big Category</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option value="1">Ram</option>
-                        <option value="2">CPU</option>
-                        <option value="3">SSD</option>
-                    </select>
-                    <label class="mt-3">Category</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option value="1">Samsung</option>
-                        <option value="2">Kingston</option>
-                    </select>
-                    <label class="mt-3">Description</label>
-                    <textarea id="txtAddProductDescription" type="text" name="Description" class="border border-cyan-700"></textarea>
-                    <label class="mt-3">Image</label>
-                    <input type="file" accept=".jpg, .png" style="line-height: normal;" multiple>
-                </div>
-                <form class="modal-footer" id="" action="/admin/product/add-product" method="post">
+            <div class="modal-content" style="overflow-y: scroll; height:500px">
+                <form enctype="multipart/form-data"
+                      action="/admin/add-product"
+                      id="addForm"
+                      class="modal-footer" method="post">
+                    <div class="modal-body">
+                        <label>Product Name</label>
+                        <input id="txtAddProductName" type="text" name="ProName" class="border border-cyan-700">
+                        <label class="mt-3">Price</label>
+                        <input id="txtAddPrice" type="number" min="0" name="Price" class="border border-cyan-700">
+                        <label class="mt-3">Stock</label>
+                        <input id="txtAddStock" type="number" min="1" name="Stock" class="border border-cyan-700">
+                        <label class="mt-3">Big Category</label>
+                        <select class="form-select"
+                                name="parent_category" id="parent_category"
+                                onChange="update()">
+                            <option value="RAM" selected>RAM</option>
+                            <option value="CPU">CPU</option>
+                            <option value="SSD">SSD</option>
+                        </select>
+                        <label class="mt-3">Category</label>
+                        <select class="form-select"
+                                name="child_category" id="child_category">
+                        </select>
+
+                        <label class="mt-3">Description</label>
+                        <textarea id="txtAddProductDescription" type="text" name="Description"
+                                  class="border border-cyan-700"></textarea>
+
+                        <label class="mt-3">Image</label>
+                        <input name="fileUpload" id="fileUpload" type="file" accept=".jpg, .png"
+                               style="line-height: normal;">
+                    </div>
                     <button type="submit" class="btn-save">Save</button>
                     <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
                 </form>
@@ -128,52 +251,8 @@
     </div>
 
     <!-- Modal edit-->
-    <div class="modal" id="exampleModalEdit" tabindex="-1" aria-labelledby="exampleModalEditLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <label>Product Name</label>
-                    <input id="txtAddBigCatName" type="text" name="BigCatName" class="border border-cyan-700">
-                    <label>Price</label>
-                    <input id="txtAddPrice" type="text" name="Price" class="border border-cyan-700">
-                    <label class="mt-3">Product Count</label>
-                    <input id="txtAddBigCatName" type="text" name="BigCatName" class="border border-cyan-700">
-                    <label class="mt-3">Big Category</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option value="1">Ram</option>
-                        <option value="2">CPU</option>
-                        <option value="3">SSD</option>
-                    </select>
-                    <label class="mt-3">Category</label>
-                    <select class="form-select" aria-label="Default select example">
-                        <option value="1">Samsung</option>
-                        <option value="2">Kingston</option>
-                    </select>
-                </div>
-                <form class="modal-footer">
-                    <button type="submit" class="btn-save">Save</button>
-                    <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                </form>
-            </div>
-        </div>
-    </div>
 
     <!-- Modal delete-->
-    <div class="modal" id="exampleModalDel" tabindex="-1" aria-labelledby="exampleModalDelLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-body">
-                    Are you sure to delete this product?
-                </div>
-                <form class="modal-footer" id="btnDelete" method="post">
-                    <button type="submit" class="btn-save" value="1" formaction="/admin/product/delete-product"
-                            name="delete">Delete
-                    </button>
-                    <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
-                </form>
-            </div>
-        </div>
-    </div>
 </div>
 
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>

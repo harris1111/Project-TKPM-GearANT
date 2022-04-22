@@ -11,7 +11,6 @@ router.use(bodyParser.urlencoded({ extended: false }))
 router.get('/', async function(req, res, next) {
     const username = req.session.authUser.Username;
     const ordList = await userModel.findOrderList(username)
-    console.log(ordList)
 
     let ret = {}
 
@@ -59,7 +58,6 @@ router.get('/cart', async function(req, res, next) {
     let total = 0
 
     const user = await userModel.findByUsername(username)
-    console.log(user)
     delete user.Password
 
     if (cart.length <= 0) {
