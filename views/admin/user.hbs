@@ -8,8 +8,8 @@
     <table class="table">
       <thead>
         <tr class="table-active">
-          <th scope="col">ID</th>
-          <th scope="col">User Name</th>
+          <th scope="col">No.</th>
+          <th scope="col">Username</th>
           <th scope="col">Phone</th>
           <th scope="col">Address</th>
         </tr>
@@ -17,14 +17,48 @@
       {{#each this.userList}}
         <tbody>
           <tr>
-            <th scope="row">1</th>
-            <td>{{username}}</td>
-            <td>{{number}}</td>
-            <td>{{address}}</td>
+            <th scope="row">{{No}}</th>
+            <td><strong>{{Username}}</strong></td>
+            <td>{{Number}}</td>
+            <td>{{Address}}</td>
           </tr>
         </tbody>
       {{/each}}
     </table>
   </div>
+</div>
+
+<div class="mt-5">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {{#if isFirst}}
+            {{else}}
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+            {{/if}}
+            {{#each this.page_numbers}}
+                {{#if isCurrent}}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{value}}">
+                        <strong>{{value}}</strong>
+                        </a>
+                    </li>
+                {{else}}
+                    <li class="page-item"><a class="page-link" href="?page={{value}}">{{value}}</a></li>
+                {{/if}}
+            {{/each}}
+            {{#if isLast}}
+            {{else}}
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            {{/if}}
+        </ul>
+    </nav>
 </div>
 {{/if}}

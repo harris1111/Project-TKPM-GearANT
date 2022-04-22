@@ -1,8 +1,11 @@
-
-
-<div class="table_page table-responsive" style="min-height: 200px;max-height: 500px">
-    <table>
-        <thead>
+{{#if this.empty}}
+    <div class="w-full max-w-4xl mx-auto mt-8">
+        No order to show yet!
+    </div>
+{{else}}
+    <div class="table_page table-responsive" style="min-height: 200px;max-height: 500px">
+        <table>
+            <thead>
             <tr>
                 <th>Order</th>
                 <th>Date</th>
@@ -10,29 +13,30 @@
                 <th>Product</th>
                 <th>Total</th>
             </tr>
-        </thead>
+            </thead>
 
-        <tbody>
+            <tbody>
             {{#each ordList}}
-            <tr>
-                <td>{{@key}}</td>
-                <td>{{format_no_h this.Date}}</td>
-                <td {{#if this.success}} class="text-success" {{/if}}>{{this.State}}</td>
-                <td>
-                    <table>
-                        {{#each this.Orders}}
-                        <tr>
-                            <td style="border: none; padding:0; text-align:left">{{this.ProName}}
-                            </td>
-                            <td style="border: none; padding:0; min-width: 50px; color:#24262b">
-                                {{this.Stock}}x</td>
-                        </tr>
-                        {{/each}}
-                    </table>
-                </td>
-                <td>{{format_number this.Total}} VND</td>
-            </tr>
+                <tr>
+                    <td>{{@key}}</td>
+                    <td>{{format_no_h this.Date}}</td>
+                    <td {{#if this.success}} class="text-success" {{/if}}>{{this.State}}</td>
+                    <td>
+                        <table>
+                            {{#each this.Orders}}
+                                <tr>
+                                    <td style="border: none; padding:0; text-align:left">{{this.ProName}}
+                                    </td>
+                                    <td style="border: none; padding:0; min-width: 50px; color:#24262b">
+                                        {{this.Stock}}x</td>
+                                </tr>
+                            {{/each}}
+                        </table>
+                    </td>
+                    <td>{{format_number this.Total}} VND</td>
+                </tr>
             {{/each}}
-        </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
+    </div>
+{{/if}}
