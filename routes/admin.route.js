@@ -80,9 +80,9 @@ router.get("/product", async function (req, res, next) {
 
   const product = await productModel.findAllLimitBig(limit, offset);
 
-  for (let i in product) {
-      const tmp = await productModel.findSold(product[i].ProID)
-      product[i].Sold = tmp.Sold
+  for(let i in product){
+    const tmp = await productModel.findSold(product[i].ProID)
+    product[i].Sold = tmp.Sold
   }
 
   let isFirst = 1;
