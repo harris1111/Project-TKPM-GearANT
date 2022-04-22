@@ -4,7 +4,6 @@ import productModel from "../models/product.model.js";
 import multer from 'multer';
 import {v2 as cloudinary} from 'cloudinary';
 import {CloudinaryStorage} from "multer-storage-cloudinary";
-import userModel from "../models/user.model.js";
 
 const router = express.Router();
 
@@ -26,39 +25,11 @@ const upload = multer({storage: storage});
 
 router.get("/user", async function (req, res, next) {
   let uActive = true;
-  const page = req.query.page || 1;
-  const limit = 6;
-  const total = await userModel.countUser();
-  let nPage = Math.floor(total/limit);
-  if (total % limit > 0) {
-    nPage++;
-  }
-  const page_numbers = [];
-
-  for (let i = 1; i<= nPage; i++) {
-    page_numbers.push({
-      value: i,
-      isCurrent: +page=== i
-    });
-  }
-  const offset = (page - 1) * limit;
-
-  const user = await adminModel.getUserList(limit, offset);
-  console.log(user);
-  let isFirst = 1;
-  let isLast = 1;
-  if (user.length !== 0) { 
-    isFirst = page_numbers[0].isCurrent;
-    isLast = page_numbers[nPage - 1].isCurrent;
-  }
+  const uList = await adminModel.getUserList();
     res.render("admin/user", {
     uActive,
-    user,
+    userList: uList,
     layout: "admin.hbs",
-    empty: user.length === 0,
-    page_numbers,
-    isFirst,
-    isLast
   });
 });
 
@@ -80,65 +51,57 @@ router.post("/update-pro", async function (req, res) {
     }
     await productModel.updateProduct(productEntity);
 
-    const url = req.headers.referer || '/admin/product';
-    return res.redirect(url);
+  const total = await productModel.countProduct();
+
+  let nPage = Math.floor(total / limit);
+  if (total % limit > 0) {
+    nPage++;
+  }
+
+  const page_numbers = [];
+  for (let i = 1; i <= nPage; i++) {
+    page_numbers.push({
+      value: i,
+      isCurrent: +page === i
+    });
+  }
+
+  const offset = (page - 1) * limit;
+
+  const product = await productModel.findAllLimitBig(limit, offset);
+
+  for(let i in product){
+    const tmp = await productModel.findSold(product[i].ProID)
+    product[i].Sold = tmp.Sold
+  }
+
+  let isFirst = 1;
+  let isLast = 1;
+
+  if (product.length !== 0) {
+    isFirst = page_numbers[0].isCurrent;
+    isLast = page_numbers[nPage - 1].isCurrent;
+  }
+
+  res.render('admin/product', {
+    pActive,
+    product,
+    layout: 'admin.hbs',
+    empty: product.length === 0,
+    page_numbers,
+    isFirst,
+    isLast
+  });
 });
 
-router.get("/product", async function (req, res, next) {
-    let pActive = true;
-
-    const page = req.query.page || 1;
-    const limit = 8;
-
-    const total = await productModel.countProduct();
-
-    let nPage = Math.floor(total / limit);
-    if (total % limit > 0) {
-        nPage++;
-    }
-
-    const page_numbers = [];
-    for (let i = 1; i <= nPage; i++) {
-        page_numbers.push({
-            value: i,
-            isCurrent: +page === i
-        });
-    }
-
-    const offset = (page - 1) * limit;
-
-    const product = await productModel.findAllLimitBig(limit, offset);
-
-    for (let i in product) {
-        const tmp = await productModel.findSold(product[i].ProID)
-        product[i].Sold = tmp.Sold
-    }
-
-    let isFirst = 1;
-    let isLast = 1;
-
-    if (product.length !== 0) {
-        isFirst = page_numbers[0].isCurrent;
-        isLast = page_numbers[nPage - 1].isCurrent;
-    }
-
-    res.render('admin/product', {
-        pActive,
-        product,
-        layout: 'admin.hbs',
-        empty: product.length === 0,
-        page_numbers,
-        isFirst,
-        isLast
-    });
-});
-
-router.get("/order", function (req, res, next) {
-    let oActive = true;
-    res.render("admin/order", {
-        oActive,
-        layout: "admin.hbs",
-    });
+router.get("/order", async function (req, res, next) {
+  let oActive = true;
+  const oList = await adminModel.getOrderList();
+  console.log(oList);
+  res.render("admin/order", {
+    oActive,
+    layout: "admin.hbs",
+  });
 });
 
 router.post("/add-product", upload.single('fileUpload'), async function (req, res) {
