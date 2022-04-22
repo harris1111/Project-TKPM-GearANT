@@ -4,6 +4,7 @@ import productModel from "../models/product.model.js";
 import multer from 'multer';
 import {v2 as cloudinary} from 'cloudinary';
 import {CloudinaryStorage} from "multer-storage-cloudinary";
+import userModel from "../models/user.model.js";
 
 const router = express.Router();
 
@@ -24,12 +25,41 @@ const storage = new CloudinaryStorage({
 const upload = multer({storage: storage});
 
 router.get("/user", async function (req, res, next) {
-    let uActive = true;
+  let uActive = true;
+  const page = req.query.page || 1;
+  const limit = 6;
+  const total = await userModel.countUser();
+  let nPage = Math.floor(total/limit);
+  if (total % limit > 0) {
+    nPage++;
+  }
+  const page_numbers = [];
 
-    res.render("admin/user", {
-        uActive,
-        layout: "admin.hbs",
+  for (let i = 1; i<= nPage; i++) {
+    page_numbers.push({
+      value: i,
+      isCurrent: +page=== i
     });
+  }
+  const offset = (page - 1) * limit;
+
+  const user = await adminModel.getUserList(limit, offset);
+  console.log(user);
+  let isFirst = 1;
+  let isLast = 1;
+  if (user.length !== 0) { 
+    isFirst = page_numbers[0].isCurrent;
+    isLast = page_numbers[nPage - 1].isCurrent;
+  }
+    res.render("admin/user", {
+    uActive,
+    user,
+    layout: "admin.hbs",
+    empty: user.length === 0,
+    page_numbers,
+    isFirst,
+    isLast
+  });
 });
 
 router.post("/update-pro", async function (req, res) {
