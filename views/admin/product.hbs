@@ -110,6 +110,7 @@
                 <th scope="col">ID</th>
                 <th scope="col">Name</th>
                 <th scope="col">Price</th>
+                <th scope="col">Product Count</th>
                 <th scope="col">Stock</th>
                 <th scope="col" class="text-center">&nbsp;</th>
                 <th scope="col" class="text-center">&nbsp;</th>
@@ -132,6 +133,10 @@
                             <button type="button" data-bs-toggle="modal"
                                     data-bs-target="#exampleModalEdit{{ProID}}">Edit
                             </button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="delForm">
                             <button type="button" data-bs-toggle="modal"
                                     data-bs-target="#exampleModalDel{{ProID}}">Delete
                             </button>
@@ -139,8 +144,7 @@
                     </td>
                 </tr>
 
-                <div class="modal"
-                     id="exampleModalEdit{{ProID}}" tabindex="-1" aria-labelledby="exampleModalEditLabel"
+                <div class="modal" id="exampleModalEdit{{ProID}}" tabindex="-1" aria-labelledby="exampleModalEditLabel"
                      aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content " style="overflow-y: scroll; height:500px">
@@ -172,7 +176,7 @@
                     </div>
                 </div>
 
-                <div class="modal delForm" id="exampleModalDel{{ProID}}" tabindex="-1"
+                <div class="modal" id="exampleModalDel{{ProID}}" tabindex="-1"
                      aria-labelledby="exampleModalDelLabel"
                      aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
