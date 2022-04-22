@@ -23,47 +23,6 @@
         update();
     </script>
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.js"></script>
-
-    <script>
-        // $('.input-price').focus();
-        // $(".input-price").maskMoney({
-        //     // Delay formatting of text field until focus leaves the field
-        //     formatOnBlur: false,
-        //
-        //     // Prevent users from inputing zero
-        //     allowZero:false,
-        //
-        //     // Prevent users from inputing negative values
-        //     allowNegative:false,
-        //
-        //     // Allow empty input values, so that when you delete the number it doesn't reset to 0.00.
-        //     allowEmpty: true,
-        //
-        //     // Select text in the input on double click
-        //     doubleClickSelection: true,
-        //
-        //     // Select all text in the input when the element fires the focus event.
-        //     selectAllOnFocus: false,
-        //
-        //     // The thousands separator
-        //     thousands: '.',
-        //
-        //     // How many decimal places are allowed
-        //     precision: 3,
-        //
-        //     // Set if the symbol will stay in the field after the user exits the field.
-        //     affixesStay : false,
-        //
-        //     // Set if the symbol will stay in the field after the user exits the field.
-        //     affixesStay :false,
-        //     // Place caret at the end of the input on focus
-        //     bringCaretAtEndOnFocus:true
-        //
-        // });
-    </script>
-
     <script>
         document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';
         $('#addForm').on('submit', function (event) {
@@ -71,8 +30,11 @@
             const proname = document.getElementById('txtAddProductName').value;
             const price = document.getElementById('txtAddPrice').value;
             const stock = document.getElementById('txtAddStock').value;
+            const des = document.getElementById('txtAddProductDescription').value;
+            // const childCat = document.getElementById('child_category').value;
             const file = document.getElementById('fileUpload');
 
+            // alert(file.files.length)
             if (file.files.length === 0) {
                 swal("Please upload product image!")
                 return;
@@ -86,12 +48,20 @@
             $('#addForm').off('submit').submit();
         });
 
-        // $('.formEdit').on('submit', function (event) {
-        //     event.preventDefault();
-        //     swal("Congrats!", "Product updated successfully!!", "success");
-        //     $('.formEdit').off('submit').submit();
-        // });
+        $('.formEdit').on('submit', function (event) {
+            event.preventDefault();
+            // const price = document.getElementById('editPrice').value;
+            const price = $(this).find("input").val();
 
+            if (price.length<1) {
+                swal("Price must be filled in!");
+                return;
+            }
+            // else {
+            //     swal("Successful").then((value) => {
+            //         $('#editForm').off('submit').submit();});
+            // }
+        });
     </script>
 {{/section}}
 
@@ -145,26 +115,33 @@
                      id="exampleModalEdit{{ProID}}" tabindex="-1" aria-labelledby="exampleModalEditLabel"
                      aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content " style="overflow-y: scroll; height:500px">
+                        <div class="modal-content">
                             <form class="modal-footer formEdit" method="post"
                                   id="formEdit"
                                   action="/admin/update-pro">
                                 <div class="modal-body">
-                                    <input value="{{ProID}}" hidden
-                                           name="ProID">
-                                    <label><strong>Product name</strong></label>
-                                    <input type="text" value="{{ProName}}" disabled
-                                           name="ProName" class="border border-cyan-700">
-                                    <label class="mt-3"><strong>Price</strong></label>
-                                    <input id="editPrice" type="number" name="Price" min="1" value="{{Price}}"
-                                           class="border input-price border-cyan-700 editPrice">
-                                    <label class="mt-3"><strong>Stock</strong></label>
-                                    <input id="editStock" type="number" min="1" value="{{Stock}}"
+                                    <label>Product Name</label>
+                                    <input id="editBigCatName" type="text" value="{{ProName}}" disabled
+                                           name="BigCatName" class="border border-cyan-700">
+                                    <label>Price</label>
+                                    <input id="editPrice" type="text" name="Price" value="{{Price}}"
+                                           class="border border-cyan-700 editPrice">
+                                    <label class="mt-3">Stock</label>
+                                    <input id="editStock" type="text" value="{{Stock}}"
                                            name="Stock" class="border border-cyan-700">
-                                    <label class="mt-3"><strong>Description</strong></label>
-                                    <textarea type="text" name="txtDescription"
-                                              class="border ckeditor">{{Description}}</textarea>
-                                    <label class="text-primary mt-3 mb-3">If you empty any field, it will be considered unchanged!</label>
+                                    <label class="mt-3">Big Category</label>
+                                    <select class="form-select" name="BigCat"
+                                            aria-label="Default select example">
+                                        <option value="" selected disabled hidden>{{BigCatName}}</option>
+                                        <option value="RAM">Ram</option>
+                                        <option value="CPU">CPU</option>
+                                        <option value="SSD">SSD</option>
+                                    </select>
+                                    <label class="mt-3">Category</label>
+                                    <select class="form-select" name="Cat" id="editCat"
+                                            aria-label="Default select example">
+                                        <option value="" selected disabled hidden>{{CatName}}</option>
+                                    </select>
                                 </div>
 
                                 <button type="submit" class="btn-save">Save</button>
@@ -174,17 +151,16 @@
                     </div>
                 </div>
 
-                <div class="modal delForm" id="exampleModalDel{{ProID}}" tabindex="-1"
-                     aria-labelledby="exampleModalDelLabel"
+                <div class="modal delForm" id="exampleModalDel{{ProID}}" tabindex="-1" aria-labelledby="exampleModalDelLabel"
                      aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-body">
-                                Are you sure to delete product {{ProID}} - {{ProName}}?
+                                Are you sure to delete this product?
                             </div>
-                            <form class="modal-footer" id="btnDelete"
-                                  action="/admin/del-product" method="post">
-                                <button type="submit" class="btn-save" value={{ProID}}
+                            <form class="modal-footer" id="btnDelete" method="post">
+                                <button type="submit" class="btn-save" value="1"
+                                        formaction="/admin/product/delete-product"
                                         name="delete">Delete
                                 </button>
                                 <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
@@ -284,5 +260,4 @@
 
 <script>
     CKEDITOR.replace('txtAddProductDescription');
-    CKEDITOR.replace('txtDescription');
 </script>
