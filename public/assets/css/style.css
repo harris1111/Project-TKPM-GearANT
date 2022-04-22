@@ -2624,6 +2624,7 @@ only screen and (max-width: 767px) {
 .cart-main-area .table-content table tbody>tr td.product-thumbnail {
   width: 150px;
   padding-left: 10px;
+  padding-right: 10px;
 }
 
 .cart-main-area .table-content table tbody>tr td.product-name {
