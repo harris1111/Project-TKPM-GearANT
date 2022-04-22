@@ -6921,32 +6921,6 @@ only screen and (min-width: 992px) and (max-width: 1199px) {
   content: "»";
 }
 
-/* .page-pagination li {
-  display: inline-block;
-}
-
-.page-pagination li a {
-  font-weight: 500;
-  padding: 0 10px;
-  display: block;
-  text-align: center;
-  line-height: 41px;
-  min-width: 41px;
-  height: 41px;
-  text-transform: uppercase;
-  color: #ababab;
-  letter-spacing: 2px;
-  border-radius: 5px;
-}
-
-.page-pagination li a.current {
-  background: #f6f5f9;
-  color: #fb5d5d;
-}
-
-.page-pagination li a:hover {
-  color: #fb5d5d;
-} */
 
 /* Deal Area Style */
 .deal-bg {
@@ -7753,8 +7727,6 @@ header {
   }
 }
 
-/* ============ desktop view .end// ============ */
-
 
 
 
@@ -7827,6 +7799,11 @@ header {
   color: #fd3d6b;
 }
 
+/* ACCOUNT */
+.account__item{
+  width: 70%;
+  margin: 0 auto;
+}
 
 
 /* ADMIN */
@@ -7862,8 +7839,7 @@ header {
 }
 
 .bigCate{
-  /* background-color: #393939; */
-  width: 70%;
+  width: 80%;
   margin: 0 auto;
 }
 
@@ -7877,32 +7853,33 @@ header {
   color: #fb5d5d;
   font-weight: bold;
 }
-.editForm{
+.editForm,
+.delForm{
   display: flex;
   justify-content: center;
 }
-.editForm button{
+.editForm button,
+.delForm button{
   border: 1px solid transparent;
   margin: 0 6px ;
   font-weight: bold;
   transition: all .5s;
+  color: white;
 }
 
-.editForm button:first-child{
+.editForm button{
   background-color: #6699ff;
 }
 
-.editForm button:first-child:hover{
+.editForm button:hover{
   background-color: blue;
-  color: white;
 }
 
-.editForm button:last-child{
+.delForm button{
   background-color: rgba(255,0,0,0.6);
 }
 
-.editForm button:last-child:hover{
-  color: white;
+.delForm button:hover{
   background-color: red;
 }
 
