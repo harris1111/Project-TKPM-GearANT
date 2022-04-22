@@ -13,6 +13,11 @@ export default {
         return db.select().from('product').limit(limit).offset(offset);
     },
 
+    async updateProduct(entity) {
+        const proid = entity.ProID;
+        delete entity.ProID;
+        return db('product').where('ProID', proid).update(entity);
+    },
 
     async countProduct() {
         const list = await db.select().from('product').count({ amount: 'ProID' });
