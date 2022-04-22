@@ -145,8 +145,6 @@ input {
   text-align: left;
   box-shadow: none;
   -webkit-box-shadow: none;
-  padding-left: 20px;
-  padding-right: 10px;
   outline: 0;
 }
 
@@ -2629,6 +2627,7 @@ only screen and (max-width: 767px) {
 }
 
 .cart-main-area .table-content table tbody>tr td.product-name {
+  text-align: left;
   width: 400px;
   padding-left: 10px;
   padding-right: 10px;
