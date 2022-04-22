@@ -27,8 +27,11 @@ export default {
         const ret = await db.raw(sql);
         return ret[0];
     },
-    async getUserList() {
-        const sql = `SELECT username, address, number from user`;
+    async getUserList(limit, offset) {
+        const sql = `SELECT username, address, number 
+                    from user 
+                    limit ${limit}
+                    offset ${offset}`;
         const ret = await db.raw(sql);
         return ret[0];
     }

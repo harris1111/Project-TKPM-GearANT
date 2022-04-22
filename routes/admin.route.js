@@ -4,6 +4,7 @@ import productModel from "../models/product.model.js";
 import multer from 'multer';
 import {v2 as cloudinary} from 'cloudinary';
 import {CloudinaryStorage} from "multer-storage-cloudinary";
+import userModel from "../models/user.model.js";
 
 const router = express.Router();
 
@@ -25,11 +26,39 @@ const upload = multer({storage: storage});
 
 router.get("/user", async function (req, res, next) {
   let uActive = true;
-  const uList = await adminModel.getUserList();
+  const page = req.query.page || 1;
+  const limit = 6;
+  const total = await userModel.countUser();
+  let nPage = Math.floor(total/limit);
+  if (total % limit > 0) {
+    nPage++;
+  }
+  const page_numbers = [];
+
+  for (let i = 1; i<= nPage; i++) {
+    page_numbers.push({
+      value: i,
+      isCurrent: +page=== i
+    });
+  }
+  const offset = (page - 1) * limit;
+
+  const user = await adminModel.getUserList(limit, offset);
+  console.log(user);
+  let isFirst = 1;
+  let isLast = 1;
+  if (user.length !== 0) { 
+    isFirst = page_numbers[0].isCurrent;
+    isLast = page_numbers[nPage - 1].isCurrent;
+  }
     res.render("admin/user", {
     uActive,
-    userList: uList,
+    user,
     layout: "admin.hbs",
+    empty: user.length === 0,
+    page_numbers,
+    isFirst,
+    isLast
   });
 });
 
@@ -57,7 +86,6 @@ router.get("/product", async function (req, res, next) {
   const offset = (page - 1) * limit;
 
   const product = await productModel.findAllLimitBig(limit, offset);
-
   for(let i in product){
     const tmp = await productModel.findSold(product[i].ProID)
     product[i].Sold = tmp.Sold
@@ -85,7 +113,6 @@ router.get("/product", async function (req, res, next) {
 router.get("/order", async function (req, res, next) {
   let oActive = true;
   const oList = await adminModel.getOrderList();
-  console.log(oList);
   res.render("admin/order", {
     oActive,
     layout: "admin.hbs",
