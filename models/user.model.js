@@ -44,10 +44,7 @@ export default {
     async addCart(entity){
         return db('cart').insert(entity);
     },
-    async countUser() {
-        const list = await db.select().from('user').count({ amount: 'Username' });
-        return list[0].amount;
-    },
+
     async findCartSum(username) {
         const sql = `select sum(StockCart) as SumStock
                      from (

@@ -17,22 +17,5 @@ export default {
         const id = entity.orderID;
         delete entity.orderID;
         return db('order_list').where('OrderID', id).update(entity);
-    },
-    async getOrderList() { 
-        const sql = `select od.Stock,ol.User,ol.Date,pd.ProName 
-        from order_list ol 
-        left join order_detail od on ol.OrderID = od.OrderID 
-        left join product pd on od.ProID = pd.ProID;
-        `
-        const ret = await db.raw(sql);
-        return ret[0];
-    },
-    async getUserList(limit, offset) {
-        const sql = `SELECT username, address, number 
-                    from user 
-                    limit ${limit}
-                    offset ${offset}`;
-        const ret = await db.raw(sql);
-        return ret[0];
     }
 }
