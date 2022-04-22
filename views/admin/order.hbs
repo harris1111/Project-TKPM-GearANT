@@ -53,51 +53,21 @@
         </table>
     </div>
 
-  <!-- Modal edit-->
-  <div
-    class="modal"
-    id="exampleModalApprove"
-    tabindex="-1"
-    aria-labelledby="exampleModalDelLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-body">
-          Approve this order?
+    <!-- Modal edit-->
+    <div class="modal" id="exampleModalApprove" tabindex="-1" aria-labelledby="exampleModalDelLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Approve this order?
+                </div>
+                <form class="modal-footer">
+                    <button type="button" class="btn-save">Approve</button>
+                    <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                </form>
+            </div>
         </div>
-        <form class="modal-footer" method="post">
-          <button
-            type="submit"
-            class="btn-save"
-            value="2"
-            formaction="/admin/order/set-state-order"
-            name="newState"
-          >Approve</button>
-          <button
-            type="button"
-            class="btn-cancel"
-            data-bs-dismiss="modal"
-          >Cancel</button>
-        </form>
-      </div>
     </div>
-  </div>
 
-<<<<<<< HEAD
-  <!-- Modal delete-->
-  <div
-    class="modal"
-    id="exampleModalDel"
-    tabindex="-1"
-    aria-labelledby="exampleModalDelLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-body">
-          Cancel this order?
-=======
     <!-- Modal delete-->
     <div class="modal" id="exampleModalDel" tabindex="-1" aria-labelledby="exampleModalDelLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -111,23 +81,6 @@
                     <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
                 </form>
             </div>
->>>>>>> origin/UI
         </div>
-        <form class="modal-footer" method="post">
-          <button
-            type="submit"
-            class="btn-save"
-            value="3"
-            formaction="/admin/order/set-state-order"
-            name="newState"
-          >Save</button>
-          <button
-            type="button"
-            class="btn-cancel"
-            data-bs-dismiss="modal"
-          >Cancel</button>
-        </form>
-      </div>
     </div>
-  </div>
 </div>

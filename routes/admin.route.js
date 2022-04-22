@@ -34,63 +34,73 @@ router.get("/user", async function (req, res, next) {
 });
 
 router.post("/update-pro", async function (req, res) {
-    // console.log("ProID"+req.body.ProID)
-    const product = await productModel.findByID(req.body.ProID)
+  // console.log("ProID"+req.body.ProID)
+  const product = await productModel.findByID(req.body.ProID)
 
-    if (req.body.Price.length > 0) {
-        product.Price = +req.body.Price
-    }
-    if (req.body.Stock.length > 0) {
-        product.Stock = +req.body.Stock
-    }
-    const productEntity = {
-        ProID: product.ProID,
-        Price: product.Price,
-        Stock: product.Stock,
-        Description: req.body.txtDescription
-    }
-    await productModel.updateProduct(productEntity);
+  if (req.body.Price.length > 0) {
+      product.Price = +req.body.Price
+  }
+  if (req.body.Stock.length > 0) {
+      product.Stock = +req.body.Stock
+  }
+  const productEntity = {
+      ProID: product.ProID,
+      Price: product.Price,
+      Stock: product.Stock,
+      Description: req.body.txtDescription
+  }
+  await productModel.updateProduct(productEntity);
+
+  const url = req.headers.referer || '/admin/product';
+  return res.redirect(url);
+});
+
+router.get("/product", async function (req, res, next) {
+  let pActive = true;
+
+  const page = req.query.page || 1;
+  const limit = 8;
 
   const total = await productModel.countProduct();
 
   let nPage = Math.floor(total / limit);
   if (total % limit > 0) {
-    nPage++;
+      nPage++;
   }
 
   const page_numbers = [];
   for (let i = 1; i <= nPage; i++) {
-    page_numbers.push({
-      value: i,
-      isCurrent: +page === i
-    });
+      page_numbers.push({
+          value: i,
+          isCurrent: +page === i
+      });
   }
 
   const offset = (page - 1) * limit;
 
   const product = await productModel.findAllLimitBig(limit, offset);
 
-  for(let i in product){
-    const tmp = await productModel.findSold(product[i].ProID)
-    product[i].Sold = tmp.Sold
+  for (let i in product) {
+      const tmp = await productModel.findSold(product[i].ProID)
+      product[i].Sold = tmp.Sold
   }
 
   let isFirst = 1;
   let isLast = 1;
 
   if (product.length !== 0) {
-    isFirst = page_numbers[0].isCurrent;
-    isLast = page_numbers[nPage - 1].isCurrent;
+      isFirst = page_numbers[0].isCurrent;
+      isLast = page_numbers[nPage - 1].isCurrent;
   }
 
   res.render('admin/product', {
-    pActive,
-    product,
-    layout: 'admin.hbs',
-    empty: product.length === 0,
-    page_numbers,
-    isFirst,
-    isLast
+      pActive,
+      product,
+      layout: 'admin.hbs',
+      empty: product.length === 0,
+      page_numbers,
+      isFirst,
+      isLast
   });
 });
 
@@ -149,16 +159,16 @@ router.post("/del-product", async function (req, res) {
     return res.redirect(url);
 });
 router.post("/order/set-state-order", async function (req, res) {
-    const state = req.body.state;
-    const OrderID = req.body.orderid;
-    const user = {
-        orderID: OrderID,
-        State: state,
-    };
-    await adminModel.updateStateOrder(user);
-    return res.render("/admin/order", {
-        oAtive,
-        layout: "admin.hbs",
-    });
+  const state = req.body.state;
+  const OrderID = req.body.orderid;
+  const user = {
+      orderID: OrderID,
+      State: state,
+  };
+  await adminModel.updateStateOrder(user);
+  return res.render("/admin/order", {
+      oAtive,
+      layout: "admin.hbs",
+  });
 });
 export default router;
