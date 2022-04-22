@@ -54,16 +54,16 @@
                 swal("Passwords doesn't match!");
                 return;
             }
-
     $.getJSON(`/username-available?username=${username}`, function (data) {
       if (data === false) {
         swal('Username is already in use. Please choose another one!');
         return;
       }
-      $('#formRegister').off('submit').submit();
-      swal("Congrats!", "Register successfully!!", "success");
-    }
-    );
+    });
+    swal("Success!", "Register successfully", "success").then(() => {
+        $('#formRegister').off('submit').submit();
+        return;
+    });
   });
 </script>
 {{/section}}
