@@ -9,6 +9,16 @@ export default {
         return raw[0][0].CatID;
     },
 
+    async findAllLimit(limit, offset) {
+        return db.select().from('product').limit(limit).offset(offset);
+    },
+
+
+    async countProduct() {
+        const list = await db.select().from('product').count({ amount: 'ProID' });
+        return list[0].amount;
+    },
+
     async addProduct(entity) {
         return db('product').insert(entity);
     },
@@ -51,6 +61,20 @@ export default {
 
         const raw = await db.raw(sql);
         return raw[0][0];
+    },
+
+    async findAllLimitBig(limit, offset) {
+        const sql = `select *
+                     from product p
+                              join category c
+                                   on c.CatID = p.CatID
+                              join big_category b
+                                   on c.BigCat = b.BigCatID
+                         limit ${limit}
+                     offset ${offset}`
+
+        const raw = await db.raw(sql);
+        return raw[0];
     },
 
     async findByCatID(catid, proid) {
@@ -130,6 +154,6 @@ export default {
                      group by od.ProID
         `;
         const raw = await db.raw(sql);
-        return raw[0][0] || 0;
+        return raw[0][0] || {Sold:0};
     },
 }

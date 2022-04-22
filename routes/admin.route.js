@@ -3,7 +3,7 @@ import adminModel from "../models/admin.model.js";
 import productModel from "../models/product.model.js";
 import multer from 'multer';
 import {v2 as cloudinary} from 'cloudinary';
-import { CloudinaryStorage } from "multer-storage-cloudinary";
+import {CloudinaryStorage} from "multer-storage-cloudinary";
 
 const router = express.Router();
 
@@ -21,22 +21,63 @@ const storage = new CloudinaryStorage({
   },
 });
 
-const upload = multer({ storage: storage });
+const upload = multer({storage: storage});
 
-router.get("/user", function (req, res, next) {
+router.get("/user", async function (req, res, next) {
   let uActive = true;
+
   res.render("admin/user", {
     uActive,
     layout: "admin.hbs",
   });
 });
 
-router.get("/product", function (req, res, next) {
+router.get("/product", async function (req, res, next) {
   let pActive = true;
-  res.render("admin/product", {
+
+  const page = req.query.page || 1;
+  const limit = 8;
+
+  const total = await productModel.countProduct();
+
+  let nPage = Math.floor(total / limit);
+  if (total % limit > 0) {
+    nPage++;
+  }
+
+  const page_numbers = [];
+  for (let i = 1; i <= nPage; i++) {
+    page_numbers.push({
+      value: i,
+      isCurrent: +page === i
+    });
+  }
+
+  const offset = (page - 1) * limit;
+
+  const product = await productModel.findAllLimitBig(limit, offset);
+
+  for(let i in product){
+    const tmp = await productModel.findSold(product[i].ProID)
+    product[i].Sold = tmp.Sold
+  }
+
+  let isFirst = 1;
+  let isLast = 1;
+
+  if (product.length !== 0) {
+    isFirst = page_numbers[0].isCurrent;
+    isLast = page_numbers[nPage - 1].isCurrent;
+  }
+
+  res.render('admin/product', {
     pActive,
-    lcCategories: res.locals.lcCategories,
-    layout: "admin.hbs",
+    product,
+    layout: 'admin.hbs',
+    empty: product.length === 0,
+    page_numbers,
+    isFirst,
+    isLast
   });
 });
 
@@ -48,17 +89,18 @@ router.get("/order", function (req, res, next) {
   });
 });
 
-router.post("/add-product", upload.single('fileUpload'),async function(req,res) {
+router.post("/add-product", upload.single('fileUpload'), async function (req, res) {
+
   const cat_id = await productModel.findCatID(req.body.child_category);
 
   const product = {
-    ProName:req.body.ProName,
-    CatID:cat_id,
-    Price:req.body.Price,
-    LinkURL:req.file.path,
-    Stock:req.body.Stock,
-    ProState:true,
-    Description:req.body.Description
+    ProName: req.body.ProName,
+    CatID: cat_id,
+    Price: req.body.Price,
+    LinkURL: req.file.path,
+    Stock: req.body.Stock,
+    ProState: true,
+    Description: req.body.Description
   }
 
   const ret = await productModel.addProduct(product);
@@ -75,9 +117,9 @@ router.post("/product/edit-product", async function (req, res) {
   let user = {
     Username: req.session.authUser.username,
   };
-  if (name != "") user = user + { ProName: name };
-  if (price != "") user = user + { Price: price };
-  if (count != "") user = user + { Stock: count };
+  if (name != "") user = user + {ProName: name};
+  if (price != "") user = user + {Price: price};
+  if (count != "") user = user + {Stock: count};
   await adminModel.updateAdmin(user);
   return res.render("/admin/product", {
     pAtive,
