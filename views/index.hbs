@@ -1,6 +1,43 @@
 <div class="container py-5">
     <div class="section-title text-left mb-3">
-        <h2 class="title line-height-1">Ram - 5 best sellers</h2>
+        <h2 class="title line-height-1">CPU - 5 best sellers</h2>
+    </div>
+
+    <div class="owl-carousel owl-theme">
+        {{#each best_cpu}}
+            <div class="item card-item">
+                <div class="card">
+                    <img src="{{this.LinkURL}}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.ProName}}</h5>
+                        <div class="card-price">
+                            <p class="card-price-num">{{format_number this.Price}}</p><span> </span>
+                        </div>
+                        <hr>
+                        <p class="card-sold">Sold: {{sold}}</p>
+                    </div>
+                    <div class="card__overlay">
+                        <a href="/product/detail/{{ProID}}" class="card__overlay-detail" target="_blank">
+                            <i class="fa fa-arrow-circle-right"></i>Detail
+                        </a>
+                        <form class = "addCartForm" method = "post" action="/account/cart-add">
+                            <input type="hidden" name="ProID" value="{{this.ProID}}"/>
+                            <input type="hidden" class="Stock" name="Stock" value="1"/>
+                            <button type="submit"
+                                    class="card__overlay-cart">
+                                <i class="fa fa-shopping-cart"></i>Add to cart
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="section-title text-left mb-3">
+        <h2 class="title line-height-1">RAM - 5 best sellers</h2>
     </div>
     <div class="owl-carousel owl-theme">
         {{#each best_ram}}
@@ -70,42 +107,6 @@
     </div>
 </div>
 
-<div class="container py-5">
-    <div class="section-title text-left mb-3">
-        <h2 class="title line-height-1">CPU - 5 best sellers</h2>
-    </div>
-
-    <div class="owl-carousel owl-theme">
-        {{#each best_cpu}}
-            <div class="item card-item">
-                <div class="card">
-                    <img src="{{this.LinkURL}}" class="card-img-top" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">{{this.ProName}}</h5>
-                        <div class="card-price">
-                            <p class="card-price-num">{{format_number this.Price}}</p><span> </span>
-                        </div>
-                        <hr>
-                        <p class="card-sold">Sold: {{sold}}</p>
-                    </div>
-                    <div class="card__overlay">
-                        <a href="/product/detai/{{ProID}}" class="card__overlay-detail" target="_blank">
-                            <i class="fa fa-arrow-circle-right"></i>Detail
-                        </a>
-                        <form class = "addCartForm" method = "post" action="/account/cart-add">
-                            <input type="hidden" name="ProID" value="{{this.ProID}}"/>
-                            <input type="hidden" class="Stock" name="Stock" value="1"/>
-                            <button type="submit"
-                                    class="card__overlay-cart">
-                                <i class="fa fa-shopping-cart"></i>Add to cart
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        {{/each}}
-    </div>
-</div>
 <!-- Feature Area Srart -->
 <div class="feature-area py-5">
     <div class="container">

@@ -83,15 +83,10 @@
                 swal("Please fill all fields!")
                 return;
             }
-            swal("Congrats!", "Product uploaded successfully!!", "success");
-            $('#addForm').off('submit').submit();
+            swal("Success!", "This product has been added to cart!", "success").then(() => {
+                $('#addForm').off('submit').submit();
+            });
         });
-
-        // $('.formEdit').on('submit', function (event) {
-        //     event.preventDefault();
-        //     swal("Congrats!", "Product updated successfully!!", "success");
-        //     $('.formEdit').off('submit').submit();
-        // });
 
     </script>
 {{/section}}
