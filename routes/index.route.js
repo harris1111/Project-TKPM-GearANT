@@ -86,8 +86,8 @@ router.post("/register", async function(req, res) {
     const user = {
         Username: req.body.username,
         Password: hash,
-        Address: req.body.Address,
-        Number: req.body.Number,
+        Address: req.body.address,
+        Number: req.body.phone,
         Type: 1,
     };
 
