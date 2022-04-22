@@ -1,65 +1,57 @@
 <div class="bigCate">
-  <div class="table-responsive" style="min-height: 200px;max-height: 500px">
-    <table class="table">
-      <thead>
-        <tr class="table-active">
-          <th scope="col">ID</th>
-          <th scope="col">Detail</th>
-          <th scope="col" style="text-align: center;">Date</th>
-          <th scope="col" class="text-center">&nbsp;</th>
-
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>
-            <table style="width: 100%">
-              <tr>
-                <strong>Customer:</strong>
-                thanh
-              </tr>
-              <tr>
-                <td style="border: none; padding:0; float:left">Ram abcxyz</td>
-                <td
-                  style="border: none; padding:0; min-width: 30px; color:#24262b; text-align: center;"
-                >
-                  1</td>
-              </tr>
-              <tr>
-                <td style="border: none; padding:0; float:left">Ram abcxyz</td>
-                <td
-                  style="border: none; padding:0; min-width: 30px; color:#24262b; text-align: center;"
-                >
-                  1</td>
-              </tr>
-            </table>
-          </td>
-          <td style="text-align: center;">
-            10/04/2022
-          </td>
-          <td>
-            <div class="editForm">
-              <button
-                type="button"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModalApprove"
-              >Approve</button>
-              <button
-                type="button"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModalDel"
-              >Cancel</button>
-            </div>
-          </td>
-          {{! <td>
-                    <div class="editForm">
+    <div class="table-responsive" style="min-height: 200px;max-height: 500px">
+        <table class="table">
+            <thead>
+                <tr class="table-active">
+                    <th scope="col">ID</th>
+                    <th scope="col">Detail</th>
+                    <th scope="col" style="text-align: center;">Date</th>
+                    <th scope="col" class="text-center">&nbsp;</th>
+                    <th scope="col" class="text-center">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>
+                        <table style="width: 100%">
+                            <tr>
+                                <strong>Customer:</strong> thanh
+                            </tr>
+                            <tr>
+                                <td style="border: none; padding:0; float:left">Ram abcxyz</td>
+                                <td
+                                    style="border: none; padding:0; min-width: 30px; color:#24262b; text-align: center;">
+                                    1</td>
+                            </tr>
+                            <tr>
+                                <td style="border: none; padding:0; float:left">Ram abcxyz</td>
+                                <td
+                                    style="border: none; padding:0; min-width: 30px; color:#24262b; text-align: center;">
+                                    1</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td style="text-align: center;">
+                        10/04/2022
+                    </td>
+                    <td>
+                        <div class="editForm">
+                            <button type="button" data-bs-toggle="modal"
+                                data-bs-target="#exampleModalApprove">Approve</button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="delForm">
+                        <button type="button" data-bs-toggle="modal"
+                                data-bs-target="#exampleModalDel">Cancel
+                        </button>
                     </div>
-                </td> }}
-        </tr>
-      </tbody>
-    </table>
-  </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 
   <!-- Modal edit-->
   <div
@@ -92,6 +84,7 @@
     </div>
   </div>
 
+<<<<<<< HEAD
   <!-- Modal delete-->
   <div
     class="modal"
@@ -104,6 +97,21 @@
       <div class="modal-content">
         <div class="modal-body">
           Cancel this order?
+=======
+    <!-- Modal delete-->
+    <div class="modal" id="exampleModalDel" tabindex="-1" aria-labelledby="exampleModalDelLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body">
+                    Cancel this order?
+                </div>
+                <form class="modal-footer" method="post">
+                    <button type="submit" class="btn-save" value="2"
+                        formaction="/admin/order/cancel-order">Save</button>
+                    <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                </form>
+            </div>
+>>>>>>> origin/UI
         </div>
         <form class="modal-footer" method="post">
           <button

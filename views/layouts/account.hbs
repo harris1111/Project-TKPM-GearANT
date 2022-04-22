@@ -74,7 +74,7 @@
                                 </li> --}}
                                 {{#if auth}}
                                 <li class="nav-item">
-                                    <a href="/account" class="main-menu-link">Account</a>
+                                    <a href="/account/order" class="main-menu-link">Account</a>
                                 </li>
                                 {{#if isAdmin}}
                                 <li class="nav-item">
@@ -130,27 +130,34 @@
                         <a class="admin__item 
                             {{#if oActive}}
                                 admin__item-active
-                            {{/if}}" href="/admin/order">
+                            {{/if}}" href="/account/order">
                             <i class="fa fa-cart-arrow-down"></i>
-                            Order
+                            Orders
                         </a>
 
                         <a class="admin__item 
-                            {{#if pActive}}
+                            {{#if iActive}}
                                 admin__item-active
-                            {{/if}}" href="/admin/product">
+                            {{/if}}" href="/account/information">
                             <i class="fa fa-archive"></i>
-                            Product
+                            Information
                         </a>
 
                         <a class="admin__item
-                            {{#if uActive}}
+                            {{#if aActive}}
                                 admin__item-active
-                            {{/if}}" href="/admin/user">
+                            {{/if}}" href="/account/address">
                             <i class="fa fa-user"></i>
-                            User
+                            Address
                         </a>
 
+                        <a class="admin__item
+                            {{#if cActive}}
+                                admin__item-active
+                            {{/if}}" href="/account/changePass">
+                            <i class="fa fa-user"></i>
+                            Change Password
+                        </a>
 
                     </nav>
                 </div>
@@ -206,7 +213,7 @@
                                                     target="_blank">About</a></li>
                                             {{#if auth}}
                                             <li class="nav-item">
-                                                <a href="/account/order" class="main-menu-link" target="_blank">Account</a>
+                                                <a href="/account" class="main-menu-link" target="_blank">Account</a>
                                             </li>
                                             {{/if}}
                                         </ul>
