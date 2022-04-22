@@ -59,7 +59,7 @@ router.get("/product", async function (req, res, next) {
   let pActive = true;
 
   const page = req.query.page || 1;
-  const limit = 8;
+  const limit = 6;
 
   const total = await productModel.countProduct();
 
@@ -107,7 +107,7 @@ router.get("/product", async function (req, res, next) {
 router.get("/order", async function (req, res, next) {
   let oActive = true;
   const oList = await adminModel.getOrderList();
-  console.log(oList);
+  // console.log(oList);
   res.render("admin/order", {
     oActive,
     layout: "admin.hbs",
