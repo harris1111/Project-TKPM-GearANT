@@ -1,14 +1,14 @@
 const constant = {
-    bigCatID:{
+    bigCatID: {
         RAM: 1,
         SSD: 2,
-        CPU:3,
+        CPU: 3,
     },
-    ordState:{
+    ordState: {
         PENDING: 1,
-        PREPARING: 2,
-        ARRIVING:3,
-        SUCCESS:4,
+        ARRIVING: 2,
+        SUCCESS: 3,
+        CANCELED: 4
     }
 };
 

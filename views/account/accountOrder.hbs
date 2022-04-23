@@ -7,7 +7,7 @@
         <table>
             <thead>
             <tr>
-                <th>Order</th>
+                <th>ID</th>
                 <th>Date</th>
                 <th>Status</th>
                 <th>Product</th>
@@ -18,14 +18,19 @@
             <tbody>
             {{#each ordList}}
                 <tr>
-                    <td>{{@key}}</td>
+                    <td>{{this.OrderID}}</td>
                     <td>{{format_no_h this.Date}}</td>
-                    <td {{#if this.success}} class="text-success" {{/if}}>{{this.State}}</td>
+                    <td class="{{this.color}}">{{this.State}}
+                    </td>
                     <td>
                         <table>
                             {{#each this.Orders}}
                                 <tr>
-                                    <td style="border: none; padding:0; text-align:left">{{this.ProName}}
+                                    <td style="border: none; padding:0; text-align:left;">
+                                        <a class = "text-dark text-weight-bold"
+                                           href="/product/detail/{{this.ProID}}">
+                                            {{this.ProName}}
+                                        </a>
                                     </td>
                                     <td style="border: none; padding:0; min-width: 50px; color:#24262b">
                                         {{this.Stock}}x</td>
@@ -33,7 +38,7 @@
                             {{/each}}
                         </table>
                     </td>
-                    <td>{{format_number this.Total}} VND</td>
+                    <td>{{format_number this.Total}}</td>
                 </tr>
             {{/each}}
             </tbody>
