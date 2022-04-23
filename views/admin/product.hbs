@@ -79,21 +79,16 @@
             return;
         }
 
-        if (proname.length < 1 || price.length < 1 || stock.length < 1) {
-            swal("Please fill all fields!")
-            return;
-        }
-        swal("Congrats!", "Product uploaded successfully!!", "success");
-        $('#addForm').off('submit').submit();
-    });
+            if (proname.length < 1 || price.length < 1 || stock.length < 1) {
+                swal("Please fill all fields!")
+                return;
+            }
+            swal("Success!", "This product has been added to cart!", "success").then(() => {
+                $('#addForm').off('submit').submit();
+            });
+        });
 
-        // $('.formEdit').on('submit', function (event) {
-        //     event.preventDefault();
-        //     swal("Congrats!", "Product updated successfully!!", "success");
-        //     $('.formEdit').off('submit').submit();
-        // });
-
-</script>
+    </script>
 {{/section}}
 {{#if this.empty}}
 <div class="w-full max-w-4xl mx-auto mt-8">

@@ -22,7 +22,13 @@ router.get('/detail/:id', async function(req, res) {
 
     product.outstock = product.Stock === 0
 
-    const related_products = await productModel.findByCatID(product.CatID, product.ProID);
+    const bigcat = await productModel.findBigCatID(pro_id)
+    const related_products = await productModel.findByBigCatID(bigcat, product.ProID);
+
+    for (let i in related_products) {
+        const sold = await productModel.findSold(related_products[i].ProID)
+        related_products[i].Sold = sold.Sold || 0
+    }
 
     res.render('product/detail', {
         layout: 'homecat.hbs',

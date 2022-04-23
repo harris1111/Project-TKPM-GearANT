@@ -7,42 +7,71 @@
     <table>
         <thead>
             <tr>
-                <th scope="col">Order</th>
-                <th scope="col">Date</th>
-                <th scope="col">Status</th>
-                <th scope="col">Product</th>
-                <th scope="col">Total</th>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Product</th>
+                <th>Total</th>
                 <th scope="col" class="text-center">&nbsp;</th>
             </tr>
         </thead>
 
         <tbody>
             {{#each ordList}}
-            <tr>
-                <td>{{@key}}</td>
-                <td>{{format_no_h this.Date}}</td>
-                <td {{#if this.success}} class="text-success" {{/if}}>{{this.State}}</td>
-                <td>
-                    <table>
-                        {{#each this.Orders}}
-                        <tr>
-                            <td style="border: none; padding:0; text-align:left">{{this.ProName}}
-                            </td>
-                            <td style="border: none; padding:0; min-width: 50px; color:#24262b">
-                                {{this.Stock}}x</td>
-                        </tr>
-                        {{/each}}
-                    </table>
-                </td>
-                <td>{{format_number this.Total}} VND</td>
-                <td>
-                    <div class="receivedForm">
-                        <button type="button" data-bs-toggle="modal"
-                            data-bs-target="#exampleModalReceived" disabled>Received
-                        </button>
+                <tr>
+                    <td>{{this.OrderID}}</td>
+                    <td>{{format_no_h this.Date}}</td>
+                    <td class="{{this.color}}"><strong>
+                        {{this.State}}
+                    </strong>
+                    </td>
+                    <td>
+                        <table>
+                            {{#each this.Orders}}
+                                <tr>
+                                    <td style="border: none; padding:0; text-align:left;">
+                                        <a class = "text-dark"
+                                           href="/product/detail/{{this.ProID}}">
+                                            {{this.ProName}}
+                                        </a>
+                                    </td>
+                                    <td style="border: none; padding:0; min-width: 50px; color:#24262b">
+                                        {{this.Stock}}x</td>
+                                </tr>
+                            {{/each}}
+                        </table>
+                    </td>
+                    <td class="text-danger"><strong>
+                        {{format_number this.Total}}
+                    </strong></td>
+                    <td>
+                        <div class="receivedForm">
+                            <button type="button" data-bs-toggle="modal" {{#if this.preventReceive}}
+                                disabled
+                            {{/if}}
+                                    data-bs-target="#exampleModalReceived{{this.OrderID}}">Received
+                            </button>
+                        </div>
+                    </td>
+
+                    <div class="modal" id="exampleModalReceived{{this.OrderID}}"
+                         tabindex="-1" aria-labelledby="exampleModalReceivedLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    You have received this order?
+                                </div>
+                                <form id="btnReceived" action="/account/receive" method="post">
+                                    <div class="modal-footer">
+                                        <input hidden name="OrderID" value="{{this.OrderID}}">
+                                        <button type="submit" class="btn-save">Confirm</button>
+                                        <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
-                </td>
-            </tr>
+                </tr>
             {{/each}}
         </tbody>
     </table>

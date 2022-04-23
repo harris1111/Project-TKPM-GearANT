@@ -9,6 +9,16 @@ export default {
         return raw[0][0].CatID;
     },
 
+    async findBigCatID(ProID) {
+        const sql = `select b.BigCatID
+                     from product p
+                              join category c on p.CatID = c.CatID join big_category b
+                     on c.BigCat = b.BigCatID
+                     where p.ProID = '${ProID}'`;
+        const raw = await db.raw(sql);
+        return raw[0][0].BigCatID;
+    },
+
     async findAllLimit(limit, offset) {
         return db.select().from('product').limit(limit).offset(offset);
     },
@@ -20,7 +30,7 @@ export default {
     },
 
     async countProduct() {
-        const list = await db.select().from('product').count({ amount: 'ProID' });
+        const list = await db.select().from('product').count({amount: 'ProID'});
         return list[0].amount;
     },
 
@@ -31,7 +41,7 @@ export default {
     async countByKW(name) {
         const sql = `SELECT count(*) as amount
                      FROM product p
-                     WHERE MATCH(ProName)
+                     WHERE MATCH (ProName)
                          AGAINST('${name}')`;
         const raw = await db.raw(sql);
         return raw[0][0].amount;
@@ -94,6 +104,22 @@ export default {
         return raw[0];
     },
 
+    async findByBigCatID(id, proid) {
+        const sql = `select *
+                     from product p
+                              join category c
+                                   on p.CatID = c.CatID
+                              join big_category b
+                                   on c.BigCat = b.BigCatID
+                     where b.BigCatID = ${id}
+                       and p.ProID!=${proid}
+                         limit 4
+                     offset 0`
+
+        const raw = await db.raw(sql);
+        return raw[0];
+    },
+
     async countBigCatId(bigCatId) {
         const sql = `select count(p.ProID) as amount
                      from product p
@@ -133,9 +159,9 @@ export default {
     async findPageByKW(name, limit, offset) {
         const sql = `select *
                      from product p
-                     WHERE MATCH(ProName)
+                     WHERE MATCH (ProName)
                          AGAINST('${name}')
-                     limit ${limit}
+                         limit ${limit}
                      offset ${offset}`;
         const raw = await db.raw(sql);
         return raw[0];
@@ -159,6 +185,6 @@ export default {
                      group by od.ProID
         `;
         const raw = await db.raw(sql);
-        return raw[0][0] || {Sold:0};
+        return raw[0][0] || {Sold: 0};
     },
 }
