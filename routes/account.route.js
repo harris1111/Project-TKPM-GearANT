@@ -9,6 +9,8 @@ const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }));
 
 /* GET home page. */
+
+
 router.get("/order", async function (req, res, next) {
   const username = req.session.authUser.Username;
   const ordList = await userModel.findOrderList(username);

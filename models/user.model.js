@@ -80,7 +80,5 @@ export default {
         return db('user')
             .where('Username', user)
             .update(entity);
-    },
-
-
+    }
 }
