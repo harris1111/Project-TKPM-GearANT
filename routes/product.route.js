@@ -103,9 +103,16 @@ router.get('/buynow', async function(req, res, next) {
     product.Stock = 'Available'
     product.subtotal = total
 
+    const item = {
+        ProID: pro_id,
+        Stock: quantity
+    }
+
     res.render('account/cart', {
         cart,
         total,
+        buynow: true,
+        item,
         isEmpty: false,
         user
     });

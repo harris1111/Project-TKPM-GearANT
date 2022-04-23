@@ -11,7 +11,7 @@ router.use(bodyParser.urlencoded({extended: false}))
 
 function findOrder(orders, id) {
     for (let i in orders) {
-        if (orders[i]['OrderID']===id) {
+        if (orders[i]['OrderID'] === id) {
             return i;
         }
     }
@@ -29,7 +29,7 @@ router.get('/order', async function (req, res, next) {
     for (let i in ordList) {
         let orderID = ordList[i]['OrderID']
         let idx = -1;
-        if ((idx=findOrder(ret,orderID))===-1) {
+        if ((idx = findOrder(ret, orderID)) === -1) {
             ret.push({
                 'OrderID': orderID,
                 'Orders': [],
@@ -37,7 +37,7 @@ router.get('/order', async function (req, res, next) {
                 'State': null,
                 'Total': 0,
             })
-            idx = ret.length-1;
+            idx = ret.length - 1;
         }
 
         ret[idx]['Orders'].push(ordList[i])
@@ -117,7 +117,7 @@ router.get('/cart', async function (req, res, next) {
 });
 
 router.post('/cart-del', async (req, res) => {
-    const ret = await userModel.delCart(req.session.authUser.Username,req.body.ProID);
+    const ret = await userModel.delCart(req.session.authUser.Username, req.body.ProID);
     // console.log(ret);
     const url = req.headers.referer || '/account/cart';
     return res.redirect(url);
@@ -126,7 +126,7 @@ router.post('/cart-del', async (req, res) => {
 router.post('/receive', async (req, res) => {
     const OrderID = req.body.OrderID;
 
-    const entity={
+    const entity = {
         OrderID,
         State: 3
     }
@@ -150,6 +150,34 @@ router.post('/cart-add', async (req, res) => {
     await userModel.addCart(item);
     const url = req.headers.referer || '/';
     return res.redirect(url);
+});
+
+router.post('/checkout-buynow', async function (req, res) {
+    const username = req.session.authUser.Username;
+
+    const ordEntity = {
+        User: username,
+        Date: moment().format(),
+        State: config.ordState.PENDING
+    }
+
+    await userModel.addOrder(ordEntity)
+    const ordID = await userModel.findRecentOrder(username)
+
+    const product = await productModel.findByID(req.body.buynowID)
+
+    if (+req.body.buynowStock <= +product.Stock) {
+        const tmpOrdDetail = {
+            OrderID: ordID,
+            ProID: req.body.buynowID,
+            Stock: +req.body.buynowStock
+        }
+
+        await orderModel.addOrdDetail(tmpOrdDetail)
+    }
+
+    const url = '/account/order';
+    res.redirect(url);
 });
 
 router.post('/checkout', async function (req, res) {
@@ -180,7 +208,7 @@ router.post('/checkout', async function (req, res) {
             }
 
             await orderModel.addOrdDetail(tmpOrdDetail)
-            await userModel.delCart(username,cart[i].ProID)
+            await userModel.delCart(username, cart[i].ProID)
         }
     }
 

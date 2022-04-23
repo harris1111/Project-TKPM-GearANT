@@ -89,8 +89,16 @@
                             <h4 class="cart-bottom-title section-bg-gary-cart">CART TOTAL</h4>
                         </div>
                         <h4 class="grand-totall-title">Total <span>{{format_number total}}</span></h4>
-                        <form id="formCheckout" action="/account/checkout" method="post"></form>
-                        <a href="javascript: $('#formCheckout').submit();">Check out</a>
+                        {{#if buynow}}
+                            <form id="formCheckout" action="/account/checkout-buynow" method="post">
+                                <input hidden name="buynowID" value="{{item.ProID}}">
+                                <input hidden name="buynowStock" value="{{item.Stock}}">
+                            </form>
+                            <a href="javascript: $('#formCheckout').submit();">Check out</a>
+                        {{else}}
+                            <form id="formCheckout" action="/account/checkout" method="post"></form>
+                            <a href="javascript: $('#formCheckout').submit();">Check out</a>
+                        {{/if}}
 
                     </div>
                 </div>
