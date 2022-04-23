@@ -31,6 +31,7 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `Username` varchar(50) COLLATE utf8_general_ci NOT NULL,
   `Password` varchar(255) COLLATE utf8_general_ci NOT NULL,
+  `Name` varchar(50) COLLATE utf8_general_ci NOT NULL,
   `Address` nvarchar(80) COLLATE utf8_general_ci NOT NULL,
   `Number` varchar(11) COLLATE utf8_general_ci NOT NULL,
   `Type` char(1) NOT NULL,
@@ -125,17 +126,17 @@ COMMIT;
 -- Records of User
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` VALUES ('thanh','$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG','154 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','0933442607','1');
-INSERT INTO `user` VALUES ('an','$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG','155 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','0933442606','1');
-INSERT INTO `user` VALUES ('ngan','$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG','156 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','0933442605','1');
+INSERT INTO `user` VALUES ('thanhhoang','$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG','Nhu Thanh','154 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','0933442607','1');
+INSERT INTO `user` VALUES ('minhan2022','$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG','Minh An','155 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','0933442606','1');
+INSERT INTO `user` VALUES ('huongngan','$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG','Huong Ngan','156 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','0933442605','1');
 COMMIT;
 
 -- ----------------------------
 -- Records of Admin
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` VALUES ('admin1','$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG','150 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','0933442601','2');
-INSERT INTO `user` VALUES ('admin2','$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG','150 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','0933442602','2');
+INSERT INTO `user` VALUES ('admin1','$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG','Nhu Thanh','150 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','0933442601','2');
+INSERT INTO `user` VALUES ('admin2','$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG','Ngan An','150 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','0933442602','2');
 COMMIT;
 
 
@@ -175,28 +176,28 @@ INSERT INTO `product` VALUES (21,6,'CPU AMD Ryzen 5 5600X (3.7 GHz Upto 4.6GHz /
 COMMIT;
 
 BEGIN;
-INSERT INTO `cart` VALUES ('thanh',1,2,'2021-11-11 11:12:01');
-INSERT INTO `cart` VALUES ('thanh',16,2,'2021-12-11 11:12:01');
-INSERT INTO `cart` VALUES ('an',15,3,'2022-02-11 11:12:01');
-INSERT INTO `cart` VALUES ('ngan',16,4,'2022-03-11 11:12:01');
+INSERT INTO `cart` VALUES ('thanhhoang',1,2,'2021-11-11 11:12:01');
+INSERT INTO `cart` VALUES ('thanhhoang',16,2,'2021-12-11 11:12:01');
+INSERT INTO `cart` VALUES ('minhan2022',15,3,'2022-02-11 11:12:01');
+INSERT INTO `cart` VALUES ('huongngan',16,4,'2022-03-11 11:12:01');
 COMMIT;
 
 BEGIN;
-INSERT INTO `order_list` VALUES (1,'thanh','2021-11-11 11:12:01',1);
-INSERT INTO `order_list` VALUES (2,'thanh','2021-12-11 11:12:01',2);
-INSERT INTO `order_list` VALUES (3,'thanh','2022-01-11 11:12:01',4);
-INSERT INTO `order_list` VALUES (4,'thanh','2021-12-11 11:12:01',4);
-INSERT INTO `order_list` VALUES (5,'an','2021-11-11 11:12:01',4);
-INSERT INTO `order_list` VALUES (6,'an','2021-12-11 11:12:01',3);
-INSERT INTO `order_list` VALUES (7,'an','2022-01-11 11:12:01',4);
-INSERT INTO `order_list` VALUES (8,'an','2021-02-11 11:12:01',4);
-INSERT INTO `order_list` VALUES (9,'an','2021-03-11 11:12:01',4);
-INSERT INTO `order_list` VALUES (10,'an','2020-12-11 11:12:01',4);
-INSERT INTO `order_list` VALUES (11,'an','2021-11-11 11:12:01',4);
-INSERT INTO `order_list` VALUES (12,'an','2021-12-11 11:12:01',4);
-INSERT INTO `order_list` VALUES (13,'an','2021-01-11 11:12:01',4);
-INSERT INTO `order_list` VALUES (14,'ngan','2022-02-11 11:12:01',4);
-INSERT INTO `order_list` VALUES (15,'ngan','2022-03-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (1,'thanhhoang','2021-11-11 11:12:01',1);
+INSERT INTO `order_list` VALUES (2,'thanhhoang','2021-12-11 11:12:01',2);
+INSERT INTO `order_list` VALUES (3,'thanhhoang','2022-01-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (4,'thanhhoang','2021-12-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (5,'minhan2022','2021-11-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (6,'minhan2022','2021-12-11 11:12:01',3);
+INSERT INTO `order_list` VALUES (7,'minhan2022','2022-01-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (8,'minhan2022','2021-02-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (9,'minhan2022','2021-03-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (10,'minhan2022','2020-12-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (11,'minhan2022','2021-11-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (12,'minhan2022','2021-12-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (13,'minhan2022','2021-01-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (14,'huongngan','2022-02-11 11:12:01',4);
+INSERT INTO `order_list` VALUES (15,'huongngan','2022-03-11 11:12:01',4);
 COMMIT;
 
 BEGIN;
