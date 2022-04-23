@@ -1,5 +1,4 @@
 import indexRoute from '../routes/index.route.js'
-import aboutRoute from '../routes/about.route.js'
 import accountRoute from '../routes/account.route.js'
 import productRoute from '../routes/product.route.js'
 import adminRoute from '../routes/admin.route.js'
@@ -7,11 +6,10 @@ import auth from '../middlewares/auth.mdw.js';
 import authAdmin from '../middlewares/authAdmin.mdw.js';
 
 
-export default function (app) {
+export default function(app) {
     app.use('/', indexRoute);
-    app.use('/about', aboutRoute);
     app.use('/product', productRoute);
-    app.use('/account', auth,accountRoute);
+    app.use('/account', auth, accountRoute);
     app.use('/admin', authAdmin, adminRoute);
 
     // app.use('/profile', auth, accountRoute);
