@@ -4,7 +4,7 @@
             <div class="account_login_form">
                 <form id="editAddForm" action="/account/change-address" method="POST">
                     <div class="default-form-box mb-20">
-                        <label>Old Address</label>
+                        <label>Address</label>
                         <input type="text" name="old_address" value="{{authUser.Address}}" readonly />
                     </div>
                     <div class="default-form-box mb-20">
@@ -19,7 +19,7 @@
 
                 <form id="editPhoneForm" action="/account/change-phone" method="POST">
                     <div class="default-form-box mb-20 mt-3">
-                        <label>Old Phone Number</label>
+                        <label>Phone Number</label>
                         <input type="text" name="phone" value="{{authUser.Number}}" readonly />
                     </div>
                     <div class="default-form-box mb-20">

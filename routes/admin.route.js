@@ -101,6 +101,8 @@ router.get("/product", async function (req, res, next) {
 
     const total = await productModel.countProduct();
 
+    // console.log(total)
+
     let nPage = Math.floor(total / limit);
     if (total % limit > 0) {
         nPage++;
@@ -117,6 +119,8 @@ router.get("/product", async function (req, res, next) {
     const offset = (page - 1) * limit;
 
     const product = await productModel.findAllLimitBig(limit, offset);
+
+    // console.log(product)
 
     for (let i in product) {
         const tmp = await productModel.findSold(product[i].ProID)

@@ -85,6 +85,7 @@ export default {
                                    on c.CatID = p.CatID
                               join big_category b
                                    on c.BigCat = b.BigCatID
+                                   order by ProID
                          limit ${limit}
                      offset ${offset}`
 
