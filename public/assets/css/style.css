@@ -7859,7 +7859,8 @@ header {
   justify-content: center;
 }
 .editForm button,
-.delForm button{
+.delForm button,
+.receivedForm button{
   border: 1px solid transparent;
   margin: 0 6px ;
   font-weight: bold;
@@ -7883,12 +7884,21 @@ header {
   background-color: red;
 }
 
+.receivedForm button{
+  background-color: #33CC33;
+}
+
+.receivedForm button:hover{
+  background-color: green;
+}
 /* modal */
 .modal-content{
   width: 400px;
   margin: 0 auto;
 }
-
+.modal-footer{
+  display: flex;
+}
 .btn-save{
   border: 1px solid #000;
   color: #000;

@@ -1,42 +1,67 @@
 {{#if this.empty}}
-    <div class="w-full max-w-4xl mx-auto mt-8">
-        No order to show yet!
-    </div>
+<div class="w-full max-w-4xl mx-auto mt-8">
+    No order to show yet!
+</div>
 {{else}}
-    <div class="table_page table-responsive" style="min-height: 200px;max-height: 500px">
-        <table>
-            <thead>
+<div class="table_page table-responsive" style="width: 90%; min-height: 200px;max-height: 500px">
+    <table>
+        <thead>
             <tr>
-                <th>Order</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Product</th>
-                <th>Total</th>
+                <th scope="col">Order</th>
+                <th scope="col">Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Product</th>
+                <th scope="col">Total</th>
+                <th scope="col" class="text-center">&nbsp;</th>
             </tr>
-            </thead>
+        </thead>
 
-            <tbody>
+        <tbody>
             {{#each ordList}}
-                <tr>
-                    <td>{{@key}}</td>
-                    <td>{{format_no_h this.Date}}</td>
-                    <td {{#if this.success}} class="text-success" {{/if}}>{{this.State}}</td>
-                    <td>
-                        <table>
-                            {{#each this.Orders}}
-                                <tr>
-                                    <td style="border: none; padding:0; text-align:left">{{this.ProName}}
-                                    </td>
-                                    <td style="border: none; padding:0; min-width: 50px; color:#24262b">
-                                        {{this.Stock}}x</td>
-                                </tr>
-                            {{/each}}
-                        </table>
-                    </td>
-                    <td>{{format_number this.Total}} VND</td>
-                </tr>
+            <tr>
+                <td>{{@key}}</td>
+                <td>{{format_no_h this.Date}}</td>
+                <td {{#if this.success}} class="text-success" {{/if}}>{{this.State}}</td>
+                <td>
+                    <table>
+                        {{#each this.Orders}}
+                        <tr>
+                            <td style="border: none; padding:0; text-align:left">{{this.ProName}}
+                            </td>
+                            <td style="border: none; padding:0; min-width: 50px; color:#24262b">
+                                {{this.Stock}}x</td>
+                        </tr>
+                        {{/each}}
+                    </table>
+                </td>
+                <td>{{format_number this.Total}} VND</td>
+                <td>
+                    <div class="receivedForm">
+                        <button type="button" data-bs-toggle="modal"
+                            data-bs-target="#exampleModalReceived" disabled>Received
+                        </button>
+                    </div>
+                </td>
+            </tr>
             {{/each}}
-            </tbody>
-        </table>
-    </div>
+        </tbody>
+    </table>
+</div>
 {{/if}}
+
+
+<div class="modal" id="exampleModalReceived" tabindex="-1" aria-labelledby="exampleModalReceivedLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body">
+                Are you sure ?
+            </div>
+            <form id="btnReceived" action="" method="post">
+                <div class="modal-footer">
+                    <button type="submit" class="btn-save" name="received">Received</button>
+                    <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
