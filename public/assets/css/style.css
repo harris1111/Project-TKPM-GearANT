@@ -7891,6 +7891,14 @@ header {
 .receivedForm button:hover{
   background-color: green;
 }
+
+.receivedForm .disabled{
+  background-color: #6c6c6c;
+  cursor: not-allowed;
+}
+.receivedForm .disabled:hover{
+  background-color: #6c6c6c;
+}
 /* modal */
 .modal-content{
   width: 400px;

@@ -87,8 +87,9 @@
                 $('#addForm').off('submit').submit();
             });
         });
+    });
 
-    </script>
+</script>
 {{/section}}
 {{#if this.empty}}
 <div class="w-full max-w-4xl mx-auto mt-8">
@@ -148,7 +149,7 @@
                 <div class="modal" id="exampleModalEdit{{ProID}}" tabindex="-1" aria-labelledby="exampleModalEditLabel"
                     aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content " style="overflow-y: scroll; height:500px">
+                        <div class="modal-content " style="overflow-y: scroll; height:500px;width:600px">
                             <form class="formEdit" method="post" id="formEdit" action="/admin/update-pro">
                                 <div class="modal-body">
                                     <input value="{{ProID}}" hidden name="ProID">
@@ -235,7 +236,7 @@
     <!-- Modal add-->
     <div class="modal" id="exampleModalAdd" tabindex="-1" aria-labelledby="exampleModalAddLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="overflow-y: scroll; height:500px">
+            <div class="modal-content" style="overflow-y: scroll; height:500px; width:600px">
                 <form enctype="multipart/form-data" action="/admin/add-product" id="addForm" method="post">
                     <div class="modal-body">
                         <label>Product Name</label>
