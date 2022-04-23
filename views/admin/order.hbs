@@ -1,123 +1,122 @@
 {{#if this.empty}}
-  <div class="w-full max-w-4xl mx-auto mt-8">
-    No product.
-  </div>
+    <div class="w-full max-w-4xl mx-auto mt-8">
+        No product.
+    </div>
 {{else}}
-  <div class="bigCate">
-    <div class="table-responsive" style="min-height: 200px;max-height: 500px">
-      <table class="table">
-        <thead>
-          <tr class="table-active">
-            <th scope="col">ID</th>
-            <th scope="col">Detail</th>
-            <th scope="col">Stock</th>
-            <th scope="col" style="text-align: center;">Date</th>
-            <th scope="col" class="text-center">&nbsp;</th>
-            <th scope="col" class="text-center">&nbsp;</th>
-          </tr>
-        </thead>
-        {{#each this.ordList}}
-          <tbody>
-            <tr>
-              <th scope="row">{{orderID}}</th>
-              <td>
-                <table style="width: 100%">
+    <div class="bigCate">
+        <div class="table-responsive" style="min-height: 200px;max-height: 500px">
+            <table class="table">
+                <thead>
+                <tr class="table-active">
+                    <th scope="col">ID</th>
+                    <th scope="col">Detail</th>
+                    <th scope="col" style="text-align: center;">Date</th>
+                    <th scope="col" class="text-center">&nbsp;</th>
+                    <th scope="col" class="text-center">&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                {{#each ordList}}
                     <tr>
-                      <strong>Customer: {{fullName}}</strong>
+                        <td><strong>{{this.OrderID}}</strong></td>
+                        <td>
+                            <div class="text-primary">Customer: {{Name}}</div>
+                            <table>
+                                {{#each this.Orders}}
+                                    <tr>
+                                        <td style="border: none; padding:0; text-align:left;">
+                                            <a class="text-dark"
+                                               href="/product/detail/{{this.ProID}}">
+                                                <strong>{{this.ProName}}</strong>
+                                            </a>
+                                        </td>
+                                        <td style="border: none; padding:0; min-width: 50px; color:#24262b">
+                                            {{this.Stock}}x
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                            </table>
+                        </td>
+                        <td>{{format_no_h this.Date}}</td>
+                        <td>
+                            <div class="editForm">
+                                <button
+                                        type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalApprove{{this.OrderID}}"
+                                >Approve</button>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="delForm">
+                                <button
+                                        type="button"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#exampleModalDel{{this.OrderID}}"
+                                >Cancel
+                                </button>
+                            </div>
+                        </td>
+
+                        <!-- Modal edit-->
+                        <div
+                                class="modal"
+                                id="exampleModalApprove{{this.OrderID}}"
+                                tabindex="-1"
+                                aria-labelledby="exampleModalDelLabel"
+                                aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        Approve this order?
+                                    </div>
+                                    <form class="modal-footer" method="post"
+                                    action="/admin/set-state-order">
+                                        <button type="submit" class="btn-save"
+                                                name="OrderID"
+                                                value="{{this.OrderID}}"
+                                        >Approve</button>
+                                        <button
+                                                type="button"
+                                                class="btn-cancel"
+                                                data-bs-dismiss="modal">Cancel</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal delete-->
+                        <div
+                                class="modal"
+                                id="exampleModalDel{{this.OrderID}}"
+                                tabindex="-1"
+                                aria-labelledby="exampleModalDelLabel"
+                                aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-body">
+                                        Cancel this order?
+                                    </div>
+                                    <form class="modal-footer" action = "/admin/set-state-order"
+                                          method="post">
+                                        <button
+                                                type="submit"
+                                                class="btn-save"
+                                                name="OrderID"
+                                                value="{{this.OrderID}}"
+                                        >Confirm</button>
+                                        <button
+                                                type="button"
+                                                class="btn-cancel"
+                                                data-bs-dismiss="modal">Back</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </tr>
-                    <tr>
-                      <td
-                        style="border: none; padding:0; float:left"
-                      >{{ProName}}</td>
-                      <td
-                        style="border: none; padding:0; min-width: 30px; color:#24262b; text-align: center;"
-                      >
-                        {{Stock}}</td>
-                      <td style="text-align: center;">
-                        {{format_no_h Date}}
-                      </td>
-                    </tr>
-
-                </table>
-              </td>
-              <td>
-                <div class="editForm">
-                  <button
-                    type="button"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModalApprove"
-                  >Approve</button>
-                </div>
-              </td>
-              <td>
-                <div class="delForm">
-                  <button
-                    type="button"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModalDel"
-                  >Cancel
-                  </button>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        {{/each}}
-      </table>
-    </div>
-
-    <!-- Modal edit-->
-    <div
-      class="modal"
-      id="exampleModalApprove"
-      tabindex="-1"
-      aria-labelledby="exampleModalDelLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-body">
-            Approve this order?
-          </div>
-          <form class="modal-footer">
-            <button type="button" class="btn-save">Approve</button>
-            <button
-              type="button"
-              class="btn-cancel"
-              data-bs-dismiss="modal"
-            >Cancel</button>
-          </form>
+                {{/each}}
+                </tbody>
+            </table>
         </div>
-      </div>
     </div>
-
-    <!-- Modal delete-->
-    <div
-      class="modal"
-      id="exampleModalDel"
-      tabindex="-1"
-      aria-labelledby="exampleModalDelLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-body">
-            Cancel this order?
-          </div>
-          <form class="modal-footer" method="post">
-            <button
-              type="submit"
-              class="btn-save"
-              value="2"
-              formaction="/admin/order/cancel-order"
-            >Save</button>
-            <button
-              type="button"
-              class="btn-cancel"
-              data-bs-dismiss="modal"
-            >Cancel</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
 {{/if}}
