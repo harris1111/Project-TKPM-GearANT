@@ -99,8 +99,7 @@
                                     </span>
                                     {{/if}}
                                 </a>
-                                <span class="text-light">Hello, {{authUser.Username}} </span>
-                                {{/if}}
+                                    <span class="text-light">Hello, {{authUser.Name}} </span>                                {{/if}}
                                 {{#if auth}}
                                 <form id="formLogout" action="/logout" method="post"></form>
                                 <a class="py-2 hover:bg-cyan-900 w-full text-left pl-3"

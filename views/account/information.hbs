@@ -1,17 +1,23 @@
-
-
 <div class="account__item" id="information">
     <div class="login">
         <div class="login_form_container">
             <div class="account_login_form">
                 <form action="#" method="POST">
                     <div class="default-form-box mb-20">
+                        <label>Username</label>
+                        <input type="text" value="{{authUser.Username}}" readonly />
+                    </div>
+                    <div class="default-form-box mb-20">
+                        <label>Full name</label>
+                        <input type="text" value="{{authUser.Name}}" readonly />
+                    </div>
+                    <div class="default-form-box mb-20">
                         <label>Address</label>
-                        <input type="text" name="address" value="227 NguyenVanCu" readonly />
+                        <input type="text" name="address" value="{{authUser.Address}}" readonly />
                     </div>
                     <div class="default-form-box mb-20 mt-3">
                         <label>Phone Number</label>
-                        <input type="text" name="phone" value="0987654321" readonly />
+                        <input type="text" name="phone" value="0{{authUser.Number}}" readonly />
                     </div>
                 </form>
             </div>

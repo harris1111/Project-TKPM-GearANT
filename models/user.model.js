@@ -16,7 +16,7 @@ export default {
                      on ol.OrderID = od.OrderID
                          join product p on od.ProID = p.ProID
                      where User = '${username}'
-                     order by State`;
+                     order by State, Date desc`;
         const raw = await db.raw(sql);
         return raw[0] || null
     },
@@ -33,16 +33,21 @@ export default {
         return raw[0] || null
     },
 
-    async delCart(proid) {
-        return db('cart').where('ProID', proid).del();
-    },
-
     async addCart(entity) {
         return db('cart').insert(entity);
     },
 
-    async addCart(entity){
-        return db('cart').insert(entity);
+    async addOrder(entity) {
+        return db('order_list').insert(entity);
+    },
+
+    async findRecentOrder(username) {
+        const sql = `select OrderID
+                     from order_list
+                     where User = '${username}'
+                     order by Date desc limit 1`;
+        const raw = await db.raw(sql);
+        return raw[0][0].OrderID || null
     },
 
     async findCartSum(username) {
@@ -70,9 +75,13 @@ export default {
         return db('user').insert(entity);
     },
 
-    del(id) {
-        return db('user')
-            .where('id', id)
+
+    async delCart(user,proid) {
+        return db('cart')
+            .where({
+                'User': user,
+                'ProID': proid
+            })
             .del();
     },
 

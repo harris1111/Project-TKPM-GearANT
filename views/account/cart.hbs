@@ -13,7 +13,8 @@
             <div class="row">
                 <div class="col-12 col-lg-9">
                     <form action="#">
-                        <div class="table-content table-responsive cart-table-content">
+                        <div class="table-content table-responsive cart-table-content"
+                             style="min-height: 200px;max-height: 500px">
                             <table>
                                 <thead>
                                 <tr>
@@ -38,9 +39,9 @@
                                         </td>
                                         <td class="product-price-cart"><span class="amount">{{format_number
                                                 Price}}</span></td>
-                                        <td class="product-quantity">
-                                            {{StockCart}}
+                                        <td class="product-quantity">{{StockCart}}
                                         </td>
+
                                         <td class="product-subtotal">{{format_number subtotal}} VND</td>
                                         <td {{#if outstock}} class="text-danger" {{else}} class="text-primary" {{/if}}>
                                             <strong>
@@ -60,7 +61,7 @@
                         </div>
                     </form>
                 </div>
-                <div class="col-12 col-md-6 col-lg-3">
+                {{!-- <div class="col-12 col-md-6 col-lg-3">
                     <div class="grand-totall">
                         <div class="title-wrap text-center">
                             <h4 class="cart-bottom-title section-bg-gary-cart">DELIVERY INFORMATION</h4>
@@ -71,12 +72,26 @@
                             <p><strong>Phone: </strong>{{user.Number}}</p>
                         </div>
                     </div>
+                </div> --}}
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="grand-totall">
+                        <div class="title-wrap text-center">
+                            <h4 class="cart-bottom-title section-bg-gary-cart">DELIVERY INFORMATION</h4>
+                        </div>
+                        <div class="delivery-infor">
+                            <p><strong>Receiver: </strong>{{user.Name}}</p>
+                            <p><strong>Address: </strong>{{user.Address}}</p>
+                            <p><strong>Phone: </strong>{{user.Number}}</p>
+                        </div>
+                    </div>
                     <div class="grand-totall mt-5">
                         <div class="title-wrap text-center">
                             <h4 class="cart-bottom-title section-bg-gary-cart">CART TOTAL</h4>
                         </div>
                         <h4 class="grand-totall-title">Total <span>{{format_number total}} VND</span></h4>
-                        <a href="#">Check out</a>
+                        <form id="formCheckout" action="/account/checkout" method="post"></form>
+                        <a href="javascript: $('#formCheckout').submit();">Check out</a>
+
                     </div>
                 </div>
             </div>
