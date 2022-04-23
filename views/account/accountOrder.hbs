@@ -42,21 +42,25 @@
                     <td>{{format_number this.Total}}</td>
                     <td>
                         <div class="receivedForm">
-                            <button type="button" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModalReceived">Received
+                            <button type="button" data-bs-toggle="modal" {{#if this.preventReceive}}
+                                disabled
+                            {{/if}}
+                                    data-bs-target="#exampleModalReceived{{this.OrderID}}">Received
                             </button>
                         </div>
                     </td>
 
-                    <div class="modal" id="exampleModalReceived" tabindex="-1" aria-labelledby="exampleModalReceivedLabel" aria-hidden="true">
+                    <div class="modal" id="exampleModalReceived{{this.OrderID}}"
+                         tabindex="-1" aria-labelledby="exampleModalReceivedLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-body">
                                     You have received this order?
                                 </div>
-                                <form id="btnReceived" action="" method="post">
+                                <form id="btnReceived" action="/account/receive" method="post">
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn-save" name="received">Confirm</button>
+                                        <input hidden name="OrderID" value="{{this.OrderID}}">
+                                        <button type="submit" class="btn-save">Confirm</button>
                                         <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </form>

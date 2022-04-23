@@ -22,7 +22,7 @@ function findOrder(orders, id) {
 router.get('/order', async function (req, res, next) {
     const username = req.session.authUser.Username;
     const ordList = await userModel.findOrderList(username)
-    console.log(ordList)
+    // console.log(ordList)
 
     let ret = []
 
@@ -43,6 +43,8 @@ router.get('/order', async function (req, res, next) {
         ret[idx]['Orders'].push(ordList[i])
         ret[idx]['Date'] = ordList[i]['Date']
 
+
+        ret[idx].preventReceive = true
         switch (ordList[i].State) {
             case config.ordState.PENDING:
                 ordList[i].State = 'Pending'
@@ -51,6 +53,7 @@ router.get('/order', async function (req, res, next) {
             case config.ordState.ARRIVING:
                 ordList[i].State = 'Arriving'
                 ret[idx].color = 'text-primary'
+                ret[idx].preventReceive = false
                 break;
             case config.ordState.SUCCESS:
                 ordList[i].State = 'Success'
@@ -68,8 +71,8 @@ router.get('/order', async function (req, res, next) {
 
     let oActive = true;
 
-    console.log('return')
-    console.log(ret)
+    // console.log('return')
+    // console.log(ret)
 
     res.render('account/accountOrder', {
         oActive,
@@ -117,6 +120,22 @@ router.post('/cart-del', async (req, res) => {
     const ret = await userModel.delCart(req.session.authUser.Username,req.body.ProID);
     // console.log(ret);
     const url = req.headers.referer || '/account/cart';
+    return res.redirect(url);
+});
+
+router.post('/receive', async (req, res) => {
+    const OrderID = req.body.OrderID;
+
+    const entity={
+        OrderID,
+        State: 3
+    }
+
+    // console.log(entity)
+
+    await orderModel.update(entity)
+
+    const url = req.headers.referer || '/account/order';
     return res.redirect(url);
 });
 
