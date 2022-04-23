@@ -76,7 +76,13 @@ node app.js
 
 - Test login by using the account below
 ```sh
-  username: thanh
+  username: thanhhoang
+  password: 123
+```
+
+- Test login as admin by using the account below
+```sh
+  username: admin1
   password: 123
 ```
 
