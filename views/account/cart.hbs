@@ -42,7 +42,7 @@
                                         <td class="product-quantity">{{StockCart}}
                                         </td>
 
-                                        <td class="product-subtotal">{{format_number subtotal}} VND</td>
+                                        <td class="product-subtotal">{{format_number subtotal}}</td>
                                         <td {{#if outstock}} class="text-danger" {{else}} class="text-primary" {{/if}}>
                                             <strong>
                                                 {{Stock}}
@@ -88,7 +88,7 @@
                         <div class="title-wrap text-center">
                             <h4 class="cart-bottom-title section-bg-gary-cart">CART TOTAL</h4>
                         </div>
-                        <h4 class="grand-totall-title">Total <span>{{format_number total}} VND</span></h4>
+                        <h4 class="grand-totall-title">Total <span>{{format_number total}}</span></h4>
                         <form id="formCheckout" action="/account/checkout" method="post"></form>
                         <a href="javascript: $('#formCheckout').submit();">Check out</a>
 

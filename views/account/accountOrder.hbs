@@ -21,7 +21,9 @@
                 <tr>
                     <td>{{this.OrderID}}</td>
                     <td>{{format_no_h this.Date}}</td>
-                    <td class="{{this.color}}">{{this.State}}
+                    <td class="{{this.color}}"><strong>
+                        {{this.State}}
+                    </strong>
                     </td>
                     <td>
                         <table>
@@ -39,7 +41,9 @@
                             {{/each}}
                         </table>
                     </td>
-                    <td>{{format_number this.Total}}</td>
+                    <td class="text-danger"><strong>
+                        {{format_number this.Total}}
+                    </strong></td>
                     <td>
                         <div class="receivedForm">
                             <button type="button" data-bs-toggle="modal" {{#if this.preventReceive}}
