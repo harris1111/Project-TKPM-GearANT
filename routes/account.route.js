@@ -1,270 +1,184 @@
-import express from 'express';
-import userModel from '../models/user.model.js'
-import productModel from '../models/product.model.js'
-import orderModel from '../models/order.model.js'
-import config from '../utils/config.js'
+import express from "express";
+import userModel from "../models/user.model.js";
+import config from "../utils/config.js";
 import moment from "moment";
 import bodyParser from "body-parser";
+import bcrypt from "bcrypt";
+
 
 const router = express.Router();
-router.use(bodyParser.urlencoded({extended: false}))
-
-function findOrder(orders, id) {
-    for (let i in orders) {
-        if (orders[i]['OrderID'] === id) {
-            return i;
-        }
-    }
-    return -1;
-}
+router.use(bodyParser.urlencoded({ extended: false }));
 
 /* GET home page. */
-router.get('/order', async function (req, res, next) {
-    const username = req.session.authUser.Username;
-    const ordList = await userModel.findOrderList(username)
-    // console.log(ordList)
-
-    let ret = []
-
-    for (let i in ordList) {
-        let orderID = ordList[i]['OrderID']
-        let idx = -1;
-        if ((idx = findOrder(ret, orderID)) === -1) {
-            ret.push({
-                'OrderID': orderID,
-                'Orders': [],
-                'Date': null,
-                'State': null,
-                'Total': 0,
-            })
-            idx = ret.length - 1;
-        }
-
-        ret[idx]['Orders'].push(ordList[i])
-        ret[idx]['Date'] = ordList[i]['Date']
 
 
-        ret[idx].preventReceive = true
-        switch (ordList[i].State) {
-            case config.ordState.PENDING:
-                ordList[i].State = 'Pending'
-                ret[idx].color = 'text-secondary'
-                break;
-            case config.ordState.ARRIVING:
-                ordList[i].State = 'Arriving'
-                ret[idx].color = 'text-primary'
-                ret[idx].preventReceive = false
-                break;
-            case config.ordState.SUCCESS:
-                ordList[i].State = 'Success'
-                ret[idx].color = 'text-success'
-                break;
-            case config.ordState.CANCELED:
-                ordList[i].State = 'Canceled'
-                ret[idx].color = 'text-danger'
-                break;
-        }
+router.get("/order", async function (req, res, next) {
+  const username = req.session.authUser.Username;
+  const ordList = await userModel.findOrderList(username);
 
-        ret[idx]['State'] = ordList[i].State
-        ret[idx]['Total'] += parseInt(ordList[i]['Price']) * parseInt(ordList[i]['Stock'])
+  let ret = {};
+
+  for (let i in ordList) {
+    let orderID = ordList[i]["OrderID"];
+    if (!(orderID in ret)) {
+      ret[orderID] = {
+        Orders: [],
+        Date: null,
+        State: null,
+        Total: 0,
+      };
+    }
+    ret[orderID]["Orders"].push(ordList[i]);
+    ret[orderID]["Date"] = ordList[i]["Date"];
+
+    switch (ordList[i]["State"]) {
+      case config.ordState.PENDING:
+        ordList[i]["State"] = "Pending";
+        break;
+      case config.ordState.ARRIVING:
+        ordList[i]["State"] = "Arriving";
+        break;
+      case config.ordState.SUCCESS:
+        ret[orderID].success = true;
+        ordList[i]["State"] = "Success";
+        break;
     }
 
-    let oActive = true;
+    ret[orderID]["State"] = ordList[i]["State"];
+    ret[orderID]["Total"] +=
+      parseInt(ordList[i]["Price"]) * parseInt(ordList[i]["Stock"]);
+  }
 
-    // console.log('return')
-    // console.log(ret)
+  let oActive = true;
 
-    res.render('account/accountOrder', {
-        oActive,
-        ordList: ret,
-        empty: ordList.length === 0,
-        layout: "account.hbs",
-    });
+  res.render("account/accountOrder", {
+    oActive,
+    ordList: ret,
+    empty: ordList.length === 0,
+    layout: "account.hbs",
+  });
 });
 
-router.get('/cart', async function (req, res, next) {
-    const username = req.session.authUser.Username;
-    const cart = await userModel.findCart(username)
-    let isEmpty = false
-    let total = 0
+router.get("/cart", async function (req, res, next) {
+  const username = req.session.authUser.Username;
+  const cart = await userModel.findCart(username);
+  let isEmpty = false;
+  let total = 0;
 
-    const user = await userModel.findByUsername(username)
-    delete user.Password
+  const user = await userModel.findByUsername(username);
+  delete user.Password;
 
-    if (cart.length <= 0) {
-        isEmpty = true
-    } else {
-        for (let i in cart) {
-            //if product stock > 0
-            if (cart[i]['Stock'] >= cart[i]['StockCart']) {
-                cart[i]['Stock'] = 'Available'
-                cart[i].outstock = false
-                cart[i].subtotal = parseInt(cart[i]['StockCart']) * parseInt(cart[i]['Price'])
-                total += cart[i].subtotal
-            } else {
-                cart[i]['Stock'] = 'Out of Stock'
-                cart[i].outstock = true
-            }
-        }
-    }
-
-    res.render('account/cart', {
-        cart,
-        total,
-        isEmpty,
-        user
-    });
-});
-
-router.post('/cart-del', async (req, res) => {
-    const ret = await userModel.delCart(req.session.authUser.Username, req.body.ProID);
-    // console.log(ret);
-    const url = req.headers.referer || '/account/cart';
-    return res.redirect(url);
-});
-
-router.post('/receive', async (req, res) => {
-    const OrderID = req.body.OrderID;
-
-    const entity = {
-        OrderID,
-        State: 3
-    }
-
-    // console.log(entity)
-
-    await orderModel.update(entity)
-
-    const url = req.headers.referer || '/account/order';
-    return res.redirect(url);
-});
-
-router.post('/cart-add', async (req, res) => {
-    const item = {
-        User: req.body.Username || req.session.authUser.Username,
-        ProID: req.body.ProID,
-        Stock: req.body.Stock,
-        Date: moment().format()
-    }
-
-    await userModel.addCart(item);
-    const url = req.headers.referer || '/';
-    return res.redirect(url);
-});
-
-router.post('/checkout-buynow', async function (req, res) {
-    const username = req.session.authUser.Username;
-
-    const ordEntity = {
-        User: username,
-        Date: moment().format(),
-        State: config.ordState.PENDING
-    }
-
-    await userModel.addOrder(ordEntity)
-    const ordID = await userModel.findRecentOrder(username)
-
-    const product = await productModel.findByID(req.body.buynowID)
-
-    if (+req.body.buynowStock <= +product.Stock) {
-        const tmpOrdDetail = {
-            OrderID: ordID,
-            ProID: req.body.buynowID,
-            Stock: +req.body.buynowStock
-        }
-
-        await orderModel.addOrdDetail(tmpOrdDetail)
-    }
-
-    const url = '/account/order';
-    res.redirect(url);
-});
-
-router.post('/checkout', async function (req, res) {
-    const username = req.session.authUser.Username;
-    const cart = await userModel.findCart(username)
-
-    const ordEntity = {
-        User: username,
-        Date: moment().format(),
-        State: config.ordState.PENDING
-    }
-
-    await userModel.addOrder(ordEntity)
-    const ordID = await userModel.findRecentOrder(username)
-
+  if (cart.length <= 0) {
+    isEmpty = true;
+  } else {
     for (let i in cart) {
-        if (+cart[i].StockCart <= +cart[i].Stock) {
-            // const tempPro = {
-            //     ProID: cart[i].ProID,
-            //     Stock: +cart[i].Stock - +cart[i].StockCart
-            // }
-            // await productModel.updateProduct(tempPro)
-
-            const tmpOrdDetail = {
-                OrderID: ordID,
-                ProID: cart[i].ProID,
-                Stock: +cart[i].StockCart
-            }
-
-            await orderModel.addOrdDetail(tmpOrdDetail)
-            await userModel.delCart(username, cart[i].ProID)
-        }
+      //if product stock > 0
+      if (cart[i]["Stock"] >= cart[i]["StockCart"]) {
+        cart[i]["Stock"] = "Available";
+        cart[i].outstock = false;
+        cart[i].subtotal =
+          parseInt(cart[i]["StockCart"]) * parseInt(cart[i]["Price"]);
+        total += cart[i].subtotal;
+      } else {
+        cart[i]["Stock"] = "Out of Stock";
+        cart[i].outstock = true;
+      }
     }
+  }
 
-    const url = '/account/order';
-    res.redirect(url);
+  res.render("account/cart", {
+    cart,
+    total,
+    isEmpty,
+    user,
+  });
 });
 
-router.get('/checkout', function (req, res, next) {
-    res.render('account/checkout');
+router.post("/cart-del", async (req, res) => {
+  const ret = await userModel.delCart(req.body.ProID);
+  // console.log(ret);
+  const url = req.headers.referer || "/account/cart";
+  return res.redirect(url);
 });
 
-router.post('/change-address', async (req, res, next) => {
-    // console.log('change address post');
-    const user = {
-        Username: req.session.authUser.Username,
-        Address: req.body.new_address
-    }
-    // console.log(user.Username);
-    // console.log(user.Address);
-    const ret = await userModel.update(user)
+router.post("/cart-add", async (req, res) => {
+  const item = {
+    User: req.body.Username,
+    ProID: req.body.ProID,
+    Stock: req.body.Stock,
+    Date: moment().format(),
+  };
 
-    const user_new = await userModel.findByUsername(req.session.authUser.Username)
-    // console.log(user_new)
-    req.session.authUser = user_new
-    res.locals.authUser = req.session.authUser
-    return res.redirect('/');
+  const ret = await userModel.addCart(item);
+  const url = req.headers.referer || "/";
+  return res.redirect(url);
 });
-router.post('/change-phone', async (req, res, next) => {
-    // console.log('change phone post');
-    const user = {
-        Username: req.session.authUser.Username,
-        Number: req.body.new_phone
-    }
-    // console.log(user);
-    const ret = await userModel.update(user);
-    return res.redirect('/');
-})
-router.post('/change-password', async (req, res, next) => {
-    const user_model = await userModel.findByUsername(req.session.authUser.Username);
-    // const isEqual = bcrypt.compareSync(req.body.old_password, old_password_sv);
-    // if (isEqual === false) {
-    //     console.log("Error");
-    //     return res.render('/account', {
-    //         error: 'Incorrect password!'
-    //     });
-    // }
-    const newPassword = req.body.new_password;
-    const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(newPassword, salt);
 
-    const user = {
-        Username: req.session.authUser.Username,
-        Password: hash
-    }
+router.get("/checkout", function (req, res, next) {
+  res.render("account/checkout");
+});
 
-    const ret = await userModel.update(user);
+router.post("/change-address", async (req, res, next) => {
+  // console.log('change address post');
+  let aActive = true;
+  const user = {
+    Username: req.session.authUser.Username,
+    Address: req.body.new_address,
+  };
+  // console.log(user.Username);
+  // console.log(user.Address);
+  const ret = await userModel.update(user);
+
+  const user_new = await userModel.findByUsername(
+    req.session.authUser.Username
+  );
+  // console.log(user_new)
+  req.session.authUser = user_new;
+  res.locals.authUser = req.session.authUser;
+  return res.render("account/address", {
+    aActive,
+    layout: "account.hbs",
+  });
+});
+router.post("/change-phone", async (req, res, next) => {
+  // console.log('change phone post');
+  const user = {
+    Username: req.session.authUser.Username,
+    Number: req.body.new_phone,
+  };
+  // console.log(user);
+  const ret = await userModel.update(user);
+  return res.render("account/address", {
+    aActive,
+    layout: "account.hbs",
+  });
+});
+router.post("/change-password", async (req, res, next) => {
+    let cActive = true;
+  const user_model = await userModel.findByUsername(
+    req.session.authUser.Username
+  );
+  // const isEqual = bcrypt.compareSync(req.body.old_password, req.session.authUser.Password);
+  // if (isEqual === false) {
+  //     console.log("Error");
+  //     return res.render('/account', {
+  //         error: 'Incorrect password!'
+  //     });
+  // }
+  const newPassword = req.body.new_password;
+  const salt = bcrypt.genSaltSync(10);
+  const hash = bcrypt.hashSync(newPassword, salt);
+
+  const user = {
+    Username: req.session.authUser.Username,
+    Password: hash,
+  };
+  console.log(user);
+  const ret = await userModel.update(user);
+  res.render("account/changePass", {
+    cActive,
+    layout: "account.hbs",
+  });
 });
 
 // router.get("/order", function (req, res, next) {
@@ -276,27 +190,27 @@ router.post('/change-password', async (req, res, next) => {
 // });
 
 router.get("/information", function (req, res, next) {
-    let iActive = true;
-    res.render("account/information", {
-        iActive,
-        layout: "account.hbs",
-    });
+  let iActive = true;
+  res.render("account/information", {
+    iActive,
+    layout: "account.hbs",
+  });
 });
 
 router.get("/address", function (req, res, next) {
-    let aActive = true;
-    res.render("account/address", {
-        aActive,
-        layout: "account.hbs",
-    });
+  let aActive = true;
+  res.render("account/address", {
+    aActive,
+    layout: "account.hbs",
+  });
 });
 
 router.get("/changePass", function (req, res, next) {
-    let cActive = true;
-    res.render("account/changePass", {
-        cActive,
-        layout: "account.hbs",
-    });
+  let cActive = true;
+  res.render("account/changePass", {
+    cActive,
+    layout: "account.hbs",
+  });
 });
 
 export default router;

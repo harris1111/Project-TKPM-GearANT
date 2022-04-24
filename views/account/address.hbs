@@ -1,3 +1,30 @@
+{{#section 'js'}}
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<script>
+    document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';
+    $('#editAddForm').on('submit', function (event) {
+        event.preventDefault();
+        const new_address = document.getElementById('new_address').value;
+        if (new_address.length < 1) {
+            swal('Address must be filled to be updated');
+            return;
+        }
+        $('#editAddForm').off('submit').submit();
+    });
+    $('#editPhoneForm').on('submit', function (event) {
+        event.preventDefault();
+        const new_phone = document.getElementById('new_phone').value;
+        if (new_phone.length < 10) {
+            swal('Phone must be 10 digits!');
+            return;
+        }
+        $('#editPhoneForm').off('submit').submit();
+    });
+</script>
+{{/section}}
+
+
 <div class="account__item" id="address">
     <div class="login">
         <div class="login_form_container">
