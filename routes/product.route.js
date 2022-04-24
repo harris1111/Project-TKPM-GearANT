@@ -1,5 +1,6 @@
 import express from 'express';
 import productModel from '../models/product.model.js';
+import moment from "moment";
 import bodyParser from "body-parser";
 import userModel from "../models/user.model.js";
 
@@ -13,10 +14,6 @@ router.get('/detail/:id', async function(req, res) {
     const product = await productModel.findByID(pro_id);
 
     const sold = await productModel.findSold(pro_id)
-
-    if(product.Description.length<1){
-        product.Description="No description."
-    }
 
     product.sold = sold.Sold || 0
 

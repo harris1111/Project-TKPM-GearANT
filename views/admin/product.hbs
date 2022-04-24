@@ -36,10 +36,22 @@
         const stock = document.getElementById('txtAddStock').value;
         const file = document.getElementById('fileUpload');
 
-        if (file.files.length === 0) {
-            swal("Please upload product image!")
-            return;
-        }
+        <script>
+            document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';
+            $('#addForm').on('submit', function (event) {
+                event.preventDefault();
+            const proname = document.getElementById('txtAddProductName').value;
+            const price = document.getElementById('txtAddPrice').value;
+            const stock = document.getElementById('txtAddStock').value;
+            const des = document.getElementById('txtAddProductDescription').value;
+            // const childCat = document.getElementById('child_category').value;
+            const file = document.getElementById('fileUpload');
+
+            // alert(file.files.length)
+            if (file.files.length === 0) {
+                swal("Please upload product image!")
+                return;
+            }
 
             if (proname.length < 1 || price.length < 1 || stock.length < 1) {
                 swal("Please fill all fields!")
@@ -50,7 +62,6 @@
             });
         });
     });
-
 </script>
 {{/section}}
 {{#if this.empty}}
@@ -155,7 +166,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 {{/each}}
             </tbody>
         </table>
@@ -241,6 +252,5 @@
 <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 
 <script>
-    CKEDITOR.replace('txtAddProductDescription');
-    CKEDITOR.replace('txtDescription');
+            CKEDITOR.replace('txtAddProductDescription');
 </script>
