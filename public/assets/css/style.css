@@ -7941,6 +7941,10 @@ header {
   .bigCate{
     width: 90%;
   }
+  #widgets-searchbox .input-field {
+    width: 100%;
+}
+
 }
 
 @media screen and (max-width: 576px) {
@@ -7960,7 +7964,12 @@ header {
 }
 
 @media screen and (max-width: 768px){
- 
+  .main-menu ul li .main-menu-link{
+    margin: 10px 0;
+  }
+  .container-fluid{
+    padding: 0 15px;
+  }
   .header-logo img,
   .footer-logo img{
     width: 60px;
