@@ -36,39 +36,31 @@
                             {{/each}}
                         </table>
                     </td>
-                    {{!-- <td style="text-align: center;">{{format_no_h this.Date}}</td> --}}
+
                     {{#if mess}}
-                        <td class="{{color}}"><strong>
+                        <td style="vertical-align: middle; text-align:center" 
+                        class="{{color}}"><strong>
                             {{mess}}
                         </strong>
                         </td>
                     {{else}}
-                        <td>
-                            <div class="d-flex">
-                                <div class="editForm">
-                                    <button type="button" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModalApprove{{this.OrderID}}" {{#if this.pending}} disabled
-                                            class="disabled" {{/if}}>Approve</button>
-                                </div>
-                                <div class="delForm">
-                                    <button type="button" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModalDel{{this.OrderID}}" {{#if this.pending}} disabled
-                                            class="disabled" {{/if}}>Cancel
-                                    </button>
-                                </div>
-
+                    <td style="vertical-align: middle">
+                        <div class="d-flex">
+                            <div class="editForm">
+                                <button type="button" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModalApprove{{this.OrderID}}" {{#if this.pending}} disabled
+                                    class="disabled" {{/if}}>Approve</button>
                             </div>
-                        </td>
+                            <div class="delForm">
+                                <button type="button" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModalDel{{this.OrderID}}" {{#if this.pending}} disabled
+                                    class="disabled" {{/if}}>Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </td>
                     {{/if}}
 
-                    {{!-- <td>
-                        <div class="delForm">
-                            <button type="button" data-bs-toggle="modal"
-                                data-bs-target="#exampleModalDel{{this.OrderID}}" {{#if this.pending}} disabled
-                                class="disabled" {{/if}}>Cancel
-                            </button>
-                        </div>
-                    </td> --}}
 
                     <!-- Modal edit-->
                     <div class="modal" id="exampleModalApprove{{this.OrderID}}" tabindex="-1"
@@ -78,9 +70,12 @@
                                 <div class="modal-body">
                                     Approve this order?
                                 </div>
-                                <form class="modal-footer" method="post" action="/admin/set-state-order">
-                                    <button type="submit" class="btn-save" name="OrderIDapprove" value="{{this.OrderID}}">Approve</button>
-                                    <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                                <form method="post" action="/admin/set-state-order">
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn-save" name="OrderIDapprove"
+                                            value="{{this.OrderID}}">Approve</button>
+                                        <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -94,10 +89,12 @@
                                 <div class="modal-body">
                                     Cancel this order?
                                 </div>
-                                <form class="modal-footer" action="/admin/set-state-order" method="post">
-                                    <button type="submit" class="btn-save" name="OrderIDcancel"
-                                        value="{{this.OrderID}}">Confirm</button>
-                                    <button type="button" class="btn-cancel" data-bs-dismiss="modal">Back</button>
+                                <form action="/admin/set-state-order" method="post">
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn-save" name="OrderIDcancel"
+                                            value="{{this.OrderID}}">Confirm</button>
+                                        <button type="button" class="btn-cancel" data-bs-dismiss="modal">Back</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
