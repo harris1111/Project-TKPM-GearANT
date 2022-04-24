@@ -15,12 +15,15 @@ router.get('/detail/:id', async function(req, res) {
 
     const sold = await productModel.findSold(pro_id)
 
+    if (product.Description.length < 1) {
+        product.Description = "No description."
+    }
+
     product.sold = sold.Sold || 0
 
     product.outstock = product.Stock === 0
 
-    const bigcat = await productModel.findBigCatID(pro_id)
-    const related_products = await productModel.findByBigCatID(bigcat, product.ProID);
+    const related_products = await productModel.findByCatID(product.CatID, product.ProID);
 
     for (let i in related_products) {
         const sold = await productModel.findSold(related_products[i].ProID)
@@ -100,16 +103,9 @@ router.get('/buynow', async function(req, res, next) {
     product.Stock = 'Available'
     product.subtotal = total
 
-    const item = {
-        ProID: pro_id,
-        Stock: quantity
-    }
-
     res.render('account/cart', {
         cart,
         total,
-        buynow: true,
-        item,
         isEmpty: false,
         user
     });

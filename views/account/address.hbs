@@ -16,7 +16,7 @@
         event.preventDefault();
         const new_phone = document.getElementById('new_phone').value;
         if (new_phone.length < 10) {
-            swal('Phone must be 10 digits!');
+            swal('Please enter valid phone number!');
             return;
         }
         $('#editPhoneForm').off('submit').submit();
