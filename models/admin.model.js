@@ -42,4 +42,17 @@ export default {
     const ret = await db.raw(sql);
     return ret[0];
   },
+  async getProStockDetail(id) { 
+    const sql = `SELECT od.ProID, od.Stock 
+    from order_detail od
+    join product p on p.ProID = od.ProID
+    where OrderID = ${id}`
+    const ret = await db.raw(sql);
+    return ret[0];
+  },
+  async getProStock(id) { 
+    const sql =`SELECT Stock from product where ProID=${id}`
+    const ret = await db.raw(sql);
+    return ret[0][0];
+  }
 };
