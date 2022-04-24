@@ -18,9 +18,11 @@
         if ($('#newPass').val().length < 6) {
             $('#saveBtn').addClass("disable");
             $('#message_t').html('Password must be more than 6 characters.').css('color', 'red');
-        } else
+        } else{
             $('#saveBtn').removeClass("disable");
-        $('#message_t').html('OK').css('color', 'green');
+            $('#message_t').html('OK').css('color', 'green');
+        }
+            
     });
     $('#newPass, #newPassConfirm').on('keyup', function () {
         if ($('#newPass').val().length > 0) {
@@ -33,6 +35,7 @@
             }
         }
     });
+
     $('#changePassForm').on('submit', function (event) {
         event.preventDefault();
         const oldPass = document.getElementById('oldPass').value;
@@ -42,10 +45,7 @@
             swal('Please enter old password!');
             return;
         }
-        swal("Success!", "Register successfully", "success").then(() => {
-        $('#formRegister').off('submit').submit();
-        return;
-    });
+         $('#changePassForm').off('submit').submit();
     });
 </script>
 {{/section}}
@@ -69,8 +69,8 @@
                         <label>Confirm Password</label>
                         <input id="newPassConfirm" type="password" name="new_password_confirm" />
                         <span class="ml-2 font-medium text-bold" id='message'></span>
-                        {{#if error}}
-                        <p class="text-danger text-center mb-4 "><strong>{{error}}</strong>
+                        {{#if mess}}
+                        <p class="{{color}} text-center mb-4 "><strong>{{mess}}</strong>
                         </p>
                         {{/if}}
                     </div>

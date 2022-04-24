@@ -28,6 +28,8 @@ router.get('/order', async function(req, res, next) {
 
     let ret = []
 
+    let oActive = true;
+
     for (let i in ordList) {
         let orderID = ordList[i]['OrderID']
         let idx = -1;
@@ -183,10 +185,6 @@ router.post('/checkout', async function(req, res) {
     res.redirect(url);
 });
 
-router.get('/checkout', function(req, res, next) {
-    res.render('account/checkout');
-});
-
 router.post("/change-address", async(req, res, next) => {
     // console.log('change address post');
     let aActive = true;
@@ -204,10 +202,9 @@ router.post("/change-address", async(req, res, next) => {
     // console.log(user_new)
     req.session.authUser = user_new;
     res.locals.authUser = req.session.authUser;
-    return res.render("account/address", {
-        aActive,
-        layout: "account.hbs",
-    });
+
+    const url = '/account/address';
+    res.redirect(url);
 });
 router.post("/change-phone", async(req, res, next) => {
     // console.log('change phone post');
@@ -216,24 +213,36 @@ router.post("/change-phone", async(req, res, next) => {
         Number: req.body.new_phone,
     };
     // console.log(user);
-    const ret = await userModel.update(user);
-    return res.render("account/address", {
-        aActive,
-        layout: "account.hbs",
-    });
+    await userModel.update(user);
+
+    const user_new = await userModel.findByUsername(
+        req.session.authUser.Username
+    );
+    // console.log(user_new)
+    req.session.authUser = user_new;
+    res.locals.authUser = req.session.authUser;
+
+    const url = '/account/address';
+    res.redirect(url);
 });
+
 router.post("/change-password", async(req, res, next) => {
-    let cActive = true;
     const user_model = await userModel.findByUsername(
         req.session.authUser.Username
     );
-    // const isEqual = bcrypt.compareSync(req.body.old_password, req.session.authUser.Password);
-    // if (isEqual === false) {
-    //     console.log("Error");
-    //     return res.render('/account', {
-    //         error: 'Incorrect password!'
-    //     });
-    // }
+
+    const isEqual = bcrypt.compareSync(req.body.old_password, req.session.authUser.Password);
+    if (isEqual === false) {
+        req.session.resChange = false
+            // return res.render('account/changePass', {
+            //     cActive: true,
+            //     error: 'Incorrect password! Please try again!',
+            //     layout: "account.hbs"
+            // });
+    } else {
+        req.session.resChange = true
+    }
+
     const newPassword = req.body.new_password;
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(newPassword, salt);
@@ -242,21 +251,19 @@ router.post("/change-password", async(req, res, next) => {
         Username: req.session.authUser.Username,
         Password: hash,
     };
-    console.log(user);
-    const ret = await userModel.update(user);
-    res.render("account/changePass", {
-        cActive,
-        layout: "account.hbs",
-    });
-});
 
-// router.get("/order", function (req, res, next) {
-//     let oActive = true;
-//     res.render("account/accountOrder", {
-//         oActive,
-//         layout: "account.hbs",
-//     });
-// });
+    await userModel.update(user);
+
+    const user_new = await userModel.findByUsername(
+        req.session.authUser.Username
+    );
+
+    req.session.authUser = user_new;
+    res.locals.authUser = req.session.authUser;
+
+    const url = '/account/changePass';
+    res.redirect(url);
+});
 
 router.get("/information", function(req, res, next) {
     let iActive = true;
@@ -276,8 +283,25 @@ router.get("/address", function(req, res, next) {
 
 router.get("/changePass", function(req, res, next) {
     let cActive = true;
+
+    let mess = ""
+    let color = "text-danger"
+        // console.log(req.session.resChange)
+
+    if (req.session.resChange !== 'undefined' && req.session.resChange !== null) {
+        if (req.session.resChange == true) {
+            mess = 'Password changed successfully!'
+            color = "text-success"
+        } else {
+            mess = 'Incorrect password! Please try again!'
+        }
+        req.session.resChange = null
+    }
+
     res.render("account/changePass", {
         cActive,
+        mess,
+        color,
         layout: "account.hbs",
     });
 });
