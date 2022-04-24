@@ -91,6 +91,11 @@ router.get('/buynow', async function(req, res, next) {
     const pro_id = req.query.ProID;
     const quantity = req.query.Stock;
 
+    const item={
+        ProID:pro_id,
+        Stock:quantity
+    }
+
     const product = await productModel.findByID(pro_id)
     const user = await userModel.findByUsername(username)
     delete user.Password
@@ -106,6 +111,8 @@ router.get('/buynow', async function(req, res, next) {
     res.render('account/cart', {
         cart,
         total,
+        item,
+        buynow:true,
         isEmpty: false,
         user
     });

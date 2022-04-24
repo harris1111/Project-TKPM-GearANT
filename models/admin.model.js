@@ -22,7 +22,7 @@ export default {
     return db("order_list").where("OrderID", id).update(entity);
   },
   async getOrderList() {
-    const sql = `select ol.OrderID, User, Date, State, od.ProID, p.ProName, Price, od.Stock
+    const sql = `select ol.OrderID, Name, User, Date, State, od.ProID, p.ProName, Price, od.Stock
                  from order_list ol
                    join order_detail od
                  on ol.OrderID = od.OrderID

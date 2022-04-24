@@ -243,7 +243,7 @@ router.post("/set-state-order", async function(req, res) {
     };
     if (parseInt(OrderIDApprove) > 0) {
         newState.orderID = OrderIDApprove;
-        newState.State = 3;
+        newState.State = config.ordState.ARRIVING;
         const listProStockDetail = await adminModel.getProStockDetail(newState.orderID);
         for (let i in listProStockDetail) {
             const proStock = await adminModel.getProStock(listProStockDetail[i].ProID);
@@ -256,7 +256,7 @@ router.post("/set-state-order", async function(req, res) {
     }
     if (parseInt(OrderIDCancel) > 0) {
         newState.orderID = OrderIDCancel;
-        newState.State = 4;
+        newState.State = config.ordState.CANCELED;
     }
     await adminModel.updateStateOrder(newState);
 

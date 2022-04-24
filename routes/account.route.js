@@ -124,6 +124,9 @@ router.post('/cart-add', async (req, res) => {
 router.post('/checkout-buynow', async function (req, res) {
   const username = req.session.authUser.Username;
 
+  console.log(req.body.buynowID)
+  console.log(req.body.buynowStock)
+
   const ordEntity = {
     User: username,
     Date: moment().format(),
