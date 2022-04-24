@@ -9,6 +9,12 @@ export default {
         return raw[0][0].CatID;
     },
 
+    async updateProduct(entity) {
+        const proid = entity.ProID;
+        delete entity.ProID;
+        return db('product').where('ProID', proid).update(entity);
+    },
+
     async findBigCatID(ProID) {
         const sql = `select b.BigCatID
                      from product p
@@ -25,7 +31,7 @@ export default {
 
 
     async countProduct() {
-        const list = await db.select().from('product').count({amount: 'ProID'});
+        const list = await db.select().from('product').count({ amount: 'ProID' });
         return list[0].amount;
     },
 
@@ -181,6 +187,6 @@ export default {
                      group by od.ProID
         `;
         const raw = await db.raw(sql);
-        return raw[0][0] || {Sold: 0};
+        return raw[0][0] || { Sold: 0 };
     },
 }
