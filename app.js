@@ -6,7 +6,6 @@ import activate_view from './middlewares/view.mdw.js';
 import activate_locals from './middlewares/local.mdw.js';
 import activate_route from './middlewares/route.mdw.js';
 import activate_session from './middlewares/session.mdw.js';
-
 const __dirname = dirname(fileURLToPath(
     import.meta.url));
 

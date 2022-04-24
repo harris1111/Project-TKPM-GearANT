@@ -5,9 +5,11 @@ import orderModel from '../models/order.model.js'
 import config from '../utils/config.js'
 import moment from "moment";
 import bodyParser from "body-parser";
+import bcrypt from "bcrypt";
+
 
 const router = express.Router();
-router.use(bodyParser.urlencoded({extended: false}))
+router.use(bodyParser.urlencoded({ extended: false }))
 
 function findOrder(orders, id) {
     for (let i in orders) {
@@ -19,10 +21,10 @@ function findOrder(orders, id) {
 }
 
 /* GET home page. */
-router.get('/order', async function (req, res, next) {
+router.get('/order', async function(req, res, next) {
     const username = req.session.authUser.Username;
     const ordList = await userModel.findOrderList(username)
-    // console.log(ordList)
+        // console.log(ordList)
 
     let ret = []
 
@@ -69,7 +71,6 @@ router.get('/order', async function (req, res, next) {
         ret[idx]['Total'] += parseInt(ordList[i]['Price']) * parseInt(ordList[i]['Stock'])
     }
 
-    let oActive = true;
 
     // console.log('return')
     // console.log(ret)
@@ -82,48 +83,14 @@ router.get('/order', async function (req, res, next) {
     });
 });
 
-router.get('/cart', async function (req, res, next) {
-    const username = req.session.authUser.Username;
-    const cart = await userModel.findCart(username)
-    let isEmpty = false
-    let total = 0
-
-    const user = await userModel.findByUsername(username)
-    delete user.Password
-
-    if (cart.length <= 0) {
-        isEmpty = true
-    } else {
-        for (let i in cart) {
-            //if product stock > 0
-            if (cart[i]['Stock'] >= cart[i]['StockCart']) {
-                cart[i]['Stock'] = 'Available'
-                cart[i].outstock = false
-                cart[i].subtotal = parseInt(cart[i]['StockCart']) * parseInt(cart[i]['Price'])
-                total += cart[i].subtotal
-            } else {
-                cart[i]['Stock'] = 'Out of Stock'
-                cart[i].outstock = true
-            }
-        }
-    }
-
-    res.render('account/cart', {
-        cart,
-        total,
-        isEmpty,
-        user
-    });
-});
-
-router.post('/cart-del', async (req, res) => {
+router.post('/cart-del', async(req, res) => {
     const ret = await userModel.delCart(req.session.authUser.Username, req.body.ProID);
     // console.log(ret);
     const url = req.headers.referer || '/account/cart';
     return res.redirect(url);
 });
 
-router.post('/receive', async (req, res) => {
+router.post('/receive', async(req, res) => {
     const OrderID = req.body.OrderID;
 
     const entity = {
@@ -139,7 +106,7 @@ router.post('/receive', async (req, res) => {
     return res.redirect(url);
 });
 
-router.post('/cart-add', async (req, res) => {
+router.post('/cart-add', async(req, res) => {
     const item = {
         User: req.body.Username || req.session.authUser.Username,
         ProID: req.body.ProID,
@@ -152,7 +119,7 @@ router.post('/cart-add', async (req, res) => {
     return res.redirect(url);
 });
 
-router.post('/checkout-buynow', async function (req, res) {
+router.post('/checkout-buynow', async function(req, res) {
     const username = req.session.authUser.Username;
 
     const ordEntity = {
@@ -180,7 +147,7 @@ router.post('/checkout-buynow', async function (req, res) {
     res.redirect(url);
 });
 
-router.post('/checkout', async function (req, res) {
+router.post('/checkout', async function(req, res) {
     const username = req.session.authUser.Username;
     const cart = await userModel.findCart(username)
 
@@ -216,39 +183,51 @@ router.post('/checkout', async function (req, res) {
     res.redirect(url);
 });
 
-router.get('/checkout', function (req, res, next) {
+router.get('/checkout', function(req, res, next) {
     res.render('account/checkout');
 });
 
-router.post('/change-address', async (req, res, next) => {
+router.post("/change-address", async(req, res, next) => {
     // console.log('change address post');
+    let aActive = true;
     const user = {
         Username: req.session.authUser.Username,
-        Address: req.body.new_address
-    }
+        Address: req.body.new_address,
+    };
     // console.log(user.Username);
     // console.log(user.Address);
-    const ret = await userModel.update(user)
+    const ret = await userModel.update(user);
 
-    const user_new = await userModel.findByUsername(req.session.authUser.Username)
+    const user_new = await userModel.findByUsername(
+        req.session.authUser.Username
+    );
     // console.log(user_new)
-    req.session.authUser = user_new
-    res.locals.authUser = req.session.authUser
-    return res.redirect('/');
+    req.session.authUser = user_new;
+    res.locals.authUser = req.session.authUser;
+    return res.render("account/address", {
+        aActive,
+        layout: "account.hbs",
+    });
 });
-router.post('/change-phone', async (req, res, next) => {
+router.post("/change-phone", async(req, res, next) => {
     // console.log('change phone post');
     const user = {
         Username: req.session.authUser.Username,
-        Number: req.body.new_phone
-    }
+        Number: req.body.new_phone,
+    };
     // console.log(user);
     const ret = await userModel.update(user);
-    return res.redirect('/');
-})
-router.post('/change-password', async (req, res, next) => {
-    const user_model = await userModel.findByUsername(req.session.authUser.Username);
-    // const isEqual = bcrypt.compareSync(req.body.old_password, old_password_sv);
+    return res.render("account/address", {
+        aActive,
+        layout: "account.hbs",
+    });
+});
+router.post("/change-password", async(req, res, next) => {
+    let cActive = true;
+    const user_model = await userModel.findByUsername(
+        req.session.authUser.Username
+    );
+    // const isEqual = bcrypt.compareSync(req.body.old_password, req.session.authUser.Password);
     // if (isEqual === false) {
     //     console.log("Error");
     //     return res.render('/account', {
@@ -261,10 +240,14 @@ router.post('/change-password', async (req, res, next) => {
 
     const user = {
         Username: req.session.authUser.Username,
-        Password: hash
-    }
-
+        Password: hash,
+    };
+    console.log(user);
     const ret = await userModel.update(user);
+    res.render("account/changePass", {
+        cActive,
+        layout: "account.hbs",
+    });
 });
 
 // router.get("/order", function (req, res, next) {
@@ -275,7 +258,7 @@ router.post('/change-password', async (req, res, next) => {
 //     });
 // });
 
-router.get("/information", function (req, res, next) {
+router.get("/information", function(req, res, next) {
     let iActive = true;
     res.render("account/information", {
         iActive,
@@ -283,7 +266,7 @@ router.get("/information", function (req, res, next) {
     });
 });
 
-router.get("/address", function (req, res, next) {
+router.get("/address", function(req, res, next) {
     let aActive = true;
     res.render("account/address", {
         aActive,
@@ -291,7 +274,7 @@ router.get("/address", function (req, res, next) {
     });
 });
 
-router.get("/changePass", function (req, res, next) {
+router.get("/changePass", function(req, res, next) {
     let cActive = true;
     res.render("account/changePass", {
         cActive,
