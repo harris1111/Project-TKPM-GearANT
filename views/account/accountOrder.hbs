@@ -8,7 +8,7 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Date</th>
+                <th style="text-align: center; width: 150px">Date</th>
                 <th>Status</th>
                 <th>Product</th>
                 <th>Total</th>
@@ -20,7 +20,7 @@
             {{#each ordList}}
                 <tr>
                     <td>{{this.OrderID}}</td>
-                    <td>{{format_no_h this.Date}}</td>
+                    <td style="text-align: center;">{{format_no_h this.Date}}</td>
                     <td class="{{this.color}}"><strong>
                         {{this.State}}
                     </strong>
