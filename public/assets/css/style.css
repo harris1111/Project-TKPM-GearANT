@@ -156,6 +156,10 @@ input {
 .height-full{
   height: 100vh;
 }
+.height-full-2{
+  height: 150vh;
+}
+
 .pt-50px {
   padding-top: 50px;
 }
@@ -7929,6 +7933,9 @@ header {
     margin-bottom: .5rem;
   }
   .height-full{
+    height: auto;
+  }
+  .height-full-2{
     height: auto;
   }
   .bigCate{
