@@ -174,8 +174,25 @@ router.get("/order", async function(req, res, next) {
 
         ret[idx]["Orders"].push(ordList[i]);
         ret[idx]["Date"] = ordList[i]["Date"];
-        if (ordList[i].State !== config.ordState.PENDING) {
-            ret[idx].pending = true;
+        // if (ordList[i].State !== config.ordState.PENDING) {
+        //     ret[idx].prevent = true;
+        // }
+
+        ret[idx].mess=null
+
+        switch(ordList[i].State) {
+            case config.ordState.ARRIVING:
+                ret[idx].mess = "Approved"
+                ret[idx].color='text-primary'
+                break;
+            case config.ordState.SUCCESS:
+                ret[idx].mess = "Success"
+                ret[idx].color='text-success'
+                break;
+            case config.ordState.CANCELED:
+                ret[idx].mess = "Canceled"
+                ret[idx].color='text-danger'
+                break;
         }
     }
     res.render("admin/order", {
@@ -242,6 +259,7 @@ router.post("/set-state-order", async function(req, res) {
         newState.State = 4;
     }
     await adminModel.updateStateOrder(newState);
+
     const url = req.headers.referer || "/admin/order";
     return res.redirect(url);
 });

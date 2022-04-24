@@ -37,22 +37,30 @@
                         </table>
                     </td>
                     {{!-- <td style="text-align: center;">{{format_no_h this.Date}}</td> --}}
-                    <td>
-                        <div class="d-flex">
-                            <div class="editForm">
-                                <button type="button" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModalApprove{{this.OrderID}}" {{#if this.pending}} disabled
-                                    class="disabled" {{/if}}>Approve</button>
-                            </div>
-                            <div class="delForm">
-                                <button type="button" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModalDel{{this.OrderID}}" {{#if this.pending}} disabled
-                                    class="disabled" {{/if}}>Cancel
-                                </button>
-                            </div>
+                    {{#if mess}}
+                        <td class="{{color}}"><strong>
+                            {{mess}}
+                        </strong>
+                        </td>
+                    {{else}}
+                        <td>
+                            <div class="d-flex">
+                                <div class="editForm">
+                                    <button type="button" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModalApprove{{this.OrderID}}" {{#if this.pending}} disabled
+                                            class="disabled" {{/if}}>Approve</button>
+                                </div>
+                                <div class="delForm">
+                                    <button type="button" data-bs-toggle="modal"
+                                            data-bs-target="#exampleModalDel{{this.OrderID}}" {{#if this.pending}} disabled
+                                            class="disabled" {{/if}}>Cancel
+                                    </button>
+                                </div>
 
-                        </div>
-                    </td>
+                            </div>
+                        </td>
+                    {{/if}}
+
                     {{!-- <td>
                         <div class="delForm">
                             <button type="button" data-bs-toggle="modal"
