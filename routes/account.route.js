@@ -5,6 +5,7 @@ import moment from "moment";
 import bodyParser from "body-parser";
 import bcrypt from "bcrypt";
 
+
 const router = express.Router();
 router.use(bodyParser.urlencoded({ extended: false }));
 
@@ -157,7 +158,7 @@ router.post("/change-password", async (req, res, next) => {
   const user_model = await userModel.findByUsername(
     req.session.authUser.Username
   );
-  // const isEqual = bcrypt.compareSync(req.body.old_password, old_password_sv);
+  // const isEqual = bcrypt.compareSync(req.body.old_password, req.session.authUser.Password);
   // if (isEqual === false) {
   //     console.log("Error");
   //     return res.render('/account', {
@@ -172,7 +173,7 @@ router.post("/change-password", async (req, res, next) => {
     Username: req.session.authUser.Username,
     Password: hash,
   };
-
+  console.log(user);
   const ret = await userModel.update(user);
   res.render("account/changePass", {
     cActive,
