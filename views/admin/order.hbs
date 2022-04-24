@@ -21,7 +21,7 @@
                         <td><strong>{{this.OrderID}}</strong></td>
                         <td>
                             <div class="text-primary">Customer: {{Name}}</div>
-                            <table>
+                            <table style="width: 100%">
                                 {{#each this.Orders}}
                                     <tr>
                                         <td style="border: none; padding:0; text-align:left;">
@@ -30,7 +30,7 @@
                                                 <strong>{{this.ProName}}</strong>
                                             </a>
                                         </td>
-                                        <td style="border: none; padding:0; min-width: 50px; color:#24262b">
+                                        <td style="border: none; padding:0; min-width: 50px; color:#24262b; text-align:right;">
                                             {{this.Stock}}x
                                         </td>
                                     </tr>
