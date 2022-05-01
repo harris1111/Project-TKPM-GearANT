@@ -3,6 +3,7 @@ import bodyParser from "body-parser";
 import productHome from "../models/product.model.js";
 import constant from "../utils/config.js";
 import userModel from "../models/user.model.js";
+import emailModel from "../models/email.model.js";
 import bcrypt from "bcrypt";
 const router = express.Router();
 
@@ -110,24 +111,59 @@ router.get('/username-available', async function(req, res) {
 router.get('/forgot-password', async function(req, res) {
     res.render('otp/forgot-password');
 });
-
-
-router.get('/reset-success', async function(req, res) {
-    res.render('otp/reset-success');
-});
-
-router.get('/confirm-reset', async function(req, res) {
+router.get('/confirm-otp', async function(req, res) {
     res.render('otp/confirm-otp');
 });
 
-router.get('/confirm-register', async function(req, res) {
-    res.render('otp/confirm-otp-register');
+router.get('/reset-success', async function(req, res) {
+    res.render('otp/reset-success');
 });
 
 router.get('/register-success', async function(req, res) {
     res.render('otp/register-success');
 });
 
+router.post('/forget-password', async function(req, res) {
+    const email = req.body.Email;
+    const user = await userModel.findByEmail(email);
+    console.log(user);
+    console.log(req.body);
+    if(user === null){
+        return res.render('otp/forget-password',{
+            error: 'Email not found. Please try again!'
+        });
+    }
+
+    req.session.forgetUser = email;
+    console.log(req.session.forgetUser);
+    const otp = emailModel.sendOTP(email);
+    console.log(otp);
+    req.body.OTP = otp.toString();
+    await userModel.updateUser(req.body);
+    return res.redirect('/confirm-otp');
+});
+
+
+router.post('/confirm-otp', async function(req, res) {
+    const email = req.session.forgetUser;
+    //console.log(email);
+    const ret = await userModel.findOTP(email);
+    const otpInput = req.body.OTP;
+
+    if(otpInput !== ret.OTP){
+        return res.render('otp/confirm-otp',{
+            error: 'OTP is incorrect!'
+        });
+    }
+    const password = emailModel.sendNewPassword(email);
+    req.body.Email = email;
+    req.body.OTP = 'NULL';
+    req.body.Password = password;
+    await userModel.updateUser(req.body);
+
+    req.session.forgetUser = null;
+    return res.redirect('/reset-success');
+});
 
 //log out
 router.post("/logout", async function(req, res) {

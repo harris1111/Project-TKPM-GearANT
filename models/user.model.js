@@ -8,7 +8,12 @@ export default {
 
         return list[0];
     },
-
+    async findByEmail(email) {
+        const user = await db('user').where({
+            Email: email
+        });
+        return user[0] || null;
+    },
     async findOrderList(username) {
         const sql = `select ol.OrderID, User, Date, State, od.ProID, p.ProName, Price, od.Stock
                      from order_list ol
@@ -32,7 +37,12 @@ export default {
         const raw = await db.raw(sql);
         return raw[0] || null
     },
-
+    async findOTP(email) {
+        const user = await db('user').select('OTP').where({
+            Email: email
+        });
+        return user[0] || null;
+    },
     async addCart(entity) {
         return db('cart').insert(entity);
     },
@@ -84,7 +94,12 @@ export default {
             })
             .del();
     },
-
+    async updateUser(entity) {
+        const email = entity.Email;
+        delete entity.Email;
+        await db('user').where('Email', email).update(entity);
+        return db('user').where('Email', email);
+    },
     update(entity) {
         const user = entity.Username;
         delete entity.Username;
