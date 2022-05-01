@@ -83,18 +83,41 @@ router.post("/register", async function(req, res) {
     const rawPassword = req.body.password;
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(rawPassword, salt);
-
+    const otp = emailModel.sendOTPRegister(req.body.email);
     const user = {
+        Email: req.body.email,
         Username: req.body.username,
         Name: req.body.name,
         Password: hash,
         Address: req.body.address,
         Number: req.body.number,
         Type: 1,
+        Valid: false,
+        OTP: otp,
     };
 
     await userModel.add(user);
-    res.redirect("/login");
+    req.session.registerUser = req.body.email;
+    res.redirect("/confirm-register");
+});
+
+router.post('/confirm-register', async function(req, res) {
+    const email = req.session.registerUser;
+    const ret = await userModel.findOTP(email);
+    const otpInput = req.body.OTP;
+
+    if(otpInput !== ret.OTP){
+        return res.render('otp/confirm-otp-register',{
+            error: 'OTP is incorrect!'
+        });
+    }
+    req.body.Email = email;
+    req.body.OTP = 'NULL';
+    req.body.Valid = true;
+    await userModel.updateUser(req.body);
+
+    req.session.registerUser = null;
+    return res.redirect('/register-success');
 });
 router.get('/username-available', async function(req, res) {
     const username = req.query.username;
@@ -111,8 +134,8 @@ router.get('/username-available', async function(req, res) {
 router.get('/forgot-password', async function(req, res) {
     res.render('otp/forgot-password');
 });
-router.get('/confirm-otp', async function(req, res) {
-    res.render('otp/confirm-otp');
+router.get('/confirm-register', async function(req, res) {
+    res.render('otp/confirm-otp-register');
 });
 
 router.get('/reset-success', async function(req, res) {
