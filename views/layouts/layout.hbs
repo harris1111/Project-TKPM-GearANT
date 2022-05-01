@@ -29,7 +29,8 @@
 
     <!-- Use the minified version files listed below for better performance and remove the files listed above -->
     <!-- Main Style -->
-    <link rel="stylesheet" href="/assets/css/style.css"/>
+    {{!-- <link rel="stylesheet" href="/assets/css/style.css"/> --}}
+    <link rel="stylesheet" href="/assets/css/main.css">
 
 </head>
 
@@ -72,9 +73,6 @@
                                     {{/each}}
                                 </ul>
                             </li>
-                            {{!-- <li class="nav-item">
-                                <a href="/about" class="main-menu-link" target="_blank">About us</a>
-                            </li> --}}
                             {{#if auth}}
                                 <li class="nav-item">
                                     <a href="/account/order" class="main-menu-link" target="_blank">Account</a>
@@ -107,7 +105,7 @@
                             {{/if}}
                             {{#if auth}}
                                 <form id="formLogout" action="/logout" method="post"></form>
-                                <a class="py-2 hover:bg-cyan-900 w-full text-left pl-3"
+                                <a class="logout-btn"
                                    href="javascript: $('#formLogout').submit();">
                                     Log out
                                 </a>
@@ -129,7 +127,7 @@
 {{{body}}}
 
 <!-- Footer Area Start -->
-<div class="footer-area">
+<footer>
     <div class="footer-container">
         <div class="footer-top">
             <div class="container">
@@ -140,7 +138,7 @@
                             <div class="footer-logo d-flex align-items-center">
                                 <img src="https://i.imgur.com/5g0Inms_d.webp?maxwidth=760&fidelity=grand"
                                      alt="logo">
-                                <p class="fw-bold fs-2">GEAR<span class="fs-2">ANT</span></p>
+                                <p class="fw-bold fs-2 text-light">GEAR<span class="fs-2">ANT</span></p>
                             </div>
                             <ul class="link-follow">
                                 <li>
@@ -224,7 +222,7 @@
             </div>
         </div>
     </div>
-</div>
+</footer>
 <!-- Footer Area End -->
 
 <!-- Global Vendor, plugins JS -->

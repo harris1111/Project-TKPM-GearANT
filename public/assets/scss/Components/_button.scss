@@ -1,0 +1,85 @@
+.save_button {
+    button {
+        background-color: #3b3b3b;
+        border-color: #3b3b3b;
+        color: #fff;
+        font-weight: 400;
+        font-size: 14px;
+        width: 130px;
+        height: 45px;
+        transition: all 0.3s;
+        &:hover {
+            border-color: #fb5d5d;
+            background-color: #fb5d5d;
+            color: #fff;
+        }
+    }
+}
+
+.receivedForm {
+    button {
+        background-color: #33cc33;
+        border: 1px solid transparent;
+        margin: 0 6px;
+        font-weight: bold;
+        transition: all 0.5s;
+        color: white;
+        padding: 1px 6px;
+        &:hover {
+            background-color: green;
+        }
+    }
+    .disabled {
+        background-color: #6c6c6c;
+        cursor: not-allowed;
+        &:hover {
+            background-color: #6c6c6c;
+        }
+    }
+}
+
+.editForm {
+    display: flex;
+    justify-content: center;
+    button {
+        border: 1px solid transparent;
+        margin: 0 6px;
+        font-weight: bold;
+        transition: all 0.5s;
+        color: white;
+        background-color: #6699ff;
+        padding: 1px 6px;
+        &:hover {
+            background-color: blue;
+        }
+    }
+}
+
+.delForm {
+    display: flex;
+    justify-content: center;
+    button {
+        border: 1px solid transparent;
+        margin: 0 6px;
+        font-weight: bold;
+        transition: all 0.5s;
+        color: white;
+        background-color: rgba(255, 0, 0, 0.6);
+        padding: 1px 6px;
+        &:hover {
+            background-color: red;
+        }
+    }
+}
+
+.btn-save {
+    border: 1px solid #000;
+    color: #000;
+    font-weight: bold;
+}
+
+.btn-cancel {
+    color: white;
+    background-color: #b91c1c;
+    font-weight: bold;
+}

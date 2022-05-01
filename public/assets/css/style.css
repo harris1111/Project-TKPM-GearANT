@@ -312,6 +312,7 @@ input {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
 }
 
 #scrollUp:hover {
@@ -374,7 +375,7 @@ input {
 
 /* Fixed Header */
 .sticky-nav.menu_fixed {
-  position: fixed;
+  position: fixed;  
   top: 0;
   left: 0;
   width: 100%;

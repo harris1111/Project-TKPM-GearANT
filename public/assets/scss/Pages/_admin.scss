@@ -1,0 +1,57 @@
+.admin {
+    background-color: #ccc;
+    .admin__content {
+        background-color: $color-6;
+        .admin__item {
+            display: block;
+            width: 100%;
+            margin-bottom: 6px;
+            background-color: #333333;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 10px 10px 10px 30px;
+            color: white;
+            align-items: center;
+            transition: all 0.5s;
+            &:hover {
+                background: $color-bg;
+                color: white;
+                padding-left: 40px;
+            }
+        }
+        .admin__item-active {
+            background: $color-bg;
+        }
+    }
+}
+
+.bigCate {
+    width: 90%;
+    margin: 0 auto;
+    .bigCate-title {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        h3 {
+            color: #fb5d5d;
+            font-weight: bold;
+        }
+        button{
+            padding: 8px 10px;
+            border: none;
+            font-weight: bold;
+            transition: 1s ease-out;
+            i{
+                transition: 1s ease-out;
+            }
+            &:hover{
+                color: #fb5d5d;
+                i{
+                    transform: rotate(1turn);
+                    color: #fb5d5d;
+                }
+            }
+        }
+
+    }
+}

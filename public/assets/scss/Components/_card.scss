@@ -1,0 +1,94 @@
+.card-item {
+    position: relative;
+    width: 100%;
+    box-shadow: 0px 0px 16px -4px rgba(0, 0, 0, 0.06);
+    margin: 10px 0;
+    .card {
+        margin: 0 auto;
+        .card-img-top {
+            box-shadow: 0px 0px 16px -4px rgba(0, 0, 0, 0.06);
+        }
+        .card-body {
+            padding: 10px;
+            .card-title {
+                font-size: 18px;
+                font-weight: 700;
+                color: black;
+                margin-bottom: 8px;
+            }
+            .card-price {
+                p {
+                    font-size: 20px;
+                    font-weight: 700;
+                    color: #fb5332;
+                    margin: 0;
+                    display: inline-block;
+                }
+            }
+            .card-sold {
+                float: right;
+            }
+        }
+        .card__overlay {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            text-align: center;
+            background-color: rgba(63, 63, 63, 0.7);
+            -webkit-transition: all 0.5s;
+            transition: all 0.5s;
+            opacity: 0;
+            .card__overlay-detail {
+                position: absolute;
+                top: 15%;
+                left: 50%;
+                -webkit-transform: translateX(-50%);
+                transform: translateX(-50%);
+                width: 60%;
+                background-color: #3fa1fa;
+                text-decoration: none;
+                border-radius: 20px;
+                color: #fff;
+                font-size: 15px;
+                padding: 8px 0;
+                -webkit-transition: all 0.5s;
+                transition: all 0.5s;
+                i {
+                    padding-right: 10px;
+                }
+            }
+            .card__overlay-cart {
+                position: absolute;
+                bottom: 15%;
+                left: 50%;
+                -webkit-transform: translateX(-50%);
+                transform: translateX(-50%);
+                width: 60%;
+                background-color: #ff2020;
+                border: 0;
+                border-radius: 50px;
+                padding: 8px 0;
+                font-size: 15px;
+                color: #fff;
+                -webkit-transition: all 0.5s;
+                transition: all 0.5s;
+                i{
+                    padding-right: 10px;
+                }
+            }
+        }
+        &:hover{
+            .card__overlay{
+                opacity: 1;
+                .card__overlay-detail{
+                    top: 37%;
+                }
+                .card__overlay-cart {
+                    bottom: 37%;
+                }
+            }
+        }
+    }
+}

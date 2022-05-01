@@ -164,7 +164,7 @@ router.post('/forget-password', async function(req, res) {
     await userModel.updateUser(req.body);
     return res.redirect('/confirm-otp');
 });
-
+// otp ended
 
 router.post('/confirm-otp', async function(req, res) {
     const email = req.session.forgetUser;
