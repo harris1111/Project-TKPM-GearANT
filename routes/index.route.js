@@ -146,21 +146,20 @@ router.get('/register-success', async function(req, res) {
     res.render('otp/register-success');
 });
 
+router.get('/confirm-otp', async function(req, res) {
+    res.render('otp/confirm-otp');
+});
 router.post('/forget-password', async function(req, res) {
     const email = req.body.Email;
     const user = await userModel.findByEmail(email);
-    console.log(user);
-    console.log(req.body);
     if(user === null){
-        return res.render('otp/forget-password',{
+        return res.render('otp/forgot-password',{
             error: 'Email not found. Please try again!'
         });
     }
 
     req.session.forgetUser = email;
-    console.log(req.session.forgetUser);
     const otp = emailModel.sendOTP(email);
-    console.log(otp);
     req.body.OTP = otp.toString();
     await userModel.updateUser(req.body);
     return res.redirect('/confirm-otp');

@@ -41,7 +41,7 @@ export default {
         const passStr = 'This is your new password: ' + password +
             '\nPlease do not share it with anyone. \nYour password has been encrypted so that only you know it. You can change it later in settings';
         const mailOptions = {
-            from: "Horizon <horizon@gmail.com>",
+            from: "Gearant <horizon@gmail.com>",
             to: receiver,
             subject: 'New password',
             text: passStr
