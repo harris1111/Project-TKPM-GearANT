@@ -106,6 +106,29 @@ router.get('/username-available', async function(req, res) {
 });
 //register ended
 
+//otp
+router.get('/forgot-password', async function(req, res) {
+    res.render('otp/forgot-password');
+});
+
+
+router.get('/reset-success', async function(req, res) {
+    res.render('otp/reset-success');
+});
+
+router.get('/confirm-reset', async function(req, res) {
+    res.render('otp/confirm-otp');
+});
+
+router.get('/confirm-register', async function(req, res) {
+    res.render('otp/confirm-otp-register');
+});
+
+router.get('/register-success', async function(req, res) {
+    res.render('otp/register-success');
+});
+
+
 //log out
 router.post("/logout", async function(req, res) {
     req.session.auth = false;
