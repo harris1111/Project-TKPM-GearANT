@@ -1,0 +1,95 @@
+footer {
+    background-color: $color-1;
+    .footer-top {
+        padding: 50px 0;
+        .single-wedge {
+            padding-left: 50px;
+            .footer-logo {
+                img {
+                    width: 80px;
+                    height: auto;
+                }
+                span {
+                    color: $color-2;
+                }
+            }
+            .link-follow {
+                li {
+                    list-style: none;
+                    display: inline-block;
+                    a {
+                        color: $color-5;
+                        line-height: 32px;
+                        width: 32px;
+                        height: 32px;
+                        text-align: center;
+                        background-color: transparent;
+                        display: block;
+                        transition: all 0.5s;
+                        border-radius: 50%;
+                        &:hover {
+                            color: $color-5;
+                            background-color: $color-bg-2;
+                        }
+                    }
+                }
+            }
+            .footer-herading {
+                font-size: 20px;
+                text-transform: capitalize;
+                font-weight: 600;
+                margin-bottom: 27px;
+                position: relative;
+                color: $color-6;
+            }
+            .footer-links {
+                li {
+                    list-style: none;
+                    color: $color-7;
+                    .single-link {
+                        line-height: 27px;
+                        text-transform: capitalize;
+                        color: $color-7;
+                        transition: all 0.3s linear;
+                        &:hover {
+                            padding-left: 8px;
+                            color: $color-2;
+                        }
+                    }
+                }
+                p {
+                    margin-bottom: 5px;
+                    color: $color-7;
+                    a {
+                        color: $color-7;
+                        transition: all 0.5s;
+                        &:hover {
+                            color: $color-bg-2;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .footer-bottom {
+        background: #393939 none repeat scroll 0 0;
+        padding: 25px 0 20px 0;
+        .copy-text{
+            font-size: 14px;
+            line-height: 26px;
+            color: $color-8;
+            i{
+                color: $color-bg-2;
+                margin: 0 3px;
+                font-size: 16px;
+            }
+            .company-name{
+                color: $color-8;
+                transition: all .5s;
+                &:hover{
+                    color: $color-2;
+                }
+            }
+        }
+    }
+}

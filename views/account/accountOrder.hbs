@@ -4,7 +4,7 @@
 </div>
 {{else}}
 <div class="table_page table-responsive" style="width: 90%; min-height: 200px;max-height: 500px">
-    <table>
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>ID</th>
@@ -19,7 +19,7 @@
         <tbody>
             {{#each ordList}}
                 <tr>
-                    <td>{{this.OrderID}}</td>
+                    <td style="text-align: center;">{{this.OrderID}}</td>
                     <td style="text-align: center;">{{format_no_h this.Date}}</td>
                     <td class="{{this.color}}"><strong>
                         {{this.State}}

@@ -127,7 +127,7 @@ router.get('/confirm-register', async function(req, res) {
 router.get('/register-success', async function(req, res) {
     res.render('otp/register-success');
 });
-
+// otp ended
 
 //log out
 router.post("/logout", async function(req, res) {
