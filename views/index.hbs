@@ -1,36 +1,45 @@
+<div class="banner">
+    <div class="owl-carousel owl-theme myBanner">
+        <div class="item" style="background-image: url('https://tuanphong.vn/upload_images/images/2021/05/O-cung-SSD-M2-PCIe-256GB-Sabrent-ROCKET-NVMe-2280-xanh-PCIe-3_0-x4-8-.jpg');">
+        </div>
+        <div class="item" style="background-image: url('https://i.imgur.com/t8BT6HW.jpg');">
+        </div>
+        <div class="item" style="background-image: url('https://www.yeucongngheso.com/wp-content/uploads/2020/11/o-cung-ssd-samsung-980pro-1-1024x459.png');">
+        </div>
+    </div>
+</div>
 <div class="container py-5">
     <div class="section-title text-left mb-3">
         <h2 class="title line-height-1">CPU - 5 best sellers</h2>
     </div>
 
-    <div class="owl-carousel owl-theme">
+    <div class="owl-carousel owl-theme product-carousel">
         {{#each best_cpu}}
-            <div class="item card-item">
-                <div class="card">
-                    <img src="{{this.LinkURL}}" class="card-img-top" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">{{this.ProName}}</h5>
-                        <div class="card-price">
-                            <p class="card-price-num">{{format_number this.Price}}</p><span> </span>
-                        </div>
-                        <hr>
-                        <p class="card-sold">Sold: {{sold}}</p>
+        <div class="item card-item">
+            <div class="card">
+                <img src="{{this.LinkURL}}" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.ProName}}</h5>
+                    <div class="card-price">
+                        <p class="card-price-num">{{format_number this.Price}}</p><span> </span>
                     </div>
-                    <div class="card__overlay">
-                        <a href="/product/detail/{{ProID}}" class="card__overlay-detail" target="_blank">
-                            <i class="fa fa-arrow-circle-right"></i>Detail
-                        </a>
-                        <form class = "addCartForm" method = "post" action="/account/cart-add">
-                            <input type="hidden" name="ProID" value="{{this.ProID}}"/>
-                            <input type="hidden" class="Stock" name="Stock" value="1"/>
-                            <button type="submit"
-                                    class="card__overlay-cart">
-                                <i class="fa fa-shopping-cart"></i>Add to cart
-                            </button>
-                        </form>
-                    </div>
+                    <hr>
+                    <p class="card-sold">Sold: {{sold}}</p>
+                </div>
+                <div class="card__overlay">
+                    <a href="/product/detail/{{ProID}}" class="card__overlay-detail" target="_blank">
+                        <i class="fa fa-arrow-circle-right"></i>Detail
+                    </a>
+                    <form class="addCartForm" method="post" action="/account/cart-add">
+                        <input type="hidden" name="ProID" value="{{this.ProID}}" />
+                        <input type="hidden" class="Stock" name="Stock" value="1" />
+                        <button type="submit" class="card__overlay-cart">
+                            <i class="fa fa-shopping-cart"></i>Add to cart
+                        </button>
+                    </form>
                 </div>
             </div>
+        </div>
         {{/each}}
     </div>
 </div>
@@ -39,34 +48,33 @@
     <div class="section-title text-left mb-3">
         <h2 class="title line-height-1">RAM - 5 best sellers</h2>
     </div>
-    <div class="owl-carousel owl-theme">
+    <div class="owl-carousel owl-theme product-carousel">
         {{#each best_ram}}
-            <div class="item card-item">
-                <div class="card">
-                    <img src="{{this.LinkURL}}" class="card-img-top" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">{{this.ProName}}</h5>
-                        <div class="card-price">
-                            <p class="card-price-num">{{format_number this.Price}} </p>
-                        </div>
-                        <hr>
-                        <p class="card-sold">Sold: {{sold}}</p>
+        <div class="item card-item">
+            <div class="card">
+                <img src="{{this.LinkURL}}" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.ProName}}</h5>
+                    <div class="card-price">
+                        <p class="card-price-num">{{format_number this.Price}} </p>
                     </div>
-                    <div class="card__overlay">
-                        <a href="/product/detail/{{this.ProID}}" class="card__overlay-detail" target="_blank">
-                            <i class="fa fa-arrow-circle-right"></i>Detail
-                        </a>
-                        <form class = "addCartForm" method = "post" action="/account/cart-add">
-                            <input type="hidden" name="ProID" value="{{this.ProID}}"/>
-                            <input type="hidden" class="Stock" name="Stock" value="1"/>
-                            <button type="submit"
-                                    class="card__overlay-cart">
-                                <i class="fa fa-shopping-cart"></i>Add to cart
-                            </button>
-                        </form>
-                    </div>
+                    <hr>
+                    <p class="card-sold">Sold: {{sold}}</p>
+                </div>
+                <div class="card__overlay">
+                    <a href="/product/detail/{{this.ProID}}" class="card__overlay-detail" target="_blank">
+                        <i class="fa fa-arrow-circle-right"></i>Detail
+                    </a>
+                    <form class="addCartForm" method="post" action="/account/cart-add">
+                        <input type="hidden" name="ProID" value="{{this.ProID}}" />
+                        <input type="hidden" class="Stock" name="Stock" value="1" />
+                        <button type="submit" class="card__overlay-cart">
+                            <i class="fa fa-shopping-cart"></i>Add to cart
+                        </button>
+                    </form>
                 </div>
             </div>
+        </div>
         {{/each}}
     </div>
 </div>
@@ -75,34 +83,33 @@
     <div class="section-title text-left mb-3">
         <h2 class="title line-height-1">SSD - 5 best sellers</h2>
     </div>
-    <div class="owl-carousel owl-theme">
+    <div class="owl-carousel owl-theme product-carousel">
         {{#each best_ssd}}
-            <div class="item card-item">
-                <div class="card">
-                    <img src="{{this.LinkURL}}" class="card-img-top" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">{{this.ProName}}</h5>
-                        <div class="card-price">
-                            <p class="card-price-num">{{format_number this.Price}}</p><span> </span>
-                        </div>
-                        <hr>
-                        <p class="card-sold">Sold: {{sold}}</p>
+        <div class="item card-item">
+            <div class="card">
+                <img src="{{this.LinkURL}}" class="card-img-top" alt="">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.ProName}}</h5>
+                    <div class="card-price">
+                        <p class="card-price-num">{{format_number this.Price}}</p><span> </span>
                     </div>
-                    <div class="card__overlay">
-                        <a href="/product/detail/{{ProID}}" class="card__overlay-detail" target="_blank">
-                            <i class="fa fa-arrow-circle-right"></i>Detail
-                        </a>
-                        <form class = "addCartForm" method = "post" action="/account/cart-add">
-                            <input type="hidden" name="ProID" value="{{this.ProID}}"/>
-                            <input type="hidden" class="Stock" name="Stock" value="1"/>
-                            <button type="submit"
-                                    class="card__overlay-cart">
-                                <i class="fa fa-shopping-cart"></i>Add to cart
-                            </button>
-                        </form>
-                    </div>
+                    <hr>
+                    <p class="card-sold">Sold: {{sold}}</p>
+                </div>
+                <div class="card__overlay">
+                    <a href="/product/detail/{{ProID}}" class="card__overlay-detail" target="_blank">
+                        <i class="fa fa-arrow-circle-right"></i>Detail
+                    </a>
+                    <form class="addCartForm" method="post" action="/account/cart-add">
+                        <input type="hidden" name="ProID" value="{{this.ProID}}" />
+                        <input type="hidden" class="Stock" name="Stock" value="1" />
+                        <button type="submit" class="card__overlay-cart">
+                            <i class="fa fa-shopping-cart"></i>Add to cart
+                        </button>
+                    </form>
                 </div>
             </div>
+        </div>
         {{/each}}
     </div>
 </div>

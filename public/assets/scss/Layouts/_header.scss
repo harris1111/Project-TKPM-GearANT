@@ -50,11 +50,11 @@
                                     top: -7px;
                                     display: none;
                                 }
-                                &:hover>a {
+                                &:hover > a {
                                     color: #fb5d5d;
                                     background-color: #f1f1f1;
                                 }
-                                &:hover{ 
+                                &:hover {
                                     .submenu {
                                         display: block;
                                     }
@@ -127,7 +127,7 @@
     }
 }
 .sticky-nav {
-    .main_fixed {
+    &.menu_fixed {
         position: fixed;
         top: 0;
         left: 0;
@@ -136,5 +136,14 @@
         animation: sticky 1s;
         box-shadow: 2px 4px 8px rgba(51, 51, 51, 0.25);
         background-color: $color-1;
+    }
+    @keyframes sticky {
+        0% {
+            transform: translateY(-100%);
+        }
+
+        100% {
+            transform: translateY(0%);
+        }
     }
 }

@@ -79,6 +79,46 @@ input {
   outline: 0;
 }
 
+.owl-carousel .owl-nav button.owl-prev, .owl-carousel .owl-nav button.owl-next {
+  color: #fffefe;
+  opacity: 0.5;
+  background-color: #cfcfcf;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 2px 8px 2px #474747;
+          box-shadow: 0 2px 8px 2px #474747;
+  font-size: 40px;
+  line-height: 40px;
+  position: absolute;
+  top: 35%;
+}
+
+.owl-carousel .owl-nav button.owl-prev:hover, .owl-carousel .owl-nav button.owl-next:hover {
+  background-color: #fffefe;
+  color: #474747;
+}
+
+.owl-carousel .owl-nav button.owl-prev:focus, .owl-carousel .owl-nav button.owl-next:focus {
+  outline: none;
+}
+
+.owl-carousel .owl-nav button.owl-prev {
+  left: 30px;
+}
+
+.owl-carousel .owl-nav button.owl-next {
+  right: 30px;
+}
+
+.owl-theme.myBanner .owl-dots {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+}
+
 .header-main {
   background-color: #333333;
 }
@@ -227,7 +267,7 @@ input {
   padding-left: 20px;
 }
 
-.sticky-nav .main_fixed {
+.sticky-nav.menu_fixed {
   position: fixed;
   top: 0;
   left: 0;
@@ -238,6 +278,28 @@ input {
   -webkit-box-shadow: 2px 4px 8px rgba(51, 51, 51, 0.25);
           box-shadow: 2px 4px 8px rgba(51, 51, 51, 0.25);
   background-color: #333333;
+}
+
+@-webkit-keyframes sticky {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+  100% {
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+  }
+}
+
+@keyframes sticky {
+  0% {
+    -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+  }
+  100% {
+    -webkit-transform: translateY(0%);
+            transform: translateY(0%);
+  }
 }
 
 footer {
@@ -890,6 +952,13 @@ footer .footer-bottom .copy-text .company-name:hover {
 .feature-area .single-feature:hover .feature-icon img {
   -webkit-transform: scale(0.9) rotate(3deg);
           transform: scale(0.9) rotate(3deg);
+}
+
+.banner .item {
+  height: 400px;
+  background-size: cover;
+  background-image: none;
+  background-position: center;
 }
 
 .login-register-area .login-register-wrapper .login-register-tab-list {
