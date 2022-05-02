@@ -3,59 +3,57 @@
     No order to show yet!
 </div>
 {{else}}
-<div class="table_page table-responsive" style="width: 90%; min-height: 200px;max-height: 500px">
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th style="text-align: center; width: 150px">Date</th>
-                <th>Status</th>
-                <th>Product</th>
-                <th>Total</th>
-                <th scope="col" class="text-center">&nbsp;</th>
-            </tr>
-        </thead>
+<div class="bigCate">
+    <div class="table-responsive" style="width: 90%; min-height: 200px;max-height: 500px">
+        <table class="table table-bordered">
+            <thead>
+                <tr class="table-active">
+                    <th>ID</th>
+                    <th style="text-align: center; width: 150px">Date</th>
+                    <th>Status</th>
+                    <th>Product</th>
+                    <th>Total</th>
+                    <th scope="col" class="text-center">&nbsp;</th>
+                </tr>
+            </thead>
 
-        <tbody>
-            {{#each ordList}}
+            <tbody>
+                {{#each ordList}}
                 <tr>
                     <td style="text-align: center;">{{this.OrderID}}</td>
                     <td style="text-align: center;">{{format_no_h this.Date}}</td>
-                    <td class="{{this.color}}"><strong>
-                        {{this.State}}
-                    </strong>
+                    <td class="{{this.color}}" style="vertical-align: middle; text-align: center;"><strong>
+                            {{this.State}}
+                        </strong>
                     </td>
-                    <td>
-                        <table>
+                    <td style="padding: 0" class="table-customize">
+                        <table class="table table-bordered" style="margin: 0; width: 100%">
                             {{#each this.Orders}}
-                                <tr>
-                                    <td style="border: none; padding:0; text-align:left;">
-                                        <a class = "text-dark"
-                                           href="/product/detail/{{this.ProID}}">
-                                            {{this.ProName}}
-                                        </a>
-                                    </td>
-                                    <td style="border: none; padding:0; min-width: 50px; color:#24262b; text-align: right">
-                                        {{this.Stock}}x</td>
-                                </tr>
+                            <tr>
+                                <td style="text-align:left; border-top:0; border-left: 0; margin:0;">
+                                    <a class="text-dark" href="/product/detail/{{this.ProID}}">
+                                        {{this.ProName}}
+                                    </a>
+                                </td>
+                                <td style="border-left: 0;border-top:0 ;border-right: 0;width: 50px; color:#24262b; text-align: center; margin:0;">
+                                    {{this.Stock}}x</td>
+                            </tr>
                             {{/each}}
                         </table>
                     </td>
                     <td class="text-danger"><strong>
-                        {{format_number this.Total}}
-                    </strong></td>
-                    <td>
+                            {{format_number this.Total}}
+                        </strong></td>
+                    <td style="vertical-align: middle; text-align:center">
                         <div class="receivedForm">
-                            <button type="button" data-bs-toggle="modal" {{#if this.preventReceive}}
-                                disabled class="disabled"
-                            {{/if}}
-                                    data-bs-target="#exampleModalReceived{{this.OrderID}}">Received
+                            <button type="button" data-bs-toggle="modal" {{#if this.preventReceive}} disabled
+                                class="disabled" {{/if}} data-bs-target="#exampleModalReceived{{this.OrderID}}">Received
                             </button>
                         </div>
                     </td>
 
-                    <div class="modal" id="exampleModalReceived{{this.OrderID}}"
-                         tabindex="-1" aria-labelledby="exampleModalReceivedLabel" aria-hidden="true">
+                    <div class="modal" id="exampleModalReceived{{this.OrderID}}" tabindex="-1"
+                        aria-labelledby="exampleModalReceivedLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                                 <div class="modal-body">
@@ -72,8 +70,9 @@
                         </div>
                     </div>
                 </tr>
-            {{/each}}
-        </tbody>
-    </table>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
 </div>
 {{/if}}

@@ -612,7 +612,6 @@ footer .footer-bottom .copy-text .company-name:hover {
 .receivedForm button {
   background-color: #33cc33;
   border: 1px solid transparent;
-  margin: 0 6px;
   font-weight: bold;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
@@ -804,41 +803,18 @@ footer .footer-bottom .copy-text .company-name:hover {
           transform: skewX(30deg) translateX(-10px);
 }
 
-.table_page {
-  margin: 0 auto;
+.table-customize table {
+  border: none;
 }
 
-.table_page table {
-  width: 100%;
-  caption-side: bottom;
-  border-collapse: collapse;
+.table-customize table tr {
+  border: none;
 }
 
-.table_page table thead {
-  background: #f2f2f2;
-}
-
-.table_page table thead tr th {
-  color: #24262b;
-  border-bottom: 3px solid #fb5d5d;
-  font-size: 16px;
-  font-weight: 600;
-  text-transform: capitalize;
-  padding: 10px;
-  text-align: center;
-}
-
-.table_page table tbody tr td {
-  font-weight: 600;
-  text-transform: capitalize;
-  font-size: 14px;
-  text-align: center;
-  min-width: 100px;
-  padding: 10px;
-}
-
-.table_page table tbody tr td:last-child {
-  color: #fb5d5d;
+.table-customize table tr td {
+  border-top: 1px solid;
+  border-color: #e5e5e5;
+  border-bottom: 0px;
 }
 
 .modal-content {
