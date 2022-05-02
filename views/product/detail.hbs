@@ -73,7 +73,7 @@
 <!-- breadcrumb-area end -->
 
 <!-- Product Details Area Start -->
-<div class="product-details-area pt-100px pb-100px">
+<div class="product-details-area section">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-sm-12 col-xs-12 mb-lm-30px mb-md-30px mb-sm-30px">
@@ -135,9 +135,9 @@
 
                                         {{#if auth}}
                                             <button class="add-cart"
-                                                    type="submit"> Add To Cart</button>
+                                                    type="submit"><span>Add To Cart</span> </button>
                                         {{else}}
-                                            <button class="add-cart isLogin" type="button"> Add To Cart</button>
+                                            <button class="add-cart isLogin" type="button"><span>Add To Cart</span></button>
                                         {{/if}}
 
                                     </form></span>
@@ -149,9 +149,9 @@
                                         <input type="hidden" class="stock" name="Stock"/>
 
                                         {{#if auth}}
-                                            <button class="buy-cart" type="submit">Buy now</button>
+                                            <button class="buy-cart" type="submit"><span>Buy now</span></button>
                                         {{else}}
-                                            <button class="buy-cart isLogin" type="button">Buy now</button>
+                                            <button class="buy-cart isLogin" type="button"><span>Buy now</span></button>
                                         {{/if}}
                                     </form>
                                 </span>
@@ -163,7 +163,7 @@
         </div>
     </div>
 
-    <div class="container pt-50px pb-50px">
+    <div class="container section-2">
         <div class="product-description">
             <div class="product-description-title">
                 <p>Description</p>
@@ -213,8 +213,6 @@
                     </div>
                 </div>
             {{/each}}
-
         </div>
     </div>
-
 </div>

@@ -1,0 +1,20 @@
+.otp{
+    .otp__content{
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+        box-shadow: 5px 5px 50px -10px rgba(0,0,0,0.09);
+        label{
+
+        }
+        input{
+            width: 80%;
+            padding: 10px 10px;
+        }
+        .otp-btn{
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+        }
+    }
+}

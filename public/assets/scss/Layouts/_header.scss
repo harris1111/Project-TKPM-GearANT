@@ -39,11 +39,37 @@
                             border-color: #fb5d5d;
                         }
                     }
+                    .dropdown {
+                        .dropdown-menu {
+                            display: none;
+                            li {
+                                position: relative;
+                                .submenu {
+                                    position: absolute;
+                                    left: 100%;
+                                    top: -7px;
+                                    display: none;
+                                }
+                                &:hover>a {
+                                    color: #fb5d5d;
+                                    background-color: #f1f1f1;
+                                }
+                                &:hover{ 
+                                    .submenu {
+                                        display: block;
+                                    }
+                                }
+                            }
+                        }
+                        .show {
+                            display: block;
+                        }
+                    }
                 }
             }
-            #widgets-searchbox{
+            #widgets-searchbox {
                 position: relative;
-                .input-field{
+                .input-field {
                     border: 1px solid $color-3;
                     border-radius: 10px;
                     width: 200px;
@@ -55,7 +81,7 @@
                     color: $color-4;
                     background-color: transparent;
                 }
-                .widgets-searchbox-btn{
+                .widgets-searchbox-btn {
                     background-color: transparent;
                     border: 0;
                     border-left: 1px solid $color-3;
@@ -68,34 +94,34 @@
                     padding-right: 15px;
                     color: $color-3;
                     // line-height: 1;
-                    transition: all .3s;
+                    transition: all 0.3s;
                 }
             }
         }
     }
-    .header-actions{
+    .header-actions {
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        .header-action-btn{
+        .header-action-btn {
             position: relative;
             color: #fff;
             display: flex;
             margin-right: 20px;
-            i{
-                transition: all .3s;
+            i {
+                transition: all 0.3s;
                 font-size: 25px;
             }
-            span{
+            span {
                 color: $color-2;
             }
-            &:hover{
-                i{
+            &:hover {
+                i {
                     color: #fb5d5d;
                 }
             }
         }
-        .logout-btn{
+        .logout-btn {
             padding-left: 20px;
         }
     }

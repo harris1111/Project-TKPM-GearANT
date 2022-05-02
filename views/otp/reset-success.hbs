@@ -1,23 +1,28 @@
-<div class="pt-100px" style="width: 50%; margin: 0 auto;">
-
-    <div class="container mx-auto flex justify-center pt-16">
-        <div class="w-96  p-8 border border-cyan-700 shadow-2xl ">
-            <div class="text-green-500 font-semibold">
-                Password has been reset!
+<div class="otp section height-full container">
+    <div class="otp__content flex justify-center">
+        <div class="border border-cyan-700 otp__item">
+            <div class="section-title">
+                <p class="title">
+                    Password has been reset!
+                </p>
             </div>
-            <div style="text-align:justify" class="text-sm font-light text-left">
-                We have sent the new password to your email.
+            <div>
+                <p class="fs-5">
+                    We have sent the new password to your email.
                 Please log in with the new password.
                 You can change it later in settings.
+                </p>
+                <p class="fs-5">
+                   *Your password has been encrypted so Horizon does not know it!
+                </p>
             </div>
-            <div style="text-align:justify" class="text-key mt-2 text-xs font-light text-left">
-                <i>*Your password has been encrypted so Horizon does not know it!</i>
+            <div class="otp-btn">
+                <a href="/login">
+                    <button class="add-cart">
+                        <span>GOT IT</span>
+                    </button>
+                </a>
             </div>
-            <a href="/login">
-                <button class="bg-cyan-700 w-full mt-2 shadow-md py-2 px-4 hover:bg-cyan-800 font-medium transition duration-500 text-white">
-                    GOT IT
-                </button>
-            </a>
         </div>
     </div>
 </div>
