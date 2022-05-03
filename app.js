@@ -25,7 +25,7 @@ activate_locals(app);
 activate_route(app);
 
 const port = process.env.PORT || 8080;
-// app.listen(port, function () {});
-const server = https.createServer({ key: key, cert: cert }, app).listen(8080);
+app.listen(port, function () {});
+//const server = https.createServer({ key: key, cert: cert }, app).listen(8080);
 //server.listen(port, function () {});
 console.log(`Listening on localhost:${port}`);
