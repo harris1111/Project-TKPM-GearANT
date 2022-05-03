@@ -62,7 +62,7 @@ router.get(
   async function (req, res, next) {
     if (req.session.auth === true) {
       return res.redirect("/");
-    } else return res.render("login");
+    } else return res.render("register");
   }
 );
 router.post("/login", recaptcha.middleware.verify, async function (req, res) {
