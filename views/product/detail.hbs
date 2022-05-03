@@ -1,61 +1,61 @@
 {{#section 'js'}}
-    <script>
-        document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';
-        $('#formAddCart').on('submit', function (event) {
-            event.preventDefault();
-            const quantity = document.getElementById('quantity').value;
+<script>
+    document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';
+    $('#formAddCart').on('submit', function (event) {
+        event.preventDefault();
+        const quantity = document.getElementById('quantity').value;
 
-            if (+quantity < 1) {
-                swal('Minimum quantity is 1!');
-                return;
-            }
+        if (+quantity < 1) {
+            swal('Minimum quantity is 1!');
+            return;
+        }
 
-            const stock = +{{product.Stock}}
-            if (+quantity > stock){
-                const str= `Sorry, we have only ${stock} products left!`
-                swal(str);
-                return;
-            }
+        const stock = +{{ product.Stock }}
+            if (+quantity > stock) {
+        const str = `Sorry, we have only ${stock} products left!`
+        swal(str);
+        return;
+    }
 
-            $('.stock').val(+quantity)
-            swal("Success!", "This product has been added to cart!", "success").then(() => {
-                $('#formAddCart').off('submit').submit();
-                return;
+    $('.stock').val(+quantity)
+    swal("Success!", "This product has been added to cart!", "success").then(() => {
+        $('#formAddCart').off('submit').submit();
+        return;
+    });
+        });
+
+    $('#formBuyNow').on('submit', function (event) {
+        event.preventDefault();
+        const quantity = document.getElementById('quantity').value;
+
+        if (+quantity < 1) {
+            swal('Minimum quantity is 1!');
+            return;
+        }
+
+        const stock = +{{ product.Stock }}
+            if (+quantity > stock) {
+        const str = `Sorry, we have only ${stock} products left!`
+        swal(str);
+        return;
+    }
+
+    $('.stock').val(+quantity)
+    $('#formBuyNow').off('submit').submit();
+        });
+</script>
+
+<script>
+    $('.isLogin').click(function (e) {
+        if (!{{ this.auth }}) {
+        swal("Please log in to continue!")
+            .then((value) => {
+                if (value)
+                    window.location.href = "/login";
             });
-        });
-
-        $('#formBuyNow').on('submit', function (event) {
-            event.preventDefault();
-            const quantity = document.getElementById('quantity').value;
-
-            if (+quantity < 1) {
-                swal('Minimum quantity is 1!');
-                return;
-            }
-
-            const stock = +{{product.Stock}}
-            if (+quantity > stock){
-                const str= `Sorry, we have only ${stock} products left!`
-                swal(str);
-                return;
-            }
-
-            $('.stock').val(+quantity)
-            $('#formBuyNow').off('submit').submit();
-        });
-    </script>
-
-    <script>
-        $('.isLogin').click(function (e) {
-            if(!{{this.auth}}) {
-                swal("Please log in to continue!")
-                        .then((value) => {
-                            if(value)
-                                window.location.href = "/login";
-                        });
-            }
+    }
         })
-    </script>
+</script>
 {{/section}}
 
 <div class="breadcrumb-area">
@@ -118,44 +118,41 @@
                     </div>
                     <div class="pro-details-quality">
                         {{#if product.outstock}}
-                            <p class="text-danger"><strong>Out of stock</strong></p>
+                        <p class="text-danger"><strong>Out of stock</strong></p>
                         {{else}}
-                            <div class="cart-plus-minus">
-                                <input id = "quantity"
-                                       class="cart-plus-minus-box" min="1" value="1"
-                                    name="quantity"/>
-                            </div>
-                            <div class="d-flex">
-                                <span class="pro-details-cart">
-                                    <form id="formAddCart"
-                                            method="post" action="/account/cart-add">
-                                        <input type="hidden" name="Username" value="{{authUser.Username}}"/>
-                                        <input type="hidden" name="ProID" value="{{product.ProID}}"/>
-                                        <input type="hidden" class="stock" name="Stock"/>
+                        <div class="cart-plus-minus">
+                            <input id="quantity" class="cart-plus-minus-box" min="1" value="1" name="quantity" />
+                        </div>
+                        <div class="d-flex">
+                            <span class="pro-details-cart">
+                                <form id="formAddCart" method="post" action="/account/cart-add">
+                                    <input type="hidden" name="Username" value="{{authUser.Username}}" />
+                                    <input type="hidden" name="ProID" value="{{product.ProID}}" />
+                                    <input type="hidden" class="stock" name="Stock" />
 
-                                        {{#if auth}}
-                                            <button class="add-cart"
-                                                    type="submit"><span>Add To Cart</span> </button>
-                                        {{else}}
-                                            <button class="add-cart isLogin" type="button"><span>Add To Cart</span></button>
-                                        {{/if}}
+                                    {{#if auth}}
+                                    <button class="add-cart" type="submit"><span>Add To Cart</span> </button>
+                                    {{else}}
+                                    <button class="add-cart isLogin" type="button"><span>Add To Cart</span></button>
+                                    {{/if}}
 
-                                    </form></span>
+                                </form>
+                            </span>
 
-                                <span class="pro-details-cart">
-                                    <form method="get" id="formBuyNow"
-                                          action="/product/buynow?ProID={{product.ProID}}&Stock=1">
-                                        <input type="hidden" name="ProID" value="{{product.ProID}}"/>
-                                        <input type="hidden" class="stock" name="Stock"/>
+                            <span class="pro-details-cart">
+                                <form method="get" id="formBuyNow"
+                                    action="/product/buynow?ProID={{product.ProID}}&Stock=1">
+                                    <input type="hidden" name="ProID" value="{{product.ProID}}" />
+                                    <input type="hidden" class="stock" name="Stock" />
 
-                                        {{#if auth}}
-                                            <button class="buy-cart" type="submit"><span>Buy now</span></button>
-                                        {{else}}
-                                            <button class="buy-cart isLogin" type="button"><span>Buy now</span></button>
-                                        {{/if}}
-                                    </form>
-                                </span>
-                            </div>
+                                    {{#if auth}}
+                                    <button class="buy-cart" type="submit"><span>Buy now</span></button>
+                                    {{else}}
+                                    <button class="buy-cart isLogin" type="button"><span>Buy now</span></button>
+                                    {{/if}}
+                                </form>
+                            </span>
+                        </div>
                         {{/if}}
                     </div>
                 </div>
@@ -184,7 +181,7 @@
             </div>
         </div>
 
-        <div class="owl-carousel owl-theme pt-3">
+        <div class="owl-carousel owl-theme pt-3 product-carousel">
             {{#each related_products}}
                 <div class="item card-item">
                     <div class="card">
@@ -201,11 +198,10 @@
                             <a href="/product/detail/{{this.ProID}}" class="card__overlay-detail">
                                 <i class="fa fa-arrow-circle-right"></i>Detail
                             </a>
-                            <form class = "addCartForm" method = "post" action="/account/cart-add">
-                                <input type="hidden" name="ProID" value="{{this.ProID}}"/>
-                                <input type="hidden" class="Stock" name="Stock" value="1"/>
-                                <button type="submit"
-                                        class="card__overlay-cart">
+                            <form class="addCartForm" method="post" action="/account/cart-add">
+                                <input type="hidden" name="ProID" value="{{this.ProID}}" />
+                                <input type="hidden" class="Stock" name="Stock" value="1" />
+                                <button type="submit" class="card__overlay-cart">
                                     <i class="fa fa-shopping-cart"></i>Add to cart
                                 </button>
                             </form>
@@ -213,6 +209,7 @@
                     </div>
                 </div>
             {{/each}}
+
         </div>
     </div>
 </div>
