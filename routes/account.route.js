@@ -242,6 +242,8 @@ router.post("/change-password", async (req, res, next) => {
     //     error: 'Incorrect password! Please try again!',
     //     layout: "account.hbs"
     // });
+    const url = '/account/changePass';
+    res.redirect(url);
   } else {
     req.session.resChange = true
   }
