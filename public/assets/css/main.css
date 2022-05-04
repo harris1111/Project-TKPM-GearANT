@@ -79,6 +79,12 @@ input {
   outline: 0;
 }
 
+@media screen and (max-width: 768px) {
+  .container-fluid {
+    padding: 0 15px;
+  }
+}
+
 .owl-carousel .owl-nav button.owl-prev, .owl-carousel .owl-nav button.owl-next {
   color: #fffefe;
   opacity: 0.5;
@@ -302,6 +308,40 @@ input {
   }
 }
 
+@media screen and (max-width: 991px) {
+  .header-main .navbar .offcanvas .main-menu ul .dropdown .dropdown-menu {
+    margin-left: 0.7rem;
+    margin-right: 0.7rem;
+    margin-bottom: 0.5rem;
+  }
+  .header-main .navbar .offcanvas #widgets-searchbox .input-field {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header-main .navbar .header-logo img {
+    width: 60px;
+    height: auto;
+  }
+  .header-main .navbar .offcanvas .main-menu ul li .main-menu-link {
+    margin: 10px 0;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .header-main .navbar .header-logo img {
+    width: 30px;
+    height: auto;
+  }
+  .header-main .navbar .header-logo p {
+    display: none;
+  }
+  .header-main .navbar .offcanvas .main-menu ul li .main-menu-link {
+    margin: 10px 0;
+  }
+}
+
 footer {
   background-color: #333333;
 }
@@ -407,12 +447,29 @@ footer .footer-bottom .copy-text i {
 
 footer .footer-bottom .copy-text .company-name {
   color: #d8d8d8;
-  -webkit-transition: all .5s;
-  transition: all .5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }
 
 footer .footer-bottom .copy-text .company-name:hover {
   color: #fd3d6b;
+}
+
+@media screen and (max-width: 768px) {
+  footer .footer-top .single-wedge .footer-logo img {
+    width: 60px;
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  footer .footer-top .single-wedge .footer-logo img {
+    width: 40px;
+    height: auto;
+  }
+  footer .footer-top .single-wedge .footer-logo p {
+    font-size: 15px;
+  }
 }
 
 .breadcrumb-area {
@@ -479,6 +536,13 @@ footer .footer-bottom .copy-text .company-name:hover {
 
 .account__item .account_login_form .default-form-box input:focus {
   border-color: #fb5d5d;
+}
+
+@media screen and (max-width: 991px) {
+  .account__item {
+    width: 90%;
+    margin: 0 auto;
+  }
 }
 
 .card-item {
@@ -588,6 +652,21 @@ footer .footer-bottom .copy-text .company-name:hover {
   bottom: 37%;
 }
 
+@media screen and (max-width: 576px) {
+  .card-item .card .card__overlay .card__overlay-detail {
+    width: 80%;
+  }
+  .card-item .card .card__overlay .card__overlay-cart {
+    width: 80%;
+  }
+  .card-item .card:hover .card__overlay .card__overlay-detail {
+    top: 33%;
+  }
+  .card-item .card:hover .card__overlay .card__overlay-cart {
+    bottom: 33%;
+  }
+}
+
 .section-title .title {
   font-size: 36px;
   font-family: "Nunito Sans", sans-serif;
@@ -651,6 +730,15 @@ footer .footer-bottom .copy-text .company-name:hover {
 
 .height-full-2 {
   height: 160vh;
+}
+
+@media (max-width: 991px) {
+  .height-full {
+    height: auto;
+  }
+  .height-full-2 {
+    height: auto;
+  }
 }
 
 .save_button button {
@@ -756,7 +844,7 @@ footer .footer-bottom .copy-text .company-name:hover {
 
 .add-cart {
   position: relative;
-  padding: 0 35px;
+  padding: 0 34px;
   height: 50px;
   font-size: 14px;
   font-weight: 600;
@@ -811,7 +899,7 @@ footer .footer-bottom .copy-text .company-name:hover {
 
 .buy-cart {
   position: relative;
-  padding: 0 35px;
+  padding: 0 34px;
   height: 50px;
   font-size: 14px;
   font-weight: 600;
@@ -1048,6 +1136,13 @@ footer .footer-bottom .copy-text .company-name:hover {
 .login-register-area .login-register-wrapper .login-form-container .login-register-form .button-box button:hover {
   background-color: #fb5d5d;
   color: #fff;
+}
+
+@media screen and (max-width: 991px) {
+  .login-register-area .login-register-wrapper .login-form-container {
+    padding: 10px;
+    text-align: left;
+  }
 }
 
 .admin {
@@ -1407,5 +1502,18 @@ footer .footer-bottom .copy-text .company-name:hover {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+}
+
+@media screen and (max-width: 991px) {
+  .otp .otp__content {
+    width: 90%;
+  }
+  .otp .otp__content label {
+    font-size: 26px;
+  }
+  .otp .otp__content input {
+    width: 90%;
+    padding: 10px 10px;
+  }
 }
 /*# sourceMappingURL=main.css.map */

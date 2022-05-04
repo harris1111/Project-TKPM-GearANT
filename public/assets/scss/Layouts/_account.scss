@@ -22,10 +22,17 @@
                 background-color: #fff;
                 border: 1px solid #e2e2e2;
                 line-height: 45px;
-                &:focus{
+                &:focus {
                     border-color: #fb5d5d;
                 }
             }
         }
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .account__item {
+        width: 90%;
+        margin: 0 auto;
     }
 }

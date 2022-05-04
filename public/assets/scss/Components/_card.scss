@@ -74,15 +74,15 @@
                 color: #fff;
                 -webkit-transition: all 0.5s;
                 transition: all 0.5s;
-                i{
+                i {
                     padding-right: 10px;
                 }
             }
         }
-        &:hover{
-            .card__overlay{
+        &:hover {
+            .card__overlay {
                 opacity: 1;
-                .card__overlay-detail{
+                .card__overlay-detail {
                     top: 37%;
                 }
                 .card__overlay-cart {
@@ -92,3 +92,29 @@
         }
     }
 }
+
+@media screen and (max-width: 576px) {
+    .card-item {
+        .card {
+            .card__overlay {
+                .card__overlay-detail {
+                    width: 80%;
+                }
+                .card__overlay-cart {
+                    width: 80%;
+                }
+            }
+            &:hover {
+                .card__overlay {
+                    .card__overlay-detail {
+                        top: 33%;
+                    }
+                    .card__overlay-cart {
+                        bottom: 33%;
+                    }
+                }
+            }
+        }
+    }
+}
+

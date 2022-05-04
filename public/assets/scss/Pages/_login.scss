@@ -30,8 +30,8 @@
                         color: $color-bg-2;
                     }
                 }
-                &.active{
-                    h4{
+                &.active {
+                    h4 {
                         color: #fb5d5d;
                     }
                 }
@@ -74,6 +74,22 @@
                             background-color: #fb5d5d;
                             color: #fff;
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .login-register-area {
+        .login-register-wrapper {
+            .login-form-container {
+                padding: 10px;
+                text-align: left;
+                .login-register-form {
+                    input {
+                        
                     }
                 }
             }

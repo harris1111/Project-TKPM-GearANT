@@ -62,7 +62,7 @@ ul {
     width: 100%;
 }
 
-input{
+input {
     display: inline-block;
     line-height: 50px;
     height: 50px;
@@ -75,4 +75,10 @@ input{
     box-shadow: none;
     -webkit-box-shadow: none;
     outline: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .container-fluid {
+        padding: 0 15px;
+    }
 }

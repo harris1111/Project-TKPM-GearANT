@@ -13,3 +13,12 @@
 .height-full-2 {
     height: 160vh;
 }
+
+@media (max-width: 991px) {
+    .height-full {
+        height: auto;
+    }
+    .height-full-2 {
+        height: auto;
+    }
+}

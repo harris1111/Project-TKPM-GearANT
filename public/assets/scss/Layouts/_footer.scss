@@ -74,20 +74,53 @@ footer {
     .footer-bottom {
         background: #393939 none repeat scroll 0 0;
         padding: 25px 0 20px 0;
-        .copy-text{
+        .copy-text {
             font-size: 14px;
             line-height: 26px;
             color: $color-8;
-            i{
+            i {
                 color: $color-bg-2;
                 margin: 0 3px;
                 font-size: 16px;
             }
-            .company-name{
+            .company-name {
                 color: $color-8;
-                transition: all .5s;
-                &:hover{
+                transition: all 0.5s;
+                &:hover {
                     color: $color-2;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    footer {
+        .footer-top {
+            .single-wedge {
+                .footer-logo {
+                    img {
+                        width: 60px;
+                        height: auto;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    footer {
+        .footer-top {
+            .single-wedge {
+                .footer-logo {
+                    img {
+                        width: 40px;
+                        height: auto;
+                    }
+                    p{
+                        font-size: 15px;
+                    }
                 }
             }
         }

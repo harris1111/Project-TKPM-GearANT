@@ -18,3 +18,18 @@
         }
     }
 }
+
+@media screen and (max-width: 991px) {
+    .otp{
+        .otp__content{
+            width: 90%;
+            label{
+                font-size: 26px;
+            }
+            input{
+                width: 90%;
+                padding: 10px 10px;
+            }
+        }
+    }
+}
