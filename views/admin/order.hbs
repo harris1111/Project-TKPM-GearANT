@@ -19,17 +19,23 @@
                 {{#each ordList}}
                 <tr>
                     <td><strong>{{this.OrderID}}</strong></td>
-                    <td>
-                        <div class="text-primary">Customer: {{Name}}</div>
-                        <table style="width: 100%">
+                    <td style="padding: 0;" class="table-customize">
+                        <table style="width: 100%; margin: 0;" class="table table-bordered">
+                            <tr>
+                                <td>
+                                    <div class="text-primary">Customer: {{Name}}</div>
+                                </td>
+                                <td>&nbsp;</td>
+                            </tr>
                             {{#each this.Orders}}
                             <tr>
-                                <td style="border: none; padding:0; text-align:left;">
+                                <td style="text-align:left;">
                                     <a class="text-dark" href="/product/detail/{{this.ProID}}">
                                         <strong>{{this.ProName}}</strong>
                                     </a>
                                 </td>
-                                <td style="border: none; padding:0; min-width: 50px; color:#24262b; text-align:right;">
+                                <td
+                                    style="width: 50px; color:#24262b; text-align:center;">
                                     {{this.Stock}}x
                                 </td>
                             </tr>
@@ -38,11 +44,10 @@
                     </td>
 
                     {{#if mess}}
-                        <td style="vertical-align: middle; text-align:center" 
-                        class="{{color}}"><strong>
+                    <td style="vertical-align: middle; text-align:center" class="{{color}}"><strong>
                             {{mess}}
                         </strong>
-                        </td>
+                    </td>
                     {{else}}
                     <td style="vertical-align: middle">
                         <div class="d-flex">

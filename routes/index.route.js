@@ -79,6 +79,10 @@ router.post("/login", async function(req, res) {
 //login ended
 
 //register started
+router.get('/register', async function(req, res) {
+    res.render('register');
+});
+
 router.post("/register", async function(req, res) {
     const rawPassword = req.body.password;
     const salt = bcrypt.genSaltSync(10);

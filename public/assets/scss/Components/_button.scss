@@ -20,7 +20,6 @@
     button {
         background-color: #33cc33;
         border: 1px solid transparent;
-        margin: 0 6px;
         font-weight: bold;
         transition: all 0.5s;
         color: white;
@@ -82,4 +81,83 @@
     color: white;
     background-color: #b91c1c;
     font-weight: bold;
+}
+
+.add-cart {
+    position: relative;
+    padding: 0 35px;
+    height: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    box-shadow: none;
+    text-transform: uppercase;
+    background: rgb(251, 93, 93);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 2px;
+    overflow: hidden;
+    span{
+        z-index: 3;
+    }
+    &::before {
+        content: "";
+        width: 120%;
+        height: 100%;
+        background-color: rgb(252, 49, 49);
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        transform: skewX(30deg) translateX(-110%);
+        transition: all 0.5s;
+        z-index: 1;
+    }
+    &:hover::before{
+        transform: skewX(30deg) translateX(-10px);
+    }
+}
+
+.buy-cart {
+    position: relative;
+    padding: 0 35px;
+    height: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    box-shadow: none;
+    text-transform: uppercase;
+    background: rgb(103, 187, 215);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 2px;
+    margin-left: 20px;
+    overflow: hidden;
+    span{
+        z-index: 3;
+    }
+    &::before {
+        content: "";
+        width: 120%;
+        height: 100%;
+        background-color: rgb(31, 131, 165);
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        transform: skewX(30deg) translateX(-110%);
+        transition: all 0.5s;
+        z-index: 1;
+    }
+    &:hover::before{
+        transform: skewX(30deg) translateX(-10px);
+    }
 }

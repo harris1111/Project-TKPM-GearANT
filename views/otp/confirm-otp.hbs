@@ -1,46 +1,39 @@
 {{!-- {{#section 'js'}}
-    <script>
-        document.body.appendChild(document.createElement('script')).src='https://unpkg.com/sweetalert/dist/sweetalert.min.js';
-        $('#formConfirmOTP').on('submit', function (event) {
-            event.preventDefault();
-            const otp = document.getElementById('txtOTP').value;
-            if(otp.length<1){
-                swal("Please enter OTP!");
-                return;
-            }
-            $('#formConfirmOTP').off('submit').submit();
-        });
-        $('#txtOTP').select();
-    </script>
+<script>
+    document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';
+    $('#formConfirmOTP').on('submit', function (event) {
+        event.preventDefault();
+        const otp = document.getElementById('txtOTP').value;
+        if (otp.length < 1) {
+            swal("Please enter OTP!");
+            return;
+        }
+        $('#formConfirmOTP').off('submit').submit();
+    });
+    $('#txtOTP').select();
+</script>
 {{/section}} --}}
 
 
-<div class="pt-100px pb-100px" style="width: 50%; margin: 0 auto;">
+<div class="otp section height-full container">
     <form id="formConfirmOTP" method="post" action="/confirm-otp">
-        <div class="container mx-auto flex justify-center pt-16">
-            <div class="w-96  p-8 border border-cyan-700 shadow-2xl ">
-                {{#if error}}
-                    <p class="text-red-600 text-left mb-4 "><strong>{{error}}</strong></p>
-                {{/if}}
-                <label>
+        <div class="mx-auto flex justify-center otp__content">
+            <div class="border border-cyan-700 section-title otp__item">
+                {{!-- {{#if error}}
+                <p class="text-danger"><strong>{{error}}</strong></p>
+                {{/if}} --}}
+                <label class="title">
                     Enter the OTP we sent you via email.
                 </label>
-                <input hidden name = "Email" value = {{forgetUser}}>
-                <input
-                        class="flex-1 mt-2 appearance-none
-                    form-control
-                    border border-cyan-700 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none"
-                        id="txtOTP"
-                        type="number"
-                        maxlength="6"
-                        placeholder="6-digit-number OTP"
-                        name="OTP"/>
-                <button
-                        style="background-color: red;"
-                        type="submit">CONFIRM
-                </button>
+                <input hidden name="Email" value={{forgetUser}}>
+                <input class="
+                    border border-cyan-700" id="txtOTP" type="number" maxlength="6" placeholder="6-digit-number OTP"
+                    name="OTP" />
+                <div class="otp-btn">
+                    <button class="add-cart" type="submit"><span>CONFIRM</span>
+                    </button>
+                </div>
             </div>
         </div>
     </form>
 </div>
-
