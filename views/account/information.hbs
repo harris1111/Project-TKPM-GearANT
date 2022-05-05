@@ -1,9 +1,12 @@
-
 <div class="account__item" id="information">
     <div class="login">
         <div class="login_form_container">
             <div class="account_login_form">
                 <form action="#" method="POST">
+                    <div class="default-form-box mb-20">
+                        <label>Email</label>
+                        <input type="text" value="{{authUser.Email}}" readonly />
+                    </div>
                     <div class="default-form-box mb-20">
                         <label>Username</label>
                         <input type="text" value="{{authUser.Username}}" readonly />

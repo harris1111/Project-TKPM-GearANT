@@ -89,7 +89,8 @@ router.post("/login", recaptcha.middleware.verify, async function (req, res) {
 
     req.session.auth = true;
     req.session.authUser = user;
-
+    const email = userModel.findEmailbyUsername(username);
+    req.session.authUser.Email = email;
     if (user.Type === "2") {
       req.session.isAdmin = true;
       res.locals.isAdmin = req.session.isAdmin;
@@ -131,10 +132,8 @@ router.post(
       req.session.registerUser = req.body.email;
       res.redirect("/confirm-register");
     } else {
-      const rActive = true;
-      return res.render("login", {
-        error_register: "Please check the captcha!",
-        rActive
+      return res.render("register", {
+        error_register: "Please check the captcha!"
       });
     }
   }

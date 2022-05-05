@@ -80,7 +80,10 @@ export default {
 
         return list[0];
     },
-
+    async findEmailbyUsername(username) { 
+        const email = await db('user').where('username', username);
+        return email[0];
+    },
     add(entity) {
         return db('user').insert(entity);
     },

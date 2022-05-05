@@ -29,12 +29,15 @@ CREATE TABLE `category` (
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
+  `Email` varchar(50) COLLATE utf8_general_ci NOT NULL,
   `Username` varchar(50) COLLATE utf8_general_ci NOT NULL,
   `Password` varchar(255) COLLATE utf8_general_ci NOT NULL,
   `Name` varchar(50) COLLATE utf8_general_ci NOT NULL,
   `Address` nvarchar(80) COLLATE utf8_general_ci NOT NULL,
   `Number` varchar(11) COLLATE utf8_general_ci NOT NULL,
   `Type` char(1) NOT NULL,
+  `OTP` char(6) NOT NULL,
+  `Valid` tinyint(1) NOT NULL,
   PRIMARY KEY (`Username`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -126,17 +129,17 @@ COMMIT;
 -- Records of User
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` VALUES ('thanhhoang','$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG','Nhu Thanh','154 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','0933442607','1');
-INSERT INTO `user` VALUES ('minhan2022','$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG','Minh An','155 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','0933442606','1');
-INSERT INTO `user` VALUES ('huongngan','$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG','Huong Ngan','156 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','0933442605','1');
+INSERT INTO `user` VALUES ('thanhhoang@gmail.com','thanhhoang','$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG','Nhu Thanh','154 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','0933442607','1','',0);
+INSERT INTO `user` VALUES ('minhan112001@gmail.com','minhan2022','$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG','Minh An','155 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','0933442606','1','',0);
+INSERT INTO `user` VALUES ('huongngan123@gmail.com','huongngan','$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG','Huong Ngan','156 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','0933442605','1','',0);
 COMMIT;
 
 -- ----------------------------
 -- Records of Admin
 -- ----------------------------
 BEGIN;
-INSERT INTO `user` VALUES ('admin1','$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG','Nhu Thanh','150 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','0933442601','2');
-INSERT INTO `user` VALUES ('admin2','$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG','Ngan An','150 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','0933442602','2');
+INSERT INTO `user` VALUES ('test@gmail.com','admin1','$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG','Nhu Thanh','150 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','0933442601','2','',0);
+INSERT INTO `user` VALUES ('test@gmail.com','admin2','$2a$10$Aq.r.RZmDExi19OZkzKqW.7BrhuVHL8nYWVh7vtHCiS/MeM55wIOG','Ngan An','150 Nguyễn Chí Thanh, Phường 9, Quận 5, TP.HCM','0933442602','2','',0);
 COMMIT;
 
 
