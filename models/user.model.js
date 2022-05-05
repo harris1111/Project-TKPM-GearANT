@@ -74,16 +74,24 @@ export default {
     },
 
     async findByUsername(username) {
-        const list = await db('user').where('username', username);
+        const list = await db('user').where('Username', username);
         if (list.length === 0)
             return null;
 
         return list[0];
     },
-    async findEmailbyUsername(username) { 
-        const email = await db('user').where('username', username);
-        return email[0];
-    },
+
+    // async findByEmail(username) {
+    //     const list = await db('user').where('email', username);
+    //     if (list.length === 0)
+    //         return null;
+    //
+    //     return list[0];
+    // },
+    // async findEmailbyUsername(username) {
+    //     const email = await db('user').where('username', username);
+    //     return email[0];
+    // },
     add(entity) {
         return db('user').insert(entity);
     },

@@ -89,8 +89,8 @@ router.post("/login", recaptcha.middleware.verify, async function (req, res) {
 
     req.session.auth = true;
     req.session.authUser = user;
-    const email = userModel.findEmailbyUsername(username);
-    req.session.authUser.Email = email;
+    // console.log("login", user)
+    // req.session.authUser = userModel.findEmailbyUsername(username);
     if (user.Type === "2") {
       req.session.isAdmin = true;
       res.locals.isAdmin = req.session.isAdmin;
@@ -159,6 +159,16 @@ router.post("/confirm-register", async function (req, res) {
 router.get("/username-available", async function (req, res) {
   const username = req.query.username;
   const user = await userModel.findByUsername(username);
+  if (user === null) {
+    return res.json(true);
+  } else {
+    return res.json(false);
+  }
+});
+
+router.get("/email-available", async function (req, res) {
+  const email = req.query.email;
+  const user = await userModel.findByEmail(email);
   if (user === null) {
     return res.json(true);
   } else {

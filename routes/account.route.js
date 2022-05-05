@@ -199,11 +199,10 @@ router.post("/change-address", async (req, res, next) => {
   // console.log(user.Address);
   const ret = await userModel.update(user);
 
-  const user_new = await userModel.findByUsername(
-    req.session.authUser.Username
-  );
   // console.log(user_new)
-  req.session.authUser = user_new;
+  req.session.authUser = await userModel.findByUsername(
+      req.session.authUser.Username
+  );
   res.locals.authUser = req.session.authUser;
 
   const url = '/account/address';
@@ -237,11 +236,6 @@ router.post("/change-password", async (req, res, next) => {
   const isEqual = bcrypt.compareSync(req.body.old_password, req.session.authUser.Password);
   if (isEqual === false) {
     req.session.resChange = false
-    // return res.render('account/changePass', {
-    //     cActive: true,
-    //     error: 'Incorrect password! Please try again!',
-    //     layout: "account.hbs"
-    // });
     const url = '/account/changePass';
     res.redirect(url);
   } else {
@@ -259,19 +253,21 @@ router.post("/change-password", async (req, res, next) => {
 
   await userModel.update(user);
 
-  const user_new = await userModel.findByUsername(
-    req.session.authUser.Username
+  req.session.authUser = await userModel.findByUsername(
+      req.session.authUser.Username
   );
-
-  req.session.authUser = user_new;
   res.locals.authUser = req.session.authUser;
+
+  // console.log(req.session.authUser)
 
   const url = '/account/changePass';
   res.redirect(url);
 });
 
-router.get("/information", function (req, res, next) {
+router.get("/information", async function (req, res, next) {
   let iActive = true;
+  // const user = await userModel.findByUsername(req.session.authUser.Username)
+  // console.log("info", req.session.authUser)
   res.render("account/information", {
     iActive,
     layout: "account.hbs",
@@ -294,13 +290,13 @@ router.get("/changePass", function (req, res, next) {
   // console.log(req.session.resChange)
 
   if (req.session.resChange !== 'undefined' && req.session.resChange !== null) {
-    if (req.session.resChange == true) {
+    if (req.session.resChange === true) {
       mess = 'Password changed successfully!'
       color = "text-success"
-    } else {
+    } else if (req.session.resChange === false){
       mess = 'Incorrect password! Please try again!'
     }
-    req.session.resChange = null
+    delete req.session.resChange
   }
 
   res.render("account/changePass", {
