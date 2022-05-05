@@ -1489,6 +1489,12 @@ footer .footer-bottom .copy-text .company-name:hover {
           box-shadow: 5px 5px 50px -10px rgba(0, 0, 0, 0.09);
 }
 
+.otp .otp__content .section-title {
+  width: 80%;
+  text-align: left;
+  margin: 0 auto;
+}
+
 .otp .otp__content label {
   font-size: 24px;
   margin-top: 20px;
@@ -1523,6 +1529,9 @@ footer .footer-bottom .copy-text .company-name:hover {
   }
   .otp .otp__content label {
     font-size: 20px;
+  }
+  .otp .otp__content .section-title {
+    width: 90%;
   }
   .otp .otp__content input {
     width: 90%;

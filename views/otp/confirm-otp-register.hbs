@@ -17,13 +17,15 @@
 
     <form id="formConfirmOTP" method="post" action="/confirm-register">
         <div class="mx-auto flex justify-center otp__content">
-            <div class="border border-cyan-700 otp__item section-title">
-                {{#if error}}
-                <p class="text-danger "><strong>{{error}}</strong></p>
-                {{/if}}
-                <label class="title">
-                    Enter the OTP we sent you via email.
-                </label>
+            <div class="border border-cyan-700 otp__item">
+                <div class="section-title">
+                    {{#if error}}
+                    <p class="text-danger "><strong>{{error}}</strong></p>
+                    {{/if}}
+                    <label class="title">
+                        Enter the OTP we sent you via email.
+                    </label>
+                </div>
                 <input hidden name="Email" value={{forgetUser}}>
                 <input class="
                     border border-cyan-700" id="txtOTP" type="number" maxlength="6" placeholder="6-digit-number OTP"

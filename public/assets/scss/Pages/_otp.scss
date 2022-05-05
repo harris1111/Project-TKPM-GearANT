@@ -4,6 +4,11 @@
         margin: 0 auto;
         text-align: center;
         box-shadow: 5px 5px 50px -10px rgba(0,0,0,0.09);
+        .section-title{
+            width: 80%;
+            text-align: left;
+            margin: 0 auto;
+        }
         label{
             font-size: 24px;
             margin-top: 20px;
@@ -33,6 +38,9 @@
             width: 90%;
             label{
                 font-size: 20px;
+            }
+            .section-title{
+                width: 90%;
             }
             input{
                 width: 90%;
