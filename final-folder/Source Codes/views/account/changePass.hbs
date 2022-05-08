@@ -1,0 +1,89 @@
+{{#section 'js'}}
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<script>
+    document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';
+    $('#newPass, #newPassConfirm, #oldPass').on('keyup', function () {
+        if ($('#oldPass').val().length < 1 ||
+            $('#newPass').val().length < 1 ||
+            $('#newPassConfirm').val().length < 1) {
+            $('#saveBtn').prop("disabled", true);
+            $('#saveBtn').addClass("disable");
+        } else {
+            $('#saveBtn').prop("disabled", false);
+            $('#saveBtn').removeClass("disable");
+        }
+    });
+    $('#newPass').on('keyup', function () {
+        if ($('#newPass').val().length < 6) {
+            $('#saveBtn').addClass("disable");
+            $('#saveBtn').prop("disabled", true);
+            $('#message_t').html('Password must be more than 6 characters.').css('color', 'red');
+        } else{
+            $('#saveBtn').prop("disabled", false);
+            $('#saveBtn').removeClass("disable");
+            $('#message_t').html('OK').css('color', 'green');
+        }
+            
+    });
+    $('#newPass, #newPassConfirm').on('keyup', function () {
+        if ($('#newPass').val().length > 0) {
+            if ($('#newPass').val() == $('#newPassConfirm').val()) {
+                if ($('#newPass').val().length >= 6) {
+                $('#message').html('OK').css('color', 'green');
+                $('#saveBtn').prop("disabled", false);
+                $('#saveBtn').removeClass("disable");}
+            } else {
+                $('#saveBtn').addClass("disable");
+                $('#saveBtn').prop("disabled", true);
+                $('#message').html('Not Matching').css('color', 'red');
+            }
+        }
+    });
+
+    $('#changePassForm').on('submit', function (event) {
+        event.preventDefault();
+        const oldPass = document.getElementById('oldPass').value;
+        const newPass = document.getElementById('newPass').value;
+        const newPassConfirm = document.getElementById('newPassConfirm').value;
+        if (oldPass.length < 1) {
+            swal('Please enter old password!');
+            return;
+        }
+         $('#changePassForm').off('submit').submit();
+    });
+</script>
+{{/section}}
+<div class="account__item" id="account-details">
+    <div class="login">
+        <div class="login_form_container">
+            <div class="account_login_form">
+                <form id="changePassForm" action="/account/change-password" method="POST">
+                    <input type="hidden" name="_id" value="{{user._id}}" />
+
+                    <div class="default-form-box mb-20">
+                        <label>Password</label>
+                        <input id="oldPass" type="password" name="old_password" />
+                    </div>
+                    <div class="default-form-box mb-20">
+                        <label>New Password</label>
+                        <input id="newPass" type="password" name="new_password" />
+                        <span class="ml-2 font-medium text-bold" id='message_t'></span>
+                    </div>
+                    <div class="default-form-box mb-20">
+                        <label>Confirm Password</label>
+                        <input id="newPassConfirm" type="password" name="new_password_confirm" />
+                        <span class="ml-2 font-medium text-bold" id='message'></span>
+                        {{#if mess}}
+                        <p class="{{color}} text-center mb-4 "><strong>{{mess}}</strong>
+                        </p>
+                        {{/if}}
+                    </div>
+                    <div class="save_button mt-3">
+                        <button id="saveBtn" class="btn" type="submit">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

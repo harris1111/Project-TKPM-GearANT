@@ -1,0 +1,215 @@
+{{#section 'js'}}
+<script>
+    document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';
+    $('#formAddCart').on('submit', function (event) {
+        event.preventDefault();
+        const quantity = document.getElementById('quantity').value;
+
+        if (+quantity < 1) {
+            swal('Minimum quantity is 1!');
+            return;
+        }
+
+        const stock = +{{ product.Stock }}
+            if (+quantity > stock) {
+        const str = `Sorry, we have only ${stock} products left!`
+        swal(str);
+        return;
+    }
+
+    $('.stock').val(+quantity)
+    swal("Success!", "This product has been added to cart!", "success").then(() => {
+        $('#formAddCart').off('submit').submit();
+        return;
+    });
+        });
+
+    $('#formBuyNow').on('submit', function (event) {
+        event.preventDefault();
+        const quantity = document.getElementById('quantity').value;
+
+        if (+quantity < 1) {
+            swal('Minimum quantity is 1!');
+            return;
+        }
+
+        const stock = +{{ product.Stock }}
+            if (+quantity > stock) {
+        const str = `Sorry, we have only ${stock} products left!`
+        swal(str);
+        return;
+    }
+
+    $('.stock').val(+quantity)
+    $('#formBuyNow').off('submit').submit();
+        });
+</script>
+
+<script>
+    $('.isLogin').click(function (e) {
+        if (!{{ this.auth }}) {
+        swal("Please log in to continue!")
+            .then((value) => {
+                if (value)
+                    window.location.href = "/login";
+            });
+    }
+        })
+</script>
+{{/section}}
+
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="d-flex align-items-center">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i></a></li>
+                <li class="breadcrumb-item"><a href="/">{{product.BigCatName}}</a></li>
+                <li class="breadcrumb-item">{{product.CatName}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- breadcrumb-area end -->
+
+<!-- Product Details Area Start -->
+<div class="product-details-area section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-sm-12 col-xs-12 mb-lm-30px mb-md-30px mb-sm-30px">
+                <!-- Swiper -->
+                <div class="swiper-container zoom-top">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img class="img-responsive m-auto" src="{{product.LinkURL}}" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-12 col-xs-12" data-aos="fade-up" data-aos-delay="200">
+                <div class="product-details-content quickview-content p-3">
+
+                    <h2>{{product.ProName}}</h2>
+
+                    <div class="product-infor">
+                        <ul>
+                            <li>
+                                Brand: <p>{{product.CatName}}</p>
+                            </li>
+                            <li>
+                                Sold: <p>{{product.sold}}</p>
+                            </li>
+                            {{#if product.outstock}}
+                            <li>
+                                <p class="text-danger"><strong>Out of stock</strong></p>
+                            </li>
+                            {{else}}
+                            <li>
+                                Remaining: <p>{{product.Stock}}</p>
+                            </li>
+                            {{/if}}
+                        </ul>
+                    </div>
+
+                    <div class="pricing-meta mt-30px">
+                        <ul>
+                            <li class="old-price not-cut"><strong>{{format_number product.Price}}</strong></li>
+                        </ul>
+                    </div>
+                    <div class="pro-details-quality">
+                        {{#if product.outstock}}
+                        <p class="text-danger"><strong>Out of stock</strong></p>
+                        {{else}}
+                        <div class="cart-plus-minus">
+                            <input id="quantity" class="cart-plus-minus-box" min="1" value="1" name="quantity" />
+                        </div>
+                        <div class="d-flex">
+                            <span class="pro-details-cart">
+                                <form id="formAddCart" method="post" action="/account/cart-add">
+                                    <input type="hidden" name="Username" value="{{authUser.Username}}" />
+                                    <input type="hidden" name="ProID" value="{{product.ProID}}" />
+                                    <input type="hidden" class="stock" name="Stock" />
+
+                                    {{#if auth}}
+                                    <button class="add-cart" type="submit"><span>Add To Cart</span> </button>
+                                    {{else}}
+                                    <button class="add-cart isLogin" type="button"><span>Add To Cart</span></button>
+                                    {{/if}}
+
+                                </form>
+                            </span>
+
+                            <span class="pro-details-cart">
+                                <form method="get" id="formBuyNow"
+                                    action="/product/buynow?ProID={{product.ProID}}&Stock=1">
+                                    <input type="hidden" name="ProID" value="{{product.ProID}}" />
+                                    <input type="hidden" class="stock" name="Stock" />
+
+                                    {{#if auth}}
+                                    <button class="buy-cart" type="submit"><span>Buy now</span></button>
+                                    {{else}}
+                                    <button class="buy-cart isLogin" type="button"><span>Buy now</span></button>
+                                    {{/if}}
+                                </form>
+                            </span>
+                        </div>
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container section-2">
+        <div class="product-description">
+            <div class="product-description-title">
+                <p>Description</p>
+            </div>
+        </div>
+        <div class="product-description-text">
+            <div>
+                {{{product.Description}}}
+            </div>
+        </div>
+    </div>
+
+    {{!-- Related Product --}}
+    <div class="container">
+        <div class="product-description">
+            <div class="product-description-title">
+                <p>Related Product</p>
+            </div>
+        </div>
+
+        <div class="owl-carousel owl-theme pt-3 product-carousel">
+            {{#each related_products}}
+                <div class="item card-item">
+                    <div class="card">
+                        <img src="{{LinkURL}}" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ProName}}</h5>
+                            <div class="card-price">
+                                <p class="card-price-num">{{format_number Price}}</p>
+                            </div>
+                            <hr>
+                            <p class="card-sold">Sold: {{Sold}}</p>
+                        </div>
+                        <div class="card__overlay">
+                            <a href="/product/detail/{{this.ProID}}" class="card__overlay-detail">
+                                <i class="fa fa-arrow-circle-right"></i>Detail
+                            </a>
+                            <form class="addCartForm" method="post" action="/account/cart-add">
+                                <input type="hidden" name="ProID" value="{{this.ProID}}" />
+                                <input type="hidden" class="Stock" name="Stock" value="1" />
+                                <button type="submit" class="card__overlay-cart">
+                                    <i class="fa fa-shopping-cart"></i>Add to cart
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,113 @@
+{{#if this.empty}}
+<div class="w-full max-w-4xl mx-auto mt-8">
+    No order to show yet!
+</div>
+{{else}}
+<div class="bigCate">
+    <div class="table-responsive" style="min-height: 200px;max-height: 500px">
+        <table class="table table-bordered">
+            <thead>
+                <tr class="table-active">
+                    <th scope="col">ID</th>
+                    <th scope="col">Detail</th>
+                    {{!-- <th scope="col" style="text-align: center; width: 150px">Date</th> --}}
+                    {{!-- <th scope="col" class="text-center">&nbsp;</th> --}}
+                    <th scope="col" class="text-center">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each ordList}}
+                <tr>
+                    <td><strong>{{this.OrderID}}</strong></td>
+                    <td style="padding: 0;" class="table-customize">
+                        <table style="width: 100%; margin: 0;" class="table table-bordered">
+                            <tr>
+                                <td>
+                                    <div class="text-primary">Customer: {{Name}}</div>
+                                </td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            {{#each this.Orders}}
+                            <tr>
+                                <td style="text-align:left;">
+                                    <a class="text-dark" href="/product/detail/{{this.ProID}}">
+                                        <strong>{{this.ProName}}</strong>
+                                    </a>
+                                </td>
+                                <td
+                                    style="width: 50px; color:#24262b; text-align:center;">
+                                    {{this.Stock}}x
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </table>
+                    </td>
+
+                    {{#if mess}}
+                    <td style="vertical-align: middle; text-align:center" class="{{color}}"><strong>
+                            {{mess}}
+                        </strong>
+                    </td>
+                    {{else}}
+                    <td style="vertical-align: middle">
+                        <div class="d-flex">
+                            <div class="editForm">
+                                <button type="button" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModalApprove{{this.OrderID}}" {{#if this.pending}} disabled
+                                    class="disabled" {{/if}}>Approve</button>
+                            </div>
+                            <div class="delForm">
+                                <button type="button" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModalDel{{this.OrderID}}" {{#if this.pending}} disabled
+                                    class="disabled" {{/if}}>Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                    {{/if}}
+
+
+                    <!-- Modal edit-->
+                    <div class="modal" id="exampleModalApprove{{this.OrderID}}" tabindex="-1"
+                        aria-labelledby="exampleModalDelLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    Approve this order?
+                                </div>
+                                <form method="post" action="/admin/set-state-order">
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn-save" name="OrderIDapprove"
+                                            value="{{this.OrderID}}">Approve</button>
+                                        <button type="button" class="btn-cancel" data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal delete-->
+                    <div class="modal" id="exampleModalDel{{this.OrderID}}" tabindex="-1"
+                        aria-labelledby="exampleModalDelLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    Cancel this order?
+                                </div>
+                                <form action="/admin/set-state-order" method="post">
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn-save" name="OrderIDcancel"
+                                            value="{{this.OrderID}}">Confirm</button>
+                                        <button type="button" class="btn-cancel" data-bs-dismiss="modal">Back</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+{{/if}}

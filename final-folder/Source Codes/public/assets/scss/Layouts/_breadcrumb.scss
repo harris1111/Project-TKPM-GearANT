@@ -1,0 +1,28 @@
+.breadcrumb-area {
+    background-color: #fcf6f6;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border-bottom-width: 0px;
+    padding: 10px 0;
+    background-size: cover;
+    line-height: 1;
+    .breadcrumb-item {
+        display: inline-block;
+        font-size: 20px;
+        font-weight: 400;
+        text-transform: capitalize;
+        margin-top: 14px;
+        background: $color-bg;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        &:first-child::before{
+            content: none;
+        }
+        &::before {
+            display: inline-block;
+            padding-right: 10px;
+            color: #3c3c3c;
+            content: "»";
+        }
+    }
+}

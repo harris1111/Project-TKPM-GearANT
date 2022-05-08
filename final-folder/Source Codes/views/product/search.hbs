@@ -1,0 +1,91 @@
+<!-- breadcrumb-area start -->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="d-flex align-items-center">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item">Keyword: "{{this.keyword}}"</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- breadcrumb-area end -->
+<!-- Shop Page Start  -->
+<div class="shop-category-area pt-100px pb-100px height-full-2">
+    <div class="container">
+        <div class="row">
+            <!-- Shop Bottom Area Start -->
+            <div class="shop-bottom-area">
+                <!-- Tab Content Area Start -->
+                <div class="tab-pane fade show active row" id="shop-list">
+                    {{#each this.products}}
+                    <div class="col-12 col-md-4 col-lg-3 card-content">
+                        <div class="item card-item">
+                            <div class="card">
+                                <img src="{{LinkURL}}" class="card-img-top" alt="">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ProName}}</h5>
+                                    <div class="card-price">
+                                        <p class="card-price-num">{{format_number Price}} </p>
+                                    </div>
+                                    <hr>
+                                    <p class="card-sold">Sold: {{sold}}</p>
+                                </div>
+                                <div class="card__overlay">
+                                    <a href="/product/detail/{{ProID}}" class="card__overlay-detail">
+                                        <i class="fa fa-arrow-circle-right"></i>Details
+                                    </a>
+                                    <button class="card__overlay-cart">
+                                        <i class="fa fa-shopping-cart"></i>Add to cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                    <!-- Tab Content Area End -->
+                </div>
+                <!-- Shop Bottom Area End -->
+            </div>
+            <!-- Tab Content Area End -->
+
+            <!--  Pagination Area Start -->
+            <div class="mt-5">
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination justify-content-center">
+                        {{#if isFirst}}
+                        {{else}}
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                        {{/if}}
+                        {{#each this.page_numbers}}
+                        {{#if isCurrent}}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{value}}">
+                                <strong>{{value}}</strong>
+                            </a>
+                        </li>
+                        {{else}}
+                        <li class="page-item"><a class="page-link" href="?page={{value}}">{{value}}</a></li>
+                        {{/if}}
+                        {{/each}}
+                        {{#if isLast}}
+                        {{else}}
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                        {{/if}}
+                    </ul>
+                </nav>
+            </div>
+            <!--  Pagination Area End -->
+        </div>
+        <!-- Shop Bottom Area End -->
+    </div>
+</div>
+<!-- Shop Page End  -->

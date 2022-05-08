@@ -1,0 +1,163 @@
+.save_button {
+    button {
+        background-color: #3b3b3b;
+        border-color: #3b3b3b;
+        color: #fff;
+        font-weight: 400;
+        font-size: 14px;
+        width: 130px;
+        height: 45px;
+        transition: all 0.3s;
+        &:hover {
+            border-color: #fb5d5d;
+            background-color: #fb5d5d;
+            color: #fff;
+        }
+    }
+}
+
+.receivedForm {
+    button {
+        background-color: #33cc33;
+        border: 1px solid transparent;
+        font-weight: bold;
+        transition: all 0.5s;
+        color: white;
+        padding: 1px 6px;
+        &:hover {
+            background-color: green;
+        }
+    }
+    .disabled {
+        background-color: #6c6c6c;
+        cursor: not-allowed;
+        &:hover {
+            background-color: #6c6c6c;
+        }
+    }
+}
+
+.editForm {
+    display: flex;
+    justify-content: center;
+    button {
+        border: 1px solid transparent;
+        margin: 0 6px;
+        font-weight: bold;
+        transition: all 0.5s;
+        color: white;
+        background-color: #6699ff;
+        padding: 1px 6px;
+        &:hover {
+            background-color: blue;
+        }
+    }
+}
+
+.delForm {
+    display: flex;
+    justify-content: center;
+    button {
+        border: 1px solid transparent;
+        margin: 0 6px;
+        font-weight: bold;
+        transition: all 0.5s;
+        color: white;
+        background-color: rgba(255, 0, 0, 0.6);
+        padding: 1px 6px;
+        &:hover {
+            background-color: red;
+        }
+    }
+}
+
+.btn-save {
+    border: 1px solid #000;
+    color: #000;
+    font-weight: bold;
+}
+
+.btn-cancel {
+    color: white;
+    background-color: #b91c1c;
+    font-weight: bold;
+}
+
+.add-cart {
+    position: relative;
+    padding: 0 34px;
+    height: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    box-shadow: none;
+    text-transform: uppercase;
+    background: rgb(251, 93, 93);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 2px;
+    overflow: hidden;
+    span{
+        z-index: 3;
+    }
+    &::before {
+        content: "";
+        width: 120%;
+        height: 100%;
+        background-color: rgb(252, 49, 49);
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        transform: skewX(30deg) translateX(-110%);
+        transition: all 0.5s;
+        z-index: 1;
+    }
+    &:hover::before{
+        transform: skewX(30deg) translateX(-10px);
+    }
+}
+
+.buy-cart {
+    position: relative;
+    padding: 0 34px;
+    height: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    box-shadow: none;
+    text-transform: uppercase;
+    background: rgb(103, 187, 215);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 2px;
+    margin-left: 20px;
+    overflow: hidden;
+    span{
+        z-index: 3;
+    }
+    &::before {
+        content: "";
+        width: 120%;
+        height: 100%;
+        background-color: rgb(31, 131, 165);
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        transform: skewX(30deg) translateX(-110%);
+        transition: all 0.5s;
+        z-index: 1;
+    }
+    &:hover::before{
+        transform: skewX(30deg) translateX(-10px);
+    }
+}

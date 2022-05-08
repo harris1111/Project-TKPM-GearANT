@@ -13,16 +13,15 @@
     $('#txtOTP').select();
 </script>
 {{/section}} --}}
-
-
 <div class="otp section height-full container">
-    <form id="formConfirmOTP" method="post" action="/confirm-otp">
-        <div class="mx-auto flex otp__content">
+
+    <form id="formConfirmOTP" method="post" action="/confirm-register">
+        <div class="mx-auto flex justify-center otp__content">
             <div class="border border-cyan-700 otp__item">
-                {{!-- {{#if error}}
-                <p class="text-danger"><strong>{{error}}</strong></p>
-                {{/if}} --}}
-                <div class="section-title ">
+                <div class="section-title">
+                    {{#if error}}
+                    <p class="text-danger "><strong>{{error}}</strong></p>
+                    {{/if}}
                     <label class="title">
                         Enter the OTP we sent you via email.
                     </label>

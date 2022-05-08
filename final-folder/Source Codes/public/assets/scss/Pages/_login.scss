@@ -1,0 +1,98 @@
+.login-register-area {
+    .login-register-wrapper {
+        .login-register-tab-list {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            a {
+                position: relative;
+                h4 {
+                    font-size: 25px;
+                    font-weight: 600;
+                    margin: 0 20px;
+                    text-transform: capitalize;
+                    transition: all 0.3s ease 0s;
+                    color: #000000;
+                }
+                &:first-child::before {
+                    background-color: #000;
+                    bottom: 5px;
+                    content: "";
+                    height: 18px;
+                    margin: 0 auto;
+                    position: absolute;
+                    right: -2px;
+                    transition: all 0.4s ease 0s;
+                    width: 1px;
+                }
+                &:hover {
+                    h4 {
+                        color: $color-bg-2;
+                    }
+                }
+                &.active {
+                    h4 {
+                        color: #fb5d5d;
+                    }
+                }
+            }
+        }
+        .login-form-container {
+            background: transparent none repeat scroll 0 0;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+            padding: 80px;
+            text-align: left;
+            .login-register-form {
+                input {
+                    background-color: transparent;
+                    border: 1px solid #ebebeb;
+                    color: #474747;
+                    font-size: 14px;
+                    margin-bottom: 30px;
+                    padding: 10px 15px;
+                    width: 100%;
+                    outline: none;
+                    &:focus {
+                        color: $color-2;
+                    }
+                }
+                .button-box {
+                    button {
+                        background-color: #f2f2f2;
+                        border: medium none;
+                        color: #000000;
+                        cursor: pointer;
+                        font-size: 14px;
+                        font-weight: 600;
+                        line-height: 1;
+                        padding: 11px 30px;
+                        text-transform: uppercase;
+                        transition: all 0.5s;
+                        outline: none;
+                        border-radius: 0px;
+                        &:hover {
+                            background-color: #fb5d5d;
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .login-register-area {
+        .login-register-wrapper {
+            .login-form-container {
+                padding: 10px;
+                text-align: left;
+                .login-register-form {
+                    input {
+                        
+                    }
+                }
+            }
+        }
+    }
+}

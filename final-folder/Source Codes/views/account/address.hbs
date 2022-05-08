@@ -1,0 +1,63 @@
+{{#section 'js'}}
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js"></script>
+<script>
+    document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';
+    $('#editAddForm').on('submit', function (event) {
+        event.preventDefault();
+        const new_address = document.getElementById('new_address').value;
+        if (new_address.length < 1) {
+            swal('Address must be filled to be updated');
+            return;
+        }
+        $('#editAddForm').off('submit').submit();
+    });
+    $('#editPhoneForm').on('submit', function (event) {
+        event.preventDefault();
+        const new_phone = document.getElementById('new_phone').value;
+        if (new_phone.length < 10) {
+            swal('Please enter valid phone number!');
+            return;
+        }
+        $('#editPhoneForm').off('submit').submit();
+    });
+</script>
+{{/section}}
+
+
+<div class="account__item" id="address">
+    <div class="login">
+        <div class="login_form_container">
+            <div class="account_login_form">
+                <form id="editAddForm" action="/account/change-address" method="POST">
+                    <div class="default-form-box mb-20">
+                        <label>Address</label>
+                        <input type="text" name="old_address" value="{{authUser.Address}}" readonly />
+                    </div>
+                    <div class="default-form-box mb-20">
+                        <label>New Address</label>
+                        <input id="new_address" type="text" name="new_address" placeholder="New address" />
+                    </div>
+
+                    <div class="save_button mt-3">
+                        <button class="btn" type="submit">Save</button>
+                    </div>
+                </form>
+
+                <form id="editPhoneForm" action="/account/change-phone" method="POST">
+                    <div class="default-form-box mb-20 mt-3">
+                        <label>Phone Number</label>
+                        <input type="text" name="phone" value="{{authUser.Number}}" readonly />
+                    </div>
+                    <div class="default-form-box mb-20">
+                        <label>New Phone Number</label>
+                        <input id="new_phone" type="text" name="new_phone" placeholder="New phone number" />
+                    </div>
+                    <div class="save_button mt-3">
+                        <button class="btn" type="submit">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

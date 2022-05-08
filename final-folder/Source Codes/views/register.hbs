@@ -1,0 +1,167 @@
+{{#section 'js'}}
+<script>
+    document.body.appendChild(document.createElement('script')).src = 'https://unpkg.com/sweetalert/dist/sweetalert.min.js';
+    $('#formLogin').on('submit', function (event) {
+        event.preventDefault();
+        const pass = document.getElementById('pass_login').value;
+        const username = document.getElementById('username_login').value;
+        if (username.length < 1) {
+            swal("Please enter your username!");
+            return;
+        }
+        if (pass.length < 1) {
+            swal("Please enter your password!");
+            return;
+        }
+        // Ajax
+        $('#formLogin').off('submit').submit();
+    });
+    $('#formRegister').on('submit', function (event) {
+        event.preventDefault();
+        const username = document.getElementById('username').value;
+        const name = document.getElementById('name').value;
+        const password = document.getElementById('password').value;
+        const confirm_password = document.getElementById('confirm_Password').value;
+        const address = document.getElementById('address').value;
+        const phone_num = document.getElementById('phone_num').value;
+        const email = document.getElementById('email').value;
+        // Validate username
+        if (!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email)) {
+            swal("Please enter valid email!");
+            return;
+        }
+        if (!/(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(phone_num)) { 
+            swal("Please enter valid phone number!");
+            return;
+        }
+        if (username.length < 6) {
+            swal('Username must be more than 6 characters!');
+            return;
+        }
+        if (!name) {
+            swal('Name must be filled in!');
+            return;
+        }
+        // Validate password
+        if (!password) {
+            swal('Password must be filled in!');
+            return;
+        }
+        if (!confirm_password) {
+            swal('Please confirm password!');
+            return;
+        }
+        if (!address) {
+            swal('Address must be filled in!');
+            return;
+        }
+        if (!phone_num) {
+            swal('Phone number must be filled in!');
+            return;
+        }
+        if (password !== confirm_password) {
+            swal("Passwords doesn't match!");
+            return;
+        }
+        $.getJSON(`/username-available?username=${username}`, function (data) {
+            if (data === false) {
+                swal('Username is already in use. Please choose another one!');
+                return;
+            }
+        });
+        $.getJSON(`/email-available?email=${email}`, function (data) {
+            if (data === false) {
+                swal('Email is already in use. Please choose another one!');
+                return;
+            }
+        });
+        swal("Success!", "Register request sent!", "success").then(() => {
+            $('#formRegister').off('submit').submit();
+            return;
+        });
+    });
+</script>
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{{/section}}
+
+
+<!-- breadcrumb-area start -->
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="d-flex align-items-center">
+            <ul class="breadcrumb-list">
+                <li class="breadcrumb-item"><a href="/"><i class="fa fa-home"></i></a></li>
+                <li class="breadcrumb-item">Register</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- breadcrumb-area end -->
+
+<!-- login area start -->
+<div class="login-register-area section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-md-12 mr-auto ml-auto">
+                <div class="login-register-wrapper">
+                    <div class="login-register-tab-list nav">
+                        <a href="/login">
+                            <h4>login</h4>
+                        </a>
+                        <a class="active" href="/register">
+                            <h4>register</h4>
+                        </a>
+                    </div>
+                    <div class="tab-content">
+                        {{!-- <div id="lg1" class="tab-pane active">
+                            <div class="login-form-container">
+                                <div class="login-register-form">
+                                    <form id="formLogin" action="/login" method="post">
+                                        {{#if error_login}}
+                                        <p class="text-danger text-center mb-4 "><strong>{{error_login}}</strong>
+                                        </p>
+                                        {{/if}}
+                                        <input type="text" name="username" id="username_login" placeholder="Username" />
+                                        <input type="password" name="password" id="pass_login" placeholder="Password" />
+                                        <a href="/forgot-password">Forgot password ?</a>
+                                        <div class="button-box text-center">
+                                            <button type="submit"><span>Login</span></button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div> --}}
+                        <div id="lg2" class="tab-pane active">
+                            <div class="login-form-container">
+                                <div class="login-register-form">
+                                    <form id="formRegister" action="/register" method="post">
+                                        {{#if error_register}}
+                                        <p class="text-danger text-center mb-4 "><strong>{{error_register}}</strong>
+                                        </p>
+                                        {{/if}}
+                                        <input type="text" name="email" id="email" placeholder="Email" />
+                                        <input type="text" name="username" id="username" placeholder="Username" />
+                                        <input type="text" name="name" id="name" placeholder="Full name" />
+                                        <input type="password" name="password" id="password" placeholder="Password" />
+                                        <input type="password" name="confirm_password" id="confirm_Password"
+                                            placeholder="Confirm Password" />
+                                        <input type="text" name="number" id="phone_num" placeholder="Phone number" />
+                                        <input type="text" name="address" id="address" placeholder="Address" />
+                                        <div class="g-recaptcha"
+                                            data-sitekey="6Lf3qxgfAAAAABMD65zmxa6hBnk9dtzUduPW92Fr"></div>
+                                        <div class="button-box text-center mt-4">
+                                            <button type="submit"><span>Register</span></button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- login area end -->

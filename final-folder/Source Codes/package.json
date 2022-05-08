@@ -1,0 +1,37 @@
+{
+    "type": "module",
+    "name": "gearANT",
+    "version": "1.0.0",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "body-parser": "^1.20.0",
+        "cloudinary": "^1.29.1",
+        "express": "^4.17.3",
+        "express-mysql-session": "^2.1.7",
+        "express-recaptcha": "^5.1.0",
+        "express-session": "^1.17.2",
+        "fs": "^0.0.1-security",
+        "https": "^1.0.0",
+        "jquery": "^3.6.0",
+        "knex": "^1.0.4",
+        "lodash": "^4.17.21",
+        "moment": "^2.29.2",
+        "multer": "^1.4.4",
+        "multer-storage-cloudinary": "^4.0.0",
+        "mysql2": "^2.3.3",
+        "nodemailer": "^6.7.4",
+        "swal": "^0.1.0",
+        "sweetalert": "^2.1.2",
+        "sweetalert2": "^11.4.8"
+    },
+    "scripts": {
+        "watch": "nodemon app.js"
+    },
+    "devDependencies": {
+        "bcrypt": "^5.0.1",
+        "express-handlebars": "^6.0.3",
+        "express-handlebars-sections": "^1.0.1",
+        "nodemon": "^2.0.15",
+        "numeral": "^2.0.6"
+    }
+}
