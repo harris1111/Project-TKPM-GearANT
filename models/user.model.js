@@ -37,6 +37,16 @@ export default {
         const raw = await db.raw(sql);
         return raw[0] || null
     },
+
+    async findPrdCart(username, proid) {
+        const sql = `select User, Stock
+                     from cart
+                     where User = '${username}'
+                       and ProID = '${proid}'`;
+        const raw = await db.raw(sql);
+        return raw[0][0] || null
+    },
+
     async findOTP(email) {
         const user = await db('user').select('OTP').where({
             Email: email
@@ -97,7 +107,7 @@ export default {
     },
 
 
-    async delCart(user,proid) {
+    async delCart(user, proid) {
         return db('cart')
             .where({
                 'User': user,
@@ -111,6 +121,20 @@ export default {
         await db('user').where('Email', email).update(entity);
         return db('user').where('Email', email);
     },
+
+    async updateCart(entity) {
+        const user = entity.User;
+        const proid = entity.ProID;
+
+        delete entity.User;
+        delete entity.ProID;
+
+        await db('cart').where({
+            'User': user,
+            'ProID': proid
+        }).update(entity);
+    },
+
     update(entity) {
         const user = entity.Username;
         delete entity.Username;

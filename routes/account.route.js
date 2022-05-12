@@ -9,7 +9,7 @@ import bcrypt from "bcrypt";
 
 
 const router = express.Router();
-router.use(bodyParser.urlencoded({ extended: false }))
+router.use(bodyParser.urlencoded({extended: false}))
 
 function findOrder(orders, id) {
   for (let i in orders) {
@@ -109,11 +109,27 @@ router.post('/receive', async (req, res) => {
 });
 
 router.post('/cart-add', async (req, res) => {
-  const item = {
+  let item = {
     User: req.body.Username || req.session.authUser.Username,
     ProID: req.body.ProID,
     Stock: req.body.Stock,
     Date: moment().format()
+  }
+
+  let find = await userModel.findPrdCart(req.session.authUser.Username, req.body.ProID)
+
+  console.log(find);
+
+  if (find !== null) {
+    item = {
+      User: req.body.Username || req.session.authUser.Username,
+      ProID: req.body.ProID,
+      Stock: +req.body.Stock + +find.Stock,
+      Date: moment().format()
+    }
+    await userModel.updateCart(item);
+    const url = req.headers.referer || '/';
+    return res.redirect(url);
   }
 
   await userModel.addCart(item);
@@ -218,7 +234,7 @@ router.post("/change-phone", async (req, res, next) => {
   await userModel.update(user);
 
   const user_new = await userModel.findByUsername(
-    req.session.authUser.Username
+      req.session.authUser.Username
   );
   // console.log(user_new)
   req.session.authUser = user_new;
@@ -230,7 +246,7 @@ router.post("/change-phone", async (req, res, next) => {
 
 router.post("/change-password", async (req, res, next) => {
   const user_model = await userModel.findByUsername(
-    req.session.authUser.Username
+      req.session.authUser.Username
   );
 
   const isEqual = bcrypt.compareSync(req.body.old_password, req.session.authUser.Password);
@@ -293,7 +309,7 @@ router.get("/changePass", function (req, res, next) {
     if (req.session.resChange === true) {
       mess = 'Password changed successfully!'
       color = "text-success"
-    } else if (req.session.resChange === false){
+    } else if (req.session.resChange === false) {
       mess = 'Incorrect password! Please try again!'
     }
     delete req.session.resChange
