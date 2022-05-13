@@ -28,6 +28,64 @@ export default {
         sender.sendMail(mailOptions);
         return otp;
     },
+
+    checkoutSend(receiver,order) {
+        const ordID = order.OrderID;
+        const stock = order.Stock;
+        const proname = order.ProName;
+        const price = +order.Price* +stock;
+        const Price = new Intl.NumberFormat('en-US').format(+order.Price);
+        const curPrice = new Intl.NumberFormat('en-US').format(price);
+
+        const str = 'Your order has been placed.\nThank you for choosing GearANT.\n'
+        +`OrderID: ${ordID}\n
+        Product name: ${proname}\n
+        Price: ${Price}\n
+        Quantity: ${stock}\n
+        Total: ${curPrice}`
+
+        const mailOptions = {
+            from: "Gearant <gearant@gmail.com>",
+            to: receiver,
+            subject: 'Your order has been placed.',
+            text: str
+        };
+
+        sender.sendMail(mailOptions);
+    },
+
+    checkoutSendMul(receiver,ordId,cart,total) {
+        const curTotal = new Intl.NumberFormat('en-US').format(total);
+
+        let str='Your order has successfully placed.\nThank you for choosing GearANT.\n'
+        +`OrderID: ${ordId}\n`
+        +`Total: ${curTotal}\n`
+        +'Datail\n\n';
+
+        for(let i in cart){
+            // const ordID = cart[i].OrderID;
+            const stock = cart[i].StockCart;
+            const proname = cart[i].ProName;
+            const price = +cart[i].Price* +stock;
+            const curPrice = new Intl.NumberFormat('en-US').format(price);
+            const subtotal = +price*+stock;
+            const curSub = new Intl.NumberFormat('en-US').format(subtotal);
+
+            str +=`Product name: ${proname}\n
+            Price: ${curPrice}\n
+            Quantity: ${stock}\n
+            Subtotal: ${curSub}\n\n`
+        }
+        const mailOptions = {
+            from: "Gearant <gearant@gmail.com>",
+            to: receiver,
+            subject: 'Your order has successfully placed.',
+            text: str
+        };
+
+        sender.sendMail(mailOptions);
+    },
+
     sendNewPassword(receiver) {
         let chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
         let passwordLength = 8;

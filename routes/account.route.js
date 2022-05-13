@@ -6,6 +6,7 @@ import config from '../utils/config.js'
 import moment from "moment";
 import bodyParser from "body-parser";
 import bcrypt from "bcrypt";
+import emailModel from "../models/email.model.js";
 
 
 const router = express.Router();
@@ -161,7 +162,16 @@ router.post('/checkout-buynow', async function (req, res) {
       Stock: +req.body.buynowStock
     }
 
+    const OrdDetail = {
+      OrderID: ordID,
+      ProID: req.body.buynowID,
+      ProName: product.ProName,
+      Price: product.Price,
+      Stock: +req.body.buynowStock
+    }
+
     await orderModel.addOrdDetail(tmpOrdDetail)
+    emailModel.checkoutSend(req.session.authUser.Email,OrdDetail);
   }
 
   const url = '/account/order';
@@ -181,13 +191,10 @@ router.post('/checkout', async function (req, res) {
   await userModel.addOrder(ordEntity)
   const ordID = await userModel.findRecentOrder(username)
 
+  let total = 0;
+
   for (let i in cart) {
     if (+cart[i].StockCart <= +cart[i].Stock) {
-      // const tempPro = {
-      //     ProID: cart[i].ProID,
-      //     Stock: +cart[i].Stock - +cart[i].StockCart
-      // }
-      // await productModel.updateProduct(tempPro)
 
       const tmpOrdDetail = {
         OrderID: ordID,
@@ -195,10 +202,14 @@ router.post('/checkout', async function (req, res) {
         Stock: +cart[i].StockCart
       }
 
+      total+= +cart[i].StockCart* +cart[i].Price;
+
       await orderModel.addOrdDetail(tmpOrdDetail)
       await userModel.delCart(username, cart[i].ProID)
     }
   }
+
+  emailModel.checkoutSendMul(req.session.authUser.Email,ordID,cart,total)
 
   const url = '/account/order';
   res.redirect(url);
